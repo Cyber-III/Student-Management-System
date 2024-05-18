@@ -72,12 +72,11 @@ if(isset($_SESSION['username'])) {
         <nav class="header-nav ms-auto">
 
             
-
             <ul class="d-flex align-items-center">
             
             <a href="../../../welcome.php"><li>Home</li></a>
             <a href="../../../index.php"><li>Logout</li></a>
-
+            <div class="animation start-home"></div>
             </ul>
         </nav>
 

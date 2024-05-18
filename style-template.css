@@ -124,6 +124,7 @@ header .header-nav {
 
 /* Style for each list item */
 .header-nav ul li {
+    font-weight: 600;
     margin: 0 10px; /* Add spacing between the items */
     color: #fff; /* Text color */
     cursor: pointer; /* Change cursor to pointer on hover */
@@ -132,9 +133,9 @@ header .header-nav {
 }
 
 /* Style for list item hover */
-.header-nav ul li:hover {
-    text-decoration: underline; /* Underline on hover */
-}
+/* .header-nav ul li:hover {
+    text-decoration: underline;
+} */
 
 
 /* Header Section close================================================================================*/
@@ -164,6 +165,55 @@ header .header-nav {
     border-radius: 50%; 
 }
 
+
+/*TopBar Links*/
+nav{
+	position: relative;
+  margin-left: 280px;
+	text-align: center;
+	width: 220px;
+	border-radius: 8px;
+	font-size: 0;
+}
+nav a{
+	font-size: 18px;
+	text-transform:capitalize;
+	color: white;
+	text-decoration: none;
+	line-height: 50px;
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	text-align: center;
+}
+nav .animation{
+	position: absolute;
+	height: 80%;
+	/* height: 5px; */
+	bottom: 15px;
+	/* bottom: 0; */
+	z-index: 0;
+	background: #ff0000;
+	border-radius: 8px;
+	transition: all .5s ease 0s;
+}
+nav a:nth-child(1){
+	width: 80px;
+}
+nav a:nth-child(1):hover~.animation{
+	width: 80px;
+	left: 30px;
+}
+nav a:nth-child(2){
+	width: 100px;
+}
+nav a:nth-child(2):hover~.animation{
+	width: 100px;
+	left: 110px;
+}
+
+
+
 /* Responisve section */
 
 @media (max-width: 1199px) {
@@ -178,7 +228,7 @@ header .header-nav {
   .sidebar::-webkit-scrollbar-thumb {
     background-color: #aab7cf;
   }
-  
+
   @media (min-width: 1200px) {
     
     .toggle-sidebar-btn {
@@ -190,7 +240,7 @@ header .header-nav {
       margin-left: 300px;
     }
   }
-  
+
   @media (max-width: 1199px) {
     .toggle-sidebar .sidebar {
       left: 0;
