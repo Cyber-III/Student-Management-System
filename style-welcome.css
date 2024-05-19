@@ -35,6 +35,11 @@ body::-webkit-scrollbar {
     position: relative;
 }
 
+/* Removing scroll bar from the main pic */
+.main-pic::-webkit-scrollbar {
+    display: none;
+}
+
 .G1 {
     filter: blur(4px);
     width: 100%;

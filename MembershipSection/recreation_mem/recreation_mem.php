@@ -41,11 +41,11 @@ include_once('../../assests/content/static/template.php');
 <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
-                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Recreation Membership</h1>
+                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-4">Recreation Membership</h1>
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                <img src="pics/recreation.png" class="img-fluid" alt="recreation">
+                <img src="pics/recreation.png" class="img-fluid" alt="recreation" height="300px" width="500px">
                 </div>
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <div class="form col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <form action="request_rec.php" method="post">
                     
                     <!-- <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Login </p> -->

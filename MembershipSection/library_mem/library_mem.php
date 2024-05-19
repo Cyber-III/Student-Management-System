@@ -39,7 +39,7 @@ include_once('../../assests/content/static/template.php');
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
-                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Library Membership</h1>
+                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-4">Library Membership</h1>
                 <div class="col-md-8 col-lg-7 col-xl-6">
                     <img src="pics/library.png" class="img-fluid" alt="Library image" height="300px" width="600px">
                 </div>
