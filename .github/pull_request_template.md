@@ -1,25 +1,20 @@
 ## Purpose
-<!--- Describe the problems, issues, or needs driving this feature/fix and include links to related issues -->
+<!--- Describe the reason why you created this PR -->
 The purpose of this PR is to fix #<issue-number>
 
 
 
-## Goals
-<!---  Describe the solutions that this feature/fix will introduce to resolve the problems described above -->
+## Screenshots or Videos
+<!---  Please upload a screenshot or a small video 
+(About how the system was before you solved the problem and how it is after you solved the problem.)  -->
+### Before solving the issue
 
 
-
-## Approach
-<!--- Describe how you are implementing the solutions. Include a link to a Markdown file or Google doc if the feature write-up is too long to paste here. -->
-
-
-
-### Screenshots
-<!---  Include an animated GIF or screenshot if the change affects the UI.  -->
+### After solving the issue
   
 
 
 ##  Checklist
-- [ ] I created this pull request for the issue that was assigned to me
-- [ ] I have performed a self-review of my own code
-- [ ] I have commented my code, particularly in hard-to-understand areas
+- [] I created this pull request for the issue that was assigned to me
+- [] I have performed a self-review of my own code
+- [] I have commented on my code, particularly in hard-to-understand areas

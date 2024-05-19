@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a report about bugs
 title: ''
 labels: ''
 assignees: ''
@@ -8,16 +8,19 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+<!-- A clear and concise description of what the bug is. -->
+
+
 
 **Describe the Solution**
-Steps to reproduce the behavior:
+<!-- Describe your suggested solution -->
+
+
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+<!-- Please upload a screenshot or small video of the problem you are trying to solve -->
 
-**Additional context**
-Add any other context about the problem here.
+
 
 **Are you working on it**
 Yes / No
