@@ -7,11 +7,16 @@ h4 {
     margin-left: 250px;
 }
 
+
+.img-fluid {
+    margin-left: 50px;
+}
+
 .alert-container {
-    width: 50%; /* Adjust width as needed */
+    width: 50%;
     font-size: 30px;
-    background-color: #dff0d8; /* Adjust background color */
-    border: 1px solid #c3e6cb; /* Adjust border color */
-    border-radius: 5px; /* Adjust border radius */
-    padding: 15px; /* Adjust padding */
+    background-color: #dff0d8;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 15px;
 }
