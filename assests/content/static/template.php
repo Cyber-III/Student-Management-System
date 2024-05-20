@@ -246,7 +246,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Message -->
             <div class="item">
-                <a href=""><i class="fas fa-envelope"></i>Message </a>
+                <a href="../../../Message Section/message.php"><i class="fas fa-envelope"></i>Message </a>
             </div>
 
             <!-- Call Center -->
