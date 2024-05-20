@@ -22,17 +22,17 @@ include_once('../assests/content/static/template.php');
     <link rel="stylesheet" href="style-view_profile.css">
 </head>
 <body>
-    
-<!-- //adding user profile image -->
-    <div class="profilepic">
-        <a href="..\view_profile\Images\User Icon.png">
+    <div class="container">
+        <!-- //adding user profile image -->
+<div class="profilepic">
+    <a href="..\view_profile\Images\User Icon.png">
         <img src="..\view_profile\Images\User Icon.png" alt="User Profile Icon">
-        </a>
-    </div>    
+    </a>
+</div>
 
     <div class="profileTop">
 
-        <h1 class="topname"> <span><?php echo isset($student_name) ? $student_name : ''; ?></span></h1>
+        <b><h1 class="topname"> <span><?php echo isset($student_name) ? $student_name : ''; ?></span></h1></b>
         <h6><?php echo isset($course) ? $course : ''; ?></h6>
         <br><br>
             
@@ -61,7 +61,8 @@ include_once('../assests/content/static/template.php');
                 <h4 class="center">Local Education Center :  <span><?php echo isset($lec) ? $lec : ''; ?></span></h4>
             </div>
     </div>
-    
+    </div>
+
     
 </body>
 </html>

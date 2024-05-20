@@ -1,46 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;700;800;900&display=swap');
-*
-{
-    font-family: 'Poppins',sans-serif;
-   
+/* Default styles for larger screens */
+.container {
+    margin-top: 300px;
+    width: 80%;
+    margin: 0 auto;
 }
 
-
-body {
-    cursor: default; /* Set cursor to default for the entire body */
-    text-decoration: none;
-}
-
-p {
-    color: black;
-    margin-left: 250px;
-    margin-top: 75px;
-    text-decoration: none;
-}
-
-.profile {
-    width: 100px;
-    height: 100px;
-    margin-left: 75%;
-    margin-top: 190px;
-    
-
-}
-.profileTop{
-    margin-left: 300px;
+.profilepic {
     margin-top: 100px;
-    
-}
-.profilepic{
-    transform: scale(0.9);
-    margin-top: 100px;
-    text-align: left;
     margin-right: 10px;    
     margin-left: 50px;
-    display: inline-block;
     float: right;
+    width: 200px; /* Example width for web view */
+    height: 200px; /* Example height for web view */
 }
 
-.topname{
-    font-size: 85px;
+.profilepic img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}
+
+.profileTop {
+    overflow: hidden;
+    margin-top: 100px;
+    margin-left: 150px;
+}
+
+.profileTop h1, .profileTop h6 {
+    text-align: left;
+}
+
+.p_data, .University_data {
+    margin-top: 30px;
+}
+
+.p_data h2, .University_data h2 {
+    text-align: left;
+}
+
+.p_data h4, .University_data h4 {
+    text-align: left;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .profilepic {
+        transform: scale(1.0); /* Reset the scale for mobile view */
+        margin-top: 80px;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center; /* Center align on mobile view */
+        float: none; /* Remove float on mobile view */
+        width: 100px; /* Example width for mobile view */
+        height: 100px; /* Example height for mobile view */
+        display: flex; /* Use flexbox to center content */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        flex-direction: column; /* Stack children vertically */
+    }
+
+    .profilepic img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .profileTop {
+        text-align: center; /* Center align text on mobile */
+        margin-top: 20px;
+    }
+
+    .profileTop h1, .profileTop h6 {
+        text-align: center; /* Center align text on mobile */
+    }
+
+    .p_data, .University_data {
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+
+    .p_data h2, .University_data h2 {
+        text-align: center; /* Center align text on mobile */
+    }
+
+    .p_data h4, .University_data h4 {
+        text-align: center; /* Center align text on mobile */
+    }
 }

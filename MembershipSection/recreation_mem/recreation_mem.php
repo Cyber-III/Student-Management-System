@@ -41,45 +41,28 @@ include_once('../../assests/content/static/template.php');
 <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
-                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Recreation Membership</h1>
+                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-4">Recreation Membership</h1>
                 <div class="col-md-8 col-lg-7 col-xl-6">
-                <img src="pics/recreation.png" class="img-fluid" alt="recreation">
+                <img src="pics/recreation.png" class="img-fluid" alt="recreation" height="300px" width="500px">
                 </div>
-                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form action="request_rec.php" method="post">
-                    
-                    <!-- <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Login </p> -->
-
-                    <!-- Username input -->
-                    <div class="form-outline mb-4">
-                    <label class="form-label" for="form1Example13"> <i class="bi bi-person-circle"></i> Username</label>
-                    <input type="text" id="form1Example13" class="form-control form-control-lg py-3" name="username" autocomplete="off" placeholder="Enter your username" style="border-radius:25px ;" />
-
-                    </div>
-
-                    <!-- Password input -->
-                    <div class="form-outline mb-4">
-                    <label class="form-label" for="form1Example23"><i class="bi bi-person-vcard-fill"></i> Student Name</label>
-                    <input type="text" id="form1Example23" class="form-control form-control-lg py-3" name="student_name" autocomplete="off" placeholder="Enter your name" style="border-radius:25px ;" />
-
-                    </div>
-
-
-                    <!-- Password input -->
-                    <div class="form-outline mb-4">
-                    <label class="form-label" for="form1Example23"><i class="bi bi-envelope-fill"></i> Email </label>
-                    <input type="email" id="form1Example23" class="form-control form-control-lg py-3" name="email" autocomplete="off" placeholder="Enter your e-mail" style="border-radius:25px ;" />
-
-                    </div>
-
-
-                    <!-- Signin button -->
-                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <input type="submit" value="Requset Membership" name="request_rec" class="btn btn-warning btn-lg text-light my-2 py-3" style="width:100% ; border-radius: 30px; font-weight:600; background-color: #3333ff; border-color: #3333ff; color: #FFFFFF;" />
-                
-                    </div>
-
-                </form>
+                <div class="form col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form action="checkout.php" method="post">
+            <div class="form-outline mb-4">
+                <label class="form-label" for="username"><i class="bi bi-person-circle"></i> Username</label>
+                <input type="text" id="username" class="form-control form-control-lg py-3" name="username" autocomplete="off" placeholder="Enter your username" style="border-radius:25px;" required>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="student_name"><i class="bi bi-person-vcard-fill"></i> Student Name</label>
+                <input type="text" id="student_name" class="form-control form-control-lg py-3" name="student_name" autocomplete="off" placeholder="Enter your name" style="border-radius:25px;" required>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="email"><i class="bi bi-envelope-fill"></i> Email</label>
+                <input type="email" id="email" class="form-control form-control-lg py-3" name="email" autocomplete="off" placeholder="Enter your email" style="border-radius:25px;" required>
+            </div>
+            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                <input type="submit" value="Request Membership" name="request_rec" class="btn btn-warning btn-lg text-light my-2 py-3" style="width:100%; border-radius: 30px; font-weight:600; background-color: #3333ff; border-color: #3333ff; color: #FFFFFF;">
+            </div>
+        </form>
                 </div>
             </div>
         

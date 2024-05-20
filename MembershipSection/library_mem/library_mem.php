@@ -39,12 +39,12 @@ include_once('../../assests/content/static/template.php');
     <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex align-items-center justify-content-center h-100">
-                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-3">Library Membership</h1>
+                <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-4">Library Membership</h1>
                 <div class="col-md-8 col-lg-7 col-xl-6">
                     <img src="pics/library.png" class="img-fluid" alt="Library image" height="300px" width="600px">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                    <form action="request_lib.php" method="post">
+                    <form action="checkout.php" method="post">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="username"><i class="bi bi-person-circle"></i> Username</label>
                             <input type="text" id="username" class="form-control form-control-lg py-3" name="username" autocomplete="off" placeholder="Enter your username" style="border-radius:25px;" required>
