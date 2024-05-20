@@ -1,0 +1,24 @@
+/* Ensure there is no CSS conflict by resetting common properties */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+p {
+    color: black;
+    margin-left: 300px;
+    text-decoration: none;
+}
+
+.container {
+    width: 100px;
+    height: 100px;
+    margin-left: 75%;
+    margin-top: 190px;
+}
+
+table{
+    margin-top: 50px;
+    border: 1px;
+}
