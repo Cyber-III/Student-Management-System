@@ -44,7 +44,7 @@ include_once('../../assests/content/static/template.php');
                     <img src="pics/library.png" class="img-fluid" alt="Library image" height="300px" width="600px">
                 </div>
                 <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                    <form action="request_lib.php" method="post">
+                    <form action="checkout.php" method="post">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="username"><i class="bi bi-person-circle"></i> Username</label>
                             <input type="text" id="username" class="form-control form-control-lg py-3" name="username" autocomplete="off" placeholder="Enter your username" style="border-radius:25px;" required>
