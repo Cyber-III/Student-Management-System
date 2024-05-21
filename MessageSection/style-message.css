@@ -1,0 +1,46 @@
+h4 {
+    margin-top: 100px;
+    margin-left: 270px;
+}
+
+.vh-100 {
+    margin-left: 250px;
+    margin-right: 50px;
+}
+
+
+.img-fluid {
+    margin-top: 50px;
+    margin-left: 50px;
+    height: 300px;
+    width: 600px;
+}
+
+
+/* Media Query */
+.form-label {
+    font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+    .vh-100 {
+        margin: 0;
+        justify-content: center;
+    }
+
+    .col-md-7 {
+        justify-content: center;
+    }
+
+    .img-fluid {
+        margin-left: 0;
+    }
+}
+@media (max-width: 767.98px) {
+    .text-center img {
+        width: 50%;
+    }
+    form {
+        margin-top: 20px;
+    }
+}

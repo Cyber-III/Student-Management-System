@@ -38,7 +38,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -47,7 +47,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -56,7 +56,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>1/1</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -65,7 +65,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -74,7 +74,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -83,7 +83,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -92,7 +92,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -101,7 +101,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -110,7 +110,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -119,7 +119,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -128,7 +128,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -137,7 +137,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -146,7 +146,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -155,7 +155,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -164,7 +164,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
             <tr>
                 <td>Y1 S1</td>
@@ -173,7 +173,7 @@ include_once('../assests/content/static/template.php');
                 <td>05-20-2024</td>
                 <td>36</td>
                 <td>2/2</td>
-                <td><a href="../../../view_profile/Images/User Icon.png">View</a></td>
+                <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
             </tr>
         </table>
     </div>
