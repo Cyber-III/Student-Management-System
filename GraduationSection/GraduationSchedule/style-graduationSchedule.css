@@ -1,12 +1,105 @@
-p {
-    color: black;
-    margin-left: 300px;
-    text-decoration: none;
+.vh-100 {
+    margin-left: 250px;
+    margin-right: 50px;
 }
-
 .profile {
     width: 100px;
     height: 100px;
     margin-left: 75%;
     margin-top: 190px;
 }
+.graduationSch {
+    font-weight: 600;
+    font-size: 25px;
+    margin-left: 60px;
+    margin-top: 30px;
+}
+.border-rectangle {
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    height: 550px;
+}
+.border-rectangle::-webkit-scrollbar {
+    display: none;
+}
+.schedule-item {
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background-color: #0056b3;
+}
+.schedule-title {
+    font-weight: bold;
+}
+.fixed-image-container {
+    position: relative;
+    text-align: center;
+}
+.fixed-image {
+    margin-top: 30px;
+    margin-left: 30px;
+    height: auto;
+    max-width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .vh-100 {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .graduationSch {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .border-rectangle {
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .vh-100 {
+        padding: 0 15px;
+    }
+    .graduationSch {
+        font-size: 20px;
+        margin-top: 25px;
+    }
+    .fixed-image {
+        margin-top: 15px;
+    }
+    .border-rectangle {
+        padding: 15px;
+    }
+    .schedule-item {
+        padding: 8px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .vh-100 {
+        padding: 0 10px;
+    }
+    .graduationSch {
+        font-size: 18px;
+        margin-top: 25px;
+    }
+    .fixed-image {
+        margin-top: 10px;
+    }
+    .border-rectangle {
+        padding: 10px;
+    }
+    .schedule-item {
+        padding: 6px;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
