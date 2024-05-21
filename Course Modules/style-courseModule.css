@@ -22,16 +22,19 @@ p {
     width: 100%;
     border-collapse: collapse;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
+
 th, td {
     border: 0px solid #dddddd;
     text-align: left;
     padding: 15px;
     white-space: nowrap;
 }
+
 /* style-courseModule.css */
 
 .view-link {
