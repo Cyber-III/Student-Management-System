@@ -1,0 +1,18 @@
+/* Ensure there is no CSS conflict by resetting common properties */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.image {
+    width: 500px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
+}
