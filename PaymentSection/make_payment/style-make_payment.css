@@ -1,12 +1,67 @@
+/* Ensure there is no CSS conflict by resetting common properties */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 p {
     color: black;
     margin-left: 300px;
     text-decoration: none;
 }
 
-.profile {
+.container {
     width: 100px;
     height: 100px;
-    margin-left: 75%;
-    margin-top: 190px;
+    margin-left: 350px;
+    margin-top: 100px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+/* style-courseModule.css */
+
+.view-link {
+    color: #007BFF; 
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; 
+    padding: 5px 10px; 
+    border: 1px solid #007BFF; 
+    border-radius: 5px; 
+    background-color: #f0f8ff; 
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.view-link:hover {
+    background-color: #007BFF; 
+    color: white; 
+    cursor: pointer; 
+}
+
+
+.chart-container {
+    display: flex;
+    justify-content: flex-end;
+}
+#myPieChart {
+    width: 600px !important;
+    height: 600px !important;
+    /* margin-right: 30px; */
+    margin-top: -100px;
 }

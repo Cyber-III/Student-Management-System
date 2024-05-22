@@ -194,7 +194,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">View Class Details</a>
+                    <a href="../../../Class Schedule/classSchedule.php" class="sub-item">View Class Details</a>
                     
                 </div>
             </div>
@@ -219,7 +219,7 @@ if(isset($_SESSION['username'])) {
             
             <!-- Course Materials -->
             <div class="item">
-                <a href=""><i class="fas fa-book-reader"></i>Course Materials </a>
+                <a href="../../../Course Materials/courseMaterials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
             </div>
 
             <!-- Penalty -->
