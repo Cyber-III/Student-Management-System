@@ -17,6 +17,18 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $record_id = $_GET['record_id'];
     $amount = $_GET['amount'];
 
+    // Get the description from make_payment_tbl
+    $desc_sql = "SELECT description FROM make_payment_tbl WHERE username = ? AND no = ?";
+    $stmt = $conn->prepare($desc_sql);
+    $stmt->bind_param('si', $username, $record_id);
+    $stmt->execute();
+    $desc_result = $stmt->get_result();
+    $description = '';
+    if ($desc_result->num_rows > 0) {
+        $desc_row = $desc_result->fetch_assoc();
+        $description = $desc_row['description'];
+    }
+
     // Remove the record from make_payment_tbl for the specific username
     $delete_sql = "DELETE FROM make_payment_tbl WHERE username = ? AND no = ?";
     $stmt = $conn->prepare($delete_sql);
@@ -34,8 +46,15 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $stmt->bind_param('is', $amount, $username);
     $stmt->execute();
 
+    // Insert the payment details into the payment_status table
+    $insert_sql = "INSERT INTO payment_status (username, no, description, amount) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($insert_sql);
+    $stmt->bind_param('sisd', $username, $record_id, $description, $amount);
+    $stmt->execute();
+
     echo '<p>Payment successful.</p>';
 }
+
 
 // Fetch data from the table
 $username = $_SESSION['username']; // Assuming you have stored the username in the session
@@ -50,6 +69,8 @@ $stmt1 = $conn->prepare($sql1);
 $stmt1->bind_param('s', $username);
 $stmt1->execute();
 $result1 = $stmt1->get_result();
+
+
 
 // Initialize variables
 $tot_course_fee = $amount_paid = $outstanding = $uni_fee = $paid_uni_fee = $uni_fee_outstanding = 0;
@@ -120,26 +141,27 @@ if ($result1->num_rows > 0) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $amount = $row['amount'];
-    $record_id = $row['no']; // Use record id to uniquely identify the record
-    echo "<tr>";
-    echo "<td>" . htmlspecialchars($row['no']) . "</td>";
-    echo "<td>" . htmlspecialchars($row['nxt_pay_date']) . "</td>";
-    echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-    echo "<td>" . htmlspecialchars($amount) . "</td>";
-    echo '<td>
-            <form action="pay.php" method="POST">
-                <input type="hidden" name="username" value="' . htmlspecialchars($username) . '">
-                <input type="hidden" name="amount" value="' . htmlspecialchars($amount) . '">
-                <input type="hidden" name="record_id" value="' . htmlspecialchars($record_id) . '">
-                <button type="submit" class="view-link">PAY</button>
-            </form></td>';
-    echo "</tr>";
-}
-} else {
-    echo "<tr><td colspan='5'>No payments found</td></tr>";
-}
-$conn->close();
-?>
+                    $record_id = $row['no']; // Use record id to uniquely identify the record
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['no']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['nxt_pay_date']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['description']) . "</td>";
+                    echo "<td>" . htmlspecialchars($amount) . "</td>";
+                    echo '<td>
+                            <form action="pay.php" method="POST">
+                                <input type="hidden" name="username" value="' . htmlspecialchars($username) . '">
+                                <input type="hidden" name="amount" value="' . htmlspecialchars($amount) . '">
+                                <input type="hidden" name="record_id" value="' . htmlspecialchars($record_id) . '">
+                                <button type="submit" class="view-link">PAY</button>
+                            </form></td>';
+                    echo "</tr>";
+                }
+            } 
+            else {
+                echo "<tr><td colspan='5'>No payments found</td></tr>";
+            }
+            $conn->close();
+            ?>
         </table>
     </div>
 </div>
