@@ -66,7 +66,7 @@ if(isset($_SESSION['username'])) {
         
         <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
-        <a href="../../../welcome.php"><img src="../../../pics/L2.png" alt="" class="logos"></a>
+        <a href="../../../welcome.php"><img src="../../../pics/L4.png" alt="" class="logos"></a>
         
 
         <nav class="header-nav ms-auto">
