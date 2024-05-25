@@ -6,7 +6,6 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
-    
 }
 
 .container {
@@ -15,6 +14,8 @@ body {
     align-items: center;
     width: 90%;
     max-width: 1200px;
+    margin-top: 100px;
+    margin-left: 350px;
 }
 
 .calendar-container, .link-section {
@@ -30,7 +31,6 @@ body {
     margin-bottom: 20px;
     width: 100%;
     margin-right: 50px;
-    
 }
 
 .month {
@@ -68,11 +68,16 @@ body {
 }
 
 .dates .today {
-    background-color: hsl(182, 87%, 47%);
+    background-color: blue;
+    color: white;
     font-weight: bold;
 }
 
-.border-rectangle {
+.dates .today:hover{
+    color: rgb(0, 0, 0);
+}
+
+/* .border-rectangle {
     color: rgb(0, 0, 0);
     padding: 5%;
     border-radius: 10px;
@@ -82,7 +87,7 @@ body {
     width: auto;
     height: auto;
     max-width: auto;
-}
+} */
 
 .border-rectangle::-webkit-scrollbar {
     display: none;
@@ -93,7 +98,7 @@ body {
     padding: 5%;
     margin-bottom: 5%;
     border-radius: 20px;
-    background-color: hsl(182, 87%, 47%);
+    background-color: #e0e0e0;
     width: auto;
     height: auto;
 }
@@ -104,6 +109,30 @@ body {
 
 .link-display {
     padding: 0;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.download-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.download-btn:hover {
+    background-color: hsl(0, 0%, 0%);
 }
 
 @media (min-width: 768px) {

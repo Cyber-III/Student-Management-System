@@ -49,7 +49,8 @@ $latestLink = mysqli_fetch_assoc($latestLinkResult);
                     <div class="link-display">
                         <?php
                             if ($latestLink) {
-                                echo '<p>Weekly Schedule: <a href="' . $latestLink['link'] . '" target="_blank">' . $latestLink['link'] . '</a></p>';
+                                echo '<p>Weekly Schedule:</p>';
+                                echo '<button class="download-btn"><a href="' . $latestLink['link'] . '" target="_blank" download>Download Link</a></button>';
                             }
                         ?>
                     </div>
@@ -61,4 +62,5 @@ $latestLink = mysqli_fetch_assoc($latestLinkResult);
     <script src="script.js"></script>    
 </body>
 </html>
+
 

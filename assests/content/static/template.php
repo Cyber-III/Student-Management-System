@@ -252,7 +252,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Call Center -->
             <div class="item">
-                <a href=""><i class="fas fa-phone-alt"></i>Call Center </a>
+                <a href="../../../CallSection/callcenter.php"><i class="fas fa-phone-alt"></i>Call Center </a>
             </div>
 
             <!-- Lecture Evaluation -->
