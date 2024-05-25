@@ -7,6 +7,26 @@ include_once('../connection.php');
 
 // Loading the HTML template
 include_once('../assests/content/static/template.php');
+
+// Fetch the data from the database
+$sql = "SELECT * FROM course_modules";
+$result = $conn->query($sql);
+
+// Check if there are results
+if ($result->num_rows > 0) {
+    // Create an array to hold the data
+    $modules = [];
+
+    // Fetch the data
+    while ($row = $result->fetch_assoc()) {
+        $modules[] = $row;
+    }
+} else {
+    echo "0 results";
+}
+
+// Close the database connection
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +35,7 @@ include_once('../assests/content/static/template.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Module</title>
-    <link rel="stylesheet" href="../style-template.css">
+    <link rel="stylesheet" href="../../style-template.css"> <!--Template File CSS-->
     <link rel="stylesheet" href="style-courseModule.css">
 </head>
 <body>
@@ -31,155 +51,25 @@ include_once('../assests/content/static/template.php');
                 <th>#Assign</th>
                 <th></th>
             </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Business Information Systems</td>
-              <td>CSE4003</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Computer Architecture</td>
-              <td>CSE4001</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Fundamentals in Programming</td>
-              <td>CSE4002</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>1/1</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>System Analysis and Design</td>
-              <td>CSE4004</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Computer Networks</td>
-              <td>CSE4008</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Database Design and Development</td>
-              <td>CSE4005</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Object Oriented Programming</td>
-              <td>CSE4006</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Professional Practice</td>
-              <td>CSE4007</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Business Information Systems</td>
-              <td>CSE4010</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Data Structures and Algorithms</td>
-              <td>CSE4011</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Mobile Application Development</td>
-              <td>CSE4012</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Project Management</td>
-              <td>CSE4009</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Web Application Development</td>
-              <td>CSE4014</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Business Analytics</td>
-              <td>CSE4015</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Computing Project</td>
-              <td>CSE4013</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-            </tr>
-            <tr>
-              <td>Y1 S1</td>
-              <td>Service Oriented Computing</td>
-              <td>CSE4003</td>
-              <td>05-20-2024</td>
-              <td>36</td>
-              <td>2/2</td>
-              <td><a class="view-link" href="../../../view_profile/Images/User Icon.png">View</a></td>
-          </tr>
-
+            <?php if (!empty($modules)): ?>
+                <?php foreach ($modules as $module): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($module['semester']); ?></td>
+                        <td><?php echo htmlspecialchars($module['module_name']); ?></td>
+                        <td><?php echo htmlspecialchars($module['module_code']); ?></td>
+                        <td><?php echo htmlspecialchars($module['date']); ?></td>
+                        <td><?php echo htmlspecialchars($module['duration']); ?></td>
+                        <td><?php echo htmlspecialchars($module['assignments_completed']); ?></td>
+                        <td><a class="view-link" href="<?php echo htmlspecialchars($module['view_link']); ?>">View</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="7">No data found</td>
+                </tr>
+            <?php endif; ?>
         </table>
     </div>
 </div>
-
-
 </body>
 </html>
