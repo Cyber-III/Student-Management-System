@@ -6,27 +6,40 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #f0f0f0;
+    
 }
 
-.calendar-container {
-    width: 500px;
-    padding: 20px;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.calendar-container, .link-section {
+    width: 100%;
 }
 
 .calendar {
+    align-items: center;
     background: white;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    padding: 5%;
+    margin-bottom: 20px;
+    width: 100%;
+    margin-right: 50px;
+    
 }
 
 .month {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 5%;
 }
 
 .month h1 {
-    font-size: 2.5em;
+    font-size: 2em;
 }
 
 .days-of-week {
@@ -34,7 +47,7 @@ body {
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 5%;
 }
 
 .dates {
@@ -44,10 +57,10 @@ body {
 }
 
 .dates div {
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
-    margin: 5px;
-    font-size: 1.5em;
+    margin: 2%;
+    font-size: 1em;
 }
 
 .dates div:hover {
@@ -55,6 +68,78 @@ body {
 }
 
 .dates .today {
-    background-color: #ffeb3b;
+    background-color: hsl(182, 87%, 47%);
     font-weight: bold;
+}
+
+.border-rectangle {
+    color: rgb(0, 0, 0);
+    padding: 5%;
+    border-radius: 10px;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: auto;
+    height: auto;
+    max-width: auto;
+}
+
+.border-rectangle::-webkit-scrollbar {
+    display: none;
+}
+
+.uploaded-schedule {
+    border: 1px solid white;
+    padding: 5%;
+    margin-bottom: 5%;
+    border-radius: 20px;
+    background-color: hsl(182, 87%, 47%);
+    width: auto;
+    height: auto;
+}
+
+.uploaded-schedule {
+    font-weight: bold;
+}
+
+.link-display {
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .calendar-container, .link-section {
+        width: 48%;
+    }
+
+    .calendar, .border-rectangle {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .calendar-container, .link-section {
+        width: 100%;
+    }
+
+    .calendar, .border-rectangle {
+        width: 100%;
+    }
+
+    .month h1 {
+        font-size: 1.5em;
+    }
+
+    .days-of-week, .dates div {
+        font-size: 0.8em;
+        padding: 8px;
+    }
+
+    .uploaded-schedule, .link-display {
+        padding: 5%;
+    }
 }
