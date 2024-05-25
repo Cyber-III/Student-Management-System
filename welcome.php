@@ -13,8 +13,7 @@
     
     <!--Main pic of welcome page-->
     <div class="main-pic">
-       <img class="G1" src="./pics/G1.jpg">
-       <img class="logo" src="./pics/L1.png">
+       <img class="logo" src="./pics/L3.png">
     </div>
 
     <!--Bottom Bar Text-->
