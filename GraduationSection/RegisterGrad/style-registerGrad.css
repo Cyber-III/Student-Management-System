@@ -1,12 +1,133 @@
-p {
-    color: black;
-    margin-left: 300px;
-    text-decoration: none;
+/* General Styling */
+h4 {
+    margin-top: 100px;
+    margin-left: 270px;
 }
 
-.profile {
-    width: 100px;
-    height: 100px;
-    margin-left: 75%;
-    margin-top: 190px;
+/* Section Styling */
+.vh-100 {
+    margin-left: 250px;
+    margin-right: 50px;
+}
+
+/* Responsive Image Styling */
+.img-fluid {
+    margin-left: 50px;
+}
+
+
+/* Rectangle Styling */
+.Rectangle {
+    border: 3px solid #0056b3;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+/* Register Details Styling */
+.Register-Details {
+    padding: 10px;
+    color: #000;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.detail span {
+    min-width: 200px; 
+}
+
+.detail p {
+    margin: 0;
+    flex: 1;
+    text-align: left; /* Align text to the left */
+}
+
+/* Status Colors */
+.status {
+    color: green;
+}
+
+.Completion, .Eligibility, .Payments {
+    color: red;
+}
+
+.Penalty, .Return {
+    color: green;
+}
+
+.update {
+    color: red;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
+    .vh-100 {
+        margin: 0;
+        justify-content: center;
+    }
+
+    .col-md-7 {
+        justify-content: center;
+    }
+
+    .img-fluid {
+        margin-left: 0;
+    }
+
+    .alert-container {
+        margin: 0;
+        width: 50%;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .detail span {
+        min-width: 150px; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    h4 {
+        margin-top: 50px;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .alert-container {
+        width: 80%;
+        font-size: 18px;
+    }
+
+    .vh-100 {
+        margin: 0;
+        padding: 0 20px;
+    }
+
+    .img-fluid {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .detail {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .detail span {
+        min-width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .detail p {
+        text-align: left;
+        width: 100%;
+    }
 }
