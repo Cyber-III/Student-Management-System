@@ -17,18 +17,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $record_id = $_GET['record_id'];
     $amount = $_GET['amount'];
 
-    // Get the description from make_payment_tbl
-    $desc_sql = "SELECT description FROM make_payment_tbl WHERE username = ? AND no = ?";
-    $stmt = $conn->prepare($desc_sql);
-    $stmt->bind_param('si', $username, $record_id);
-    $stmt->execute();
-    $desc_result = $stmt->get_result();
-    $description = '';
-    if ($desc_result->num_rows > 0) {
-        $desc_row = $desc_result->fetch_assoc();
-        $description = $desc_row['description'];
-    }
-
     // Remove the record from make_payment_tbl for the specific username
     $delete_sql = "DELETE FROM make_payment_tbl WHERE username = ? AND no = ?";
     $stmt = $conn->prepare($delete_sql);
@@ -46,15 +34,8 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $stmt->bind_param('is', $amount, $username);
     $stmt->execute();
 
-    // Insert the payment details into the payment_status table
-    $insert_sql = "INSERT INTO payment_status (username, no, description, amount) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($insert_sql);
-    $stmt->bind_param('sisd', $username, $record_id, $description, $amount);
-    $stmt->execute();
-
     echo '<p>Payment successful.</p>';
 }
-
 
 // Fetch data from the table
 $username = $_SESSION['username']; // Assuming you have stored the username in the session
@@ -69,8 +50,6 @@ $stmt1 = $conn->prepare($sql1);
 $stmt1->bind_param('s', $username);
 $stmt1->execute();
 $result1 = $stmt1->get_result();
-
-
 
 // Initialize variables
 $tot_course_fee = $amount_paid = $outstanding = $uni_fee = $paid_uni_fee = $uni_fee_outstanding = 0;
@@ -91,84 +70,98 @@ if ($result1->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <title>Make Payment</title>
     <link rel="stylesheet" href="../../style-template.css"> <!--Template File CSS-->
     <link rel="stylesheet" href="style-make_payment.css"> <!--Relevant PHP File CSS-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<div class="container">
-    <div class="table">
-        <table>
-            <tr>
-                <td>Course Fee</td>
-                <td><?php echo htmlspecialchars($tot_course_fee); ?></td>
-            </tr>
-            <tr>
-                <td>Amount Paid</td>
-                <td><?php echo htmlspecialchars($amount_paid); ?></td>
-            </tr>
-            <tr>
-                <td>Outstanding</td>
-                <td><?php echo htmlspecialchars($outstanding); ?></td>
-            </tr>
-            <tr>
-                <td>University Fee</td>
-                <td><?php echo htmlspecialchars($uni_fee); ?></td>
-            </tr>
-            <tr>
-                <td>Paid University Fee</td>
-                <td><?php echo htmlspecialchars($paid_uni_fee); ?></td>
-            </tr>
-            <tr>
-                <td>University Fee Outstanding</td>
-                <td><?php echo htmlspecialchars($uni_fee_outstanding); ?></td>
-            </tr>
-        </table>
+
+    <div class="container">
+        <div class = "table-container-1">
+            <div class="table">
+                <table>
+                    <tr>
+                        <td><b>Course Fee</b></td>
+                        <td><?php echo htmlspecialchars($tot_course_fee); ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Amount Paid</b></td>
+                        <td><?php echo htmlspecialchars($amount_paid); ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Outstanding</b></td>
+                        <td><?php echo htmlspecialchars($outstanding); ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>University Fee</b></td>
+                        <td><?php echo htmlspecialchars($uni_fee); ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Paid University Fee</b></td>
+                        <td><?php echo htmlspecialchars($paid_uni_fee); ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>University Fee Outstanding</b></td>
+                        <td><?php echo htmlspecialchars($uni_fee_outstanding); ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    
+        
+        <div class="chart-container">
+            <canvas id="myPieChart"></canvas>
+        </div>   
     </div>
-    <br><br>
-    <div class="table">
-        <table>
-            <tr>
-                <th>No</th>
-                <th>Next Payment Date</th>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Payment Link</th>
-            </tr>
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $amount = $row['amount'];
+
+    <div class = "container">
+        <div class = "table-container-2" >
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Next payment date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Payment link</th>
+                    </tr>
+                    </thead>
+                    
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $amount = $row['amount'];
                     $record_id = $row['no']; // Use record id to uniquely identify the record
                     echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['no']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['nxt_pay_date']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                    echo "<td>" . htmlspecialchars($amount) . "</td>";
-                    echo '<td>
-                            <form action="pay.php" method="POST">
-                                <input type="hidden" name="username" value="' . htmlspecialchars($username) . '">
-                                <input type="hidden" name="amount" value="' . htmlspecialchars($amount) . '">
-                                <input type="hidden" name="record_id" value="' . htmlspecialchars($record_id) . '">
-                                <button type="submit" class="view-link">PAY</button>
-                            </form></td>';
+                    echo "<td data-cell = 'No:'>" . htmlspecialchars($row['no']) . "</td>";
+                    echo "<td data-cell = 'Next Payment Date:'>" . htmlspecialchars($row['nxt_pay_date']) . "</td>";
+                    echo "<td data-cell = 'Description:'>" . htmlspecialchars($row['description']) . "</td>";
+                    echo "<td data-cell = 'Amount:'>" . htmlspecialchars($amount) . "</td>";
+                    echo '<td >
+                    <form action="pay.php" method="POST">
+                        <input type="hidden" name="username" value="' . htmlspecialchars($username) . '">
+                        <input type="hidden" name="amount" value="' . htmlspecialchars($amount) . '">
+                        <input type="hidden" name="record_id" value="' . htmlspecialchars($record_id) . '">
+                        <button type="submit" class="view-link">PAY</button>
+                    </form></td>';
                     echo "</tr>";
-                }
-            } 
-            else {
-                echo "<tr><td colspan='5'>No payments found</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </table>
+                    }} else {
+                        echo "<tr><td colspan='5'>No payments found</td></tr>";
+                    }
+                    $conn->close();
+                    ?>
+                </table>
+            </div>
+        </div>
+    
     </div>
-</div>
 
-<div class="chart-container">
-    <canvas id="myPieChart"></canvas>
-</div>
+
+
+
 
 <script>
     // Data for the pie chart
@@ -200,20 +193,20 @@ if ($result1->num_rows > 0) {
                 'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255, 99, 132, 1)',    // Red
+                'rgba(54, 162, 235, 1)',    // Blue
+                'rgba(255, 206, 86, 1)',    // Yellow
+                'rgba(75, 192, 192, 1)',    // Teal
+                'rgba(153, 102, 255, 1)',   // Purple
+                'rgba(255, 159, 64, 1)'  
             ],
             borderWidth: 1
         }]
     };
 
-    // Config for the pie chart
+        // Config for the doughnut chart
     const config = {
-        type: 'pie',
+        type: 'doughnut', // Change type from 'pie' to 'doughnut'
         data: data,
         options: {
             responsive: true,
@@ -228,7 +221,8 @@ if ($result1->num_rows > 0) {
                         }
                     }
                 }
-            }
+            },
+            cutout: '50%' // Add this option to create a doughnut chart
         },
     };
 
