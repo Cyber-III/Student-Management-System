@@ -1,31 +1,53 @@
 /* Ensure there is no CSS conflict by resetting common properties */
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
+    
 }
 
 p {
     color: black;
-    margin-left: 300px;
+    /* margin-left: 300px; */
     text-decoration: none;
 }
 
+html{
+    scroll-behavior: smooth;
+
+}
 .container {
-    width: 100px;
-    height: 100px;
-    margin-left: 350px;
-    margin-top: 100px;
+    
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;   
+    gap: 2rem;
 }
 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-}
+
 
 table {
+    background: #ffffff;
     width: 100%;
     border-collapse: collapse;
+    border: #cacace;
+   
+}
+.table-container-1{
+    width: 400px;
+   
+}
+.table-container-2 {
+    width: 100%;
+    margin: 32px;
+  
 }
 
 th, td {
@@ -33,17 +55,20 @@ th, td {
     text-align: left;
     padding: 15px;
     white-space: nowrap;
+    
 }
+
 
 /* style-courseModule.css */
 
 .view-link {
-    color: #007BFF; 
+    width: 90px;
+    color: #182431; 
     text-decoration: none; /* Remove underline */
     font-weight: bold; 
     padding: 5px 10px; 
     border: 1px solid #007BFF; 
-    border-radius: 5px; 
+    border-radius: 88px; 
     background-color: #f0f8ff; 
     transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
@@ -56,12 +81,104 @@ th, td {
 
 
 .chart-container {
-    display: flex;
-    justify-content: flex-end;
+   
+    /* width: fit-content; */
+    margin-top: 90px;
+    
+    
 }
 #myPieChart {
-    width: 600px !important;
-    height: 600px !important;
-    /* margin-right: 30px; */
-    margin-top: -100px;
+    width: 450px !important;
+    height: 450px !important;
+    margin-top: -100px; 
+    
+}  
+@media screen and (min-width: 1200px) {
+   .container{
+    width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+    margin: 100px auto auto 300px; 
+    overflow: hidden;
+    max-width: none;
+   }
 }
+
+
+
+@media screen and (max-width: 1199px) {
+    
+    .container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+        
+    }
+     .table-container-2{
+        margin-left: 5px;
+        width: 100%;
+     }
+     #myPieChart {
+        width: 400px !important;
+        height: 400px !important;
+        margin-top: -100px; 
+        
+    } 
+    
+
+}
+
+
+@media screen and (max-width: 700px) {
+    .container {
+      /* min-height: 120dvh; */
+      /* margin: 10px 10px 10px 10px; */
+      width: auto;
+      
+      padding: 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center all items in the container */
+      justify-content: center;
+    }
+  
+    .table-container-2 {
+      width: 100%;
+      
+      
+    }
+    .table-container-1{
+        width: 100%;
+        margin-top: 12vh;
+    }
+    
+    .table-container-2 .table td, th{
+        font-size: 18px;
+    }
+    
+    .chart-container{
+       
+        margin-bottom: 10px;
+    }
+    .table-container-2 th {
+        display: none;
+    }
+    .table-container-2 td{
+        display: grid;
+        gap: 2.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.5rem 1rem;
+    }
+    td::before{
+        content: attr(data-cell);
+        font-weight: 700;
+    }
+    #myPieChart {
+        width: 450px !important;
+        height: 450px !important;
+        margin-top: -100px; 
+        
+    } 
+      
+  }
