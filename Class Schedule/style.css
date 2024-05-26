@@ -1,25 +1,66 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
+    
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    max-width: 1200px;
-    margin-top: 100px;
-    margin-left: 350px;
+.schedule-data {
+    color: red;
+    background: yellow;
 }
+
+
+.vh-100 {
+    margin-left: 250px;
+    margin-right: 50px;
+}
+.profile {
+    width: 100px;
+    height: 100px;
+    margin-left: 75%;
+    margin-top: 190px;
+}
+.graduationSch {
+    font-weight: 600;
+    font-size: 25px;
+    margin-left: 60px;
+    margin-top: 30px;
+}
+.border-rectangle {
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    height: 550px;
+}
+.border-rectangle::-webkit-scrollbar {
+    display: none;
+}
+.schedule-item {
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background-color: #0056b3;
+    
+}
+.schedule-title {
+    font-weight: bold;
+}
+.sche-container {
+    position: relative;
+    text-align: center;
+}
+
+
+/* Calender Section  */
 
 .calendar-container, .link-section {
     width: 100%;
+}
+
+.topic {
+    margin-bottom: 50px;
+    margin-left: 20%;
 }
 
 .calendar {
@@ -30,7 +71,8 @@ body {
     padding: 5%;
     margin-bottom: 20px;
     width: 100%;
-    margin-right: 50px;
+    margin-right: 30px;
+    margin-left: 60px;
 }
 
 .month {
@@ -68,26 +110,14 @@ body {
 }
 
 .dates .today {
-    background-color: blue;
-    color: white;
+    background-color: yellow;
+    color: black;
     font-weight: bold;
 }
 
 .dates .today:hover{
     color: rgb(0, 0, 0);
 }
-
-/* .border-rectangle {
-    color: rgb(0, 0, 0);
-    padding: 5%;
-    border-radius: 10px;
-    overflow-y: auto;
-    background-color: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: auto;
-    height: auto;
-    max-width: auto;
-} */
 
 .border-rectangle::-webkit-scrollbar {
     display: none;
@@ -107,68 +137,64 @@ body {
     font-weight: bold;
 }
 
-.link-display {
-    padding: 0;
-}
 
-.download-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: blue;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 10px;
-}
 
-.download-btn a {
-    color: white;
-    text-decoration: none;
-}
 
-.download-btn:hover {
-    background-color: hsl(0, 0%, 0%);
-}
-
-@media (min-width: 768px) {
-    .container {
-        flex-direction: row;
-        justify-content: space-between;
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .vh-100 {
+        margin-left: 0;
+        margin-right: 0;
     }
-
-    .calendar-container, .link-section {
-        width: 48%;
+    .graduationSch {
+        margin-left: 0;
+        margin-top: 10px;
     }
-
-    .calendar, .border-rectangle {
-        width: 100%;
+    .border-rectangle {
+        height: auto;
     }
 }
 
-@media (max-width: 767px) {
-    .calendar-container, .link-section {
-        width: 100%;
+@media (max-width: 768px) {
+    .vh-100 {
+        padding: 0 15px;
     }
-
-    .calendar, .border-rectangle {
-        width: 100%;
+    .graduationSch {
+        font-size: 20px;
+        margin-top: 25px;
     }
-
-    .month h1 {
-        font-size: 1.5em;
+    .fixed-image {
+        margin-top: 15px;
     }
-
-    .days-of-week, .dates div {
-        font-size: 0.8em;
+    .border-rectangle {
+        padding: 15px;
+    }
+    .schedule-item {
         padding: 8px;
-    }
-
-    .uploaded-schedule, .link-display {
-        padding: 5%;
+        margin-bottom: 15px;
     }
 }
+
+@media (max-width: 576px) {
+    .vh-100 {
+        padding: 0 10px;
+    }
+    .graduationSch {
+        font-size: 18px;
+        margin-top: 25px;
+    }
+    .fixed-image {
+        margin-top: 10px;
+    }
+    .border-rectangle {
+        padding: 10px;
+    }
+    .schedule-item {
+        padding: 6px;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
