@@ -241,7 +241,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Notice Board -->
             <div class="item">
-                <a href=""><i class="far fa-sticky-note"></i>Notice Board </a>
+                <a href="../../../Notice-Board-Section/noticeboard.php"><i class="far fa-sticky-note"></i>Notice Board </a>
             </div>
 
             <!-- Message -->
