@@ -1,32 +1,50 @@
 <?php
-// Start the session
 session_start();
 
-// Include the database connection
 include_once('../connection.php');
 
-// Loading the HTML template
+// Loading the template.php
 include_once('../assests/content/static/template.php');
 
-// Fetch the data from the database
-$sql = "SELECT * FROM course_modules";
-$result = $conn->query($sql);
-
-// Check if there are results
-if ($result->num_rows > 0) {
-    // Create an array to hold the data
-    $modules = [];
-
-    // Fetch the data
-    while ($row = $result->fetch_assoc()) {
-        $modules[] = $row;
-    }
-} else {
-    echo "0 results";
+// Check if the username session variable is set
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
 }
 
-// Close the database connection
-$conn->close();
+$username = $_SESSION['username']; // Get the username from the session
+
+// Fetch the user's course based on the username
+$sql = "SELECT course FROM login_tbl WHERE username = ?";
+$stmt = $conn->prepare($sql);
+if ($stmt) {
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
+    
+    if ($user) {
+        $course = $user['course'];
+
+        // Fetch the schedule details based on the course
+        $sql = "SELECT * FROM modules WHERE course = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt) {
+            $stmt->bind_param('s', $course);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $modules = $result->fetch_all(MYSQLI_ASSOC); // Fetch all records
+            $stmt->close();
+        } else {
+            die("Error in SQL query: " . $conn->error);
+        }
+    } else {
+        die("User not found.");
+    }
+} else {
+    die("Error in SQL query: " . $conn->error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,41 +52,39 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Module</title>
-    <link rel="stylesheet" href="../../style-template.css"> <!--Template File CSS-->
-    <link rel="stylesheet" href="style-courseModule.css">
+    <title>Course Module Table Page</title>
+    <link rel="stylesheet" href="../style-template.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
 <body>
 <div class="container">
-    <div class="table">
-        <table>
-            <tr>
-                <th>Semester</th>
-                <th>Module Name</th>
-                <th>Module Code</th>
-                <th>Date</th>
-                <th>Duration</th>
-                <th>#Assign</th>
-                <th></th>
-            </tr>
-            <?php if (!empty($modules)): ?>
-                <?php foreach ($modules as $module): ?>
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><?php echo htmlspecialchars($module['semester']); ?></td>
-                        <td><?php echo htmlspecialchars($module['module_name']); ?></td>
-                        <td><?php echo htmlspecialchars($module['module_code']); ?></td>
-                        <td><?php echo htmlspecialchars($module['date']); ?></td>
-                        <td><?php echo htmlspecialchars($module['duration']); ?></td>
-                        <td><?php echo htmlspecialchars($module['assignments_completed']); ?></td>
-                        <td><a class="view-link" href="<?php echo htmlspecialchars($module['view_link']); ?>">View</a></td>
+                        <th>Module Name</th>
+                        <th>Module Code</th>
+                        <th>Date</th>
+                        <th>Duration</th>
+                        <th>Assignments</th>
                     </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="7">No data found</td>
-                </tr>
-            <?php endif; ?>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($modules as $module): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($module['module_name']); ?></td>
+                            <td><?php echo htmlspecialchars($module['module_code']); ?></td>
+                            <td><?php echo htmlspecialchars($module['date']); ?></td>
+                            <td><?php echo htmlspecialchars($module['duration']); ?></td>
+                            <td><?php echo htmlspecialchars($module['num_assignments']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
