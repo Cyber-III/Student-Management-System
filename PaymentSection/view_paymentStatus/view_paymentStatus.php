@@ -50,7 +50,7 @@ $result = $stmt->get_result();
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($row['no']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['paid_date']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['description']) . "</td>";
+                    echo "<td> Course Fee </td>";
                     echo "<td>" . htmlspecialchars($amount) . "</td>";
                     echo '<td> <button type="submit" class="view-link">PRINT</button> </td>';
                     echo "</tr>";

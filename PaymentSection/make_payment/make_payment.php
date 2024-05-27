@@ -35,6 +35,12 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $stmt->bind_param('is', $amount, $username);
     $stmt->execute();
 
+    // Insert the payment details into the payment_status table
+    $insert_sql = "INSERT INTO payment_status (username, no, description, amount) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($insert_sql);
+    $stmt->bind_param('sisd', $username, $record_id, $description, $amount);
+    $stmt->execute();
+
 }
 
 // Get the current date
