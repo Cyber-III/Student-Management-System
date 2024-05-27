@@ -224,7 +224,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Penalty -->
             <div class="item">
-                <a href=""><i class="fa fa-dollar"></i>Penalty </a>
+                <a href="../../../PenaltySection/penalty.php"><i class="fa fa-dollar"></i>Penalty </a>
             </div>
 
             <!-- Course Guidlines Category -->
