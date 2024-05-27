@@ -216,6 +216,9 @@ nav a:nth-child(2):hover~.animation{
 	left: 110px;
 }
 
+.logos{
+  width: 50%;
+}
 
 
 /* Responisve section */
