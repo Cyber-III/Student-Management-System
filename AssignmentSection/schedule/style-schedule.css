@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 100px;
+    margin-left: 350px;
+    padding: 20px;
+}
+
+.topic {
+    text-align: center;
+    margin-bottom: 20px;
+}
+ 
+.border-rectangle {
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+}
+
+.schedule-item {
+    background-color: #0056b3;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 calc(50% - 40px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.959);
+}
+
+.schedule-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.button-29 {
+    align-items: center;
+    appearance: none;
+    background-image: radial-gradient(100% 90% at 100% 0, #2e52f1 0, #1df0f0 100%);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JetBrains Mono",monospace;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+  }
+  
+  .button-29:focus {
+    box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  }
+  
+  .button-29:hover {
+    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    transform: translateY(-2px);
+  }
+  
+  .button-29:active {
+    box-shadow: #3c4fe0 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .container {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .schedule-item {
+        flex: 1 1 calc(100% - 40px);
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .schedule-item {
+        padding: 10px;
+    }
+}
