@@ -222,11 +222,6 @@ if(isset($_SESSION['username'])) {
                 <a href="../../../Course Materials/courseMaterials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
             </div>
 
-            <!-- Penalty -->
-            <div class="item">
-                <a href="../../../PenaltySection/penalty.php"><i class="fa fa-dollar"></i>Penalty </a>
-            </div>
-
             <!-- Course Guidlines Category -->
             <div class="item">
                 <a class="sub-btn"><i class="far fa-question-circle"></i>Course Guidlines
