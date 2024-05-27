@@ -1,29 +1,35 @@
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
 
-p {
-    color: black;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 2rem;
     margin-left: 300px;
-    text-decoration: none;
+    margin-top: 5rem;
 }
 
-.container {
-    width: 100px;
-    height: 100px;
-    margin-left: 350px;
-    margin-top: 100px;
-}
-
+/* table styles */
 table {
-    width: 70%;
+    background: #ffffff;
+    width: 100%;
     border-collapse: collapse;
-    margin-top: 80px;
-    margin-left: 350px;
+    border: #cacace;
+   
 }
-
+.table{
+    margin: 0 32px;
+}
 th, td {
     border: 0px solid #dddddd;
     text-align: left;
@@ -48,4 +54,50 @@ th, td {
     background-color: #007BFF; 
     color: white; 
     cursor: pointer; 
+}
+
+@media screen and (min-width: 1200px) {
+    .container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+}
+@media screen and (max-width: 1199px) {
+    .container{
+        width: 100%;
+        display: flex;
+        margin-left: auto;
+    }
+    .table{
+        width: 100%;
+    }
+ }
+ 
+
+@media screen and (max-width: 600px) {
+    .container{
+        margin-top: 10vh;
+        margin-left: auto;
+        width: auto;
+        display: flex;
+        padding: 0 10px;
+        align-items: center;
+        justify-content: center;
+    }
+    .table{
+        width: 100%;
+    }
+    
+    
+}
+@media screen and (max-width: 514px){
+    .table{
+        width: auto;
+    }
+    .table td, th{
+        font-size: 12px;
+       
+    }
 }
