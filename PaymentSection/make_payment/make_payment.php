@@ -1,12 +1,12 @@
 <?php
-// Start the session
 session_start();
 
 // Include the database connection
 include_once('../../connection.php');
+
+//Loading the template.php
 include_once('../../assests/content/static/template.php');
 
-// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -23,22 +23,55 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $stmt->bind_param('si', $username, $record_id);
     $stmt->execute();
 
-    // Update the payment_summary_tbl
+    // Update the payment_summary_tbl setting the amount_paid row
     $update_sql = "UPDATE payment_summary_tbl SET amount_paid = amount_paid + ? WHERE username = ?";
     $stmt = $conn->prepare($update_sql);
     $stmt->bind_param('is', $amount, $username);
     $stmt->execute();
 
+    // Update the payment_summary_tbl setting the outstanding row
     $update_sql1 = "UPDATE payment_summary_tbl SET outstanding = outstanding - ? WHERE username = ?";
     $stmt = $conn->prepare($update_sql1);
     $stmt->bind_param('is', $amount, $username);
     $stmt->execute();
 
-    echo '<p>Payment successful.</p>';
+    // Insert the payment details into the payment_status table
+    $insert_sql = "INSERT INTO payment_status (username, no, description, amount) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($insert_sql);
+    $stmt->bind_param('sisd', $username, $record_id, $description, $amount);
+    $stmt->execute();
+
 }
 
-// Fetch data from the table
-$username = $_SESSION['username']; // Assuming you have stored the username in the session
+// Get the current date
+$current_date = new DateTime();
+
+// Fetch all records from the table to update penalties
+$sql = "SELECT no, nxt_pay_date, penalty FROM make_payment_tbl";
+$result_penalty_update = $conn->query($sql);
+
+while ($row = $result_penalty_update->fetch_assoc()) {
+    $record_id = $row['no'];
+    $nxt_pay_date = new DateTime($row['nxt_pay_date']);
+    $nxt_pay_date->modify('+1 month'); // Add one month to the next payment date
+    $penalty = $row['penalty'];
+
+    // Calculating the penalty
+    if ($current_date > $nxt_pay_date) {
+        $interval = $current_date->diff($nxt_pay_date);
+        $days_overdue = $interval->days;
+        $new_penalty = $days_overdue * 100;
+
+        // Update the penalty in the make_payment_tbl table
+        $update_penalty_sql = "UPDATE make_payment_tbl SET penalty = ? WHERE no = ?";
+        $stmt = $conn->prepare($update_penalty_sql);
+        $stmt->bind_param('ii', $new_penalty, $record_id);
+        $stmt->execute();
+    }
+}
+
+// Fetch data from the table for display
+$username = $_SESSION['username'];
 $sql = "SELECT * FROM make_payment_tbl WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $username);
@@ -79,7 +112,7 @@ if ($result1->num_rows > 0) {
 <body>
 
     <div class="container">
-        <div class = "table-container-1">
+        <div class="table-container-1">
             <div class="table">
                 <table>
                     <tr>
@@ -116,8 +149,8 @@ if ($result1->num_rows > 0) {
         </div>   
     </div>
 
-    <div class = "container">
-        <div class = "table-container-2" >
+    <div class="container">
+        <div class="table-container-2">
             <div class="table">
                 <table>
                     <thead>
@@ -126,6 +159,7 @@ if ($result1->num_rows > 0) {
                         <th>Next payment date</th>
                         <th>Description</th>
                         <th>Amount</th>
+                        <th>Penalty</th>
                         <th>Payment link</th>
                     </tr>
                     </thead>
@@ -134,103 +168,101 @@ if ($result1->num_rows > 0) {
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $amount = $row['amount'];
-                    $record_id = $row['no']; // Use record id to uniquely identify the record
-                    echo "<tr>";
-                    echo "<td data-cell = 'No:'>" . htmlspecialchars($row['no']) . "</td>";
-                    echo "<td data-cell = 'Next Payment Date:'>" . htmlspecialchars($row['nxt_pay_date']) . "</td>";
-                    echo "<td data-cell = 'Description:'>" . htmlspecialchars($row['description']) . "</td>";
-                    echo "<td data-cell = 'Amount:'>" . htmlspecialchars($amount) . "</td>";
-                    echo '<td >
-                    <form action="pay.php" method="POST">
-                        <input type="hidden" name="username" value="' . htmlspecialchars($username) . '">
-                        <input type="hidden" name="amount" value="' . htmlspecialchars($amount) . '">
-                        <input type="hidden" name="record_id" value="' . htmlspecialchars($record_id) . '">
-                        <button type="submit" class="view-link">PAY</button>
-                    </form></td>';
-                    echo "</tr>";
-                    }} else {
-                        echo "<tr><td colspan='5'>No payments found</td></tr>";
+                            $penalty = $row['penalty'];
+                            $record_id = $row['no']; // Use record id to uniquely identify the record
+                            echo "<tr>";
+                            echo "<td data-cell='No:'>" . htmlspecialchars($row['no']) . "</td>";
+                            echo "<td data-cell='Next Payment Date:'>" . htmlspecialchars($row['nxt_pay_date']) . "</td>";
+                            echo "<td data-cell='Description:'>" . htmlspecialchars($row['description']) . "</td>";
+                            echo "<td data-cell='Amount:'>" . htmlspecialchars($amount) . "</td>";
+                            echo "<td data-cell='Penalty:'>" . htmlspecialchars($penalty) . "</td>";
+                            echo '<td>
+                                <form action="pay.php" method="POST">
+                                    <input type="hidden" name="username" value="' . htmlspecialchars($username) . '">
+                                    <input type="hidden" name="amount" value="' . htmlspecialchars($amount + $penalty) . '">
+                                    <input type="hidden" name="record_id" value="' . htmlspecialchars($record_id) . '">
+                                    <button type="submit" class="view-link">PAY</button>
+                                </form></td>';
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='6'>No payments found</td></tr>";
                     }
                     $conn->close();
                     ?>
                 </table>
             </div>
         </div>
-    
     </div>
 
-
-
-
-
-<script>
-    // Data for the pie chart
-    const data = {
-        labels: [
-            'Course Fee',
-            'Amount Paid',
-            'Outstanding',
-            'University Fee',
-            'Paid University Fee',
-            'University Fee Outstanding'
-        ],
-        datasets: [{
-            label: 'Fees Breakdown',
-            data: [
-                <?php echo $tot_course_fee; ?>,
-                <?php echo $amount_paid; ?>,
-                <?php echo $outstanding; ?>,
-                <?php echo $uni_fee; ?>,
-                <?php echo $paid_uni_fee; ?>,
-                <?php echo $uni_fee_outstanding; ?>
+    <script>
+        // Data for the pie chart
+        const data = {
+            labels: [
+                'Course Fee',
+                'Amount Paid',
+                'Outstanding',
+                'University Fee',
+                'Paid University Fee',
+                'University Fee Outstanding'
             ],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',    // Red
-                'rgba(54, 162, 235, 1)',    // Blue
-                'rgba(255, 206, 86, 1)',    // Yellow
-                'rgba(75, 192, 192, 1)',    // Teal
-                'rgba(153, 102, 255, 1)',   // Purple
-                'rgba(255, 159, 64, 1)'  
-            ],
-            borderWidth: 1
-        }]
-    };
+            datasets: [{
+                label: 'Fees Breakdown',
+                data: [
+                    <?php echo $tot_course_fee; ?>,
+                    <?php echo $amount_paid; ?>,
+                    <?php echo $outstanding; ?>,
+                    <?php echo $uni_fee; ?>,
+                    <?php echo $paid_uni_fee; ?>,
+                    <?php echo $uni_fee_outstanding; ?>
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',    // Red
+                    'rgba(54, 162, 235, 1)',    // Blue
+                    'rgba(255, 206, 86, 1)',    // Yellow
+                    'rgba(75, 192, 192, 1)',    // Teal
+                    'rgba(153, 102, 255, 1)',   // Purple
+                    'rgba(255, 159, 64, 1)'  
+                ],
+                borderWidth: 1
+            }]
+        };
 
         // Config for the doughnut chart
-    const config = {
-        type: 'doughnut', // Change type from 'pie' to 'doughnut'
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function (tooltipItem) {
-                            return `${tooltipItem.label}: ${tooltipItem.raw}`;
+        const config = {
+            type: 'doughnut', // Change type from 'pie' to 'doughnut'
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                            }
                         }
                     }
                 }
             },
             cutout: '50%' // Add this option to create a doughnut chart
-        },
-    };
+        };
 
-    // Render the pie chart
-    window.onload = function () {
-        const ctx = document.getElementById('myPieChart').getContext('2d');
-        new Chart(ctx, config);
-    };
-</script>
+        // Render the pie chart
+        window.onload = function () {
+            const ctx = document.getElementById('myPieChart').getContext('2d');
+            new Chart(ctx, config);
+        };
+    </script>
 </body>
 </html>
