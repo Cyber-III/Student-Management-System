@@ -1,59 +1,116 @@
+/* Ensure there is no CSS conflict by resetting common properties */
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+ 
+    
+}
+
 p {
-    color: black;
-    margin-left: 300px;
+    /* margin-left: 300px; */
     text-decoration: none;
 }
-
-
-.img-fluid {
-    margin-top: 50px;
-    margin-left: 300px;
-    height: 400px;
-    width: 600px;
-}
-
-.btn {
-    color: blueviolet;
-    margin-bottom: 10px;
-}
-
-
-
-.centered-alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
+.container-box{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #38a169; /* Tailwind green-500 */
+    box-sizing: border-box;
+    gap: 2rem;
+    margin-left: 300px;
+    margin-top: 5rem;
+
+}
+.image-container{
+    width: 450px;
+    height: auto;
+}
+
+.box.form-box {
+    background-color: rgb(44, 44, 44, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+   
     color: white;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
-.table {
-    width: 75%;
-    border-collapse: collapse;
+.box.form-box form {
+    display: flex;
+    flex-direction: column;
 }
 
+.box.form-box .field {
+    margin-bottom: 15px;
+}
+
+.box.form-box label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+.box.form-box input[type="text"],
+.box.form-box input[type="number"],
+.box.form-box input[type="date"],
+.box.form-box input[type="file"],
+.box.form-box textarea {
+    width: 100%;
+    padding: 10px;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.box.form-box input[type="file"] {
+    padding: 0px;
+    background-color: white;
+}
+
+.box.form-box .field-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.box.form-box .btn1 {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%;
+}
+
+.box.form-box .btn1:hover {
+    background-color: #e0e0e0;
+}
+
+.box.form-box textarea {
+    resize: none;
+}
+
+/* table styles */
 table {
+    background: #ffffff;
     width: 100%;
     border-collapse: collapse;
-    margin: 0;
+    border: #cacace;
+   
 }
-
+.table{
+    margin: 0 32px;
+}
 th, td {
     border: 0px solid #dddddd;
     text-align: left;
     padding: 15px;
     white-space: nowrap;
 }
-
 /* style-courseModule.css */
 
 .view-link {
@@ -73,46 +130,95 @@ th, td {
     cursor: pointer; 
 }
 
-@media (max-width: 1200px) {
-    .vh-100 {
-        margin: 0;
+
+@media screen and (min-width: 1200px) {
+    .container-box{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+}
+@media screen and (max-width: 1199px) {
+    .container-box{
+        width: 100%;
+        display: flex;
+        margin-left: auto;
+    }
+    .table{
+        width: 100%;
+    }
+ }
+ 
+@media screen and (max-width: 700px){
+    .container-box{
+        margin-left: auto;
+        width: auto;
+        display: flex;
+        padding: 0 10px;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
     }
-
-    .col-md-7 {
-        justify-content: center;
+    
+    .image-container{
+        display: none;
     }
+    .table{
+        width: 100%;
 
-    .img-fluid {
-        margin-left: 0;
+    }
+    .table td, th{
+        font-size: 12px;
+        
+    }
+    
+    
+    .box.form-box {
+        width: 400px;
+        margin: auto;
+        
+
     }
 }
 
-@media (max-width: 1023px) {
-    .img-fluid {
-        margin-top: 700px;
-        height: 500px;
+@media screen and (max-width: 400px) {
+    .table{
+        width: 100%;
     }
+    .table th{
+       display: none;
 
-    .table {
-        margin-top: 650px;
-        margin-left: 10px;
-        margin-right: 10px;
+    }
+    .table td{
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.5rem 1rem;
+
+    }
+    td::before{
+        content: attr(data-cell);
+        font-weight: 700;
+    }
+    .table td, th{
+        font-size: 12px;
+       
     }
     
-}
+    
+    .box.form-box {
+        width: 400px;
+        margin: auto;
+       
 
-@media (max-width: 767.98px) {
-    .text-center img {
-        width: 50%;
     }
     
-}
-
-@media (max-width: 500px) {
-    .img-fluid {
-        margin-top: 700px;
-        height: 400px;
+    td.view-link {
+        display: inline-block;
+        /* justify-content: center; */
+        /* width: fit-content; */
+        margin: 15px 0px 0px 160px;
     }
-    
+
 }
