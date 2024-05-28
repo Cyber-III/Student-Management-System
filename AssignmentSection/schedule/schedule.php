@@ -65,8 +65,8 @@ if ($stmt) {
                     <p><span class="schedule-title">Date of Issue: </span> <?= htmlspecialchars($schedule['date_of_issue']) ?></p>
                     <p><span class="schedule-title">Date of Submit: </span> <?= htmlspecialchars($schedule['date_of_submit']) ?></p>
                     <p>
-                       <div class="view-button">
-                            <a href="<?= htmlspecialchars($schedule['view']) ?>" class="view-link" target="_blank">View Assignment</a>
+                       <div class="mt-5">
+                                <a href="<?= htmlspecialchars($schedule['view']) ?>" class="view-link p-2" target="_blank">View Assignment</a>
                        </div>
                     </p>
                 </div>

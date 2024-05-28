@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 
+
 * {
     box-sizing: border-box;
 }
@@ -46,14 +47,13 @@ body {
 }
 
 .view-link {
-    display: inline-block;
-    width: auto;
+    width: 90px;
     color: #182431; 
     text-decoration: none; /* Remove underline */
     font-weight: bold; 
     padding: 5px 10px; 
     border: 1px solid #007BFF; 
-    border-radius: 8px; 
+    border-radius: 88px; 
     background-color: #f0f8ff; 
     transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
