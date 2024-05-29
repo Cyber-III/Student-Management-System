@@ -180,7 +180,7 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                     <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="../../../AssignmentSection\submission\submission.php" class="sub-item">Assignment Submissions</a>
+                    <a href="../../../AssignmentSection\submission\upload_assignment.php" class="sub-item">Assignment Submissions</a>
                     <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
                     <a href="../../../AssignmentSection\Mitigation Request\Add request\addRequest.php" class="sub-item">Add Mitigation Request</a>
                     <a href="../../../AssignmentSection\Mitigation Request\view request\viewRequest.php" class="sub-item">View Mitigation Request</a>
