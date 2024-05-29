@@ -166,7 +166,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Exam Schedule</a>
+                    <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
                     <a href="" class="sub-item">Exam Submissions</a>
                     <a href="" class="sub-item">Exam Admission</a>
                     
@@ -180,7 +180,7 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                     <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="../../../AssignmentSection\submission\submission.php" class="sub-item">Assignment Submissions</a>
+                    <a href="../../../AssignmentSection\submission\upload_assignment.php" class="sub-item">Assignment Submissions</a>
                     <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
                     <a href="../../../AssignmentSection\Mitigation Request\Add request\addRequest.php" class="sub-item">Add Mitigation Request</a>
                     <a href="../../../AssignmentSection\Mitigation Request\view request\viewRequest.php" class="sub-item">View Mitigation Request</a>
@@ -257,7 +257,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Vacancies -->
             <div class="item">
-                <a href=""><i class="fas fa-user-plus"></i>Vacancies </a>
+                <a href="../../../VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
             </div>
 
 

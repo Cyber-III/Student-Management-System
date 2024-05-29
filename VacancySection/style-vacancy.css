@@ -1,0 +1,233 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    padding: 0;
+    margin-left: 400px;
+}
+
+.content {
+    margin-top: 5rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.job-card {
+    margin-top: 2rem;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s ease;
+}
+
+.job-card:hover {
+    background-color: #f0f0f0;
+}
+
+.job-img {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    object-fit: cover;
+}
+
+.job-info {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.job-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+.job-description {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #4b5563;
+}
+
+.btn-container {
+    display: flex;
+}
+
+.apply-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: medium;
+    color: white;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.apply-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.card{
+    padding: 30px 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    border: none !important;
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2)
+}
+
+.blue-text {
+    color: #00BCD4
+}
+
+.form-control-label {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+input, textarea, button {
+    padding: 8px 15px;border-radius: 5px !important;
+    margin: 5px 0px;box-sizing: border-box;
+    border: 1px solid #ccc;
+    font-size: 18px !important;
+    font-weight: 300
+}
+
+input:focus, textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #00BCD4;
+    outline-width: 0;
+    font-weight: 400
+}
+
+.btn-block {
+    margin-top: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: medium;
+    color: white;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-block:hover {
+    background-color: #1d4ed8;
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+
+
+  /* Modal Styles */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    margin-left: 150px;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.alert-container {
+    width: 50%;
+    font-size: 30px;
+    background-color: #dff0d8;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.alert-error-container {
+    width: 50%;
+    font-size: 30px;
+    background-color: #f0d8d8;
+    border: 1px solid #e6c3c3;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+
+@media screen and (max-width: 1199px)   {
+    body {
+        margin: 20px;
+    }
+
+    .modal {
+        margin: 0;
+    }
+
+    .alert-container {
+        margin: 0;
+        width: 80%;
+        font-size: 20px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    
+
+    .job-card {
+        flex-direction: row;
+    }
+
+    .job-img {
+        width: 900px;
+        height: 300px;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0.75rem;
+    }
+
+    .job-info {
+        margin-left: 1rem;
+    }
+}
