@@ -7,7 +7,7 @@ include_once('../../connection.php');
 include_once('../../assests/content/static/template.php');
 
 
-$username = $_SESSION['username']; // Get the username from the session
+$username = $_SESSION['username'];
 
 // Fetch the user's batch number based on the username
 $sql = "SELECT course, batch_number FROM login_tbl WHERE username = ?";
@@ -30,7 +30,7 @@ if ($stmt) {
             $stmt->bind_param('ss', $course, $batch_number);
             $stmt->execute();
             $result = $stmt->get_result();
-            $schedules = $result->fetch_all(MYSQLI_ASSOC); // Fetch all records
+            $schedules = $result->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
         } else {
             die("Error in SQL query: " . $conn->error);
@@ -68,7 +68,7 @@ if ($stmt) {
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p>No assignment schedule found for batch <?= htmlspecialchars($batch_number) ?>.</p>
+                <p>No assignment schedule found for <?= htmlspecialchars($course) ?> <?= htmlspecialchars($batch_number) ?>.</p>
             <?php endif; ?>
         </div>
     </div>
