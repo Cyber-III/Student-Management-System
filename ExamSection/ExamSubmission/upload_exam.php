@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     elseif (isset($_FILES['file']) && isset($_POST['exam_name'])) {
         $exam_name = $_POST['exam_name'];
         $file = $_FILES['file'];
-        $uploadDir = 'uploads/';
+        $uploadDir = '../../ResultSection/Exam/uploads/';
         $uploadFile = $uploadDir . basename($file['name']);
 
         // Check if the upload directory exists, if not create it
