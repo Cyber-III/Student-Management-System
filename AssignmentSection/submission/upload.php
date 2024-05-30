@@ -1,84 +1,105 @@
 <?php
+session_start();
 include_once('../../connection.php');
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if module_id and assignment_file are set
-    if (isset($_POST['module_id']) && isset($_FILES['assignment_file'])) {
-        // Retrieve module ID
-        $module_id = $_POST['module_id'];
+$username = $_SESSION['username'];
+$batch_number = isset($_SESSION['batch_number']) ? $_SESSION['batch_number'] : null;
+
+if ($batch_number === null) {
+    die("Batch number is not set in the session.");
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['view']) && isset($_POST['module_name'])) {
+        $module_name = $_POST['module_name'];
         
-        // Retrieve other necessary data from session
-        session_start();
-        $username = $_SESSION['username'];
-
-        // Fetch user's batch number and course from login_tbl
-        $sql_user = "SELECT batch_number, course FROM login_tbl WHERE username = ?";
-        $stmt_user = $conn->prepare($sql_user);
-        if ($stmt_user) {
-            $stmt_user->bind_param('s', $username);
-            $stmt_user->execute();
-            $result_user = $stmt_user->get_result();
-            $user = $result_user->fetch_assoc();
-            $stmt_user->close();
-
-            if ($user) {
-                $batch_number = $user['batch_number'];
-                $course = $user['course'];
-
-                // File upload handling
-                $file_name = $_FILES['assignment_file']['name'];
-                $file_tmp = $_FILES['assignment_file']['tmp_name'];
-                $file_size = $_FILES['assignment_file']['size'];
-                $file_error = $_FILES['assignment_file']['error'];
-
-                // Check for errors in file upload
-                if ($file_error === 0) {
-                    // Check file size (you can set your own limit)
-                    if ($file_size <= 5242880) { // 5MB
-                        // Generate a unique filename to prevent overwriting existing files
-                        $file_destination = 'uploads/' . uniqid('', true) . '_' . $file_name;
-                        
-                        // Move uploaded file to destination directory
-                        if (move_uploaded_file($file_tmp, $file_destination)) {
-                            // File uploaded successfully
-                            // Insert data into assignments table
-                            $sql_insert = "INSERT INTO assignments (username, batch_number, module_code, course, module_name, date_of_issue, date_of_submit, file_path) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)";
-                            $stmt_insert = $conn->prepare($sql_insert);
-                            if ($stmt_insert) {
-                                $module_code = ''; // You need to fetch this from assignment_schedule based on module_id
-                                $module_name = ''; // You need to fetch this from assignment_schedule based on module_id
-                                $date_of_issue = ''; // You need to fetch this from assignment_schedule based on module_id
-                                $stmt_insert->bind_param('sssssss', $username, $batch_number, $module_code, $course, $module_name, $date_of_issue, $file_destination);
-                                $stmt_insert->execute();
-                                $stmt_insert->close();
-                                
-                                // Display a notification on the same page
-                                echo '<div class="notification">File uploaded successfully and data saved.</div>';
-                            } else {
-                                echo "Failed to prepare SQL statement: " . $conn->error;
-                            }
-                        } else {
-                            echo "Failed to move uploaded file.";
-                        }
-                    } else {
-                        echo "File size exceeds limit.";
-                    }
-                } else {
-                    echo "Error uploading file: " . $file_error;
-                }
+        // Fetch the file path from the database
+        $sql = "SELECT file_path FROM assignments WHERE module_name = ? AND username = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt) {
+            $stmt->bind_param('ss', $module_name, $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $stmt->close();
+            
+            if ($result->num_rows > 0) {
+                $submission = $result->fetch_assoc();
+                $file_path = $submission['file_path'];
+                header("Location: upload_submission.php?message=viewed&file_path=" . urlencode($file_path));
+                exit();
             } else {
-                echo "User not found.";
+                header("Location: upload_submission.php?message=nosub");
+                exit();
             }
         } else {
-            echo "Error in SQL query: " . $conn->error;
+            echo "Error preparing select statement: " . $conn->error;
+        }
+    } elseif (isset($_FILES['file']) && isset($_POST['module_name'])) {
+        $module_name = $_POST['module_name'];
+        $file = $_FILES['file'];
+        $uploadDir = 'uploads/';
+        $uploadFile = $uploadDir . basename($file['name']);
+
+        // Check if the upload directory exists, if not create it
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        // Move the uploaded file to the upload directory
+        if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
+            // Check if an entry already exists for the given module_name and username
+            $sql = "SELECT * FROM assignments WHERE module_name = ? AND username = ?";
+            $stmt = $conn->prepare($sql);
+            if ($stmt) {
+                $stmt->bind_param('ss', $module_name, $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+
+                if ($result->num_rows > 0) {
+                    // Entry exists, update the file path
+                    $sql = "UPDATE assignments SET file_path = ?, batch_number = ? WHERE module_name = ? AND username = ?";
+                    $stmt = $conn->prepare($sql);
+                    if ($stmt) {
+                        $stmt->bind_param('ssss', $uploadFile, $batch_number, $module_name, $username);
+                        if ($stmt->execute()) {
+                            header("Location: upload_submission.php?message=updated");
+                            exit();
+                        } else {
+                            echo "Error updating file path: " . $stmt->error;
+                        }
+                        $stmt->close();
+                    } else {
+                        echo "Error preparing update statement: " . $conn->error;
+                    }
+                } else {
+                    // Entry does not exist, insert a new one
+                    $sql = "INSERT INTO assignments (module_name, batch_number, username, file_path) VALUES (?, ?, ?, ?)";
+                    $stmt = $conn->prepare($sql);
+                    if ($stmt) {
+                        $stmt->bind_param('ssss', $module_name, $batch_number, $username, $uploadFile);
+                        if ($stmt->execute()) {
+                            header("Location: upload_submission.php?message=submitted");
+                            exit();
+                        } else {
+                            echo "Error inserting file path: " . $stmt->error;
+                        }
+                        $stmt->close();
+                    } else {
+                        echo "Error preparing insert statement: " . $conn->error;
+                    }
+                }
+            } else {
+                echo "Error preparing select statement: " . $conn->error;
+            }
+        } else {
+            header("Location: upload_submission.php?message=empsub");
+            exit();
         }
     } else {
-        echo "Missing module ID or file.";
+        echo "No file or module name provided.";
     }
 } else {
-    // Redirect if accessed directly
-    header("Location: ../assignment_schedule.php");
-    exit();
+    echo "Invalid request method.";
 }
 ?>

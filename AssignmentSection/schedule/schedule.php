@@ -63,7 +63,7 @@ if ($stmt) {
                     <p><span class="schedule-title">Module Name: </span> <?= htmlspecialchars($schedule['module_name']) ?></p>
                     <p><span class="schedule-title">Module Code: </span> <?= htmlspecialchars($schedule['module_code']) ?></p>
                     <p><span class="schedule-title">Date of Issue: </span> <?= htmlspecialchars($schedule['date_of_issue']) ?></p>
-                    <p><span class="schedule-title">Date of Submit: </span> <?= htmlspecialchars($schedule['date_of_submit']) ?></p>
+                    <p><span class="schedule-title">Final Date: </span> <?= htmlspecialchars($schedule['date_of_submit']) ?></p>
                     <p>
                        <div class="mt-5">
                                 <a href="<?= htmlspecialchars($schedule['view']) ?>" class="view-link p-2" target="_blank">View Assignment</a>
