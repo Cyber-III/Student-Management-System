@@ -167,7 +167,7 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                     <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
-                    <a href="" class="sub-item">Exam Submissions</a>
+                    <a href="../../../ExamSection/ExamSubmission/exam_submission.php" class="sub-item">Exam Submissions</a>
                     <a href="" class="sub-item">Exam Admission</a>
                     
                 </div>
@@ -180,7 +180,7 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                     <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="../../../AssignmentSection\submission\upload_assignment.php" class="sub-item">Assignment Submissions</a>
+                    <a href="../../../AssignmentSection\submission\upload_submission.php" class="sub-item">Assignment Submissions</a>
                     <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
                     <a href="../../../AssignmentSection\Mitigation Request\Add request\addRequest.php" class="sub-item">Add Mitigation Request</a>
                     <a href="../../../AssignmentSection\Mitigation Request\view request\viewRequest.php" class="sub-item">View Mitigation Request</a>
