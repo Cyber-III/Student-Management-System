@@ -24,7 +24,7 @@ function sanitize_input($data) {
 }
 
 // Retrieve mitigations data for the logged-in user
-$stmt = $conn->prepare("SELECT module_name, module_code, date, description, status FROM mitigations WHERE username = ?");
+$stmt = $conn->prepare("SELECT assignment_name, module_code, date, description, status FROM mitigations WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -42,38 +42,39 @@ $stmt->close();
 <head>
     <title>View Mitigations</title>
     <link rel="stylesheet" href="../../style-template.css">
-    <link rel="stylesheet" href="style-view_mitigation.css">
+    <link rel="stylesheet" href="style-view_mitigation">
 </head>
 <body>
-
-<h1>View Mitigations</h1>
-
-<?php if (!empty($mitigations)): ?>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Module Name</th>
-                <th>Module Code</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($mitigations as $mitigation): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($mitigation['module_name']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['module_code']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['date']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['description']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['status']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php else: ?>
-    <div class="alert alert-info">No mitigations found for this user.</div>
-<?php endif; ?>
-
+    <div class="container">
+            <center>
+                <h1>View Mitigations</h1>
+            </center>
+                <?php if (!empty($mitigations)): ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Assignment Name</th>
+                                <th>Module Code</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($mitigations as $mitigation): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($mitigation['assignment_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($mitigation['module_code']); ?></td>
+                                    <td><?php echo htmlspecialchars($mitigation['date']); ?></td>
+                                    <td><?php echo htmlspecialchars($mitigation['description']); ?></td>
+                                    <td><?php echo htmlspecialchars($mitigation['status']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <div class="alert alert-info">No mitigations found for this user.</div>
+                <?php endif; ?> 
+</div>
 </body>
 </html>

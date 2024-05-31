@@ -63,7 +63,7 @@ $message = '';
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
-    $module_name = sanitize_input($_POST["assignment_name"]);
+    $assignment_name = sanitize_input($_POST["assignment_name"]);
     $module_code = sanitize_input($_POST["module_code"]);
     $date = sanitize_input($_POST["date"]);
     $description = sanitize_input($_POST["description"]);
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <label for="assignment_name">Assignment Name:</label><br>
     <select id="assignment_name" name="assignment_name" required onchange="updateModuleCode()">
-        <option value="">Select Module Name</option>
+        <option value="">Select Assignment Name</option>
         <?php foreach ($modules as $module): ?>
             <option value="<?php echo htmlspecialchars($module['assignment_name']); ?>"><?php echo htmlspecialchars($module['assignment_name']); ?></option>
         <?php endforeach; ?>
