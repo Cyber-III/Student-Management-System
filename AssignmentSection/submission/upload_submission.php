@@ -5,6 +5,7 @@ include_once('../../assests/content/static/template.php');
 
 $username = $_SESSION['username'];
 
+// Fetch user course and batch number from login_tbl
 $sql = "SELECT course, batch_number FROM login_tbl WHERE username = ?";
 $stmt = $conn->prepare($sql);
 if ($stmt) {
@@ -21,6 +22,7 @@ if ($stmt) {
         // Store batch number in session
         $_SESSION['batch_number'] = $batch_number;
 
+        // Fetch assignment schedules for the user's course and batch number
         $sql = "SELECT * FROM assignment_schedule WHERE course = ? AND batch_number = ?";
         $stmt = $conn->prepare($sql);
         if ($stmt) {
@@ -75,12 +77,14 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
         <?php if ($schedules): ?>
             <?php foreach ($schedules as $schedule): ?>
                 <div class="schedule-item">
+                    <p><span class="schedule-title">Assignment Name: <?= htmlspecialchars($schedule['assignment_name']) ?> </span> </p>
                     <p><span class="schedule-title">Module Name: <?= htmlspecialchars($schedule['module_name']) ?> </span> </p>
                     <p><span class="schedule-title">Module Code: <?= htmlspecialchars($schedule['module_code']) ?> </span> </p>
                     <p><span class="schedule-title">Date: <?= htmlspecialchars($schedule['date_of_issue']) ?></span> </p>
                     <?php if ($schedule['allow_submission']): ?>
                         <form action="upload.php" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name']) ?>">
+                            <input type="hidden" name="assignment_name" value="<?= htmlspecialchars($schedule['assignment_name']) ?>">
                             <input type="hidden" name="module_code" value="<?= htmlspecialchars($schedule['module_code']) ?>">
                             <input type="file" name="file"> <br> <br>
                             <button type="submit" name="submit" class="btn btn-primary">Submit</button>

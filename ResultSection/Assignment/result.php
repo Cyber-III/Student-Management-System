@@ -9,7 +9,7 @@ include_once('../../connection.php');
 include_once('../../assests/content/static/template.php');
 
 $username = $_SESSION['username']; // Assuming you have stored the username in the session
-$sql = "SELECT module_name, assignment_name, submission_date, results, file_path, feedback FROM assignments WHERE username = ?";
+$sql = "SELECT assignment_name, submission_date, results, file_path FROM assignments WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $username);
 $stmt->execute();
@@ -24,7 +24,7 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../../style-template.css">
-    <link rel="stylesheet" href="style-feedback.css">
+    <link rel="stylesheet" href="style-result.css">
 
     <title>Document</title>
 </head>
@@ -33,10 +33,9 @@ $result = $stmt->get_result();
 <div class="table">
         <table>
             <tr>
-                <th>Assignment Name</th>
+                <th>Exam Name</th>
                 <th>Submission Date</th>
                 <th>Result</th>
-                <th>Feedback</th>
                 <th>View Submission</th>
             </tr>
             <?php
@@ -46,14 +45,13 @@ $result = $stmt->get_result();
                     echo "<td>" . htmlspecialchars($row['assignment_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['submission_date']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['results']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['feedback']) . "</td>";
                     echo '<td>';
                     echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank"><button type="submit" class="view-link">View</button></a>';
                     echo '</td>';
                     echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='5'>No exam submissions found</td></tr>";
+                echo "<tr><td colspan='4'>No assignment submissions found</td></tr>";
             }
             $conn->close();
             ?>
