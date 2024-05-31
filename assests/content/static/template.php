@@ -205,9 +205,9 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Assignment Results</a>
+                    <a href="../../../ResultSection/Assignment/result.php" class="sub-item">Assignment Results</a>
                     <a href="../../../ResultSection/Exam/result.php" class="sub-item">Exam Results</a>
-                    <a href="" class="sub-item">Final Results</a>
+                    <a href="../../../ResultSection/Final/final.php" class="sub-item">Final Results</a>
                     
                 </div>
             </div>

@@ -10,14 +10,14 @@ if ($batch_number === null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['view']) && isset($_POST['module_name'])) {
-        $module_name = $_POST['module_name'];
+    if (isset($_POST['view']) && isset($_POST['assignment_name'])) {
+        $assignment_name = $_POST['assignment_name'];
         
         // Fetch the file path from the database
-        $sql = "SELECT file_path FROM assignments WHERE module_name = ? AND username = ?";
+        $sql = "SELECT file_path FROM assignments WHERE assignment_name = ? AND username = ?";
         $stmt = $conn->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param('ss', $module_name, $username);
+            $stmt->bind_param('ss', $assignment_name, $username);
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
@@ -34,10 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             echo "Error preparing select statement: " . $conn->error;
         }
-    } elseif (isset($_FILES['file']) && isset($_POST['module_name'])) {
+    } elseif (isset($_FILES['file']) && isset($_POST['assignment_name'])) {
         $module_name = $_POST['module_name'];
+        $assignment_name = $_POST['assignment_name'];
+        $module_code = $_POST['module_code'];
         $file = $_FILES['file'];
-        $uploadDir = 'uploads/';
+        $uploadDir = '../../ResultSection/Assignment/uploads/';
         $uploadFile = $uploadDir . basename($file['name']);
 
         // Check if the upload directory exists, if not create it
@@ -47,21 +49,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Move the uploaded file to the upload directory
         if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-            // Check if an entry already exists for the given module_name and username
-            $sql = "SELECT * FROM assignments WHERE module_name = ? AND username = ?";
+            // Check if an entry already exists for the given assignment_name and username
+            $sql = "SELECT * FROM assignments WHERE assignment_name = ? AND username = ?";
             $stmt = $conn->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param('ss', $module_name, $username);
+                $stmt->bind_param('ss', $assignment_name, $username);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $stmt->close();
 
                 if ($result->num_rows > 0) {
                     // Entry exists, update the file path
-                    $sql = "UPDATE assignments SET file_path = ?, batch_number = ? WHERE module_name = ? AND username = ?";
+                    $sql = "UPDATE assignments SET file_path = ?, batch_number = ?, module_code = ?, module_name = ? WHERE assignment_name = ? AND username = ?";
                     $stmt = $conn->prepare($sql);
                     if ($stmt) {
-                        $stmt->bind_param('ssss', $uploadFile, $batch_number, $module_name, $username);
+                        $stmt->bind_param('ssssss', $uploadFile, $batch_number, $module_code, $module_name, $assignment_name, $username);
                         if ($stmt->execute()) {
                             header("Location: upload_submission.php?message=updated");
                             exit();
@@ -74,19 +76,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                 } else {
                     // Entry does not exist, insert a new one
-                    $sql = "INSERT INTO assignments (module_name, batch_number, username, file_path) VALUES (?, ?, ?, ?)";
-                    $stmt = $conn->prepare($sql);
-                    if ($stmt) {
-                        $stmt->bind_param('ssss', $module_name, $batch_number, $username, $uploadFile);
-                        if ($stmt->execute()) {
+                    $sql = "INSERT INTO assignments (module_name, assignment_name, batch_number, username, file_path, module_code) VALUES (?, ?, ?, ?, ?, ?)";
+                    $finalres = "INSERT INTO final_result (module_name, batch_number, module_code, username) VALUES (?, ?, ?, ?)";
+                    
+                    $stmt1 = $conn->prepare($sql);
+                    $stmt2 = $conn->prepare($finalres);
+
+                    if ($stmt1 && $stmt2) {
+                        $stmt1->bind_param('ssssss', $module_name, $assignment_name, $batch_number, $username, $uploadFile, $module_code);
+                        $stmt2->bind_param('ssss', $module_name, $batch_number, $module_code, $username);
+                        
+                        $conn->begin_transaction();
+
+                        try {
+                            $stmt1->execute();
+                            $stmt2->execute();
+                            $conn->commit();
                             header("Location: upload_submission.php?message=submitted");
                             exit();
-                        } else {
-                            echo "Error inserting file path: " . $stmt->error;
+                        } catch (Exception $e) {
+                            $conn->rollback();
+                            echo "Error inserting records: " . $e->getMessage();
                         }
-                        $stmt->close();
+                        
+                        $stmt1->close();
+                        $stmt2->close();
                     } else {
-                        echo "Error preparing insert statement: " . $conn->error;
+                        echo "Error preparing insert statements: " . $conn->error;
                     }
                 }
             } else {
@@ -97,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         }
     } else {
-        echo "No file or module name provided.";
+        echo "No file or assignment name provided.";
     }
 } else {
     echo "Invalid request method.";

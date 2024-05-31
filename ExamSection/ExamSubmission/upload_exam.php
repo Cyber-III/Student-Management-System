@@ -12,6 +12,8 @@ if ($batch_number === null) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['view']) && isset($_POST['exam_name'])) {
         $exam_name = $_POST['exam_name'];
+        $module_name = $_POST['module_name'];
+        $module_code = $_POST['module_code'];
         
         // Fetch the file path from the database
         $sql = "SELECT file_path FROM exam_submission WHERE exam_name = ? AND username = ?";
@@ -27,21 +29,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $file_path = $submission['file_path'];
                 header("Location: exam_submission.php?message=viewed&file_path=" . urlencode($file_path));
                 exit();
-            }
-            
-            else {
+            } else {
                 header("Location: exam_submission.php?message=nosub"); //no submission message
                 exit();
             }
-        }
-        
-        else {
+        } else {
             echo "Error preparing select statement: " . $conn->error;
         }
-    }
-    
-    elseif (isset($_FILES['file']) && isset($_POST['exam_name'])) {
+    } elseif (isset($_FILES['file']) && isset($_POST['exam_name']) && isset($_POST['module_name']) && isset($_POST['module_code'])) {
         $exam_name = $_POST['exam_name'];
+        $module_name = $_POST['module_name'];
+        $module_code = $_POST['module_code'];
         $file = $_FILES['file'];
         $uploadDir = '../../ResultSection/Exam/uploads/';
         $uploadFile = $uploadDir . basename($file['name']);
@@ -71,60 +69,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if ($stmt->execute()) {
                             header("Location: exam_submission.php?message=updated");
                             exit();
-                        }
-                        
-                        else {
+                        } else {
                             echo "Error updating file path: " . $stmt->error;
                         }
                         $stmt->close();
-                    }
-                    
-                    else {
+                    } else {
                         echo "Error preparing update statement: " . $conn->error;
                     }
-                }
-                
-                else {
+                } else {
                     // Entry does not exist, insert a new one
-                    $sql = "INSERT INTO exam_submission (exam_name, batch_number, username, file_path) VALUES (?, ?, ?, ?)";
+                    $sql = "INSERT INTO exam_submission (module_code, module_name, exam_name, batch_number, username, file_path) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $conn->prepare($sql);
                     if ($stmt) {
-                        $stmt->bind_param('ssss', $exam_name, $batch_number, $username, $uploadFile);
+                        $stmt->bind_param('ssssss', $module_code, $module_name, $exam_name, $batch_number, $username, $uploadFile);
                         if ($stmt->execute()) {
                             header("Location: exam_submission.php?message=submitted");
                             exit();
-                        }
-                        
-                        else {
+                        } else {
                             echo "Error inserting file path: " . $stmt->error;
                         }
                         $stmt->close();
-                    }
-                    
-                    else {
+                    } else {
                         echo "Error preparing insert statement: " . $conn->error;
                     }
                 }
-            }
-            
-            else {
+            } else {
                 echo "Error preparing select statement: " . $conn->error;
             }
-        }
-        
-        else {
+        } else {
             header("Location: exam_submission.php?message=empsub");
             exit();
         }
-    }
-    
-    else {
+    } else {
         echo "No file or exam name provided.";
     }
-}
-
-else {
+} else {
     echo "Invalid request method.";
 }
-
 ?>

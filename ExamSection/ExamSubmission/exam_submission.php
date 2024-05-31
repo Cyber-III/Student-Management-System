@@ -86,6 +86,8 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
                     <p><span class="schedule-title">Hours: <?= htmlspecialchars($schedule['hours']) ?></span> </p>
                     <?php if ($schedule['allow_submission']): ?>
                         <form action="upload_exam.php" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name']) ?>">
+                            <input type="hidden" name="module_code" value="<?= htmlspecialchars($schedule['module_code']) ?>">
                             <input type="hidden" name="exam_name" value="<?= htmlspecialchars($schedule['exam_name']) ?>">
                             <input type="file" name="file"> <br> <br>
                             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
