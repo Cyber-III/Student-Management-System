@@ -38,7 +38,7 @@ function get_user_details($conn, $username) {
 // Function to get modules from assignment_schedule table based on course
 function get_modules($conn, $course) {
     $modules = [];
-    $stmt = $conn->prepare("SELECT module_name, module_code, batch_number FROM assignment_schedule WHERE course = ?");
+    $stmt = $conn->prepare("SELECT assignment_name , module_code, batch_number FROM assignment_schedule WHERE course = ?");
     $stmt->bind_param("s", $course);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -63,15 +63,15 @@ $message = '';
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
-    $module_name = sanitize_input($_POST["module_name"]);
+    $module_name = sanitize_input($_POST["assignment_name"]);
     $module_code = sanitize_input($_POST["module_code"]);
     $date = sanitize_input($_POST["date"]);
     $description = sanitize_input($_POST["description"]);
     $status = 'pending';  // Default status
 
     // Insert data into the mitigations table
-    $stmt = $conn->prepare("INSERT INTO mitigations (username, module_name, module_code, date, description, status) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $username, $module_name, $module_code, $date, $description, $status);
+    $stmt = $conn->prepare("INSERT INTO mitigations (username, assignment_name, module_code, date, description, status) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $username, $assignment_name, $module_code, $date, $description, $status);
 
     if ($stmt->execute()) {
         $message = 'submitted'; // Set message to 'submitted' if successful
@@ -101,11 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php endif; ?>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <label for="module_name">Module Name:</label><br>
-    <select id="module_name" name="module_name" required onchange="updateModuleCode()">
+    <label for="assignment_name">Assignment Name:</label><br>
+    <select id="assignment_name" name="assignment_name" required onchange="updateModuleCode()">
         <option value="">Select Module Name</option>
         <?php foreach ($modules as $module): ?>
-            <option value="<?php echo htmlspecialchars($module['module_name']); ?>"><?php echo htmlspecialchars($module['module_name']); ?></option>
+            <option value="<?php echo htmlspecialchars($module['assignment_name']); ?>"><?php echo htmlspecialchars($module['assignment_name']); ?></option>
         <?php endforeach; ?>
     </select><br><br>
 
@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <select id="module_code" name="module_code" required>
         <option value="">Select Module Code</option>
         <?php foreach ($modules as $module): ?>
-            <option class="module-code-option" data-module-name="<?php echo htmlspecialchars($module['module_name']); ?>" value="<?php echo htmlspecialchars($module['module_code']); ?>"><?php echo htmlspecialchars($module['module_code']); ?></option>
+            <option class="module-code-option" data-module-name="<?php echo htmlspecialchars($module['assignment_name']); ?>" value="<?php echo htmlspecialchars($module['module_code']); ?>"><?php echo htmlspecialchars($module['module_code']); ?></option>
         <?php endforeach; ?>
     </select><br><br>
 
@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script>
     function updateModuleCode() {
-        const moduleName = document.getElementById('module_name').value;
+        const moduleName = document.getElementById('assignment_name').value;
         const moduleCodeSelect = document.getElementById('module_code');
         const moduleCodeOptions = moduleCodeSelect.querySelectorAll('.module-code-option');
         
