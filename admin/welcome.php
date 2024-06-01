@@ -38,9 +38,11 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style-welcome.css">
-    <link rel="shortcut icon" type="dp" href="pics/graduate.png">
-
     <title>Welcome Page</title>
+
+    <!--Upper Icon-->
+    <link rel="icon" type="image/png" sizes="32x32" href="pics/favicon-32x32.png">
+    
 </head>
 <body>
     
