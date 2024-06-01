@@ -63,6 +63,39 @@ body {
     cursor: pointer; 
 }
 
+
+/* General styles for the table and other elements */
+
+.no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; /* You can adjust this height as needed */
+    text-align: center;
+}
+
+/* Ensuring the image is centered and responsive */
+.no-data img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .no-data {
+        min-height: 200px; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .no-data {
+        min-height: 150px; /* Further adjustment for very small screens */
+    }
+}
+
+
+
 /* Responsive styles */
 @media (max-width: 1200px) {
     .container {
