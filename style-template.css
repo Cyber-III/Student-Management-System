@@ -210,7 +210,7 @@ nav .animation{
 	bottom: 15px;
 	/* bottom: 0; */
 	z-index: 0;
-	background: #ff0000;
+	background: #007BFF;
 	border-radius: 8px;
 	transition: all .5s ease 0s;
 }
