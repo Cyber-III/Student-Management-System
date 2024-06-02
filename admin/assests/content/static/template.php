@@ -93,7 +93,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">View Profile</a>
+                    <a href="../../../admin/adminViewProfile/viewprofile.php" class="sub-item">View Profile</a>
 
                 </div>
             </div>

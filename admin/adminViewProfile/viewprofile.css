@@ -1,0 +1,230 @@
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+
+    font-family: "Poppins", sans-serif, "Pangolin";
+    
+}
+/* Default styles for larger screens */
+.container {
+    margin-top: 300px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex; /* by default aligning is row like */
+    justify-content: space-around;
+}
+.form-row{
+    clear: both;
+}
+.form-label{
+    font-weight: bold;
+    font-size: 18px;
+    width: 200px;
+    float: left;
+    text-align: left;
+    /* padding-left: 50px; */
+}
+
+.form-value{
+    float: left;
+    font-size: 18px;
+    text-align: left;
+}
+
+.profilepic {
+    margin-top: 100px;
+    margin-right: 10px;    
+    float: right;
+    width: 250px; /* Example width for web view */
+    height: 250px; /* Example height for web view */
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profilepic img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}
+
+#profile-image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+}
+
+#profile-image-preview {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#profile-image-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#change-profile-image-button {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 0;
+}
+
+.profilepic:hover #change-profile-image-button {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.profileTop {
+    overflow: hidden;
+    margin-top: 100px;
+    margin-left: 15rem;
+}
+
+.profileTop h1, .profileTop h6 {
+    text-align: left;
+}
+
+.p_data, .University_data {
+    margin-top: 30px;
+}
+
+.p_data h2, .University_data h2 {
+    text-align: left;
+}
+
+.p_data h4, .University_data h4 {
+    text-align: left;
+}
+.side-container{
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;    
+    margin-left: 50px;
+}
+.uni-pic-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-left: 3rem;
+    
+}
+.box img{
+    width: 150px;
+    height: 150px;
+}
+.box{
+    justify-content: center;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 875px) {
+    .form-value{
+        float: left;
+        font-size: 16px;
+        text-align: left;
+    }
+    .container {
+        width: 100%;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center all items in the container */
+    }
+    .side-container{
+        order: 1;
+        margin-top: 100px;
+        margin-right: 50px;    
+        margin-left: 50px;
+    }
+    .uni-pic-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-inline: auto;
+        height: 100px;
+        
+    }
+    .box img{
+        width: 100px;
+        height: 100px;
+    }
+    .profilepic {
+        transform: scale(1.0); /* Reset the scale for mobile view */
+        margin-top: 80px;
+        margin: 0 auto; /* Center align on mobile view */
+        width: 150px; /* Example width for mobile view */
+        height: 150px; /* Example height for mobile view */
+        display: flex; /* Use flexbox to center content */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        flex-direction: column; /* Stack children vertically */
+       
+        
+    }
+
+    .profilepic img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .profileTop {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Center align items */
+        text-align: center; /* Center align text on mobile */
+        margin-top: 20px;
+        margin-left: -5px;
+    }
+
+    .profileTop h1, .profileTop h6 {
+        text-align: center; /* Center align text on mobile */
+    }
+
+    .p_data, .University_data {
+        width: 100%;
+        margin-top: 20px;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align items */
+    }
+
+    .p_data h2, .University_data h2 {
+        text-align: center; /* Center align text on mobile */
+    }
+
+    .p_data h4, .University_data h4 {
+        text-align: center; /* Center align text on mobile */
+    }
+}
+
