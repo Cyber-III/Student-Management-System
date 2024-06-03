@@ -35,11 +35,16 @@ while ($row = mysqli_fetch_assoc($result)) {
     $exam_schedule_data[] = $row;
 }
 
-// Display the success message if it exists
+// Display the success or error message if it exists
 $success_message = '';
+$error_message = '';
 if (isset($_SESSION['success_message'])) {
     $success_message = $_SESSION['success_message'];
     unset($_SESSION['success_message']); // Remove the message from the session after displaying it
+}
+if (isset($_SESSION['error_message'])) {
+    $error_message = $_SESSION['error_message'];
+    unset($_SESSION['error_message']); // Remove the message from the session after displaying it
 }
 ?>
 
@@ -53,6 +58,7 @@ if (isset($_SESSION['success_message'])) {
     <link rel="stylesheet" href="../../style-template.css">
     <link rel="stylesheet" href="style-exam_schedule.css">
     <link rel="stylesheet" href="viewprofile.css">
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const modules = <?php echo json_encode($modules); ?>;
@@ -95,73 +101,182 @@ if (isset($_SESSION['success_message'])) {
                 });
             });
         });
+
+        function manageExam(row) {
+            const cells = row.querySelectorAll('td');
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('manage-batch_number').value = cells[0].textContent;
+            document.getElementById('manage-exam_name').value = cells[1].textContent;
+            document.getElementById('manage-date').value = cells[2].textContent;
+            document.getElementById('manage-time').value = cells[3].textContent;
+            document.getElementById('manage-location').value = cells[4].textContent;
+            document.getElementById('manage-hours').value = cells[5].textContent;
+            document.getElementById('manage-allow_submission').checked = cells[6].textContent === 'Yes';
+        }
+
+        document.getElementById('search-icon').addEventListener('click', function() {
+            const searchQuery = document.getElementById('search').value.toLowerCase();
+            const rows = document.querySelectorAll('#exam-schedule-tbody tr');
+
+            rows.forEach(row => {
+                const batchNumberCell = row.querySelector('td:nth-child(1)');
+                if (batchNumberCell.textContent.toLowerCase().includes(searchQuery)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
     </script>
 </head>
 <body>
-    <h1>Exam Schedule Form</h1>
 
     <?php if ($success_message): ?>
         <div class="success-message"><?= htmlspecialchars($success_message) ?></div>
     <?php endif; ?>
 
+    <?php if ($error_message): ?>
+        <div class="error-message"><?= htmlspecialchars($error_message) ?></div>
+    <?php endif; ?>
+
     <form action="exam_scheduleSubmission.php" method="POST">
-        <label for="course">Course:</label><br>
-        <select id="course" name="course">
-            <option value="">Select Course</option>
-            <?php foreach ($courses as $course): ?>
-                <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
-            <?php endforeach; ?>
-        </select><br>
+        <div class="form-container">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="course">Course:</label>
+                    <select id="course" name="course">
+                        <option value="">Select Course</option>
+                        <?php foreach ($courses as $course): ?>
+                            <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
-        <label for="module_name">Module Name:</label><br>
-        <select id="module_name" name="module_name">
-            <option value="">Select Module Name</option>
-            <!-- Options will be populated by JavaScript -->
-        </select><br>
+                <div class="form-group">
+                    <label for="module_name">Module Name:</label>
+                    <select id="module_name" name="module_name">
+                        <option value="">Select Module Name</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+            </div>
 
-        <label for="module_code">Module Code:</label><br>
-        <select id="module_code" name="module_code">
-            <option value="">Select Module Code</option>
-            <!-- Options will be populated by JavaScript -->
-        </select><br>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="module_code">Module Code:</label>
+                    <select id="module_code" name="module_code">
+                        <option value="">Select Module Code</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
 
-        <label for="batch_number">Batch Number:</label><br>
-        <select id="batch_number" name="batch_number">
-            <option value="">Select Batch Number</option>
-            <?php foreach ($batch_numbers as $batch_number): ?>
-                <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-            <?php endforeach; ?>
-        </select><br>
+                <div class="form-group">
+                    <label for="batch_number">Batch Number:</label>
+                    <select id="batch_number" name="batch_number">
+                        <option value="">Select Batch Number</option>
+                        <?php foreach ($batch_numbers as $batch_number): ?>
+                            <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
 
-        <label for="exam_name">Exam Name:</label><br>
-        <input type="text" id="exam_name" name="exam_name"><br>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="exam_name">Exam Name:</label>
+                    <input type="text" id="exam_name" name="exam_name">
+                </div>
 
-        <label for="date">Date:</label><br>
-        <input type="date" id="date" name="date"><br>
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date">
+                </div>
+            </div>
 
-        <label for="time">Time:</label><br>
-        <input type="time" id="time" name="time"><br>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="time">Time:</label>
+                    <input type="time" id="time" name="time">
+                </div>
 
-        <label for="location">Location:</label><br>
-        <input type="text" id="location" name="location"><br>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location">
+                </div>
+            </div>
 
-        <label for="hours">Hours:</label><br>
-        <input type="number" id="hours" name="hours"><br>
-
-        <label for="allow_submission">Allow Submission:</label><br>
-        <input type="checkbox" id="allow_submission" name="allow_submission" value="1"><br>
-
-        <input type="submit" value="Submit">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="hours">Hours:</label>
+                    <input type="number" id="hours" name="hours">
+                </div>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="view-link">Submit</button>
     </form>
 
-    
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Edit Exam Schedule</h2>
+            <form action="exam_scheduleUpdateDelete.php" method="POST">
+                <input type="hidden" name="batch_number" id="manage-batch_number">
+                <div class="form-group">
+                    <label for="manage-exam_name">Exam Name:</label>
+                    <input type="text" id="manage-exam_name" name="exam_name">
+                </div>
+                <div class="form-group">
+                    <label for="manage-date">Date:</label>
+                    <input type="date" id="manage-date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="manage-time">Time:</label>
+                    <input type="time" id="manage-time" name="time">
+                </div>
+                <div class="form-group">
+                    <label for="manage-location">Location:</label>
+                    <input type="text" id="manage-location" name="location">
+                </div>
+                <div class="form-group">
+                    <label for="manage-hours">Hours:</label>
+                    <input type="number" id="manage-hours" name="hours">
+                </div>
+                <div class="form-group">
+                    <label for="manage-allow_submission">Allow Submission</label>
+                    <input type="checkbox" id="manage-allow_submission" name="allow_submission" value="1" class="checkbox-label">
+                    <br>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" name="action" value="edit" class="view-link">Edit</button>
+                    <button type="submit" name="action" value="delete" class="view-link">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="topic">Exam Schedule Details</h2>
+    <br>
+
+    <!-- Search bar with icon -->
+    <div class="search-bar">
+        <label for="search">Search by Batch Number:</label>
+        <input type="text" id="search" placeholder="Enter batch number">
+        <button id="search-icon" style="cursor: pointer;">🔍</button>
+    </div>
+    <br>
+
     <div class="table">
         <table>
             <thead>
                 <tr>
-                    <!-- <th>Course</th>
-                    <th>Module Name</th> -->
-                    <!-- <th>Module Code</th> -->
                     <th>Batch Number</th>
                     <th>Exam Name</th>
                     <th>Date</th>
@@ -169,9 +284,10 @@ if (isset($_SESSION['success_message'])) {
                     <th>Location</th>
                     <th>Hours</th>
                     <th>Allow Submission</th>
+                    <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="exam-schedule-tbody">
                 <?php foreach ($exam_schedule_data as $row): ?>
                     <tr>
                         <td><?= htmlspecialchars($row['batch_number']) ?></td>
@@ -181,18 +297,11 @@ if (isset($_SESSION['success_message'])) {
                         <td><?= htmlspecialchars($row['location']) ?></td>
                         <td><?= htmlspecialchars($row['hours']) ?></td>
                         <td><?= $row['allow_submission'] ? 'Yes' : 'No' ?></td>
-                        <?php
-                            echo '<td>
-                                <form action="" method="POST">
-                                    <button type="submit" class="view-link">MANAGE</button>
-                                </form></td>';
-                            echo "</tr>";
-                        ?>
+                        <td><button onclick="manageExam(this.parentNode.parentNode)" class="view-link">Manage</button></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
-
 </body>
 </html>
