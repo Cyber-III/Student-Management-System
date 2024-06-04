@@ -33,10 +33,11 @@ $result = $stmt->get_result();
 
 </head>
 <body>
-    <div class="container">
-        <div class="table">
-            <table>
-                <thead>
+
+<div class="container">
+    <div class="table">
+        <table>
+            <thead>
                 <tr>
                     <th>No</th>
                     <th>Paid Date</th>
@@ -44,30 +45,35 @@ $result = $stmt->get_result();
                     <th>Amount</th>
                     <th>Payment Link</th>
                 </tr>
+            </thead>
+            <tbody>
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $amount = $row['amount'];
                         $record_id = $row['no']; // Use record id to uniquely identify the record
                         echo "<tr>";
-                        echo "<td  data-cell = 'No'>" . htmlspecialchars($row['no']) . "</td>";
-                        echo "<td  data-cell = 'Paid Date'>" . htmlspecialchars($row['paid_date']) . "</td>";
-                        echo "<td  data-cell = 'Description'>" . htmlspecialchars($row['description']) . "</td>";
-                        echo "<td  data-cell = 'Amount'>" . htmlspecialchars($amount) . "</td>";
-                        echo '<td  data-cell = "Payment Link"> <button type="submit" class="view-link">PRINT</button> </td>';
+                        echo "<td data-cell='No'>" . htmlspecialchars($row['no']) . "</td>";
+                        echo "<td data-cell='Paid Date'>" . htmlspecialchars($row['paid_date']) . "</td>";
+                        echo "<td data-cell='Description'>Course Fee</td>";
+                        echo "<td data-cell='Amount'>" . htmlspecialchars($amount) . "</td>";
+                        echo '<td data-cell="Payment Link"> <button type="submit" class="view-link">PRINT</button> </td>';
                         echo "</tr>";
                     }
-                } 
-                else {
+                } else {
                     echo "<tr><td colspan='5'>No payments found</td></tr>";
                 }
-                $conn->close();
                 ?>
-                </thead>
-            </table>
-        </div>
-        
+            </tbody>
+        </table>
     </div>
+</div>
   
 </body>
 </html>
+
+<?php
+// Close the database connection
+$stmt->close();
+$conn->close();
+?>

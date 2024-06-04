@@ -1,0 +1,110 @@
+/* Basic resets */
+body, h1, form, input, textarea, select {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+
+/* Form container styling */
+form {
+    background-color: #fff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Form title styling */
+h1 {
+    margin-bottom: 20px;
+    font-size: 50px;
+    color: #333;
+    text-align: center;
+    margin-right: 20px;
+}
+
+/* Label styling */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Input and select styling */
+form input[type="text"],
+form input[type="date"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Textarea styling */
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Button styling */
+form input[type="submit"] {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    body {
+        margin-top: 50px;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    h2 {
+       
+        position: relative;
+        top: 0;
+        margin: 20px 0 20px 0;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+}

@@ -1,18 +1,122 @@
 /* Ensure there is no CSS conflict by resetting common properties */
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
+    margin-top: 100px;
+    margin-left: 350px;
+    padding: 20px;
+}
+
+.topic {
+    text-align: center;
+    margin-bottom: 20px;
+}
+ 
+.border-rectangle {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.schedule-item {
+    background-color: #0056b3;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 calc(50% - 40px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.959);
+}
+
+.schedule-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.view-link {
+    width: auto;
+    color: #182431; 
+    text-decoration: none;
+    font-weight: bold; 
+    padding: 5px 10px; 
+    border: 1px solid #007BFF; 
+    border-radius: 88px; 
+    background-color: #f0f8ff; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.view-link:hover {
+    background-color: #007BFF; 
+    color: white; 
+    cursor: pointer; 
+}
+
+
+/* General styles for the table and other elements */
+
+.no-data {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
+    min-height: 300px; /* You can adjust this height as needed */
+    text-align: center;
 }
 
-.image {
-    width: 500px; /* Set the desired width */
-    height: auto; /* Maintain aspect ratio */
+/* Ensuring the image is centered and responsive */
+.no-data img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .no-data {
+        min-height: 200px; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .no-data {
+        min-height: 150px; /* Further adjustment for very small screens */
+    }
+}
+
+
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .container {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .schedule-item {
+        flex: 1 1 calc(100% - 40px);
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .schedule-item {
+        padding: 10px;
+    }
 }

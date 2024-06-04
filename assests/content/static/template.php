@@ -46,8 +46,8 @@ if(isset($_SESSION['username'])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!--Upper Icon-->
-  <link rel="shortcut icon" type="dp" href="./pics/graduate.png">
+    <!--Upper Icon-->
+    <link rel="icon" type="image/png" href="../../../pics/graduate.png">
 
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -166,8 +166,8 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Exam Schedule</a>
-                    <a href="" class="sub-item">Exam Submissions</a>
+                    <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
+                    <a href="../../../ExamSection/ExamSubmission/exam_submission.php" class="sub-item">Exam Submissions</a>
                     <a href="" class="sub-item">Exam Admission</a>
                     
                 </div>
@@ -179,11 +179,11 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Assignment Schedule</a>
-                    <a href="" class="sub-item">Assignment Submissions</a>
-                    <a href="" class="sub-item">Assignment Feedback</a>
-                    <a href="" class="sub-item">Add Mitigation Request</a>
-                    <a href="" class="sub-item">View Mitigation Request</a>
+                    <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
+                    <a href="../../../AssignmentSection\submission\upload_submission.php" class="sub-item">Assignment Submissions</a>
+                    <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
+                    <a href="../../../AssignmentSection\Mitigation Request\mitigation.php" class="sub-item">Add Mitigation Request</a>
+                    <a href="../../../AssignmentSection\Mitigation Request\view_mitigation.php" class="sub-item">View Mitigation Request</a>
                     
                 </div>
             </div>
@@ -205,9 +205,9 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Assignment Results</a>
-                    <a href="" class="sub-item">Exam Results</a>
-                    <a href="" class="sub-item">Final Results</a>
+                    <a href="../../../ResultSection/Assignment/result.php" class="sub-item">Assignment Results</a>
+                    <a href="../../../ResultSection/Exam/result.php" class="sub-item">Exam Results</a>
+                    <a href="../../../ResultSection/Final/final.php" class="sub-item">Final Results</a>
                     
                 </div>
             </div>
@@ -220,11 +220,6 @@ if(isset($_SESSION['username'])) {
             <!-- Course Materials -->
             <div class="item">
                 <a href="../../../Course Materials/courseMaterials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
-            </div>
-
-            <!-- Penalty -->
-            <div class="item">
-                <a href=""><i class="fa fa-dollar"></i>Penalty </a>
             </div>
 
             <!-- Course Guidlines Category -->
@@ -257,12 +252,12 @@ if(isset($_SESSION['username'])) {
 
             <!-- Lecture Evaluation -->
             <div class="item">
-                <a href=""><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
+                <a href="../../../EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
             </div>
 
             <!-- Vacancies -->
             <div class="item">
-                <a href=""><i class="fas fa-user-plus"></i>Vacancies </a>
+                <a href="../../../VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
             </div>
 
 

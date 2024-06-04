@@ -1,0 +1,43 @@
+body {
+    margin-left: 350px;
+    margin-top: 100px;
+}
+
+table {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 80px;
+}
+
+th, td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.view-link {
+    width: 90px;
+    color: #182431;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #007BFF;
+    border-radius: 88px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.view-link:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1199px) {
+    body {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+}

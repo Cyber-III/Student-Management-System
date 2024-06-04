@@ -1,0 +1,81 @@
+/* Ensure there is no CSS conflict by resetting common properties */
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
+* {
+    box-sizing: border-box;
+}
+
+.one {
+    font-family: Arial, sans-serif;
+    margin-left: 350px;
+    margin-right: 100px;
+    margin-top: 100px;
+}
+
+
+.topic {
+    text-align: center;
+    margin-bottom: 20px;
+}
+ 
+.border-rectangle {
+    display: flex;
+    flex-wrap: wrap;
+    gap:20px;
+}
+
+.schedule-item {
+    background-color: #0056b3;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1 1 calc(100% - 40px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.959);
+}
+
+.schedule-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1199px) {
+    .one {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .schedule-item {
+        flex: 1 1 calc(100% - 40px);
+    }
+
+    /* .container {
+        justify-content: center;
+    } */
+}
+
+@media (max-width: 991px) {
+    .one {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .schedule-item {
+        flex: 1 1 calc(100% - 40px);
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .schedule-item {
+        padding: 10px;
+    }
+}
