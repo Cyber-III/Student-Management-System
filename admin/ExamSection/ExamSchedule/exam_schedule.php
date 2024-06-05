@@ -46,6 +46,9 @@ if (isset($_SESSION['error_message'])) {
     $error_message = $_SESSION['error_message'];
     unset($_SESSION['error_message']); // Remove the message from the session after displaying it
 }
+
+$message = isset($_GET['message']) ? $_GET['message'] : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -60,47 +63,66 @@ if (isset($_SESSION['error_message'])) {
     <link rel="stylesheet" href="viewprofile.css">
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modules = <?php echo json_encode($modules); ?>;
-            const courseSelect = document.getElementById('course');
-            const moduleNameSelect = document.getElementById('module_name');
-            const moduleCodeSelect = document.getElementById('module_code');
+    document.addEventListener('DOMContentLoaded', function() {
+        const modules = <?php echo json_encode($modules); ?>;
+        const courseSelect = document.getElementById('course');
+        const moduleNameSelect = document.getElementById('module_name');
+        const moduleCodeSelect = document.getElementById('module_code');
 
-            courseSelect.addEventListener('change', function() {
-                const selectedCourse = this.value;
+        courseSelect.addEventListener('change', function() {
+            const selectedCourse = this.value;
 
-                // Clear previous options
-                moduleNameSelect.innerHTML = '<option value="">Select Module Name</option>';
-                moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
+            // Clear previous options
+            moduleNameSelect.innerHTML = '<option value="">Select Module Name</option>';
+            moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
 
-                // Populate module dropdowns based on selected course
-                modules.forEach(module => {
-                    if (module.course === selectedCourse) {
-                        const optionName = document.createElement('option');
-                        optionName.value = module.module_name;
-                        optionName.textContent = module.module_name;
-                        moduleNameSelect.appendChild(optionName);
-                    }
-                });
-            });
-
-            moduleNameSelect.addEventListener('change', function() {
-                const selectedModuleName = this.value;
-
-                // Clear previous options
-                moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
-
-                // Populate module code based on selected module name
-                modules.forEach(module => {
-                    if (module.module_name === selectedModuleName) {
-                        const optionCode = document.createElement('option');
-                        optionCode.value = module.module_code;
-                        optionCode.textContent = module.module_code;
-                        moduleCodeSelect.appendChild(optionCode);
-                    }
-                });
+            // Populate module dropdowns based on selected course
+            modules.forEach(module => {
+                if (module.course === selectedCourse) {
+                    const optionName = document.createElement('option');
+                    optionName.value = module.module_name;
+                    optionName.textContent = module.module_name;
+                    moduleNameSelect.appendChild(optionName);
+                }
             });
         });
+
+        moduleNameSelect.addEventListener('change', function() {
+            const selectedModuleName = this.value;
+
+            // Clear previous options
+            moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
+
+            // Populate module code based on selected module name
+            modules.forEach(module => {
+                if (module.module_name === selectedModuleName) {
+                    const optionCode = document.createElement('option');
+                    optionCode.value = module.module_code;
+                    optionCode.textContent = module.module_code;
+                    moduleCodeSelect.appendChild(optionCode);
+                }
+            });
+        });
+
+        // Search functionality
+        const searchIcon = document.getElementById('search-icon');
+        const searchInput = document.getElementById('search');
+        const rows = document.querySelectorAll('#exam-schedule-tbody tr');
+
+        function filterRows() {
+            const searchQuery = searchInput.value.toLowerCase().trim();
+            rows.forEach(row => {
+                const batchNumberCell = row.querySelector('td:nth-child(1)');
+                if (batchNumberCell.textContent.toLowerCase().includes(searchQuery)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        searchIcon.addEventListener('click', filterRows);
+        searchInput.addEventListener('input', filterRows);
 
         function manageExam(row) {
             const cells = row.querySelectorAll('td');
@@ -114,29 +136,30 @@ if (isset($_SESSION['error_message'])) {
             document.getElementById('manage-allow_submission').checked = cells[6].textContent === 'Yes';
         }
 
-        document.getElementById('search-icon').addEventListener('click', function() {
-            const searchQuery = document.getElementById('search').value.toLowerCase();
-            const rows = document.querySelectorAll('#exam-schedule-tbody tr');
-
-            rows.forEach(row => {
-                const batchNumberCell = row.querySelector('td:nth-child(1)');
-                if (batchNumberCell.textContent.toLowerCase().includes(searchQuery)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
+        // Attach the event listener to the buttons after the rows are created
+        document.querySelectorAll('.manage-button').forEach(button => {
+            button.addEventListener('click', function() {
+                manageExam(this.closest('tr'));
             });
         });
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
         }
-    </script>
+
+        document.querySelector('.close').addEventListener('click', closeModal);
+    });
+</script>
+
 </head>
 <body>
 
-    <?php if ($success_message): ?>
-        <div class="success-message"><?= htmlspecialchars($success_message) ?></div>
+    <?php if ($message == 'insert'): ?>
+        <div class="alert alert-success">Records are inserted successfully.</div>
+    <?php elseif ($message == 'updated'): ?>
+        <div class="alert alert-success">Records are updated successfully.</div>
+    <?php elseif ($message == 'delete'): ?>
+        <div class="alert alert-danger">Records are deleted successfully.</div>
     <?php endif; ?>
 
     <?php if ($error_message): ?>
@@ -148,7 +171,7 @@ if (isset($_SESSION['error_message'])) {
             <div class="form-row">
                 <div class="form-group">
                     <label for="course">Course:</label>
-                    <select id="course" name="course">
+                    <select id="course" name="course" required> <!-- making required the fields -->
                         <option value="">Select Course</option>
                         <?php foreach ($courses as $course): ?>
                             <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
@@ -158,9 +181,8 @@ if (isset($_SESSION['error_message'])) {
 
                 <div class="form-group">
                     <label for="module_name">Module Name:</label>
-                    <select id="module_name" name="module_name">
+                    <select id="module_name" name="module_name" required> <!-- making required the fields -->
                         <option value="">Select Module Name</option>
-                        <!-- Options will be populated by JavaScript -->
                     </select>
                 </div>
             </div>
@@ -168,15 +190,14 @@ if (isset($_SESSION['error_message'])) {
             <div class="form-row">
                 <div class="form-group">
                     <label for="module_code">Module Code:</label>
-                    <select id="module_code" name="module_code">
+                    <select id="module_code" name="module_code" required> <!-- making required the fields -->
                         <option value="">Select Module Code</option>
-                        <!-- Options will be populated by JavaScript -->
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="batch_number">Batch Number:</label>
-                    <select id="batch_number" name="batch_number">
+                    <select id="batch_number" name="batch_number" required> <!-- making required the fields -->
                         <option value="">Select Batch Number</option>
                         <?php foreach ($batch_numbers as $batch_number): ?>
                             <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
@@ -188,31 +209,31 @@ if (isset($_SESSION['error_message'])) {
             <div class="form-row">
                 <div class="form-group">
                     <label for="exam_name">Exam Name:</label>
-                    <input type="text" id="exam_name" name="exam_name">
+                    <input type="text" id="exam_name" name="exam_name" required> <!-- making required the fields -->
                 </div>
 
                 <div class="form-group">
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date">
+                    <input type="date" id="date" name="date" required> <!-- making required the fields -->
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="time">Time:</label>
-                    <input type="time" id="time" name="time">
+                    <input type="time" id="time" name="time" required> <!-- making required the fields -->
                 </div>
 
                 <div class="form-group">
                     <label for="location">Location:</label>
-                    <input type="text" id="location" name="location">
+                    <input type="text" id="location" name="location" required> <!-- making required the fields -->
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label for="hours">Hours:</label>
-                    <input type="number" id="hours" name="hours">
+                    <input type="number" id="hours" name="hours" required> <!-- making required the fields -->
                 </div>
             </div>
         </div>
@@ -224,40 +245,52 @@ if (isset($_SESSION['error_message'])) {
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
+            
             <h2>Edit Exam Schedule</h2>
+            
             <form action="exam_scheduleUpdateDelete.php" method="POST">
                 <input type="hidden" name="batch_number" id="manage-batch_number">
+                
                 <div class="form-group">
                     <label for="manage-exam_name">Exam Name:</label>
                     <input type="text" id="manage-exam_name" name="exam_name">
+                
                 </div>
                 <div class="form-group">
                     <label for="manage-date">Date:</label>
                     <input type="date" id="manage-date" name="date">
+                
                 </div>
                 <div class="form-group">
                     <label for="manage-time">Time:</label>
                     <input type="time" id="manage-time" name="time">
+                
                 </div>
                 <div class="form-group">
                     <label for="manage-location">Location:</label>
                     <input type="text" id="manage-location" name="location">
+                
                 </div>
                 <div class="form-group">
                     <label for="manage-hours">Hours:</label>
                     <input type="number" id="manage-hours" name="hours">
+                
                 </div>
                 <div class="form-group">
                     <label for="manage-allow_submission">Allow Submission</label>
                     <input type="checkbox" id="manage-allow_submission" name="allow_submission" value="1" class="checkbox-label">
-                    <br>
-                    <br>
+
+                    <br> <br>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" name="action" value="edit" class="view-link">Edit</button>
-                    <button type="submit" name="action" value="delete" class="view-link">Delete</button>
+                    <div class="button-container">
+                        <button type="submit" name="action" value="edit" class="view-link">Edit</button>
+                        <button type="submit" name="action" value="delete" class="delete-link">Delete</button>
+                    </div>
+
                 </div>
+
             </form>
         </div>
     </div>
@@ -265,11 +298,11 @@ if (isset($_SESSION['error_message'])) {
     <h2 class="topic">Exam Schedule Details</h2>
     <br>
 
-    <!-- Search bar with icon -->
+    <!-- Search bar -->
     <div class="search-bar">
         <label for="search">Search by Batch Number:</label>
         <input type="text" id="search" placeholder="Enter batch number">
-        <button id="search-icon" style="cursor: pointer;">🔍</button>
+        <button id="search-icon"><i class="fas fa-search"></i></button>
     </div>
     <br>
 
@@ -297,7 +330,7 @@ if (isset($_SESSION['error_message'])) {
                         <td><?= htmlspecialchars($row['location']) ?></td>
                         <td><?= htmlspecialchars($row['hours']) ?></td>
                         <td><?= $row['allow_submission'] ? 'Yes' : 'No' ?></td>
-                        <td><button onclick="manageExam(this.parentNode.parentNode)" class="view-link">Manage</button></td>
+                        <td><button onclick="manageExam(this.parentNode.parentNode)" class="manage-button view-link">Manage</button></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

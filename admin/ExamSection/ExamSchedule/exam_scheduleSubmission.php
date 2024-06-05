@@ -43,10 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO exam_schedule (course, module_name, module_code, batch_number, exam_name, date, time, location, hours, allow_submission) VALUES ('$course', '$module_name', '$module_code', '$batch_number', '$exam_name', '$date', '$time', '$location', '$hours', '$allow_submission')";
 
     if (mysqli_query($conn, $sql)) {
-        // Set a success message in the session
-        $_SESSION['success_message'] = "New exam added successfully";
-        // Redirect to the exam_schedule.php page
-        header("Location: exam_schedule.php");
+        header("Location: exam_schedule.php?message=insert");
         exit();
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
