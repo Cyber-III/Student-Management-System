@@ -63,93 +63,93 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     <link rel="stylesheet" href="viewprofile.css">
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const modules = <?php echo json_encode($modules); ?>;
-        const courseSelect = document.getElementById('course');
-        const moduleNameSelect = document.getElementById('module_name');
-        const moduleCodeSelect = document.getElementById('module_code');
+        document.addEventListener('DOMContentLoaded', function() {
+            const modules = <?php echo json_encode($modules); ?>;
+            const courseSelect = document.getElementById('course');
+            const moduleNameSelect = document.getElementById('module_name');
+            const moduleCodeSelect = document.getElementById('module_code');
 
-        courseSelect.addEventListener('change', function() {
-            const selectedCourse = this.value;
+            courseSelect.addEventListener('change', function() {
+                const selectedCourse = this.value;
 
-            // Clear previous options
-            moduleNameSelect.innerHTML = '<option value="">Select Module Name</option>';
-            moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
+                // Clear previous options
+                moduleNameSelect.innerHTML = '<option value="">Select Module Name</option>';
+                moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
 
-            // Populate module dropdowns based on selected course
-            modules.forEach(module => {
-                if (module.course === selectedCourse) {
-                    const optionName = document.createElement('option');
-                    optionName.value = module.module_name;
-                    optionName.textContent = module.module_name;
-                    moduleNameSelect.appendChild(optionName);
-                }
+                // Populate module dropdowns based on selected course
+                modules.forEach(module => {
+                    if (module.course === selectedCourse) {
+                        const optionName = document.createElement('option');
+                        optionName.value = module.module_name;
+                        optionName.textContent = module.module_name;
+                        moduleNameSelect.appendChild(optionName);
+                    }
+                });
             });
+
+            moduleNameSelect.addEventListener('change', function() {
+                const selectedModuleName = this.value;
+
+                // Clear previous options
+                moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
+
+                // Populate module code based on selected module name
+                modules.forEach(module => {
+                    if (module.module_name === selectedModuleName) {
+                        const optionCode = document.createElement('option');
+                        optionCode.value = module.module_code;
+                        optionCode.textContent = module.module_code;
+                        moduleCodeSelect.appendChild(optionCode);
+                    }
+                });
+            });
+
+            // Search functionality
+            const searchIcon = document.getElementById('search-icon');
+            const searchInput = document.getElementById('search');
+            const rows = document.querySelectorAll('#exam-schedule-tbody tr');
+
+            function filterRows() {
+                const searchQuery = searchInput.value.toLowerCase().trim();
+                rows.forEach(row => {
+                    const batchNumberCell = row.querySelector('td:nth-child(1)');
+                    if (batchNumberCell.textContent.toLowerCase().includes(searchQuery)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            searchIcon.addEventListener('click', filterRows);
+            searchInput.addEventListener('input', filterRows);
+
+            function manageExam(row) {
+                const cells = row.querySelectorAll('td');
+                document.getElementById('modal').style.display = 'block';
+                document.getElementById('manage-batch_number').value = cells[0].textContent;
+                document.getElementById('manage-exam_name').value = cells[1].textContent;
+                document.getElementById('manage-date').value = cells[2].textContent;
+                document.getElementById('manage-time').value = cells[3].textContent;
+                document.getElementById('manage-location').value = cells[4].textContent;
+                document.getElementById('manage-hours').value = cells[5].textContent;
+                document.getElementById('manage-allow_submission').checked = cells[6].textContent === 'Yes';
+            }
+
+            // Attach the event listener to the buttons after the rows are created
+            document.querySelectorAll('.manage-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    manageExam(this.closest('tr'));
+                });
+            });
+
+            function closeModal() {
+                document.getElementById('modal').style.display = 'none';
+            }
+
+            document.querySelector('.close').addEventListener('click', closeModal);
         });
-
-        moduleNameSelect.addEventListener('change', function() {
-            const selectedModuleName = this.value;
-
-            // Clear previous options
-            moduleCodeSelect.innerHTML = '<option value="">Select Module Code</option>';
-
-            // Populate module code based on selected module name
-            modules.forEach(module => {
-                if (module.module_name === selectedModuleName) {
-                    const optionCode = document.createElement('option');
-                    optionCode.value = module.module_code;
-                    optionCode.textContent = module.module_code;
-                    moduleCodeSelect.appendChild(optionCode);
-                }
-            });
-        });
-
-        // Search functionality
-        const searchIcon = document.getElementById('search-icon');
-        const searchInput = document.getElementById('search');
-        const rows = document.querySelectorAll('#exam-schedule-tbody tr');
-
-        function filterRows() {
-            const searchQuery = searchInput.value.toLowerCase().trim();
-            rows.forEach(row => {
-                const batchNumberCell = row.querySelector('td:nth-child(1)');
-                if (batchNumberCell.textContent.toLowerCase().includes(searchQuery)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        searchIcon.addEventListener('click', filterRows);
-        searchInput.addEventListener('input', filterRows);
-
-        function manageExam(row) {
-            const cells = row.querySelectorAll('td');
-            document.getElementById('modal').style.display = 'block';
-            document.getElementById('manage-batch_number').value = cells[0].textContent;
-            document.getElementById('manage-exam_name').value = cells[1].textContent;
-            document.getElementById('manage-date').value = cells[2].textContent;
-            document.getElementById('manage-time').value = cells[3].textContent;
-            document.getElementById('manage-location').value = cells[4].textContent;
-            document.getElementById('manage-hours').value = cells[5].textContent;
-            document.getElementById('manage-allow_submission').checked = cells[6].textContent === 'Yes';
-        }
-
-        // Attach the event listener to the buttons after the rows are created
-        document.querySelectorAll('.manage-button').forEach(button => {
-            button.addEventListener('click', function() {
-                manageExam(this.closest('tr'));
-            });
-        });
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        document.querySelector('.close').addEventListener('click', closeModal);
-    });
-</script>
+    </script>
 
 </head>
 <body>
