@@ -1,0 +1,60 @@
+/* style-studentGuidline.css */
+
+/* General styling for the section */
+section.vh-100 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.container {
+    border-radius: 10px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styling for the list-group */
+.list-group {
+    padding-left: 0;
+    list-style: none;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+    padding-left: 35px; /* Add space for custom bullet */
+}
+
+.list-group-item::before {
+    content: "\2022"; /* Unicode for bullet point */
+    position: absolute;
+    left: 0px;
+    font-size: 25px;
+    line-height: 1;
+    color: #007bff; /* Custom color for bullet point */
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+    border-color: #ccc;
+}
+
+/* Media query for mobile screens */
+@media (max-width: 400px) {
+    .list-group-item {
+        margin-bottom: 10px;
+    }
+}
