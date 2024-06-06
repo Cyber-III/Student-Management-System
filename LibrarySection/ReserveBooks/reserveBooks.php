@@ -47,72 +47,73 @@ if ($userStatus === 'active') {
         <link rel="stylesheet" href="../../style-template.css"> <!--Template File CSS-->
         <link rel="stylesheet" href="style-reserveBooks.css"> <!--Relevant PHP File CSS-->
 
-        <!-- Tailwind CSS (required for Flowbite) -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-        <!-- Flowbite CSS -->
-        <link href="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.css" rel="stylesheet">
-
     </head>
     <body class="first">
     <div class="search-form">
         <form method="GET" action="">
-            <div class="flex-container">
-                <label for="book_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Book Name</label>
-                <input type="text" id="book_name" name="book_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book name" value="<?php echo htmlspecialchars(isset($_GET['book_name']) ? $_GET['book_name'] : ''); ?>">
-            </div>
-            
-            <div class="flex-container">
-                <label for="author_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author Name</label>
-                <input type="text" id="author_name" name="author_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author name" value="<?php echo htmlspecialchars(isset($_GET['author_name']) ? $_GET['author_name'] : ''); ?>">
-            </div>
+        <div class="flex-container">
+            <label for="book_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Book Name</label>
+            <input type="text" id="book_name" name="book_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book name" value="">
+        </div>
 
-            <div class="flex-container">
-                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <!-- Category adding section -->
-                    <option value="">Select Category</option>
-                    <option value="Software Engineering"<?php if(isset($_GET['category']) && $_GET['category'] === 'Software Engineering') echo ' selected'; ?>>Software Engineering</option>
-                    <option value="Automobile"<?php if(isset($_GET['category']) && $_GET['category'] === 'Automobile') echo ' selected'; ?>>Automobile</option>
-                    
-                </select>
-            </div>
+        <div class="flex-container">
+            <label for="author_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Author Name</label>
+            <input type="text" id="author_name" name="author_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author name" value="">
+        </div>
 
-            
-            <input type="submit" value="Search" class="mt-2 p-2 bg-blue-500 text-white rounded-lg">
+        <div class="flex-container">
+            <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+            <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="">Select Category</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Automobile">Automobile</option>
+            </select>
+        </div>
+
+        <button value="Search" class="view-link">Search</button>
         </form>
     </div>
 
     <br> <br>
-        <div class="table">
-            <table>
-                <tr>
-                    <th>Book ID</th>
-                    <th>Book Name</th>
-                    <th>Author Name</th>
-                    <th>Category</th>
-                    <th>Image</th>
-                    <th>Book Now</th>
-                </tr>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['book_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['author_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['category']) . "</td>";
-                        echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="100" height="100"/></td>';
-                        echo '<td text-center"><button onclick="confirmBooking(' . htmlspecialchars($row['id']) . ', \'' . htmlspecialchars($row['book_name']) . '\', \'' . base64_encode($row['image']) . '\')" class="view-link">Book</button></td>';
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='6'>No books found</td></tr>";
-                }
-                $stmt->close();
-                $conn->close();
-                ?>
-            </table>
+        <div class="container">
+        <div class="table-container-2">
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Book Name</th>
+                            <th>Author Name</th>
+                            <th>Category</th>
+                            <th>Image</th>
+                            <th>Book Now</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td data-label='Book ID'>" . htmlspecialchars($row['id']) . "</td>";
+                                echo "<td data-label='Book Name'>" . htmlspecialchars($row['book_name']) . "</td>";
+                                echo "<td data-label='Author Name'>" . htmlspecialchars($row['author_name']) . "</td>";
+                                echo "<td data-label='Category'>" . htmlspecialchars($row['category']) . "</td>";
+                                echo '<td data-label="Image"><img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '" width="100" height="100"/></td>';
+                                echo '<td data-label="Book Now" class="text-center"><button onclick="confirmBooking(' . htmlspecialchars($row['id']) . ', \'' . htmlspecialchars($row['book_name']) . '\', \'' . base64_encode($row['image']) . '\')" class="view-link">Book</button></td>';
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='6'>No books found</td></tr>";
+                        }
+                        $stmt->close();
+                        $conn->close();
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        </div>
+
     </body>
 
     <script>
