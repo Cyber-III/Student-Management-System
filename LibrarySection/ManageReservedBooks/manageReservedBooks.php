@@ -28,38 +28,42 @@ $result = $stmt->get_result();
 </head>
 <body>
     
-    <div class="table">
-        <table>
-            <tr>
-                <th>Book</th>
-                <th>Book Name</th>
-                <th>Image</th>
-                <th>Reserved Date</th>
-                <th>Order Cancel</th>
-            </tr>
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['book_id']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['book_name']) . "</td>";
-                    echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['book_image']) . '" width="100" height="100"/></td>';
-                    echo "<td>" . htmlspecialchars($row['reserved_date']) . "</td>";
-                    echo '<td>';
-                    echo '<form action="delete_reservation.php" method="post" onsubmit="return confirm(\'Are you sure you want to cancel this reservation?\');">';
-                    echo '<input type="hidden" name="book_id" value="' . htmlspecialchars($row['book_id']) . '">';
-                    echo '<button type="submit" class="view-link">CANCEL</button>';
-                    echo '</form>';
-                    echo '</td>';
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='5'>No reserved books found</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </table>
+    <div class="container">
+        <div class="table-container-2">
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>Book</th>
+                        <th>Book Name</th>
+                        <th>Image</th>
+                        <th>Reserved Date</th>
+                        <th>Order Cancel</th>
+                    </tr>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td data-label='Book ID'>" . htmlspecialchars($row['book_id'], ENT_QUOTES, 'UTF-8') . "</td>";
+                            echo "<td data-label='Book Name'>" . htmlspecialchars($row['book_name'], ENT_QUOTES, 'UTF-8') . "</td>";
+                            echo '<td data-label="Book Image"><img src="data:image/jpeg;base64,' . base64_encode($row['book_image']) . '" width="100" height="100"/></td>';
+                            echo "<td data-label='Reserved Date'>" . htmlspecialchars($row['reserved_date'], ENT_QUOTES, 'UTF-8') . "</td>";
+                            echo '<td data-label="Cancel Order">';
+                            echo '<form action="delete_reservation.php" method="post" onsubmit="return confirm(\'Are you sure you want to cancel this reservation?\');">';
+                            echo '<input type="hidden" name="book_id" value="' . htmlspecialchars($row['book_id'], ENT_QUOTES, 'UTF-8') . '">';
+                            echo '<button type="submit" class="view-link">CANCEL</button>';
+                            echo '</form>';
+                            echo '</td>';
+                            echo "</tr>";
+
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>No reserved books found</td></tr>";
+                    }
+                    $conn->close();
+                    ?>
+                </table>
+            </div>
+        </div>
     </div>
-    
 </body>
 </html>
