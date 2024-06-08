@@ -33,7 +33,7 @@ $result = $stmt->get_result();
 <div class="table">
         <table>
             <tr>
-                <th>Exam Name</th>
+                <th>Assignment Name</th>
                 <th>Submission Date</th>
                 <th>Result</th>
                 <th>View Submission</th>
