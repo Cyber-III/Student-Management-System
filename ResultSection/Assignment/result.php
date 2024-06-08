@@ -35,7 +35,7 @@ $result = $stmt->get_result();
             <div class="table">
                 <table>
                     <tr>
-                        <th>Exam Name</th>
+                        <th>Assignment Name</th>
                         <th>Submission Date</th>
                         <th>Result</th>
                         <th>View Submission</th>
@@ -44,7 +44,7 @@ $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td data-label='Exam Name'>" . htmlspecialchars($row['assignment_name']) . "</td>";
+                            echo "<td data-label='Assignment Name'>" . htmlspecialchars($row['assignment_name']) . "</td>";
                             echo "<td data-label='Sub Date'>" . htmlspecialchars($row['submission_date']) . "</td>";
                             echo "<td data-label='Result'>" . htmlspecialchars($row['results']) . "</td>";
                             echo '<td data-label="View Submission">';
