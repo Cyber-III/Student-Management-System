@@ -229,7 +229,7 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                     <a href="" class="sub-item">Sample Certificate</a>
-                    <a href="" class="sub-item">Student Guidlines</a>
+                    <a href="../../../CourseGuidline/StudentGuidline/studentGuidline.php" class="sub-item">Student Guidlines</a>
                     
                 </div>
             </div>
