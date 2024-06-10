@@ -1,0 +1,104 @@
+/* Ensure there is no CSS conflict by resetting common properties */
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+.one {
+    font-family: Arial, sans-serif;
+    margin-left: auto; /* Centering horizontally */
+    margin-right: auto; /* Centering horizontally */
+    margin-top: 100px;
+    max-width: 800px; /* Adjust maximum width as needed */
+}
+
+.border-rectangle {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Centering items horizontally */
+}
+
+/* Rectangle Styling */
+.Rectangle {
+    border: 3px solid #d8d8d8;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.update {
+    color: red;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+thead {
+    text-align: center;
+    border: 1px solid black;
+}
+
+tbody,
+th,
+tr {
+    border: 1px solid black;
+}
+
+#print-button {
+    color: #007BFF;
+    text-decoration: none; /* Remove underline */
+    margin-bottom: 10px;
+    float: right;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+    background-color: #e7f1ff; /* Light blue background */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+#print-button:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+/* Responsive styles */
+@media screen and (max-width: 1199px) {
+    .one {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .campus-logo {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 991px) {
+    .one {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .campus-logo {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .one {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

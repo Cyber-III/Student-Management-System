@@ -168,7 +168,7 @@ if(isset($_SESSION['username'])) {
                 <div class="sub-menu">
                     <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
                     <a href="../../../ExamSection/ExamSubmission/exam_submission.php" class="sub-item">Exam Submissions</a>
-                    <a href="" class="sub-item">Exam Admission</a>
+                    <a href="../../../ExamSection/ExamAdmission/examAdmission.php" class="sub-item">Exam Admission</a>
                     
                 </div>
             </div>
