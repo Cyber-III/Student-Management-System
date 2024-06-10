@@ -170,7 +170,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Assignment Schedule</a>
+                    <a href="../../../admin\AssignmentSection\assignmentSchedule\assignment_schedule.php" class="sub-item">Assignment Schedule</a>
                     <a href="" class="sub-item">Assignment Submissions</a>
                     <a href="" class="sub-item">Assignment Feedback</a>
                     <a href="" class="sub-item">Add Mitigation Request</a>
