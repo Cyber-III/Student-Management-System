@@ -35,36 +35,38 @@ if ($stmt) {
     <title>Final Results</title>
 </head>
 <body>
-    
-<div class="table">
-    <table>
-        <tr>
-            <th>Module Code</th>
-            <th>Module Name</th>
-            <th>Assignment Result</th>
-            <th>Presentation Result</th>
-            <th>Exam Result</th>
-            <th>Final Result</th>
-        </tr>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['module_code']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['module_name']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['coursework_result']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['presentation_result']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['exam_result']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['final_result']) . "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6'>No submissions found</td></tr>";
-        }
-        $conn->close();
-        ?>
-    </table>
+<div class="container">
+    <div class="table-container-2">
+        <div class="table">
+            <table>
+                <tr>
+                    <th>Module Code</th>
+                    <th>Module Name</th>
+                    <th>Assignment Result</th>
+                    <th>Presentation Result</th>
+                    <th>Exam Result</th>
+                    <th>Final Result</th>
+                </tr>
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td data-label='Module Code'>" . htmlspecialchars($row['module_code']) . "</td>";
+                        echo "<td data-label='Module Name'>" . htmlspecialchars($row['module_name']) . "</td>";
+                        echo "<td data-label='Assignment Result'>" . htmlspecialchars($row['coursework_result']) . "</td>";
+                        echo "<td data-label='Presentation Result'>" . htmlspecialchars($row['presentation_result']) . "</td>";
+                        echo "<td data-label='Exam Result'>" . htmlspecialchars($row['exam_result']) . "</td>";
+                        echo "<td data-label='Final Result'>" . htmlspecialchars($row['final_result']) . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No submissions found</td></tr>";
+                }
+                $conn->close();
+                ?>
+            </table>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>

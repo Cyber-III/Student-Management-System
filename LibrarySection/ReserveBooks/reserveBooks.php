@@ -3,7 +3,6 @@
 session_start();
 
 include_once('../../connection.php');
-
 include_once('../../assests/content/static/template.php');
 
 $username = $_SESSION['username'];
@@ -16,9 +15,9 @@ if ($stmt === false) {
 $stmt->bind_param('s', $username);
 $stmt->execute();
 $result = $stmt->get_result();
-$userStatus = $result->fetch_assoc()['status'];
+$user = $result->fetch_assoc();
 
-if ($userStatus === 'active') {
+if ($user && $user['status'] === 'active') {
     $book_name = isset($_GET['book_name']) ? $_GET['book_name'] : '';
     $author_name = isset($_GET['author_name']) ? $_GET['author_name'] : '';
     $category = isset($_GET['category']) ? $_GET['category'] : '';
@@ -70,7 +69,7 @@ if ($userStatus === 'active') {
             </select>
         </div>
 
-        <button value="Search" class="view-link">Search</button>
+        <button type="submit" value="Search" class="view-link">Search</button>
         </form>
     </div>
 
@@ -145,7 +144,7 @@ if ($userStatus === 'active') {
 
     <?php
 } else {
-    // User is not active
+    // User is not active or does not exist
     ?>
     <!DOCTYPE html>
     <html lang="en">
