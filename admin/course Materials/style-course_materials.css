@@ -1,0 +1,36 @@
+/* General styles for the table and other elements */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+body {
+    font-family: Poppins, sans-serif;
+    margin-left: 330px;
+    margin-top: 100px;
+}
+/* 
+.add-new{
+    margin-left: 0px;
+    margin-top: 100px;
+}  */
+
+.no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px; /* You can adjust this height as needed */
+    text-align: center;
+}
+
+/* Ensuring the image is centered and responsive */
+.no-data img {
+    max-width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+@media (max-width: 992px) {
+    .container {
+        margin-left: 100px;
+        margin-top: 0;
+    }
+}
