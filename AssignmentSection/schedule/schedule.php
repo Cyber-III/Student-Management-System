@@ -53,29 +53,31 @@ if ($stmt) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
-<body class="body">
-<div class="container">
-    <h1 class="topic">Assignment Schedule</h1>
-    <div class="border-rectangle">
-        <?php if ($schedules): ?>
-            <?php foreach ($schedules as $schedule): ?>
-                <div class="schedule-item">
-                    <p><span class="schedule-title">Module Name: </span> <?= htmlspecialchars($schedule['module_name']) ?></p>
-                    <p><span class="schedule-title">Module Code: </span> <?= htmlspecialchars($schedule['module_code']) ?></p>
-                    <p><span class="schedule-title">Date of Issue: </span> <?= htmlspecialchars($schedule['date_of_issue']) ?></p>
-                    <p><span class="schedule-title">Final Date: </span> <?= htmlspecialchars($schedule['date_of_submit']) ?></p>
-                    <p>
-                       <div class="mt-5">
-                                <a href="<?= htmlspecialchars($schedule['view']) ?>" class="view-link p-2" target="_blank">View Assignment</a>
-                       </div>
-                    </p>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No assignment schedule found for batch <?= htmlspecialchars($batch_number) ?>.</p>
-        <?php endif; ?>
+<body>
+    <div class="assignment-schedule-container">
+        <h1 class="schedule-title">Assignment Schedule</h1>
+        <div class="card-list">
+            <?php if ($schedules):?>
+                <?php foreach ($schedules as $schedule):?>
+                    <div class="card">
+                        <div class="card-header">
+                            <p><?= htmlspecialchars($schedule['module_name'])?></p>
+                        </div>
+                        <div class="card-body">
+                            <p><span class="label">Module Code:</span> <?= htmlspecialchars($schedule['module_code'])?></p>
+                            <p><span class="label">Date of Issue:</span> <?= htmlspecialchars($schedule['date_of_issue'])?></p>
+                            <p><span class="label">Final Date:</span> <?= htmlspecialchars($schedule['date_of_submit'])?></p>
+                        </div>
+                        <div class="card_footer">
+                            <a href="<?= htmlspecialchars($schedule['view'])?>" class="btn1" target="_blank">View Assignment</a>
+                        </div>
+                    </div>
+                <?php endforeach;?>
+            <?php else:?>
+                <p>No assignment schedule found for batch <?= htmlspecialchars($batch_number)?>.</p>
+            <?php endif;?>
+        </div>
     </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
