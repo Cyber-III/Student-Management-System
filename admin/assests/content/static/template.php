@@ -101,6 +101,16 @@ if(isset($_SESSION['username'])) {
 
                 </div>
             </div>
+
+            <!-- Student Search -->
+            <div class="item">
+                <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add Student</a>
+            </div>
+
+            <!-- Student Search -->
+            <div class="item">
+                <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
+            </div>
             
             <!-- Payment Category -->
             <div class="item">
