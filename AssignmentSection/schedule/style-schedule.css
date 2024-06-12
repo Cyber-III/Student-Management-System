@@ -1,84 +1,103 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
-
-
 * {
-    box-sizing: border-box;
-}
-
-.body {
-    font-family: Arial, sans-serif;
-    margin-left: 350px;
-    margin-top: 100px;
+    margin: 0;
     padding: 0;
+    
+    
 }
-
-
-.topic {
+.assignment-schedule-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+   
+  }
+  
+  .schedule-title {
     text-align: center;
+    font-weight: bold;
     margin-bottom: 20px;
-}
- 
-.border-rectangle {
+    justify-content: center;
+  }
+  
+  .card-list {
     display: flex;
     flex-wrap: wrap;
-    gap:20px;
-}
-
-.schedule-item {
-    background-color: #0056b3;
+    justify-content: center;
+  }
+  
+  .card-list .card {
+    margin: 20px;
     padding: 20px;
-    border-radius: 10px;
-    flex: 1 1 calc(50% - 40px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: rgba(255, 255, 255, 0.959);
-}
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(37, 39, 59, 0.3);
+    width: 300px;
+  }
+  
+  .card .card-header {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 500;
 
-.schedule-title {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .label {
     font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.view-link {
-    width: 90px;
+    margin-right: 10px;
+  }
+  
+  .card .card_footer {
+    
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .btn1 {
+    width: 100px;
     color: #182431; 
     text-decoration: none; /* Remove underline */
-    font-weight: bold; 
-    padding: 5px 10px; 
+    font-weight: bold;
+    padding: 5px 15px;
     border: 1px solid #007BFF; 
     border-radius: 88px; 
     background-color: #f0f8ff; 
     transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
-}
+  }
+  
+  .btn1:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
 
-.view-link:hover {
-    background-color: #007BFF; 
-    color: white; 
-    cursor: pointer; 
-}
-
-/* Responsive styles */
-@media (max-width: 1200px) {
-    .body {
-        margin-left: 50px;
-        margin-right: 50px;
+  @media screen and (min-width: 1200px) {
+    .assignment-schedule-container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
     }
-}
+ }
 
-@media (max-width: 768px) {
-    .schedule-item {
-        flex: 1 1 calc(100% - 40px);
-    }
-}
+ @media screen and (max-width: 1199px) {
 
-@media (max-width: 576px) {
-    .body {
-        margin-left: 10px;
-        margin-right: 10px;
+    .assignment-schedule-container{
+        width: 100%;
+       
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+        
     }
+ }
 
-    .schedule-item {
-        padding: 10px;
-    }
-}
+ 
