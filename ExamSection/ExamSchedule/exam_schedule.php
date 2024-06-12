@@ -52,19 +52,36 @@ if ($stmt) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
-<body class="one">
-    <div class="container">
+<body>
+    <div class="main_container">
         <h1 class="topic">Exam Schedule</h1>
-        <div class="border-rectangle">
+        <div class="card-list">
             <?php if ($schedules): ?>
                 <?php foreach ($schedules as $schedule): ?>
-                    <div class="schedule-item">
-                        <p><span class="schedule-title">Exam Name: <?= htmlspecialchars($schedule['exam_name']) ?> </span> </p>
-                        <p><span class="schedule-title">Date: <?= htmlspecialchars($schedule['date']) ?> </span> </p>
-                        <p><span class="schedule-title">Time: <?= htmlspecialchars($schedule['time']) ?></span> </p>
-                        <p><span class="schedule-title">Location: <?= htmlspecialchars($schedule['location']) ?></span> </p>
-                        <p><span class="schedule-title">Hours: <?= htmlspecialchars($schedule['hours']) ?></span> </p>
-                        
+                    <div class="card">
+                        <div class="card-header">
+                            <p><?= htmlspecialchars($schedule['exam_name']) ?></p>
+                        </div>
+                        <div class="card-body">
+                            <table class="info-table">
+                                <tr>
+                                    <th class="label-column"><span class="label">Date:</span></th>
+                                    <td class="value-column"><?= htmlspecialchars($schedule['date']) ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="label-column"><span class="label">Time:</span></th>
+                                    <td class="value-column"><?= htmlspecialchars($schedule['time']) ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="label-column"><span class="label">Location:</span></th>
+                                    <td class="value-column"><?= htmlspecialchars($schedule['location']) ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="label-column"><span class="label">Hours:</span></th>
+                                    <td class="value-column"><?= htmlspecialchars($schedule['hours']) ?></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -72,6 +89,7 @@ if ($stmt) {
             <?php endif; ?>
         </div>
     </div>
+</body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>

@@ -8,74 +8,88 @@
     box-sizing: border-box;
 }
 
-.one {
-    font-family: Arial, sans-serif;
-    margin-left: 350px;
-    margin-right: 100px;
-    margin-top: 100px;
-}
+.main_container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+   
+  }
+
 
 
 .topic {
     text-align: center;
     margin-bottom: 20px;
+    font-weight: bold;
+
 }
  
-.border-rectangle {
+.card-list {
     display: flex;
     flex-wrap: wrap;
-    gap:20px;
+    justify-content: center;
 }
 
-.schedule-item {
-    background-color: #0056b3;
+.card {
+    margin: 20px;
     padding: 20px;
-    border-radius: 10px;
-    flex: 1 1 calc(100% - 40px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: rgba(255, 255, 255, 0.959);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(37, 39, 59, 0.3);
+    width: 400px;
+  }
+
+.card .card-header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;;
+    background-color: #0d6efd;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
-.schedule-title {
+.card-body {
+    padding: 20px;
+}
+
+.info-table {
+    width: 100%;
+}
+
+.label-column {
+    width: 30%;
+   
+}
+
+.value-column {
+    width: 70%;
+    
+}
+
+.label {
     font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+    margin-right: 10px;
 }
 
 /* Responsive styles */
-@media screen and (max-width: 1199px) {
-    .one {
-        margin-left: 10px;
-        margin-right: 10px;
+@media screen and (min-width: 1200px) {
+    .main_container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
     }
+ }
+ @media screen and (max-width: 1199px) {
 
-    .schedule-item {
-        flex: 1 1 calc(100% - 40px);
-    }
-
-    /* .container {
+    .main_container{
+        width: 100%;
+       
         justify-content: center;
-    } */
-}
-
-@media (max-width: 991px) {
-    .one {
-        margin-left: 10px;
-        margin-right: 10px;
+        margin-top: 5rem
+        ;
+        
+        
     }
-
-    .schedule-item {
-        flex: 1 1 calc(100% - 40px);
-    }
-}
-
-@media (max-width: 576px) {
-    .container {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .schedule-item {
-        padding: 10px;
-    }
-}
+ }
