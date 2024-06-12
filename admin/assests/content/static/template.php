@@ -8,10 +8,14 @@ if(isset($_SESSION['username'])) {
     $sql = "SELECT * FROM admin_login_tbl WHERE username = '$username'";
     $result = mysqli_query($conn, $sql);
     
-    // Check if query executed successfully and user exists
-    if($result && mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $name = $row['name'];
+  // Check if query executed successfully and user exists
+  if($result && mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_assoc($result);
+    $gender = $row['gender'];
+    $password = $row['password'];
+    $name = $row['name'];
+
+        
         
         
     } else {
@@ -38,7 +42,7 @@ if(isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!--Upper Icon-->
-  <link rel="shortcut icon" type="dp" href="./pics/graduate.png">
+  <link rel="shortcut icon" type="dp" href="../../../pics/graduate.png">
 
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -153,7 +157,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Exam Schedule</a>
+                    <a href="../../../admin/ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
                     <a href="" class="sub-item">Exam Submissions</a>
                     <a href="" class="sub-item">Exam Admission</a>
                     
@@ -166,7 +170,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Assignment Schedule</a>
+                    <a href="../../../admin\AssignmentSection\assignmentSchedule\assignment_schedule.php" class="sub-item">Assignment Schedule</a>
                     <a href="" class="sub-item">Assignment Submissions</a>
                     <a href="" class="sub-item">Assignment Feedback</a>
                     <a href="" class="sub-item">Add Mitigation Request</a>

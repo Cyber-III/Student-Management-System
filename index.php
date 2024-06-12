@@ -6,13 +6,13 @@
 <style>
     .social-icons-container {
         display: flex;
-        align-items: center; /* Center the items vertically */
-        justify-content: center; /* Center the items horizontally */
-        margin-top: 20px; /* Add some margin for spacing */
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
     }
 
     .social-icons-container a {
-        margin-right: 50px; /* Adjust the margin as needed */
+        margin-right: 50px;
     }
 
 </style>

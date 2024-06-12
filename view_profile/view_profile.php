@@ -72,7 +72,7 @@ include_once('../assests/content/static/template.php');
                         <span class="form-value"><?php echo isset($dob) ? $dob : ''; ?></span>
                     </div>
                     <div class = "form-row">
-                        <span class="form-label"> National Identification No:</span>
+                        <span class="form-label"> NIC No:</span>
                         <span class="form-value"><?php echo isset($nic) ? $nic : ''; ?></span>
                     </div>
                     <div class = "form-row">
@@ -102,7 +102,7 @@ include_once('../assests/content/static/template.php');
                         <span class="form-value"><?php echo isset($uni_number) ? $uni_number : ''; ?></span>
                     </div>
                     <div class = "form-row">
-                        <span class="form-label">Local Education Center:</span>
+                        <span class="form-label">Education Center:</span>
                         <span class="form-value"><?php echo isset($lec) ? $lec : ''; ?></span>
                     </div>
 
