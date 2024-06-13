@@ -180,13 +180,12 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../admin\AssignmentSection\assignmentSchedule\assignment_schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="" class="sub-item">Assignment Submissions</a>
-                    <a href="" class="sub-item">Assignment Feedback</a>
-                    <a href="" class="sub-item">Add Mitigation Request</a>
-                    <a href="" class="sub-item">View Mitigation Request</a>
-                    
-                </div>
+                  <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
+                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Assignment Submissions</a>
+                  <a href="" class="sub-item">Assignment Feedback</a>
+                  <a href="" class="sub-item">Add Mitigation Request</a>
+                  <a href="" class="sub-item">View Mitigation Request</a>
+              </div>
             </div>
 
             <!-- Class Schedule Category -->
@@ -220,8 +219,9 @@ if(isset($_SESSION['username'])) {
             
             <!-- Course Materials -->
             <div class="item">
-                <a href=""><i class="fas fa-book-reader"></i>Course Materials </a>
-            </div>
+              <a href="../../../admin/course Materials/coursematerials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
+          </div>
+
 
             <!-- Notice Board -->
             <div class="item">
