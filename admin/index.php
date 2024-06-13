@@ -12,7 +12,7 @@
     }
 
     .social-icons-container a {
-        margin-right: 50px; /* Adjust the margin as needed */
+        margin-right: 50px;
     }
 
 </style>
