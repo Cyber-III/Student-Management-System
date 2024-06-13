@@ -93,13 +93,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Profile Category -->
             <div class="item">
-                <a class="sub-btn"><i class="far fa-id-card"></i>Profile
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../admin/adminViewProfile/viewprofile.php" class="sub-item">View Profile</a>
-
-                </div>
+                    <a href="../../../admin/adminViewProfile/viewprofile.php"><i class="far fa-id-card"></i>Profile</a>
             </div>
 
             <!-- Student Search -->
@@ -190,13 +184,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Class Schedule Category -->
             <div class="item">
-                <a class="sub-btn"><i class="far fa-calendar-alt"></i>Class Schedule
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="" class="sub-item">View Class Details</a>
-                    
-                </div>
+                    <a href="" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
 
             <!-- Results Category -->
