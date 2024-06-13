@@ -2,9 +2,9 @@
 session_start();
 
 // Include the database connection
-include_once('../connection.php');
+include_once('../../connection.php');
 
-include_once('../../admin\assests\content\static\template.php');
+include_once('../../admin/assests/content/static/template.php');
 
 // Check if the username session variable is set
 if (!isset($_SESSION['username'])) {
@@ -29,7 +29,7 @@ if (isset($_POST['add'])) {
     $sql = "INSERT INTO course_materials (module_name, module_code, topic, batch_number, course, download) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('sssiss', $module_name, $module_code, $topic, $batch_number, $course, $download);
+        $stmt->bind_param('ssssss', $module_name, $module_code, $topic, $batch_number, $course, $download);
         $stmt->execute();
         $stmt->close();
         // Set the success message
@@ -47,10 +47,9 @@ if (isset($_POST['add'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Course Material</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-course_materials.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
-<body class="body">
+<body>
 <div class="container">
     <h1>Add New Course Material</h1>
     <?php if (!empty($success_message)): ?>
