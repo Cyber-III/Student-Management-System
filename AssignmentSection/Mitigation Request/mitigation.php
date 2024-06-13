@@ -100,40 +100,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style-mitigation.css">
 </head>
 <body>
+<div class="main_container">
+    <h1>Mitigation Form</h1>
 
-<h1>Mitigation Form</h1>
+    <?php if ($message == 'submitted'): ?>
+        <div class="alert alert-success">Your mitigation was submitted successfully.</div>
+    <?php elseif ($message == 'error'): ?>
+        <div class="alert alert-danger">There was an error submitting your mitigation. Please try again.</div>
+    <?php endif; ?>
+    <div class="form_container">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <label for="module_name">Assignment Name:</label><br>
+            <select id="module_name" name="module_name" required onchange="updateModuleCode()">
+                <option value="">Select Assignment Name</option>
+                <?php foreach ($modules as $module): ?>
+                    <option value="<?php echo htmlspecialchars($module['module_name']); ?>"><?php echo htmlspecialchars($module['module_name']); ?></option>
+                <?php endforeach; ?>
+            </select><br><br>
 
-<?php if ($message == 'submitted'): ?>
-    <div class="alert alert-success">Your mitigation was submitted successfully.</div>
-<?php elseif ($message == 'error'): ?>
-    <div class="alert alert-danger">There was an error submitting your mitigation. Please try again.</div>
-<?php endif; ?>
+            <label for="module_code">Module Code:</label><br>
+            <select id="module_code" name="module_code" required>
+                <option value="">Select Module Code</option>
+                <?php foreach ($modules as $module): ?>
+                    <option class="module-code-option" data-module-name="<?php echo htmlspecialchars($module['module_name']); ?>" value="<?php echo htmlspecialchars($module['module_code']); ?>"><?php echo htmlspecialchars($module['module_code']); ?></option>
+                <?php endforeach; ?>
+            </select><br><br>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <label for="module_name">Assignment Name:</label><br>
-    <select id="module_name" name="module_name" required onchange="updateModuleCode()">
-        <option value="">Select Assignment Name</option>
-        <?php foreach ($modules as $module): ?>
-            <option value="<?php echo htmlspecialchars($module['module_name']); ?>"><?php echo htmlspecialchars($module['module_name']); ?></option>
-        <?php endforeach; ?>
-    </select><br><br>
+            <label for="date">Date:</label><br>
+            <input type="date" id="date" name="date" required><br><br>
 
-    <label for="module_code">Module Code:</label><br>
-    <select id="module_code" name="module_code" required>
-        <option value="">Select Module Code</option>
-        <?php foreach ($modules as $module): ?>
-            <option class="module-code-option" data-module-name="<?php echo htmlspecialchars($module['module_name']); ?>" value="<?php echo htmlspecialchars($module['module_code']); ?>"><?php echo htmlspecialchars($module['module_code']); ?></option>
-        <?php endforeach; ?>
-    </select><br><br>
+            <label for="description">Mitigation description:</label><br>
+            <textarea id="description" name="description" required></textarea><br><br>
 
-    <label for="date">Date:</label><br>
-    <input type="date" id="date" name="date" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
 
-    <label for="description">Mitigation description:</label><br>
-    <textarea id="description" name="description" required></textarea><br><br>
-
-    <input type="submit" value="Submit">
-</form>
+</div>
 
 <script>
     function updateModuleCode() {

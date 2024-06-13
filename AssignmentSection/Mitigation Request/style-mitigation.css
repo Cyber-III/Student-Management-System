@@ -3,34 +3,39 @@ body, h1, form, input, textarea, select {
     padding: 0;
     box-sizing: border-box;
 }
+.main_container{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+   
 
+}
 /* Body styling */
 body {
-    margin-top: 100px;
     font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
+    
 }
 
 
 /* Form container styling */
+.form_container{
+    display: flex;
+    justify-content: center;
+}
 form {
     background-color: #fff;
     padding: 20px 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    box-shadow: 0 0 10px rgba(37, 39, 59, 0.3);
+
+    max-width: 500px;
     width: 100%;
 }
 
 /* Form title styling */
 h1 {
     margin-bottom: 20px;
-    font-size: 50px;
+    font-weight: bold;
     color: #333;
     text-align: center;
     margin-right: 20px;
@@ -51,7 +56,7 @@ form textarea,
 form select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+   
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -90,21 +95,24 @@ form input[type="submit"]:hover {
 }
 
 /* Responsive styling */
-@media (max-width: 600px) {
-    body {
-        margin-top: 50px;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
 
-    h2 {
+@media screen and (min-width: 1200px) {
+    .main_container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+ }
+@media screen and (max-width: 1199px) {
+
+    .main_container{
+        width: 100%;
        
-        position: relative;
-        top: 0;
-        margin: 20px 0 20px 0;
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+        
     }
-
-    form {
-        margin-top: 20px;
-    }
-}
+ }
