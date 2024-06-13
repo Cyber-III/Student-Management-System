@@ -1,0 +1,82 @@
+body {
+    margin-left: 350px;
+    margin-top: 100px;
+}
+
+select,input[type="text"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#search-icon {
+    margin-left: 8px;
+    margin-bottom: 8px;
+    padding: 6px;
+    width: 45px;
+    height: 45px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#search-icon:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+#batch_number, #username {
+    width: 400px; /* Adjust this value to increase the width of the select and input elements */
+    padding: 10px; /* Optional: to give some padding for better appearance */
+    font-size: 16px; /* Optional: to adjust the font size */
+}
+
+
+
+table {
+    background: #ffffff;
+    width: 95%;
+    border-collapse: collapse;
+    border: #cacace;
+   
+}
+
+th, td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 15px;
+    /* white-space: nowrap; */
+    
+}

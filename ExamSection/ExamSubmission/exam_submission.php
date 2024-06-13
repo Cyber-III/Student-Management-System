@@ -56,7 +56,7 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
 <body class="one">
-<div class="container">
+<div class="container1">
     <marquee><p class="text">*Please note that when renaming your document, use your username (CL number) and exam name. Ex: 'CL_HDCSE_CMU_XXX_XX_Networking_Practicle.pdf'</p></marquee>
 
     <h1 class="topic">Exam Submission</h1>
@@ -76,31 +76,49 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
     
 
     <div class="border-rectangle">
-        <?php if ($schedules): ?>
-            <?php foreach ($schedules as $schedule): ?>
-                <div class="schedule-item">
-                    <p><span class="schedule-title">Exam Name: <?= htmlspecialchars($schedule['exam_name']) ?> </span> </p>
-                    <p><span class="schedule-title">Date: <?= htmlspecialchars($schedule['date']) ?> </span> </p>
-                    <p><span class="schedule-title">Time: <?= htmlspecialchars($schedule['time']) ?></span> </p>
-                    <p><span class="schedule-title">Location: <?= htmlspecialchars($schedule['location']) ?></span> </p>
-                    <p><span class="schedule-title">Hours: <?= htmlspecialchars($schedule['hours']) ?></span> </p>
-                    <?php if ($schedule['allow_submission']): ?>
-                        <form action="upload_exam.php" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name']) ?>">
-                            <input type="hidden" name="module_code" value="<?= htmlspecialchars($schedule['module_code']) ?>">
-                            <input type="hidden" name="exam_name" value="<?= htmlspecialchars($schedule['exam_name']) ?>">
-                            <input type="file" name="file"> <br> <br>
-                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                            <button type="submit" name="view" class="btn btn-secondary">View</button>
-                        </form>
-                    <?php else: ?>
-                        <p>Submission is not allowed for this exam at the moment.</p>
-                    <?php endif; ?>
+        <?php if ($schedules):?>
+            <?php foreach ($schedules as $schedule):?>
+            <div class="schedule-item card">
+                <div class="card-header">
+                <h5 class="card-title"><?= htmlspecialchars($schedule['exam_name'])?></h5>
                 </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>No assignment schedule found for <?= htmlspecialchars($course) ?> <?= htmlspecialchars($batch_number) ?>.</p>
-        <?php endif; ?>
+                <div class="card-body">
+                <table class="table">
+                    <tr>
+                    <th>Date</th>
+                    <td><?= htmlspecialchars($schedule['date'])?></td>
+                    </tr>
+                    <tr>
+                    <th>Time</th>
+                    <td><?= htmlspecialchars($schedule['time'])?></td>
+                    </tr>
+                    <tr>
+                    <th>Location</th>
+                    <td><?= htmlspecialchars($schedule['location'])?></td>
+                    </tr>
+                    <tr>
+                    <th>Hours</th>
+                    <td><?= htmlspecialchars($schedule['hours'])?></td>
+                    </tr>
+                </table>
+                <?php if ($schedule['allow_submission']):?>
+                    <form action="upload_exam.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name'])?>">
+                    <input type="hidden" name="module_code" value="<?= htmlspecialchars($schedule['module_code'])?>">
+                    <input type="hidden" name="exam_name" value="<?= htmlspecialchars($schedule['exam_name'])?>">
+                    <input type="file" name="file"> <br> <br>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="view" class="btn btn-secondary">View</button>
+                    </form>
+                <?php else:?>
+                    <p>Submission is not allowed for this exam at the moment.</p>
+                <?php endif;?>
+                </div>
+            </div>
+            <?php endforeach;?>
+        <?php else:?>
+            <p>No assignment schedule found for <?= htmlspecialchars($course)?> <?= htmlspecialchars($batch_number)?>.</p>
+        <?php endif;?>
     </div>
 </div>
 
