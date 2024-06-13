@@ -6,7 +6,6 @@ include_once('../../connection.php');
 // Loading the template.php
 include_once('../../assests/content/static/template.php');
 
-
 $username = $_SESSION['username'];
 
 // Fetch the user's batch number based on the username
@@ -51,6 +50,7 @@ if ($stmt) {
     <link rel="stylesheet" href="style-examAdmission.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
     <style>
         /* Hide the logo by default */
@@ -80,55 +80,65 @@ if ($stmt) {
 
 </head>
 <body class="one">
-    <div class="container">
+    <div class="container1">
     <h1 class="text-center h1 fw-bold mb-4 mx-1 mx-md-3 mt-4">Exam Admission</h1>
         <div class="border-rectangle">
             <?php if ($schedules): ?>
-                <?php foreach ($schedules as $schedule): ?>
+                <?php foreach ($schedules as $index => $schedule): ?>
                 <div class="Rectangle">
                     <div class="campus-logo">
-                        <img id="image" src="./pics/L3.png" alt="Campus Logo">
+                        <img id="image-<?= $index ?>" src="./pics/L3.png" alt="Campus Logo">
                     </div>
-                    <button id="print-button" type="button" class="print btn btn-primary mb-3">Print</button>
-                    <table id="table" class="table">
-                        <thead>
-                            <tr>
-                                <th colspan="2" scope="col">Exam Admission</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                             <tr>
-                                <th scope="row">Student Name</th>
-                                <td><span><?php echo isset($student_name) ? $student_name : ''; ?></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Student ID</th>
-                                <td><span><?php echo isset($username) ? $username : ''; ?></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Exam Name</th>
-                                <td><span class="form-value"><?= htmlspecialchars($schedule['exam_name']) ?></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Date</th>
-                                <td><span class="form-value"><?= htmlspecialchars($schedule['date']) ?></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Time</th>
-                                <td><span class="form-value"><?= htmlspecialchars($schedule['time']) ?></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Location</th>
-                                <td><span class="form-value"><?= htmlspecialchars($schedule['location']) ?></span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Hours</th>
-                                <td><span><?= htmlspecialchars($schedule['hours']) ?></span></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                    <button id="print-button-<?= $index ?>" type="button" class="print btn btn-primary mb-3">Print</button>
+                    <div id="content-<?= $index ?>">
+                        <table id="table" class="table">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" scope="col">Exam Admission</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Student Name</th>
+                                    <td><span><?php echo isset($student_name) ? $student_name : ''; ?></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Student ID</th>
+                                    <td><span><?php echo isset($username) ? $username : ''; ?></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Exam Name</th>
+                                    <td><span class="form-value"><?= htmlspecialchars($schedule['exam_name']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Date</th>
+                                    <td><span class="form-value"><?= htmlspecialchars($schedule['date']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Time</th>
+                                    <td><span class="form-value"><?= htmlspecialchars($schedule['time']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Location</th>
+                                    <td><span class="form-value"><?= htmlspecialchars($schedule['location']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Hours</th>
+                                    <td><span><?= htmlspecialchars($schedule['hours']) ?></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+                <script>
+                    document.getElementById('print-button-<?= $index ?>').addEventListener('click', function () {
+                        const content = document.getElementById('content-<?= $index ?>');
+                        const image = document.getElementById('image-<?= $index ?>').outerHTML;
+                        const combinedContent = image + content.outerHTML;
+
+                        html2pdf().from(combinedContent).save('exam_admission_<?= $index ?>.pdf');
+                    });
+                </script>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>No assignment schedule found for <?= htmlspecialchars($course) ?> <?= htmlspecialchars($batch_number) ?>.</p>
@@ -137,22 +147,6 @@ if ($stmt) {
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
-
-<script>
-    document.getElementById('print-button').addEventListener('click', function () {
-        const printContent1 = document.getElementById('image').outerHTML;
-        const printContent = document.getElementById('table').outerHTML;
-        const combinedContent = printContent1 + printContent;
-        const originalContent = document.body.innerHTML;
-
-        document.body.innerHTML = combinedContent;
-        window.print();
-        document.body.innerHTML = originalContent;
-        location.reload();  // Reload the page to restore the original content
-    });
-</script>
-
 
 </body>
 </html>
