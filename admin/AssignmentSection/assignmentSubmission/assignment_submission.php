@@ -2,6 +2,9 @@
 // Start the session
 session_start();
 
+// Start output buffering
+ob_start();
+
 // Include the database connection
 include_once('../../connection.php');
 
@@ -35,12 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['success_message'] = "Assignment deleted successfully.";
     }
 
+    // Flush the output buffer and redirect
+    ob_end_clean();
     header("Location: assignment_submission.php");
     exit();
 }
 
 // Updated SQL query to select all data from the assignments table
-$sql = "SELECT batch_number, username, assignment_name, submission_date, results, feedback, file_path FROM assignments";
+$sql = "SELECT batch_number, username, assignment_name, results, feedback, file_path FROM assignments";
 $result = $conn->query($sql);
 ?>
 
@@ -55,6 +60,10 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="style-assignment_submission.css">
 
     <title>Assignment Submissions</title>
+
+    <style>
+        
+    </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -78,12 +87,20 @@ $result = $conn->query($sql);
             }
 
             document.querySelector('.close').addEventListener('click', closeModal);
+
+            // Close the modal when clicking outside of the modal content
+            window.onclick = function(event) {
+                if (event.target === document.getElementById('modal')) {
+                    closeModal();
+                }
+            }
         });
     </script>
 </head>
 <body>
     <div class="container">
         <div class="topic">
+            <br><br><br>
             <h1>Assignments</h1>
         </div>
         <?php if (isset($_SESSION['success_message'])): ?>
@@ -98,7 +115,6 @@ $result = $conn->query($sql);
                             <th>User Name</th>
                             <th>Batch</th>
                             <th>Exam Name</th>
-                            <th>Submission Date</th>
                             <th>Result</th>
                             <th>Feedback</th>
                             <th>Download Submission</th>
@@ -115,7 +131,6 @@ $result = $conn->query($sql);
                                     <td><?= htmlspecialchars($row['username']) ?></td>
                                     <td><?= htmlspecialchars($row['batch_number']) ?></td>
                                     <td><?= htmlspecialchars($row['assignment_name']) ?></td>
-                                    <td><?= htmlspecialchars($row['submission_date']) ?></td>
                                     <td><?= htmlspecialchars($row['results']) ?></td>
                                     <td><?= htmlspecialchars($row['feedback']) ?></td>
                                     <td>
@@ -162,7 +177,6 @@ $result = $conn->query($sql);
                 <div class="form-group">
                     <div class="button-container">
                         <button type="submit" name="action" value="edit" class="view-link">Edit</button>
-                        <button type="submit" name="action" value="delete" class="delete-link">Delete</button>
                     </div>
                 </div>
             </form>
