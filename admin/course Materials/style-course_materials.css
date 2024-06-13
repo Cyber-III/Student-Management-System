@@ -2,16 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 
-body {
-    font-family: Poppins, sans-serif;
+.body {
     margin-left: 330px;
     margin-top: 100px;
 }
-/* 
-.add-new{
-    margin-left: 0px;
-    margin-top: 100px;
-}  */
+
 
 .no-data {
     display: flex;

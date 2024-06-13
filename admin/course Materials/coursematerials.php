@@ -2,7 +2,7 @@
 session_start();
 
 // Include the database connection
-include_once('../../connection.php');
+include_once('../connection.php');
 
 include_once('../../admin\assests\content\static\template.php');
 
@@ -70,11 +70,9 @@ if ($stmt) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     
 </head>
-<body>
+<body class="body">
 <div class="container">
     <div class="topic">
-        <br>
-        <br>
         <h1>Course Materials</h1>
     </div>
 

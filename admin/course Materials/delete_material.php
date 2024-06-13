@@ -2,7 +2,7 @@
 session_start();
 
 // Include the database connection
-include_once('../../connection.php');
+include_once('../connection.php');
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
