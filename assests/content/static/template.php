@@ -116,6 +116,57 @@ if(isset($_SESSION['username'])) {
                     <a href="../../../PaymentSection/upload_paymentReceipt/upload_paymentReceipt.php" class="sub-item">Upload Payment Receipts</a>
                 </div>
             </div>
+            
+            <!-- Class Schedule Category -->
+            <div class="item">
+                    <a href="../../../Class Schedule/classSchedule.php" class="sub-item"><i class="far fa-calendar-alt"></i>Class Schedule</a>
+            </div>
+            
+            <!-- Exam Category -->
+            <div class="item">
+                <a class="sub-btn"><i class="far fa-file-alt"></i>Exams
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                    <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
+                    <a href="../../../ExamSection/ExamSubmission/exam_submission.php" class="sub-item">Exam Submissions</a>
+                    <a href="../../../ExamSection/ExamAdmission/examAdmission.php" class="sub-item">Exam Admission</a>
+                    
+                </div>
+            </div>
+
+            <!-- Assignments Category -->
+            <div class="item">
+                <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                    <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
+                    <a href="../../../AssignmentSection\submission\upload_submission.php" class="sub-item">Assignment Submissions</a>
+                    <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
+                    <a href="../../../AssignmentSection\Mitigation Request\mitigation.php" class="sub-item">Add Mitigation Request</a>
+                    <a href="../../../AssignmentSection\Mitigation Request\view_mitigation.php" class="sub-item">View Mitigation Request</a>
+                    
+                </div>
+            </div>
+
+            <!-- Results Category -->
+            <div class="item">
+                <a class="sub-btn"><i class="fa fa-trophy"></i>Results
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                    <a href="../../../ResultSection/Assignment/result.php" class="sub-item">Assignment Results</a>
+                    <a href="../../../ResultSection/Exam/result.php" class="sub-item">Exam Results</a>
+                    <a href="../../../ResultSection/Final/final.php" class="sub-item">Final Results</a>
+                    
+                </div>
+            </div>
+
+            <!-- Notice Board -->
+            <div class="item">
+                <a href="../../../Notice-Board-Section/noticeboard.php"><i class="far fa-sticky-note"></i>Notice Board </a>
+            </div>
 
             <!-- Library Category -->
             <div class="item">
@@ -154,52 +205,6 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
-            <!-- Exam Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="far fa-file-alt"></i>Exams
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
-                    <a href="../../../ExamSection/ExamSubmission/exam_submission.php" class="sub-item">Exam Submissions</a>
-                    <a href="../../../ExamSection/ExamAdmission/examAdmission.php" class="sub-item">Exam Admission</a>
-                    
-                </div>
-            </div>
-
-            <!-- Assignments Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="../../../AssignmentSection\submission\upload_submission.php" class="sub-item">Assignment Submissions</a>
-                    <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
-                    <a href="../../../AssignmentSection\Mitigation Request\mitigation.php" class="sub-item">Add Mitigation Request</a>
-                    <a href="../../../AssignmentSection\Mitigation Request\view_mitigation.php" class="sub-item">View Mitigation Request</a>
-                    
-                </div>
-            </div>
-
-            <!-- Class Schedule Category -->
-            <div class="item">
-                    <a href="../../../Class Schedule/classSchedule.php" class="sub-item"><i class="far fa-calendar-alt"></i>Class Schedule</a>
-            </div>
-
-            <!-- Results Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fa fa-trophy"></i>Results
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../ResultSection/Assignment/result.php" class="sub-item">Assignment Results</a>
-                    <a href="../../../ResultSection/Exam/result.php" class="sub-item">Exam Results</a>
-                    <a href="../../../ResultSection/Final/final.php" class="sub-item">Final Results</a>
-                    
-                </div>
-            </div>
-
             <!-- Course Modules -->
             <div class="item">
                 <a href="../../../Course Modules/course_module.php"><i class="fas fa-info-circle"></i>Course Modules </a>
@@ -213,18 +218,12 @@ if(isset($_SESSION['username'])) {
             <!-- Course Guidlines Category -->
             <div class="item">
                     <a href="../../../CourseGuidline/StudentGuidline/studentGuidline.php"><i class="far fa-question-circle"></i>Course Guidlines</a>
-            </div>
-
-            <!-- Notice Board -->
-            <div class="item">
-                <a href="../../../Notice-Board-Section/noticeboard.php"><i class="far fa-sticky-note"></i>Notice Board </a>
-            </div>
+            </div>           
 
             <!-- Message -->
             <div class="item">
                 <a href="../../../MessageSection/message.php"><i class="fas fa-envelope"></i>Message </a>
             </div>
-
 
             <!-- Call Center -->
             <div class="item">
