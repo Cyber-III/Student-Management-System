@@ -102,13 +102,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Profile Category -->
             <div class="item">
-                <a class="sub-btn"><i class="far fa-id-card"></i>Student 
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../view_profile/view_profile.php" class="sub-item">View Profile</a>
-
-                </div>
+                    <a href="../../../view_profile/view_profile.php" class="sub-item"><i class="far fa-id-card"></i>Student Profile</a>
             </div>
             
             <!-- Payment Category -->
@@ -190,13 +184,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Class Schedule Category -->
             <div class="item">
-                <a class="sub-btn"><i class="far fa-calendar-alt"></i>Class Schedule
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../Class Schedule/classSchedule.php" class="sub-item">View Class Details</a>
-                    
-                </div>
+                    <a href="../../../Class Schedule/classSchedule.php" class="sub-item"><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
 
             <!-- Results Category -->
@@ -224,13 +212,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Course Guidlines Category -->
             <div class="item">
-                <a class="sub-btn"><i class="far fa-question-circle"></i>Course Guidlines
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../CourseGuidline/StudentGuidline/studentGuidline.php" class="sub-item">Student Guidlines</a>
-                    
-                </div>
+                    <a href="../../../CourseGuidline/StudentGuidline/studentGuidline.php"><i class="far fa-question-circle"></i>Course Guidlines</a>
             </div>
 
             <!-- Notice Board -->
