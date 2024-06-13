@@ -149,8 +149,8 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Library Membership</a>
-                    <a href="" class="sub-item">Recreation Membership</a>
+                    <a href="../../../admin/membership/library/library.php" class="sub-item">Library Membership</a>
+                    <a href="../../../admin/membership/recreation/recreation.php" class="sub-item">Recreation Membership</a>
                     
                 </div>
             </div>
