@@ -57,6 +57,12 @@ while ($row = mysqli_fetch_assoc($result2)) {
     </script>
 </head>
 <body>
+
+    <?php if ($message == 'updatedstu'): ?>
+        <div class="alert alert-success">Records are updated successfully.</div>
+    <?php elseif ($message == 'deletedstu'): ?>
+        <div class="alert alert-danger">Records are deleted successfully.</div>
+    <?php endif; ?>
     <!-- Search bar -->
     <div class="form-row">
         <div class="form-group">
