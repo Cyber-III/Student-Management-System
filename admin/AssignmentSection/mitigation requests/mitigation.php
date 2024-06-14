@@ -140,7 +140,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="main_container">
     <center><h1>Mitigation Access</h1></center>
     
-
     <?php if ($message == 'submitted'): ?>
         <div class="alert alert-success">Your mitigation was submitted successfully.</div>
     <?php elseif ($message == 'error'): ?>
