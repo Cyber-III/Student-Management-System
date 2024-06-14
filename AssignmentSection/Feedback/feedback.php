@@ -29,36 +29,38 @@ $result = $stmt->get_result();
     <title>Document</title>
 </head>
 <body>
-    
-<div class="table">
-        <table>
-            <tr>
-                <th>Assignment Name</th>
-                <th>Submission Date</th>
-                <th>Result</th>
-                <th>Feedback</th>
-                <th>View Submission</th>
-            </tr>
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row['assignment_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['submission_date']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['results']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['feedback']) . "</td>";
-                    echo '<td>';
-                    echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank"><button type="submit" class="view-link">View</button></a>';
-                    echo '</td>';
-                    echo "</tr>";
+<div class="main_container">
+    <div class="table">
+            <table>
+                <tr>
+                    <th>Assignment Name</th>
+                    <th>Submission Date</th>
+                    <th>Result</th>
+                    <th>Feedback</th>
+                    <th>View Submission</th>
+                </tr>
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td data-cell='Assignment Name'>" . htmlspecialchars($row['assignment_name']) . "</td>";
+                        echo "<td data-cell='Submission Date'>" . htmlspecialchars($row['submission_date']) . "</td>";
+                        echo "<td data-cell='Result'>" . htmlspecialchars($row['results']) . "</td>";
+                        echo "<td data-cell='Feedback'>" . htmlspecialchars($row['feedback']) . "</td>";
+                        echo '<td data-cell="View Submission">';
+                        echo '<a href="' . htmlspecialchars($row['file_path']) . '" target="_blank"><button type="submit" class="view-link">View</button></a>';
+                        echo '</td>';
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No exam submissions found</td></tr>";
                 }
-            } else {
-                echo "<tr><td colspan='5'>No exam submissions found</td></tr>";
-            }
-            $conn->close();
-            ?>
-        </table>
-    </div>
+                $conn->close();
+                ?>
+            </table>
+        </div>
+</div>  
+
 
 </body>
 </html>
