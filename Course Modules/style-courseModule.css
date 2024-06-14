@@ -5,51 +5,55 @@
     box-sizing: border-box;
 }
 
-p {
-    color: black;
-    margin-left: 300px;
-    text-decoration: none;
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
+/* Container styling */
 .container {
-    width: 100px;
-    height: 100px;
-    margin-left: 400px;
-    margin-top: 100px;
+    margin-top: 50px; /* Adjusted top margin */
+    padding: 20px;
 }
 
+/* Table styling */
 .table {
     width: 100%;
     border-collapse: collapse;
+    background-color: #ffffff;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 0px solid #dddddd;
+.table th, .table td {
+    border: 1px solid #dddddd;
     text-align: left;
-    padding: 15px;
+    padding: 12px;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.table td {
+    background-color: #ffffff;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* style-courseModule.css */
-
-.view-link {
-    color: #007BFF; 
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; 
-    padding: 5px 10px; 
-    border: 1px solid #007BFF; 
-    border-radius: 5px; 
-    background-color: #f0f8ff; 
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+/* Additional styles for the table */
+.table th, .table td {
+    vertical-align: middle;
 }
 
-.view-link:hover {
-    background-color: #007BFF; 
-    color: white; 
-    cursor: pointer; 
+
+
+/* Additional responsive styling */
+@media (max-width: 768px) {
+    .table td {
+        padding: 8px;
+        font-size: 14px;
+    }
 }

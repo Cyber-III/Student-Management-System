@@ -1,0 +1,95 @@
+/* Ensure there is no CSS conflict by resetting common properties */
+/* General */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
+* {
+    box-sizing: border-box;
+}
+
+.main_container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+   
+  }
+
+
+
+.topic {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+
+}
+ 
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(37, 39, 59, 0.3);
+    width: 400px;
+  }
+
+.card .card-header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;;
+    background-color: #0d6efd;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.info-table {
+    width: 100%;
+}
+
+.label-column {
+    width: 30%;
+   
+}
+
+.value-column {
+    width: 70%;
+    
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Responsive styles */
+@media screen and (min-width: 1200px) {
+    .main_container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+ }
+ @media screen and (max-width: 1199px) {
+
+    .main_container{
+        width: 100%;
+       
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+        
+    }
+ }

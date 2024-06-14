@@ -8,7 +8,6 @@ include_once('../connection.php');
 // Loading the HTML template
 include_once('../assests/content/static/template.php');
 
-
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +16,7 @@ include_once('../assests/content/static/template.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ABC INSTITUTE</title>
     <link rel="stylesheet" href="../style-template.css">
     <link rel="stylesheet" href="style-view_profile.css">
 </head>
@@ -73,7 +72,7 @@ include_once('../assests/content/static/template.php');
                         <span class="form-value"><?php echo isset($dob) ? $dob : ''; ?></span>
                     </div>
                     <div class = "form-row">
-                        <span class="form-label"> National Identification No:</span>
+                        <span class="form-label"> NIC No:</span>
                         <span class="form-value"><?php echo isset($nic) ? $nic : ''; ?></span>
                     </div>
                     <div class = "form-row">
@@ -103,7 +102,7 @@ include_once('../assests/content/static/template.php');
                         <span class="form-value"><?php echo isset($uni_number) ? $uni_number : ''; ?></span>
                     </div>
                     <div class = "form-row">
-                        <span class="form-label">Local Education Center:</span>
+                        <span class="form-label">Education Center:</span>
                         <span class="form-value"><?php echo isset($lec) ? $lec : ''; ?></span>
                     </div>
 
