@@ -61,7 +61,7 @@ if(isset($_SESSION['username'])) {
         
         <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
-        <a href="../../../welcome.php"><img src="../../../pics/L4.png" alt="" class="logos"></a>
+        <a href="../../../admin/welcome.php"><img src="../../../pics/L4.png" alt="" class="logos"></a>
         
 
         <nav class="header-nav ms-auto">
@@ -69,8 +69,8 @@ if(isset($_SESSION['username'])) {
             
             <ul class="d-flex align-items-center">
             
-            <a href="../../../welcome.php"><li>Home</li></a>
-            <a href="../../../index.php"><li>Logout</li></a>
+            <a href="../../../admin/welcome.php"><li>Home</li></a>
+            <a href="../../../admin/index.php"><li>Logout</li></a>
             <div class="animation start-home"></div>
             </ul>
         </nav>
@@ -93,13 +93,17 @@ if(isset($_SESSION['username'])) {
 
             <!-- Profile Category -->
             <div class="item">
-                <a class="sub-btn"><i class="far fa-id-card"></i>Profile
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../admin/adminViewProfile/viewprofile.php" class="sub-item">View Profile</a>
+                    <a href="../../../admin/adminViewProfile/viewprofile.php"><i class="far fa-id-card"></i>Profile</a>
+            </div>
 
-                </div>
+            <!-- Student Search -->
+            <div class="item">
+                <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add Student</a>
+            </div>
+
+            <!-- Student Search -->
+            <div class="item">
+                <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
             </div>
             
             <!-- Payment Category -->
@@ -145,8 +149,8 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Library Membership</a>
-                    <a href="" class="sub-item">Recreation Membership</a>
+                    <a href="../../../admin/membership/library/library.php" class="sub-item">Library Membership</a>
+                    <a href="../../../admin/membership/recreation/recreation.php" class="sub-item">Recreation Membership</a>
                     
                 </div>
             </div>
@@ -170,24 +174,17 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../admin\AssignmentSection\assignmentSchedule\assignment_schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="" class="sub-item">Assignment Submissions</a>
-                    <a href="" class="sub-item">Assignment Feedback</a>
-                    <a href="" class="sub-item">Add Mitigation Request</a>
-                    <a href="" class="sub-item">View Mitigation Request</a>
-                    
-                </div>
+                  <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
+                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Assignment Submissions</a>
+                  <a href="" class="sub-item">Assignment Feedback</a>
+                  <a href="" class="sub-item">Add Mitigation Request</a>
+                  <a href="" class="sub-item">View Mitigation Request</a>
+              </div>
             </div>
 
             <!-- Class Schedule Category -->
             <div class="item">
-                <a class="sub-btn"><i class="far fa-calendar-alt"></i>Class Schedule
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="" class="sub-item">View Class Details</a>
-                    
-                </div>
+                    <a href="" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
 
             <!-- Results Category -->
@@ -210,8 +207,9 @@ if(isset($_SESSION['username'])) {
             
             <!-- Course Materials -->
             <div class="item">
-                <a href=""><i class="fas fa-book-reader"></i>Course Materials </a>
-            </div>
+              <a href="../../../admin/course Materials/coursematerials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
+          </div>
+
 
             <!-- Notice Board -->
             <div class="item">

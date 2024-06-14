@@ -1,0 +1,56 @@
+body {
+    margin-left: 350px;
+    margin-top: 100px;
+}
+
+/* table style */
+table {
+    background: #ffffff;
+    width: 95%;
+    border-collapse: collapse;
+    border: #cacace;
+   
+}
+
+th, td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 15px;
+    /* white-space: nowrap; */
+    
+}
+
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select, input[type="text"], input[type="date"], input[type="time"], input[type="number"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Search icon */
+#search-icon {
+    margin-left: 5px;
+    padding: 6px;
+    width: 45px;
+    height: 45px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#search-icon:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
