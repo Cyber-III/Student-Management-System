@@ -135,10 +135,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Submit Mitigation</title>
     <link rel="stylesheet" href="../../style-template.css">
     <link rel="stylesheet" href="style-mitigation.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="main_container">
-    <center><h1>Mitigation Access</h1></center>
+    <center><h1>Mitigation Requests</h1></center>
     
     <?php if ($message == 'submitted'): ?>
         <div class="alert alert-success">Your mitigation was submitted successfully.</div>
@@ -166,9 +167,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td><?php echo htmlspecialchars($mitigation['date']); ?></td>
                     <td><?php echo htmlspecialchars($mitigation['description']); ?></td>
                     <td>
-                        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                        <form class="status-form" method="post">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($mitigation['id']); ?>">
-                            <select name="status" onchange="this.form.submit()">
+                            <select name="status" class="status-select" data-id="<?php echo htmlspecialchars($mitigation['id']); ?>">
                                 <option value="pending" <?php echo ($mitigation['status'] == 'pending') ? 'selected' : ''; ?>>Pending</option>
                                 <option value="approved" <?php echo ($mitigation['status'] == 'approved') ? 'selected' : ''; ?>>Approved</option>
                                 <option value="cancel" <?php echo ($mitigation['status'] == 'cancel') ? 'selected' : ''; ?>>Cancel</option>
@@ -183,26 +184,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <script>
-    function updateModuleCode() {
-        const moduleName = document.getElementById('module_name').value;
-        const moduleCodeSelect = document.getElementById('module_code');
-        const moduleCodeOptions = moduleCodeSelect.querySelectorAll('.module-code-option');
-        
-        // Reset module code select
-        moduleCodeSelect.value = '';
-        
-        // Hide all options first
-        moduleCodeOptions.forEach(option => {
-            option.style.display = 'none';
-        });
-        
-        // Show only the options that match the selected module name
-        moduleCodeOptions.forEach(option => {
-            if (option.getAttribute('data-module-name') === moduleName) {
-                option.style.display = 'block';
+$(document).ready(function() {
+    $('.status-select').change(function() {
+        var form = $(this).closest('form');
+        var formData = form.serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "update_status.php", // This is the PHP script that will handle the update
+            data: formData,
+            success: function(response) {
+                // Optionally, you can handle the response here if needed
+                console.log(response);
+                // Example: Display a success message
+                form.parent().append('<div class="alert alert-success">Status updated successfully.</div>');
+                setTimeout(function() {
+                    $('.alert-success').fadeOut('slow');
+                }, 2000); // Fade out the success message after 2 seconds
+            },
+            error: function(error) {
+                // Handle errors here
+                console.log(error);
+                // Example: Display an error message
+                form.parent().append('<div class="alert alert-danger">Error updating status. Please try again.</div>');
             }
         });
-    }
+    });
+});
 </script>
 
 </body>
