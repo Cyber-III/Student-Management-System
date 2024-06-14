@@ -182,10 +182,8 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                   <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
-                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Assignment Submissions</a>
-                  <a href="" class="sub-item">Assignment Feedback</a>
-                  <a href="" class="sub-item">Add Mitigation Request</a>
-                  <a href="" class="sub-item">View Mitigation Request</a>
+                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a>
+                  <a href="../../../admin/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
               </div>
             </div>
 
