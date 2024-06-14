@@ -1,82 +1,128 @@
-/* Ensure there is no CSS conflict by resetting common properties */
-/* General */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
-
-
 * {
-    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+    
 }
-
-.one {
-    font-family: Arial, sans-serif;
-    margin-left: 350px;
-    margin-right: 100px;
-    margin-top: 100px;
-}
-
-
-.topic {
-    text-align: center;
-    margin-bottom: 20px;
-}
- 
-.border-rectangle {
-    display: flex;
-    flex-wrap: wrap;
-    gap:20px;
-}
-
-.schedule-item {
-    background-color: #0056b3;
-    padding: 20px;
-    border-radius: 10px;
-    flex: 1 1 calc(100% - 40px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: rgba(255, 255, 255, 0.959);
-}
-
-.schedule-title {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.text {
+.text{
     color: red;
 }
-
-/* Responsive styles */
-@media screen and (max-width: 1199px) {
-    .one {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .schedule-item {
-        flex: 1 1 calc(100% - 40px);
-    }
-
+h1.topic {
+    text-align: center;
+    font-weight: bold;
+    /* margin-bottom: 20px; */
+    justify-content: center;
 }
+.submission_container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+   
+  }
 
-@media (max-width: 991px) {
-    .one {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(37, 39, 59, 0.3);
+    width: 400px;
+  }
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .label-column {
+    width: 50%;
+    text-align: left;
+    padding-right: 20px;
+    vertical-align: top;
+  }
+  
+  .value-column {
+    vertical-align: top;
+  }
+  .info_container {
+    flex-basis: 60%;
+  }
+  .card .card-header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 500;
 
-    .schedule-item {
-        flex: 1 1 calc(100% - 40px);
-    }
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .card .card-body {
+    padding: 20px;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .btn1 {
+    width: 400px;
+    color: #182431; 
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    padding: 5px 15px;
+    border: 1px solid #007BFF; 
+    border-radius: 88px; 
+    background-color: #f0f8ff; 
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  }
+  
+  .btn1:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
+  .button_container{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+  }
+input[type="file"] {
+    background: #efefef;
+  }
+ 
+.file_box {
+    display: flex;
+    margin: 10px 0px 20px 0px;
 }
-
-@media (max-width: 576px) {
-    .one {
-        margin-left: 10px;
-        margin-right: 10px;
+  
+ 
+  @media screen and (min-width: 1200px) {
+    .submission_container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
     }
+ }
+ @media screen and (max-width: 1199px) {
 
-    .schedule-item {
-        flex: 1 1 calc(100%);
+    .submission_container{
+        width: 100%;
+       
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+        
     }
-}
+ }
