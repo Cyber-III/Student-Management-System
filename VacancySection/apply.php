@@ -52,6 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_vacancy->close();
     $conn->close();
 } else {
-    echo "Error: Form not submitted.";
+    echo "Error: Form is not submitted.";
 }
 ?>
