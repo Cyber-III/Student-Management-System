@@ -131,8 +131,8 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Reserve Library Books</a>
-                    <a href="" class="sub-item">Manage Reserved Books</a>
+                    <a href="../../../admin/library/insert/insertBooks.php" class="sub-item">Insert Books</a>
+                    <a href="../../../admin/library/orders/bookOrders.php" class="sub-item">Books Orders</a>
 
                 </div>
             </div>
