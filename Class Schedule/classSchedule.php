@@ -55,11 +55,9 @@ if ($stmt) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
 <body>
-    
-<section class="vh-100">
-    <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-            <div class="col-md-8 col-lg-7 col-xl-6 sche-container">
+    <section>
+        <div class="container1">
+            <div class="sche-container">
                 <h1 class="topic ml-10">Class Schedule</h1>
                 <div class="calendar">
                     <div class="month">
@@ -77,21 +75,24 @@ if ($stmt) {
                     <div class="dates" id="dates"></div>
                 </div>
             </div>
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div class="side_container">
                 <div class="border-rectangle">
                     <?php if ($schedules): ?>
                         <?php foreach ($schedules as $schedule): ?>
-                            <div class="schedule-item">
-                                <p><span class="schedule-title">Module: </span> <?= htmlspecialchars($schedule['module']) ?></p>
-                                <p><span class="schedule-title">Lecturer: </span> <?= htmlspecialchars($schedule['lecturer']) ?></p>
-                                <p><span class="schedule-title">Date: </span> <?= htmlspecialchars($schedule['date']) ?></p>
-                                <p><span class="schedule-title">Time: </span> <?= htmlspecialchars($schedule['time']) ?></p>
-                                <p><span class="schedule-title">Hall: </span> <?= htmlspecialchars($schedule['hall']) ?></p>
-                                <p class="notes">
+                            <div class="schedule-card">
+                                <div class="card-header">
+                                    <h5><?= htmlspecialchars($schedule['module'])?></h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><span class="schedule-title">Lecturer: </span> <?= htmlspecialchars($schedule['lecturer'])?></p>
+                                    <p><span class="schedule-title">Date: </span> <?= htmlspecialchars($schedule['date'])?></p>
+                                    <p><span class="schedule-title">Time: </span> <?= htmlspecialchars($schedule['time'])?></p>
+                                    <p><span class="schedule-title">Hall: </span> <?= htmlspecialchars($schedule['hall'])?></p>
+                                    <p class="notes">
                                     <span class="schedule-title">Notes: </span>
-                                    <span class="schedule-data"><?= htmlspecialchars($schedule['notes']) ?></span>
-                                </p>
-
+                                    <span class="schedule-data"><?= htmlspecialchars($schedule['notes'])?></span>
+                                    </p>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -100,8 +101,8 @@ if ($stmt) {
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
