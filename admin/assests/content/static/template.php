@@ -30,6 +30,8 @@ if(isset($_SESSION['username'])) {
 
 }
 
+
+
 ?>
 
 <!doctype html>
@@ -50,6 +52,7 @@ if(isset($_SESSION['username'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style-template.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -104,6 +107,10 @@ if(isset($_SESSION['username'])) {
             <!-- Student Search -->
             <div class="item">
                 <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
+            </div>
+
+            <div class="item">
+                <a href="../../../admin/add-result/result.php"><i class='bx bx-add-to-queue'></i>Add Results</a>
             </div>
             
             <!-- Payment Category -->
