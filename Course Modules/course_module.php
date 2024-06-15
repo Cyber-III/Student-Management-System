@@ -54,14 +54,13 @@ if ($stmt) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Module Table Page</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-courseModule.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
 <body>
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-lg-8">
+    <div class="container_main">
+        <div class="table_container">
             <table class="table">
                 <thead>
                     <tr>
@@ -75,17 +74,17 @@ if ($stmt) {
                 <tbody>
                     <?php foreach ($modules as $module): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($module['module_name']); ?></td>
-                            <td><?php echo htmlspecialchars($module['module_code']); ?></td>
-                            <td><?php echo htmlspecialchars($module['date']); ?></td>
-                            <td><?php echo htmlspecialchars($module['duration']); ?></td>
-                            <td><?php echo htmlspecialchars($module['num_assignments']); ?></td>
+                            <td data-cell="Module Name"><?php echo htmlspecialchars($module['module_name']); ?></td>
+                            <td data-cell="Module Code"><?php echo htmlspecialchars($module['module_code']); ?></td>
+                            <td data-cell="Date"><?php echo htmlspecialchars($module['date']); ?></td>
+                            <td data-cell="Duration"><?php echo htmlspecialchars($module['duration']); ?></td>
+                            <td data-cell="Assignments"><?php echo htmlspecialchars($module['num_assignments']); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
+   
     </div>
-</div>
 </body>
 </html>
