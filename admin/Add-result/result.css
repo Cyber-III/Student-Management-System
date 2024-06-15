@@ -1,0 +1,76 @@
+
+/* result.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Adjust width as needed */
+}
+
+.topic {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.topic h1 {
+  margin: 0;
+  padding: 10px 0;
+  color: #007bff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+select,
+button {
+  margin-bottom: 12px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+select:disabled {
+  background-color: #f0f0f0;
+}
+
+option {
+  padding: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+      width: 90%;
+  }
+}
