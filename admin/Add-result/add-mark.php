@@ -7,7 +7,43 @@ include_once('../connection.php');
 
 // Loading the HTML template
 include_once('../assests/content/static/template.php');
+
+// Fetch module names (assuming this part remains unchanged)
+$sql = "SELECT module_name FROM modules";
+$result = mysqli_query($conn, $sql);
+
+$module_names = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $module_names[] = $row['module_name'];
+    }
+}
+
+// Get batch number from the URL parameter
+if (isset($_GET['batch'])) {
+    $batch = $_GET['batch'];
+} else {
+    // Handle error, redirect, or show error message
+}
+
+// Fetch student IDs and names from login_tbl for the selected batch
+$sql = "SELECT username, student_name FROM login_tbl WHERE batch_number = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $batch);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$students = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $students[$row['username']] = $row['student_name']; // Associative array to store username => student_name
+    }
+}
+
+// Close the database connection
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,28 +61,45 @@ include_once('../assests/content/static/template.php');
         <div id="message" style="display:none;"></div> <!-- Message container -->
         <form id="addResultForm" action="process_result.php" method="post"> <!-- Updated action -->
             <label for="course">Course:</label>
-            <input type="text" id="course" name="course" readonly>
+            <input type="text" id="course" name="course" value="<?php echo $_GET['course']; ?>" readonly>
             <br>
             <label for="batch">Batch:</label>
-            <input type="text" id="batch" name="batch" readonly>
+            <input type="text" id="batch" name="batch" value="<?php echo $batch; ?>" readonly>
             <br>
             <label for="semester">Semester:</label>
-            <input type="text" id="semester" name="semester" readonly>
+            <input type="text" id="semester" name="semester" value="<?php echo $_GET['semester']; ?>" readonly>
             <br>
             <label for="module">Module:</label>
             <select id="module" name="module" required>
-                <!-- Options will be dynamically populated using JavaScript -->
+                <option value="">-- Select Module --</option>
+                <?php foreach ($module_names as $module_name): ?>
+                    <option value="<?php echo $module_name; ?>"><?php echo $module_name; ?></option>
+                <?php endforeach; ?>
             </select>
             <br>
             <label for="studentId">Student ID:</label>
-            <input type="text" id="studentId" name="studentId" readonly>
+            <select id="studentId" name="studentId" required onchange="updateStudentName()">
+                <option value="">-- Select Student ID --</option>
+                <?php foreach ($students as $username => $student_name): ?>
+                    <option value="<?php echo $username; ?>"><?php echo $username; ?></option>
+                <?php endforeach; ?>
+            </select>
             <br>
             <label for="studentName">Student Name:</label>
-            <input type="text" id="studentName" name="studentName" required>
+            <input type="text" id="studentName" name="studentName" required readonly>
             <br>
             <div id="marksSection">
-                <label for="marks">Marks:</label>
-                <input type="text" id="marks" name="marks" required>
+                <label for="assignmentMarks">Assignment Marks:</label>
+                <input type="text" id="assignmentMarks" name="assignmentMarks" required>
+                <br>
+                <label for="presentationMarks">Presentation Marks:</label>
+                <input type="text" id="presentationMarks" name="presentationMarks" required>
+                <br>
+                <label for="examMarks">Exam Marks:</label>
+                <input type="text" id="examMarks" name="examMarks" required>
+                <br>
+                <label for="finalMarks">Final Marks:</label>
+                <input type="text" id="finalMarks" name="finalMarks" required>
                 <br>
             </div>
             <button type="submit">Submit Result</button>
@@ -64,67 +117,36 @@ include_once('../assests/content/static/template.php');
             document.getElementById('batch').value = batch;
             document.getElementById('semester').value = semester;
 
-            const studentId = generateStudentId(course, batch);
-            document.getElementById('studentId').value = studentId;
-
             populateModules(semester);
         });
 
-        function populateModules(semester) {
-            const moduleSelect = document.getElementById('module');
-            moduleSelect.innerHTML = ''; // Clear existing options
+        function updateStudentName() {
+            const studentIdSelect = document.getElementById('studentId');
+            const studentNameInput = document.getElementById('studentName');
+            
+            // Get the selected username
+            const selectedUsername = studentIdSelect.value;
+            
+            // Lookup the student name in the students array
+            const studentName = "<?php echo isset($students) ? addslashes(json_encode($students)) : '{}'; ?>";
+            const students = JSON.parse(studentName);
 
-            switch (semester) {
-                case 'Semester 1':
-                    moduleSelect.innerHTML = `
-                        <option value="s1m1">Architecture</option>
-                        <option value="s1m2">Fundamental In Programming</option>
-                        <option value="s1m3">System Analysis</option>
-                        <option value="s1m4">Business Information System</option>
-                    `;
-                    break;
-                case 'Semester 2':
-                    moduleSelect.innerHTML = `
-                        <option value="s2m1">Module 5</option>
-                        <option value="s2m2">Module 6</option>
-                        <option value="s2m3">Module 7</option>
-                        <option value="s2m4">Module 8</option>
-                    `;
-                    break;
-                case 'Semester 3':
-                    moduleSelect.innerHTML = `
-                        <option value="s3m1">Module 9</option>
-                        <option value="s3m2">Module 10</option>
-                        <option value="s3m3">Module 11</option>
-                        <option value="s3m4">Module 12</option>
-                    `;
-                    break;
-                case 'Semester 4':
-                    moduleSelect.innerHTML = `
-                        <option value="s4m1">Module 13</option>
-                        <option value="s4m2">Module 14</option>
-                        <option value="s4m3">Module 15</option>
-                        <option value="s4m4">Module 16</option>
-                    `;
-                    break;
-                default:
-                    moduleSelect.innerHTML = ''; // Clear options if no specific logic
-                    break;
+            // Update the student name input field
+            if (students[selectedUsername]) {
+                studentNameInput.value = students[selectedUsername];
+            } else {
+                studentNameInput.value = '';
             }
-        }
-
-        function generateStudentId(course, batch) {
-            // Generating student ID based on the course and batch
-            const courseCode = course.replace(/\s+/g, '').substring(0, 2).toUpperCase();
-            const batchCode = batch.replace(/\s+/g, '').toUpperCase();
-            return `${courseCode}${batchCode}`;
         }
 
         function goBack() {
             // Reset the form values
             document.getElementById('studentName').value = '';
             document.getElementById('studentId').value = '';
-            document.getElementById('marks').value = '';
+            document.getElementById('assignmentMarks').value = '';
+            document.getElementById('presentationMarks').value = '';
+            document.getElementById('examMarks').value = '';
+            document.getElementById('finalMarks').value = '';
 
             window.history.back(); // JavaScript function to navigate back
         }
