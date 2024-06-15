@@ -63,49 +63,56 @@ while ($row = mysqli_fetch_assoc($result2)) {
     <?php elseif ($message == 'deletedstu'): ?>
         <div class="alert alert-danger">Records are deleted successfully.</div>
     <?php endif; ?>
-    <!-- Search bar -->
-    <div class="form-row">
-        <div class="form-group">
-            <label for="batch_number">Search by Batch Number:</label>
-            <div class="input-group">
-                <select id="batch_number" name="batch_number">
-                    <option value="">Select Batch Number</option>
-                    <?php foreach ($batch_numbers as $batch_number): ?>
-                        <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <button id="search-icon" onclick="searchByBatch()"><i class="fas fa-search"></i></button>
+    
+
+    <div class="main_container">
+        <!-- Search bar -->
+        <div class="search_container">
+            <div class="form-group">
+                <label for="batch_number">Search by Batch Number:</label>
+                <div class="input-group">
+                    <select id="batch_number" name="batch_number">
+                        <option value="">Select Batch Number</option>
+                        <?php foreach ($batch_numbers as $batch_number): ?>
+                            <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button id="search-icon" onclick="searchByBatch()"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Search by Username:</label>
+                <div class="input-group">
+                    <input type="text" id="username" name="username" placeholder="Student's Username">
+                    <button id="search-icon" onclick="searchByUsername()"><i class="fas fa-search"></i></button>
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="username">Search by Username:</label>
-            <div class="input-group">
-                <input type="text" id="username" name="username" placeholder="Student's Username">
-                <button id="search-icon" onclick="searchByUsername()"><i class="fas fa-search"></i></button>
+        <br>
+        <div class="table_container">
+            <div class="table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ST_Name</th>
+                                <th>Username</th>
+                                <th>Course</th>
+                                <th>Batch_No</th>
+                                <th>Gender</th>
+                                <th>DOB</th>
+                                <th>NIC</th>
+                                <th>Contact</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exam-schedule-tbody">
+                            
+                        </tbody>
+                    </table>
             </div>
-        </div>
+        </div>                     
+        
     </div>
-    <br>
-
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th>ST_Name</th>
-                    <th>Username</th>
-                    <th>Course</th>
-                    <th>Batch_No</th>
-                    <th>Gender</th>
-                    <th>DOB</th>
-                    <th>NIC</th>
-                    <th>Contact</th>
-                </tr>
-            </thead>
-            <tbody id="exam-schedule-tbody">
-                
-            </tbody>
-        </table>
-    </div>
+   
 </body>
 </html>
