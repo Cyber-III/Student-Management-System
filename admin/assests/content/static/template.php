@@ -114,8 +114,8 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
+                    <a href="../../../admin/payment/payment_plan/plan.php" class="sub-item">Manage Payment Plan</a>
                     <a href="../../../admin/payment/view/view_payments.php" class="sub-item">View Payments</a>
-                    <a href="" class="sub-item">View Payments Status</a>
                     <a href="" class="sub-item">Upload Payment Receipts</a>
                 </div>
             </div>
