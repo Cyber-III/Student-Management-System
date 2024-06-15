@@ -118,7 +118,7 @@ if(isset($_SESSION['username'])) {
                 <div class="sub-menu">
                     <a href="../../../admin/payment/payment_plan/plan.php" class="sub-item">Manage Payment Plan</a>
                     <a href="../../../admin/payment/view/view_payments.php" class="sub-item">View Payments</a>
-                    <a href="" class="sub-item">Upload Payment Receipts</a>
+                    <a href="../../../PaymentSection/upload_paymentReceipt/check.php" class="sub-item">Upload Payment Receipts</a>
                 </div>
             </div>
 
