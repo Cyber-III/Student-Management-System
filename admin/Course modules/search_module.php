@@ -1,32 +1,24 @@
 <?php
 session_start();
-include_once('../connection.php');
-include_once('../assests/content/static/template.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['delete'])) {
-        $id = $_POST['id'];
-        $sql = "DELETE FROM modules WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        if ($stmt) {
-            $stmt->bind_param('i', $id);
-            if ($stmt->execute()) {
-                $_SESSION['delete_success'] = "Module deleted successfully.";
-            } else {
-                $_SESSION['error_message'] = "Error deleting module: " . $stmt->error;
-            }
-            $stmt->close();
-        } else {
-            $_SESSION['error_message'] = "Error in SQL query: " . $conn->error;
-        }
-    }
+// Include the database connection
+include_once('../connection.php');
+
+// Check if the username session variable is set
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
 }
 
+$username = $_SESSION['username']; // Get the username from the session
+
+// Handle search request
 $search_batch = '';
 if (isset($_GET['search'])) {
     $search_batch = $_GET['search_batch'];
 }
 
+// Fetch course materials filtered by batch name
 $sql = "SELECT * FROM modules";
 $params = [];
 if ($search_batch) {
@@ -46,39 +38,52 @@ if ($stmt) {
 } else {
     $error = "Error in SQL query: " . $conn->error;
 }
-?>
 
+// Handle delete request
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+    $sql = "DELETE FROM modules WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $stmt->close();
+        $_SESSION['delete_success'] = "Module deleted successfully.";
+        header("Location: search_materials.php");
+        exit();
+    } else {
+        $error = "Error deleting module: " . $conn->error;
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modules Table Page</title>
+    <title>Search Course Materials</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-modules.css">
+    <link rel="stylesheet" href="courseMaterial-style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 </head>
-<body class="body">
+<body>
 <div class="container">
     <div class="topic">
-        <br><br>
-        <h1>Modules</h1>
+        <h1>Search Course Materials</h1>
     </div>
-    <div class="add-new">
-        <br>
-        <a href="add_module.php" class="btn btn-success">Add New Module</a>
-    </div>
-    <br><br>
+
+    <!-- Search Form -->
     <div class="search-container">
-        <form method="get" action="modules.php">
+        <form method="get" action="search_materials.php">
             <div class="input-group mb-3">
                 <input type="text" name="search_batch" class="form-control" placeholder="Search by Batch Name" value="<?php echo htmlspecialchars($search_batch); ?>">
                 <button class="btn btn-primary" type="submit" name="search">Search</button>
             </div>
         </form>
     </div>
+
     <div class="table-container">
         <?php if (isset($error)): ?>
             <div class="alert alert-danger">
@@ -91,21 +96,16 @@ if ($stmt) {
             </div>
             <?php unset($_SESSION['delete_success']); ?>
         <?php endif; ?>
-        <?php if (isset($_SESSION['edit_success'])): ?>
-            <div class="alert alert-success">
-                <?php echo htmlspecialchars($_SESSION['edit_success']); ?>
-            </div>
-            <?php unset($_SESSION['edit_success']); ?>
-        <?php endif; ?>
         <?php if (!empty($modules)): ?>
             <table class="table">
                 <thead>
                     <tr>
                         <th>Module Name</th>
                         <th>Module Code</th>
-                        <th>Date</th>
-                        <th>Duration</th>
-                        <th>Number of Assignments</th>
+                        <th>Topic</th>
+                        <th>Batch Number</th>
+                        <th>Course</th>
+                        <th>Download</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -115,9 +115,12 @@ if ($stmt) {
                         <tr>
                             <td><?php echo htmlspecialchars($module['module_name']); ?></td>
                             <td><?php echo htmlspecialchars($module['module_code']); ?></td>
-                            <td><?php echo htmlspecialchars($module['date']); ?></td>
-                            <td><?php echo htmlspecialchars($module['duration']); ?></td>
-                            <td><?php echo htmlspecialchars($module['num_assignments']); ?></td>
+                            <td><?php echo htmlspecialchars($module['topic']); ?></td>
+                            <td><?php echo htmlspecialchars($module['batch_number']); ?></td>
+                            <td><?php echo htmlspecialchars($module['course']); ?></td>
+                            <td>
+                                <a href="<?= htmlspecialchars($module['download']) ?>" class="view-link" target="_blank">Download</a>
+                            </td>
                             <td>
                                 <a href="edit_module.php?id=<?= htmlspecialchars($module['id']) ?>" class="btn btn-primary">Edit</a>
                             </td>
