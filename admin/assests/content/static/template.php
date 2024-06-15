@@ -104,10 +104,12 @@ if(isset($_SESSION['username'])) {
                 <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
             </div>
 
+
             <div class="item">
                 <a href="../../../admin/add-result/result.php"><i class='bx bx-add-to-queue'></i>Add Results</a>
             </div>
             
+
             <!-- Payment Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-hand-holding-usd"></i>Student Payments
