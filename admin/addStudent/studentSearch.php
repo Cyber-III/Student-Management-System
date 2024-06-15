@@ -54,112 +54,114 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
     <?php elseif ($message == 'delete'): ?>
         <div class="alert alert-danger">The batch was deleted successfully.</div>
     <?php endif; ?>
+    <div class="main_container">
+        <button class="batch view-link" id="newBatchBtn">New Batch +</button>
+        <button class="batch delete-link" id="removeBatchBtn">Drop Batch -</button>
 
-    <button class="batch view-link" id="newBatchBtn">New Batch +</button>
-    <button class="batch delete-link" id="removeBatchBtn">Drop Batch -</button>
+        <form action="studentSubmission.php" method="POST">
+            <div class="form-container">
 
-    <form action="studentSubmission.php" method="POST">
-        <div class="form-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sid">Student ID: </label>
+                        <input type="text" id="sid" name="sid" required> <!-- making required the fields -->
+                    </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="sid">Student ID: </label>
-                    <input type="text" id="sid" name="sid" required> <!-- making required the fields -->
+                    <div class="form-group">
+                        <label for="sname">Student Name: </label>
+                        <input type="text" id="sname" name="sname" required> <!-- making required the fields -->
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="sname">Student Name: </label>
-                    <input type="text" id="sname" name="sname" required> <!-- making required the fields -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <input type="password" id="password" name="password" required> <!-- making required the fields -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="batch_number">Batch Number:</label>
+                        <select id="batch_number" name="batch_number" required> <!-- making required the fields -->
+                            <option value="">Select Batch Number</option>
+                            <?php foreach ($batch_numbers as $batch_number): ?>
+                                <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="course">Course:</label>
+                        <select id="course" name="course" required> <!-- making required the fields -->
+                            <option value="">Select Course</option>
+                            <?php foreach (array_unique($courses) as $course): ?>
+                                <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bdate">Date of Birth:</label>
+                        <input type="date" id="bdate" name="bdate" required> <!-- making required the fields -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nic">National Identity Card Number:</label>
+                        <input type="text" id="nic" name="nic" required> <!-- making required the fields -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required> <!-- making required the fields -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact">Contact Number:</label>
+                        <input type="text" id="contact" name="contact" required> <!-- making required the fields -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="award_uni">Awarding University:</label>
+                        <select id="award_uni" name="award_uni" required> <!-- making required the fields -->
+                            <option value="">Select University</option>
+                            <?php foreach ($award_unis as $award_uni): ?>
+                                <option value="<?= htmlspecialchars($award_uni) ?>"><?= htmlspecialchars($award_uni) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="uni_num">University Number:</label>
+                        <input type="text" id="uni_num" name="uni_num" required> <!-- making required the fields -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Local Branch:</label>
+                        <input type="text" id="location" name="location" required> <!-- making required the fields -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="gender">Gender:</label>
+                        <input type="radio" id="male" name="gender" value="Male" required> Male
+                        <input type="radio" id="female" name="gender" value="Female" required> Female <!-- making required the fields -->
+                    </div>
                 </div>
             </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="password">Password: </label>
-                    <input type="password" id="password" name="password" required> <!-- making required the fields -->
-                </div>
-
-                <div class="form-group">
-                    <label for="batch_number">Batch Number:</label>
-                    <select id="batch_number" name="batch_number" required> <!-- making required the fields -->
-                        <option value="">Select Batch Number</option>
-                        <?php foreach ($batch_numbers as $batch_number): ?>
-                            <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="course">Course:</label>
-                    <select id="course" name="course" required> <!-- making required the fields -->
-                        <option value="">Select Course</option>
-                        <?php foreach (array_unique($courses) as $course): ?>
-                            <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="bdate">Date of Birth:</label>
-                    <input type="date" id="bdate" name="bdate" required> <!-- making required the fields -->
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="nic">National Identity Card Number:</label>
-                    <input type="text" id="nic" name="nic" required> <!-- making required the fields -->
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required> <!-- making required the fields -->
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="contact">Contact Number:</label>
-                    <input type="text" id="contact" name="contact" required> <!-- making required the fields -->
-                </div>
-
-                <div class="form-group">
-                    <label for="award_uni">Awarding University:</label>
-                    <select id="award_uni" name="award_uni" required> <!-- making required the fields -->
-                        <option value="">Select University</option>
-                        <?php foreach ($award_unis as $award_uni): ?>
-                            <option value="<?= htmlspecialchars($award_uni) ?>"><?= htmlspecialchars($award_uni) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="uni_num">University Number:</label>
-                    <input type="text" id="uni_num" name="uni_num" required> <!-- making required the fields -->
-                </div>
-
-                <div class="form-group">
-                    <label for="location">Local Branch:</label>
-                    <input type="text" id="location" name="location" required> <!-- making required the fields -->
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="gender">Gender:</label>
-                    <input type="radio" id="male" name="gender" value="Male" required> Male
-                    <input type="radio" id="female" name="gender" value="Female" required> Female <!-- making required the fields -->
-                </div>
-            </div>
-        </div>
+            <br>
+            <button type="submit" class="view-link">Submit</button>
+        </form>
         <br>
-        <button type="submit" class="view-link">Submit</button>
-    </form>
-    <br>
+    </div>
+    
     
 
     <!-- The Insert Modal -->
