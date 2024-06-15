@@ -1,3 +1,4 @@
+
 <?php
 // Start the session
 session_start();
@@ -9,6 +10,7 @@ include_once('../connection.php');
 include_once('../assests/content/static/template.php');
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

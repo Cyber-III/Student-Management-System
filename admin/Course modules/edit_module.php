@@ -4,7 +4,7 @@ ob_start();  // Start output buffering
 
 include_once('../connection.php');  // Adjust path as necessary
 
-include_once('../../admin/assests/content/static/template.php');
+include_once('../../admin/assets/content/static/template.php');
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");

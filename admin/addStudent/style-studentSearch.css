@@ -1,8 +1,13 @@
-body {
+/* body {
     margin-left: 350px;
     margin-top: 100px;
-}
+} */
+.main_container{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
 
+}
 /* form */
 
 .form-container {
@@ -131,4 +136,39 @@ input[type="submit"]:hover {
 
 .modal::-webkit-scrollbar {
     Display: none
+}
+
+
+ 
+@media screen and (min-width: 1200px) {
+    .main_container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+ }
+ @media screen and (max-width: 1199px) {
+
+    .main_container{
+        width: 100%;
+       
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+    }
+    .modal {
+        margin-left: 0px;
+      }
+ }
+ @media screen and (max-width: 650px){
+ .form-row {
+    display: flex;
+    flex-wrap: wrap; /* Add this to allow flex items to wrap to the next line */
+    gap: 20px;
+  }
+  .modal {
+    margin-left: 0px;
+  }
 }
