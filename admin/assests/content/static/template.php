@@ -94,11 +94,6 @@ if(isset($_SESSION['username'])) {
         <!-- Menu Items -->
         <div class="menu">
 
-            <!-- Profile Category -->
-            <div class="item">
-                    <a href="../../../admin/adminViewProfile/viewprofile.php"><i class="far fa-id-card"></i>Profile</a>
-            </div>
-
             <!-- Student Search -->
             <div class="item">
                 <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add Student</a>
@@ -119,7 +114,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Make Payments</a>
+                    <a href="../../../admin/payment/view/view_payments.php" class="sub-item">View Payments</a>
                     <a href="" class="sub-item">View Payments Status</a>
                     <a href="" class="sub-item">Upload Payment Receipts</a>
                 </div>
