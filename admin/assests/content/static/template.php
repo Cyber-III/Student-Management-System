@@ -204,7 +204,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Course Modules -->
             <div class="item">
-                <a href=""><i class="fas fa-info-circle"></i>Course Modules </a>
+                <a href="../../../admin/Course modules/modules.php"><i class="fas fa-info-circle"></i>Course Modules </a>
             </div>
             
             <!-- Course Materials -->
