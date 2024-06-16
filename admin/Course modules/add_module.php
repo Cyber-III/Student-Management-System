@@ -18,6 +18,18 @@ $username = $_SESSION['username']; // Get the username from the session
 $course = $module_name = $module_code = $date = $duration = $num_assignments = "";
 $success_message = $error = "";
 
+// Fetch courses for the dropdown menu
+$courses = [];
+$sql_courses = "SELECT course_name FROM course_tbl";
+$result_courses = $conn->query($sql_courses);
+if ($result_courses) {
+    while ($row = $result_courses->fetch_assoc()) {
+        $courses[] = $row['course_name'];
+    }
+} else {
+    $error = "Error fetching courses: " . $conn->error;
+}
+
 // Handle form submission for adding a new module
 if (isset($_POST['add'])) {
     // Sanitize and validate inputs (assuming input validation has been done)
@@ -53,7 +65,7 @@ if (isset($_POST['add'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Module</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-modules.css">
+    <link rel="stylesheet" href="style-module.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">
@@ -72,8 +84,15 @@ if (isset($_POST['add'])) {
     <?php endif; ?>
     <form method="post">
         <div class="mb-3">
-            <label for="module_name" class="form-label">Course Name</label>
-            <input type="text" class="form-control" id="course" name="course" value="<?= htmlspecialchars($course); ?>" required>
+            <label for="course" class="form-label">Course Name</label>
+            <select class="form-control" id="course" name="course" required>
+                <option value="">Select Course</option>
+                <?php foreach ($courses as $course_name): ?>
+                    <option value="<?= htmlspecialchars($course_name); ?>" <?= $course == $course_name ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($course_name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="module_name" class="form-label">Module Name</label>
@@ -97,7 +116,7 @@ if (isset($_POST['add'])) {
             <input type="text" class="form-control" id="num_assignments" name="num_assignments" value="<?= htmlspecialchars($num_assignments); ?>" required>
         </div>
         <button type="submit" name="add" class="btn btn-primary">Add Module</button>
-        <a href="modules.php" class="btn btn-secondary">Cancel</a>
+        <a href="modules.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
 </body>

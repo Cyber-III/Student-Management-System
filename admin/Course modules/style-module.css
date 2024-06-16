@@ -1,4 +1,60 @@
-.body{
-    margin-top: 100px;
-    margin-left: 400px;
+/* General styles for the table and other elements */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+.body {
+    margin-top: 20px;
+    margin-left: 330px;
+}
+
+#search-icon {
+    margin-left: 8px;
+    margin-bottom: 8px;
+    padding: 6px;
+    width: 45px;
+    height: 45px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#search-icon:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+/* Custom styles for better mobile experience */
+@media (max-width: 768px) {
+    .body {
+        margin: 0;
+    }
+
+    .topic {
+        text-align: center;
+    }
+
+    .add-new {
+        text-align: center;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+}
+
+/* Apply specific margins for desktop mode */
+@media (min-width: 992px) {
+    .body {
+        margin-top: 20px;
+        margin-left: 330px;
+    }
 }
