@@ -1,4 +1,26 @@
 .body{
-    margin-top: 100px;
-    margin-left: 400px;
+    margin-top: 20px;
+    margin-left: 330px;
+}
+
+
+#search-icon {
+    margin-left: 8px;
+    margin-bottom: 8px;
+    padding: 6px;
+    width: 45px;
+    height: 45px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#search-icon:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
 }

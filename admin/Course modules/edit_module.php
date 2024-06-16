@@ -67,11 +67,12 @@ ob_end_flush();  // Flush the output buffer
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Module</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-modules.css">
+    <link rel="stylesheet" href="style-module.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">
 <div class="container">
+    <br><br>
     <h1>Edit Module</h1>
     <form method="post">
         <div class="mb-3">
