@@ -35,6 +35,18 @@ if ($stmt) {
     die("Error in SQL query: " . $conn->error);
 }
 
+// Fetch courses for the dropdown menu
+$courses = [];
+$sql_courses = "SELECT course_name FROM course_tbl";
+$result_courses = $conn->query($sql_courses);
+if ($result_courses) {
+    while ($row = $result_courses->fetch_assoc()) {
+        $courses[] = $row['course_name'];
+    }
+} else {
+    $error = "Error fetching courses: " . $conn->error;
+}
+
 if (isset($_POST['update'])) {
     $course = $_POST['course'];
     $module_name = $_POST['module_name'];
@@ -77,7 +89,14 @@ ob_end_flush();  // Flush the output buffer
     <form method="post">
         <div class="mb-3">
             <label for="course" class="form-label">Course</label>
-            <input type="text" class="form-control" id="course" name="course" value="<?= htmlspecialchars($module['course']); ?>" required>
+            <select class="form-control" id="course" name="course" required>
+                <option value="">Select Course</option>
+                <?php foreach ($courses as $course_name): ?>
+                    <option value="<?= htmlspecialchars($course_name); ?>" <?= $module['course'] == $course_name ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($course_name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="module_name" class="form-label">Module Name</label>
