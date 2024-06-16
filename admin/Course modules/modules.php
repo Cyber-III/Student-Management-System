@@ -66,45 +66,41 @@ while ($row = mysqli_fetch_assoc($result)) {
         }
     </script>
 </head>
-<body class="body">
-    <div class="container">
+<body>
+    <div class="container mt-5">
         <div class="topic">
-            <br><br>
             <h1>Modules</h1>
         </div>
-        <div class="add-new">
-            <br>
+        <div class="add-new my-3">
             <a href="add_module.php" class="btn btn-success">Add New Module</a>
         </div>
-        <br><br>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="course">Search by Course:</label>
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label for="course" class="form-label">Search by Course:</label>
                 <div class="input-group">
-                    <select id="course" name="course">
+                    <select id="course" name="course" class="form-select">
                         <option value="">Select Course</option>
                         <?php foreach ($courses as $course): ?>
                             <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button id="search-icon" onclick="searchModules()"><i class="fas fa-search"></i></button>
+                    <button id="search-icon" class="btn btn-outline-primary" onclick="searchModules()"><i class="bi bi-search"></i></button>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="module_name">Search by Module Name:</label>
+            <div class="col-md-6">
+                <label for="module_name" class="form-label">Search by Module Name:</label>
                 <div class="input-group">
-                    <select id="module_name" name="module_name">
+                    <select id="module_name" name="module_name" class="form-select">
                         <option value="">Select Module Name</option>
                         <?php foreach ($module_names as $module_name): ?>
                             <option value="<?= htmlspecialchars($module_name) ?>"><?= htmlspecialchars($module_name) ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button id="search-icon" onclick="searchModules()"><i class="fas fa-search"></i></button>
+                    <button id="search-icon" class="btn btn-outline-primary" onclick="searchModules()"><i class="bi bi-search"></i></button>
                 </div>
             </div>
         </div>
-        <br>
-        <div class="table-container">
+        <div class="table-responsive">
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger">
                     <?php echo htmlspecialchars($error); ?>
@@ -122,7 +118,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 </div>
                 <?php unset($_SESSION['edit_success']); ?>
             <?php endif; ?>
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>Course</th>

@@ -116,7 +116,7 @@ if (isset($_POST['add'])) {
             <input type="text" class="form-control" id="num_assignments" name="num_assignments" value="<?= htmlspecialchars($num_assignments); ?>" required>
         </div>
         <button type="submit" name="add" class="btn btn-primary">Add Module</button>
-        <a href="modules.php" class="btn btn-secondary">Cancel</a>
+        <a href="modules.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
 </body>
