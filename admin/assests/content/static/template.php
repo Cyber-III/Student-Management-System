@@ -94,11 +94,6 @@ if(isset($_SESSION['username'])) {
         <!-- Menu Items -->
         <div class="menu">
 
-            <!-- Profile Category -->
-            <div class="item">
-                    <a href="../../../admin/adminViewProfile/viewprofile.php"><i class="far fa-id-card"></i>Profile</a>
-            </div>
-
             <!-- Student Search -->
             <div class="item">
                 <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add Student</a>
@@ -109,19 +104,21 @@ if(isset($_SESSION['username'])) {
                 <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
             </div>
 
+
             <div class="item">
                 <a href="../../../admin/add-result/result.php"><i class='bx bx-add-to-queue'></i>Add Results</a>
             </div>
             
+
             <!-- Payment Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-hand-holding-usd"></i>Student Payments
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Make Payments</a>
-                    <a href="" class="sub-item">View Payments Status</a>
-                    <a href="" class="sub-item">Upload Payment Receipts</a>
+                    <a href="../../../admin/payment/payment_plan/plan.php" class="sub-item">Manage Payment Plan</a>
+                    <a href="../../../admin/payment/view/view_payments.php" class="sub-item">View Payments</a>
+                    <a href="../../../PaymentSection/upload_paymentReceipt/check.php" class="sub-item">Upload Payment Receipts</a>
                 </div>
             </div>
 
@@ -207,7 +204,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Course Modules -->
             <div class="item">
-                <a href=""><i class="fas fa-info-circle"></i>Course Modules </a>
+                <a href="../../../admin/Course modules/modules.php"><i class="fas fa-info-circle"></i>Course Modules </a>
             </div>
             
             <!-- Course Materials -->

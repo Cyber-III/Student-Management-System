@@ -25,47 +25,65 @@ include_once('../../assests/content/static/template.php');
 </head>
 <body>
     
-<section class="vh-100">
-    <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-            <div class="col-md-8 col-lg-7 col-xl-6 fixed-image-container text-center">
-                <h1 class="graduationSch">Graduation Schedule 2024</h1>
-                <img src="pics/g1.png" class="img-fluid fixed-image" alt="Graduation Image">
+<section>
+    <div class="container2">
+            <div class="sche-container">
+                <h1 class="topic">Graduation Schedule 2024</h1>
+                <img src="pics/g1.png" class="img" alt="Graduation Image">
             </div>
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div class="side_container">
                 <div class="border-rectangle">
-                    <div class="schedule-item">
-                        <p><span class="schedule-title">Graduation Name:</span> ABC Campus Graduation</p>
-                        <p><span class="schedule-title">Date:</span> 2024-02-23</p>
-                        <p><span class="schedule-title">Time:</span> 11:00 AM</p>
-                        <p><span class="schedule-title">Location:</span> BMICH</p>
-                        <p><span class="schedule-title">Program:</span> HND Graduation Ceremony</p>
+                    <!-- each schedule-card will displayed like below -->
+                    <div class="schedule-card">
+                        <div class="card-header">
+                                    <h5>ABC Campus Graduation</h5>
+                        </div>
+                        <div class="card-body">
+                                    <p><span class="schedule-title">Date: </span> 2024-01-23</p>
+                                    <p><span class="schedule-title">Time: </span> 10:00 AM</p>
+                                    <p><span class="schedule-title">Location: </span> BMICH</p>
+                                    <p><span class="schedule-title">Program: </span> Undergraduate Ceremony</p>
+                        </div>
                     </div>
-                    <div class="schedule-item">
-                        <p><span class="schedule-title">Graduation Name:</span> ABC Campus Graduation</p>
-                        <p><span class="schedule-title">Date:</span> 2024-01-23</p>
-                        <p><span class="schedule-title">Time:</span> 10:00 AM</p>
-                        <p><span class="schedule-title">Location:</span> BMICH</p>
-                        <p><span class="schedule-title">Program:</span> Undergraduate Ceremony</p>
+                    <div class="schedule-card">
+                        <div class="card-header">
+                                    <h5>ABC Campus Graduation</h5>
+                        </div>
+                        <div class="card-body">
+                                    <p><span class="schedule-title">Date: </span> 2024-01-23</p>
+                                    <p><span class="schedule-title">Time: </span> 10:00 AM</p>
+                                    <p><span class="schedule-title">Location: </span> BMICH</p>
+                                    <p><span class="schedule-title">Program: </span> Undergraduate Ceremony</p>
+                        </div>
                     </div>
-                    <div class="schedule-item">
-                        <p><span class="schedule-title">Graduation Name:</span> DEF Campus Graduation</p>
-                        <p><span class="schedule-title">Date:</span> 2024-02-15</p>
-                        <p><span class="schedule-title">Time:</span> 02:00 PM</p>
-                        <p><span class="schedule-title">Location:</span> BMICH</p>
-                        <p><span class="schedule-title">Program:</span> Postgraduate Ceremony</p>
+                    <div class="schedule-card">
+                        <div class="card-header">
+                                    <h5>ABC Campus Graduation</h5>
+                        </div>
+                        <div class="card-body">
+                                    <p><span class="schedule-title">Date: </span> 2024-01-23</p>
+                                    <p><span class="schedule-title">Time: </span> 10:00 AM</p>
+                                    <p><span class="schedule-title">Location: </span> BMICH</p>
+                                    <p><span class="schedule-title">Program: </span> Undergraduate Ceremony</p>
+                        </div>
                     </div>
-                    <div class="schedule-item">
-                        <p><span class="schedule-title">Graduation Name:</span> GHI Campus Graduation</p>
-                        <p><span class="schedule-title">Date:</span> 2024-03-10</p>
-                        <p><span class="schedule-title">Time:</span> 11:00 AM</p>
-                        <p><span class="schedule-title">Location:</span> BMICH</p>
-                        <p><span class="schedule-title">Program:</span> Doctoral Ceremony</p>
+                    <div class="schedule-card">
+                        <div class="card-header">
+                                    <h5>ABC Campus Graduation</h5>
+                        </div>
+                        <div class="card-body">
+                                    <p><span class="schedule-title">Date: </span> 2024-01-23</p>
+                                    <p><span class="schedule-title">Time: </span> 10:00 AM</p>
+                                    <p><span class="schedule-title">Location: </span> BMICH</p>
+                                    <p><span class="schedule-title">Program: </span> Undergraduate Ceremony</p>
+                        </div>
                     </div>
-                    <!-- Add more schedule items as needed -->
+                    
                 </div>
             </div>
-        </div>
+            
+            
+        
     </div>
 </section>
 

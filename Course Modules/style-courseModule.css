@@ -6,54 +6,108 @@
 }
 
 /* General body styling */
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
     color: #333;
-}
+} */
 
 /* Container styling */
-.container {
-    margin-top: 50px; /* Adjusted top margin */
+/* Add some basic styling to the container */
+.container_main {
+    max-width: 800px;
+    margin: 40px auto;
     padding: 20px;
-}
 
-/* Table styling */
-.table {
+  }
+  .table_container{
+    margin: 20px;
+  }
+  /* Style the table */
+  .table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
-}
-
-.table th, .table td {
-    border: 1px solid #dddddd;
+  }
+  
+  /* Style the table headers */
+  .table thead th {
+    background-color: #ddd;
+    color: #000000;
+    padding: 10px;
+    border-bottom: 2px solid #333;
+  }
+  
+  /* Style the table rows */
+  .table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Style the table cells */
+  .table td {
+    padding: 10px;
     text-align: left;
-    padding: 12px;
-}
-
-.table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-.table td {
-    background-color: #ffffff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Additional styles for the table */
-.table th, .table td {
-    vertical-align: middle;
-}
-
-
-
-/* Additional responsive styling */
-@media (max-width: 768px) {
-    .table td {
-        padding: 8px;
-        font-size: 14px;
+  }
+  
+  /* Add some hover effects to the table rows */
+  .table tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Make the table headers sticky */
+  .table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  /* Add some responsive design to the table */
+  
+  @media screen and (min-width: 1200px) {
+    .container_main{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
     }
-}
+ }
+ @media screen and (max-width: 1199px) {
+
+    .container_main{
+        width: 100%;
+       
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+        
+    }
+ }
+ @media screen and (max-width: 650px){
+    th{
+        display: none;
+    }
+    td{
+        
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.75rem 1rem;
+    }
+    td:first-child{
+        padding-top: 2rem;
+
+    }
+    td:last-child{
+        padding-bottom: 2rem;
+        
+    }
+    td::before{
+        content:attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+    tr:nth-child(even) {
+        background-color: #e9ecef7d; /* Zedra background color */
+      }
+      
+ }
