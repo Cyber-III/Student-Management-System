@@ -25,6 +25,9 @@ if ($team_id !== null) {
         $viva_data[] = $row;
     }
 }
+
+$message = isset($_GET['message']) ? $_GET['message'] : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +40,21 @@ if ($team_id !== null) {
 
     <link rel="stylesheet" href="../style-template.css">
     <link rel="stylesheet" href="viva.css">
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+
     <h1>Viva Session Registration</h1>
+    <?php if ($message == 'updated'): ?>
+        <div class="alert alert-success">Records are updated successfully.</div>
+    <?php elseif ($message == 'deleted'): ?>
+        <div class="alert alert-danger">Records are deleted successfully.</div>
+    <?php endif; ?>
     <form id="vivaForm">
         <div id="teamMembers">
             <div class="member">
@@ -58,32 +73,32 @@ if ($team_id !== null) {
 
     <div class="container">
 
-        <div class="table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Name</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="teamMembersTable">
-                    <?php
-                    if (count($viva_data) > 0) {
-                        foreach ($viva_data as $row) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['username']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['name']) . "</td>";
-                            echo "<td> <button class='tabbtn'>Manage</button>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='2'>No records found</td></tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+    <div class="table">
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="teamMembersTable">
+            <?php
+            if (count($viva_data) > 0) {
+                foreach ($viva_data as $row) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                    echo "<td> <button class='tabbtn btn btn-primary' data-toggle='modal' data-target='#manageModal' data-username='" . htmlspecialchars($row['username']) . "' data-name='" . htmlspecialchars($row['name']) . "'>Manage</button></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='3'>No records found</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
 
         <div class="details">
             <?php
@@ -102,9 +117,104 @@ if ($team_id !== null) {
             ?>
         </div>
     </div>
+
+    <div class="modal fade" id="manageModal" tabindex="-1" role="dialog" aria-labelledby="manageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="manageModalLabel">Manage User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="manageForm">
+                    <input type="hidden" name="id" id="id">
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="editButton">Edit</button>
+                    <button type="button" class="btn btn-danger" id="deleteButton">Delete</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
     <script>
         const vivaData = <?php echo json_encode($viva_data); ?>;
     </script>
     <script src="script.js"></script>
+    <script>
+    $('#manageModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var username = button.data('username');
+        var name = button.data('name');
+        
+        var modal = $(this);
+        modal.find('#username').val(username);
+        modal.find('#name').val(name);
+    });
+
+    $('#editButton').on('click', function () {
+        var username = $('#username').val();
+        var name = $('#name').val();
+
+        console.log("Editing user:", username, name); // Debugging
+
+        $.ajax({
+            url: 'update.php',
+            type: 'POST',
+            data: { username: username, name: name },
+            success: function(response) {
+                console.log("Update response:", response); // Debugging
+                window.location.href = 'viva.php?message=updated';
+            },
+            error: function(error) {
+                console.log("Update error:", error); // Debugging
+            }
+        });
+    });
+
+
+    $('#deleteButton').on('click', function () {
+    var username = $('#username').val();
+
+    // Display confirmation dialog
+    var confirmation = confirm("Are you sure?");
+
+    if (confirmation) {
+        // If the user confirms, proceed with the AJAX request to delete the record
+        $.ajax({
+            url: 'delete.php',
+            type: 'POST',
+            data: { username: username },
+            success: function(response) {
+                console.log("Delete response:", response); // Debugging
+                window.location.href = 'viva.php?message=deleted'; // Redirect to show the delete message
+            },
+            error: function(error) {
+                console.log("Delete error:", error); // Debugging
+                alert('Error deleting record');
+            }
+        });
+    } else {
+        // If the user cancels, do nothing
+        console.log("Delete canceled");
+    }
+});
+
+</script>
+
+
 </body>
 </html>
