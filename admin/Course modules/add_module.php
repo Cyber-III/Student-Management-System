@@ -18,6 +18,18 @@ $username = $_SESSION['username']; // Get the username from the session
 $course = $module_name = $module_code = $date = $duration = $num_assignments = "";
 $success_message = $error = "";
 
+// Fetch courses for the dropdown menu
+$courses = [];
+$sql_courses = "SELECT course_name FROM course_tbl";
+$result_courses = $conn->query($sql_courses);
+if ($result_courses) {
+    while ($row = $result_courses->fetch_assoc()) {
+        $courses[] = $row['course_name'];
+    }
+} else {
+    $error = "Error fetching courses: " . $conn->error;
+}
+
 // Handle form submission for adding a new module
 if (isset($_POST['add'])) {
     // Sanitize and validate inputs (assuming input validation has been done)
@@ -72,8 +84,15 @@ if (isset($_POST['add'])) {
     <?php endif; ?>
     <form method="post">
         <div class="mb-3">
-            <label for="module_name" class="form-label">Course Name</label>
-            <input type="text" class="form-control" id="course" name="course" value="<?= htmlspecialchars($course); ?>" required>
+            <label for="course" class="form-label">Course Name</label>
+            <select class="form-control" id="course" name="course" required>
+                <option value="">Select Course</option>
+                <?php foreach ($courses as $course_name): ?>
+                    <option value="<?= htmlspecialchars($course_name); ?>" <?= $course == $course_name ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($course_name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="module_name" class="form-label">Module Name</label>

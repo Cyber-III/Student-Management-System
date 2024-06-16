@@ -22,29 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$search_batch = '';
-if (isset($_GET['search'])) {
-    $search_batch = $_GET['search_batch'];
-}
+$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
-$sql = "SELECT * FROM modules";
-$params = [];
-if ($search_batch) {
-    $sql .= " WHERE batch_number LIKE ?";
-    $params[] = '%' . $search_batch . '%';
+// Fetch distinct courses and module names for filtering
+$courses = [];
+$module_names = [];
+$result = mysqli_query($conn, "SELECT DISTINCT course FROM modules");
+while ($row = mysqli_fetch_assoc($result)) {
+    $courses[] = $row['course'];
 }
-
-$stmt = $conn->prepare($sql);
-if ($stmt) {
-    if ($params) {
-        $stmt->bind_param(str_repeat('s', count($params)), ...$params);
-    }
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $modules = $result->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-} else {
-    $error = "Error in SQL query: " . $conn->error;
+$result = mysqli_query($conn, "SELECT DISTINCT module_name FROM modules");
+while ($row = mysqli_fetch_assoc($result)) {
+    $module_names[] = $row['module_name'];
 }
 ?>
 
@@ -58,37 +47,81 @@ if ($stmt) {
     <link rel="stylesheet" href="style-modules.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function searchModules() {
+            var course = document.getElementById('course').value;
+            var moduleName = document.getElementById('module_name').value;
+            $.ajax({
+                url: 'search_modules.php',
+                type: 'GET',
+                data: { course: course, module_name: moduleName },
+                success: function(response) {
+                    document.getElementById('modules-tbody').innerHTML = response;
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
 </head>
 <body class="body">
-<div class="container">
-    <div class="topic">
+    <div class="container">
+        <div class="topic">
+            <br><br>
+            <h1>Modules</h1>
+        </div>
+        <div class="add-new">
+            <br>
+            <a href="add_module.php" class="btn btn-success">Add New Module</a>
+        </div>
         <br><br>
-        <h1>Modules</h1>
-    </div>
-    <div class="add-new">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="course">Search by Course:</label>
+                <div class="input-group">
+                    <select id="course" name="course">
+                        <option value="">Select Course</option>
+                        <?php foreach ($courses as $course): ?>
+                            <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button id="search-icon" onclick="searchModules()"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="module_name">Search by Module Name:</label>
+                <div class="input-group">
+                    <select id="module_name" name="module_name">
+                        <option value="">Select Module Name</option>
+                        <?php foreach ($module_names as $module_name): ?>
+                            <option value="<?= htmlspecialchars($module_name) ?>"><?= htmlspecialchars($module_name) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button id="search-icon" onclick="searchModules()"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
         <br>
-        <a href="add_module.php" class="btn btn-success">Add New Module</a>
-    </div>
-    <br><br>
-    <div class="table-container">
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger">
-                <?php echo htmlspecialchars($error); ?>
-            </div>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['delete_success'])): ?>
-            <div class="alert alert-success">
-                <?php echo htmlspecialchars($_SESSION['delete_success']); ?>
-            </div>
-            <?php unset($_SESSION['delete_success']); ?>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['edit_success'])): ?>
-            <div class="alert alert-success">
-                <?php echo htmlspecialchars($_SESSION['edit_success']); ?>
-            </div>
-            <?php unset($_SESSION['edit_success']); ?>
-        <?php endif; ?>
-        <?php if (!empty($modules)): ?>
+        <div class="table-container">
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger">
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['delete_success'])): ?>
+                <div class="alert alert-success">
+                    <?php echo htmlspecialchars($_SESSION['delete_success']); ?>
+                </div>
+                <?php unset($_SESSION['delete_success']); ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['edit_success'])): ?>
+                <div class="alert alert-success">
+                    <?php echo htmlspecialchars($_SESSION['edit_success']); ?>
+                </div>
+                <?php unset($_SESSION['edit_success']); ?>
+            <?php endif; ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -102,34 +135,11 @@ if ($stmt) {
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($modules as $module): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($module['course']); ?></td>
-                            <td><?php echo htmlspecialchars($module['module_name']); ?></td>
-                            <td><?php echo htmlspecialchars($module['module_code']); ?></td>
-                            <td><?php echo htmlspecialchars($module['date']); ?></td>
-                            <td><?php echo htmlspecialchars($module['duration']); ?></td>
-                            <td><?php echo htmlspecialchars($module['num_assignments']); ?></td>
-                            <td>
-                                <a href="edit_module.php?id=<?= htmlspecialchars($module['id']) ?>" class="btn btn-primary">Edit</a>
-                            </td>
-                            <td>
-                                <form method="post" style="display:inline-block;">
-                                    <input type="hidden" name="id" value="<?= htmlspecialchars($module['id']) ?>">
-                                    <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                <tbody id="modules-tbody">
+                    <!-- Modules data will be loaded here via AJAX -->
                 </tbody>
             </table>
-        <?php else: ?>
-            <div class="no-data">
-                <img src="Images/no_data.jpg" alt="No data available">
-            </div>
-        <?php endif; ?>
+        </div>
     </div>
-</div>
 </body>
 </html>
