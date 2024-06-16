@@ -55,56 +55,66 @@ $conn->close();
 </head>
 <body>
     <div class="header">
-        <h1>Add Student Result</h1>
+        <!-- <h1>Add Student Result</h1> -->
     </div>
     <div class="container">
         <div id="message" style="display:none;"></div> <!-- Message container -->
         <form id="addResultForm" action="process_result.php" method="post"> <!-- Updated action -->
-            <label for="course">Course:</label>
-            <input type="text" id="course" name="course" value="<?php echo $_GET['course']; ?>" readonly>
-            <br>
-            <label for="batch">Batch:</label>
-            <input type="text" id="batch" name="batch" value="<?php echo $batch; ?>" readonly>
-            <br>
-            <label for="semester">Semester:</label>
-            <input type="text" id="semester" name="semester" value="<?php echo $_GET['semester']; ?>" readonly>
-            <br>
-            <label for="module">Module:</label>
-            <select id="module" name="module" required>
-                <option value="">-- Select Module --</option>
-                <?php foreach ($module_names as $module_name): ?>
-                    <option value="<?php echo $module_name; ?>"><?php echo $module_name; ?></option>
-                <?php endforeach; ?>
-            </select>
-            <br>
-            <label for="studentId">Student ID:</label>
-            <select id="studentId" name="studentId" required onchange="updateStudentName()">
-                <option value="">-- Select Student ID --</option>
-                <?php foreach ($students as $username => $student_name): ?>
-                    <option value="<?php echo $username; ?>"><?php echo $username; ?></option>
-                <?php endforeach; ?>
-            </select>
-            <br>
-            <label for="studentName">Student Name:</label>
-            <input type="text" id="studentName" name="studentName" required readonly>
-            <br>
-            <div id="marksSection">
+            <div class="form-group">
+                <label for="course">Course:</label>
+                <input type="text" id="course" name="course" value="<?php echo $_GET['course']; ?>" readonly>
+            </div>
+            <div class="form-group">
+                <label for="batch">Batch:</label>
+                <input type="text" id="batch" name="batch" value="<?php echo $batch; ?>" readonly>
+            </div>
+            <div class="form-group">
+                <label for="semester">Semester:</label>
+                <input type="text" id="semester" name="semester" value="<?php echo $_GET['semester']; ?>" readonly>
+            </div>
+            <div class="form-group">
+                <label for="module">Module:</label>
+                <select id="module" name="module" required>
+                    <option value="">-- Select Module --</option>
+                    <?php foreach ($module_names as $module_name): ?>
+                        <option value="<?php echo $module_name; ?>"><?php echo $module_name; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="studentId">Student ID:</label>
+                <select id="studentId" name="studentId" required onchange="updateStudentName()">
+                    <option value="">-- Select Student ID --</option>
+                    <?php foreach ($students as $username => $student_name): ?>
+                        <option value="<?php echo $username; ?>"><?php echo $username; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" name="studentName" required readonly>
+            </div>
+            <div class="form-group">
                 <label for="assignmentMarks">Assignment Marks:</label>
                 <input type="text" id="assignmentMarks" name="assignmentMarks" required>
-                <br>
+            </div>
+            <div class="form-group">
                 <label for="presentationMarks">Presentation Marks:</label>
                 <input type="text" id="presentationMarks" name="presentationMarks" required>
-                <br>
+            </div>
+            <div class="form-group">
                 <label for="examMarks">Exam Marks:</label>
                 <input type="text" id="examMarks" name="examMarks" required>
-                <br>
+            </div>
+            <div class="form-group">
                 <label for="finalMarks">Final Marks:</label>
                 <input type="text" id="finalMarks" name="finalMarks" required>
-                <br>
             </div>
-            <button type="submit">Submit Result</button>
+            <div class="button-container">
+                <button type="submit" class="submit-button">Submit Result</button>
+                <button type="button" onclick="goBack()" class="back-button">Back</button>
+            </div>
         </form>
-        <button onclick="goBack()" class="back-button">Back</button> <!-- Back button -->
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -153,3 +163,6 @@ $conn->close();
     </script>
 </body>
 </html>
+
+
+
