@@ -92,6 +92,7 @@ if ($stmt) {
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Course</th>
                         <th>Module Name</th>
                         <th>Module Code</th>
                         <th>Date</th>
@@ -104,6 +105,7 @@ if ($stmt) {
                 <tbody>
                     <?php foreach ($modules as $module): ?>
                         <tr>
+                            <td><?php echo htmlspecialchars($module['course']); ?></td>
                             <td><?php echo htmlspecialchars($module['module_name']); ?></td>
                             <td><?php echo htmlspecialchars($module['module_code']); ?></td>
                             <td><?php echo htmlspecialchars($module['date']); ?></td>
