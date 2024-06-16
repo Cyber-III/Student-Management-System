@@ -150,6 +150,11 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
+            <!-- Viva Session -->
+            <div class="item">
+                <a href="../../../viva/viva.php"><i class="far fa-sticky-note"></i>Viva Application</a>
+            </div>
+
             <!-- Results Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fa fa-trophy"></i>Results
