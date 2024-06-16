@@ -9,14 +9,14 @@ if (isset($_GET['batch_number'])) {
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>
-                    <td>{$row['student_name']}</td>
-                    <td>{$row['username']}</td>
-                    <td>{$row['course']}</td>
-                    <td>{$row['batch_number']}</td>
-                    <td>{$row['gender']}</td>
-                    <td>{$row['dob']}</td>
-                    <td>{$row['nic']}</td>
-                    <td>{$row['contact']}</td>
+                    <td data-cell='ST_Name'>{$row['student_name']}</td>
+                    <td data-cell='Username'>{$row['username']}</td>
+                    <td data-cell='Course'>{$row['course']}</td>
+                    <td data-cell='Batch_No'>{$row['batch_number']}</td>
+                    <td data-cell='Gender'>{$row['gender']}</td>
+                    <td data-cell='DOB'>{$row['dob']}</td>
+                    <td data-cell='NIC'>{$row['nic']}</td>
+                    <td data-cell='Contact'>{$row['contact']}</td>
                   </tr>";
         }
     }
@@ -27,14 +27,14 @@ if (isset($_GET['batch_number'])) {
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>
-                    <td>{$row['student_name']}</td>
-                    <td>{$row['username']}</td>
-                    <td>{$row['course']}</td>
-                    <td>{$row['batch_number']}</td>
-                    <td>{$row['gender']}</td>
-                    <td>{$row['dob']}</td>
-                    <td>{$row['nic']}</td>
-                    <td>{$row['contact']}</td>
+                    <td data-cell='Username'>{$row['username']}</td>
+                    <td data-cell='Course'>{$row['course']}</td>
+                    <td data-cell='Batch_No'>{$row['batch_number']}</td>
+                    <td data-cell='Gender'>{$row['gender']}</td>
+                    <td data-cell='DOB'>{$row['dob']}</td>
+                    <td data-cell='NIC'>{$row['nic']}</td>
+                    <td data-cell='ST_Name'>{$row['student_name']}</td>
+                    <td data-cell='Contact'>{$row['contact']}</td>
                   </tr>";
         }
     }

@@ -48,7 +48,6 @@ if ($stmt) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,14 +70,6 @@ if ($stmt) {
         <a href="add_module.php" class="btn btn-success">Add New Module</a>
     </div>
     <br><br>
-    <div class="search-container">
-        <form method="get" action="modules.php">
-            <div class="input-group mb-3">
-                <input type="text" name="search_batch" class="form-control" placeholder="Search by Batch Name" value="<?php echo htmlspecialchars($search_batch); ?>">
-                <button class="btn btn-primary" type="submit" name="search">Search</button>
-            </div>
-        </form>
-    </div>
     <div class="table-container">
         <?php if (isset($error)): ?>
             <div class="alert alert-danger">

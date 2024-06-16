@@ -165,176 +165,177 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     <?php if ($error_message): ?>
         <div class="error-message"><?= htmlspecialchars($error_message) ?></div>
     <?php endif; ?>
-
-    <form action="exam_scheduleSubmission.php" method="POST">
-        <div class="form-container">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="course">Course:</label>
-                    <select id="course" name="course" required> <!-- making required the fields -->
-                        <option value="">Select Course</option>
-                        <?php foreach ($courses as $course): ?>
-                            <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="module_name">Module Name:</label>
-                    <select id="module_name" name="module_name" required> <!-- making required the fields -->
-                        <option value="">Select Module Name</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="module_code">Module Code:</label>
-                    <select id="module_code" name="module_code" required> <!-- making required the fields -->
-                        <option value="">Select Module Code</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="batch_number">Batch Number:</label>
-                    <select id="batch_number" name="batch_number" required> <!-- making required the fields -->
-                        <option value="">Select Batch Number</option>
-                        <?php foreach ($batch_numbers as $batch_number): ?>
-                            <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="exam_name">Exam Name:</label>
-                    <input type="text" id="exam_name" name="exam_name" required> <!-- making required the fields -->
-                </div>
-
-                <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required> <!-- making required the fields -->
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="time">Time:</label>
-                    <input type="time" id="time" name="time" required> <!-- making required the fields -->
-                </div>
-
-                <div class="form-group">
-                    <label for="location">Location:</label>
-                    <input type="text" id="location" name="location" required> <!-- making required the fields -->
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="hours">Hours:</label>
-                    <input type="number" id="hours" name="hours" required> <!-- making required the fields -->
-                </div>
-            </div>
-        </div>
-        <br>
-        <button type="submit" class="view-link">Submit</button>
-    </form>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            
-            <h2>Edit Exam Schedule</h2>
-            
-            <form action="exam_scheduleUpdateDelete.php" method="POST">
-                <input type="hidden" name="batch_number" id="manage-batch_number">
-                
-                <div class="form-group">
-                    <label for="manage-exam_name">Exam Name:</label>
-                    <input type="text" id="manage-exam_name" name="exam_name">
-                
-                </div>
-                <div class="form-group">
-                    <label for="manage-date">Date:</label>
-                    <input type="date" id="manage-date" name="date">
-                
-                </div>
-                <div class="form-group">
-                    <label for="manage-time">Time:</label>
-                    <input type="time" id="manage-time" name="time">
-                
-                </div>
-                <div class="form-group">
-                    <label for="manage-location">Location:</label>
-                    <input type="text" id="manage-location" name="location">
-                
-                </div>
-                <div class="form-group">
-                    <label for="manage-hours">Hours:</label>
-                    <input type="number" id="manage-hours" name="hours">
-                
-                </div>
-                <div class="form-group">
-                    <label for="manage-allow_submission">Allow Submission</label>
-                    <input type="checkbox" id="manage-allow_submission" name="allow_submission" value="1" class="checkbox-label">
-
-                    <br> <br>
-                </div>
-
-                <div class="form-group">
-                    <div class="button-container">
-                        <button type="submit" name="action" value="edit" class="view-link">Edit</button>
-                        <button type="submit" name="action" value="delete" class="delete-link">Delete</button>
+    <div class="main_container">
+        <form action="exam_scheduleSubmission.php" method="POST">
+            <div class="form-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="course">Course:</label>
+                        <select id="course" name="course" required> <!-- making required the fields -->
+                            <option value="">Select Course</option>
+                            <?php foreach ($courses as $course): ?>
+                                <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="module_name">Module Name:</label>
+                        <select id="module_name" name="module_name" required> <!-- making required the fields -->
+                            <option value="">Select Module Name</option>
+                        </select>
+                    </div>
                 </div>
 
-            </form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="module_code">Module Code:</label>
+                        <select id="module_code" name="module_code" required> <!-- making required the fields -->
+                            <option value="">Select Module Code</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="batch_number">Batch Number:</label>
+                        <select id="batch_number" name="batch_number" required> <!-- making required the fields -->
+                            <option value="">Select Batch Number</option>
+                            <?php foreach ($batch_numbers as $batch_number): ?>
+                                <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="exam_name">Exam Name:</label>
+                        <input type="text" id="exam_name" name="exam_name" required> <!-- making required the fields -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required> <!-- making required the fields -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="time">Time:</label>
+                        <input type="time" id="time" name="time" required> <!-- making required the fields -->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location" required> <!-- making required the fields -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hours">Hours:</label>
+                        <input type="number" id="hours" name="hours" required> <!-- making required the fields -->
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="view-link">Submit</button>
+        </form>
+
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                
+                <h2>Edit Exam Schedule</h2>
+                
+                <form action="exam_scheduleUpdateDelete.php" method="POST">
+                    <input type="hidden" name="batch_number" id="manage-batch_number">
+                    
+                    <div class="form-group">
+                        <label for="manage-exam_name">Exam Name:</label>
+                        <input type="text" id="manage-exam_name" name="exam_name">
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="manage-date">Date:</label>
+                        <input type="date" id="manage-date" name="date">
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="manage-time">Time:</label>
+                        <input type="time" id="manage-time" name="time">
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="manage-location">Location:</label>
+                        <input type="text" id="manage-location" name="location">
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="manage-hours">Hours:</label>
+                        <input type="number" id="manage-hours" name="hours">
+                    
+                    </div>
+                    <div class="form-group">
+                        <label for="manage-allow_submission">Allow Submission</label>
+                        <input type="checkbox" id="manage-allow_submission" name="allow_submission" value="1" class="checkbox-label">
+
+                        <br> <br>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="button-container">
+                            <button type="submit" name="action" value="edit" class="view-link">Edit</button>
+                            <button type="submit" name="action" value="delete" class="delete-link">Delete</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
         </div>
-    </div>
 
-    <h2 class="topic">Exam Schedule Details</h2>
-    <br>
+        <h2 class="topic">Exam Schedule Details</h2>
+        <br>
 
-    <!-- Search bar -->
-    <div class="search-bar">
-        <label for="search">Search by Batch Number:</label>
-        <input type="text" id="search" placeholder="Enter batch number">
-        <button id="search-icon"><i class="fas fa-search"></i></button>
-    </div>
-    <br>
+        <!-- Search bar -->
+        <div class="search-bar">
+            <label for="search">Search by Batch Number:</label>
+            <input type="text" id="search" placeholder="Enter batch number">
+            <button id="search-icon"><i class="fas fa-search"></i></button>
+        </div>
+        <br>
 
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Batch Number</th>
-                    <th>Exam Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Location</th>
-                    <th>Hours</th>
-                    <th>Allow Submission</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="exam-schedule-tbody">
-                <?php foreach ($exam_schedule_data as $row): ?>
+        <div class="table">
+            <table>
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($row['batch_number']) ?></td>
-                        <td><?= htmlspecialchars($row['exam_name']) ?></td>
-                        <td><?= htmlspecialchars($row['date']) ?></td>
-                        <td><?= htmlspecialchars($row['time']) ?></td>
-                        <td><?= htmlspecialchars($row['location']) ?></td>
-                        <td><?= htmlspecialchars($row['hours']) ?></td>
-                        <td><?= $row['allow_submission'] ? 'Yes' : 'No' ?></td>
-                        <td><button onclick="manageExam(this.parentNode.parentNode)" class="manage-button view-link">Manage</button></td>
+                        <th>Batch Number</th>
+                        <th>Exam Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Hours</th>
+                        <th>Allow Submission</th>
+                        <th>Action</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="exam-schedule-tbody">
+                    <?php foreach ($exam_schedule_data as $row): ?>
+                        <tr>
+                            <td data-cell="Batch Number"><?= htmlspecialchars($row['batch_number']) ?></td>
+                            <td data-cell="Exam Name"><?= htmlspecialchars($row['exam_name']) ?></td>
+                            <td data-cell="Date"><?= htmlspecialchars($row['date']) ?></td>
+                            <td data-cell="Time"><?= htmlspecialchars($row['time']) ?></td>
+                            <td data-cell="Location"><?= htmlspecialchars($row['location']) ?></td>
+                            <td data-cell="Hours"><?= htmlspecialchars($row['hours']) ?></td>
+                            <td data-cell="Allow Submission"><?= $row['allow_submission'] ? 'Yes' : 'No' ?></td>
+                            <td data-cell="Action"><button onclick="manageExam(this.parentNode.parentNode)" class="manage-button view-link">Manage</button></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
