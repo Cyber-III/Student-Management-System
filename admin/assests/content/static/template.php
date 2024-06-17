@@ -122,6 +122,11 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
+            <!-- Viva -->
+            <div class="item">
+                <a href="../../../admin/viva/viva.php"><i class='bx bx-add-to-queue'></i>Viva Schedule</a>
+            </div>
+
             <!-- Library Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fa fa-book"></i>Library Books

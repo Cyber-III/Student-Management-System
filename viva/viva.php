@@ -46,6 +46,32 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script>
+        document.getElementById('addMember').addEventListener('click', function () {
+            var memberContainer = document.createElement('div');
+            memberContainer.className = 'member';
+
+            var usernameLabel = document.createElement('label');
+            usernameLabel.innerHTML = 'Username: <input type="text" name="username[]" required>';
+            memberContainer.appendChild(usernameLabel);
+
+            var nameLabel = document.createElement('label');
+            nameLabel.innerHTML = 'Name: <input type="text" name="name[]" required>';
+            memberContainer.appendChild(nameLabel);
+
+            var removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.className = 'view-link';
+            removeButton.innerText = 'Remove';
+            removeButton.addEventListener('click', function () {
+                memberContainer.remove();
+            });
+            memberContainer.appendChild(removeButton);
+
+            document.getElementById('teamMembers').appendChild(memberContainer);
+        });
+
+    </script>
 </head>
 <body>
 
@@ -55,13 +81,26 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     <?php elseif ($message == 'deleted'): ?>
         <div class="alert alert-danger">Records are deleted successfully.</div>
     <?php endif; ?>
-    <form id="vivaForm">
+    <form id="vivaForm" action="submit.php" method="POST">
+        <label for="viva_name">Viva Name:</label>
+        <select id="viva_name" name="viva_name" required>
+            <?php
+            // Fetch viva names from the viva_schedules table
+            $sql = "SELECT DISTINCT viva_name FROM viva_schedules";
+            $result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo '<option value="' . htmlspecialchars($row['viva_name']) . '">' . htmlspecialchars($row['viva_name']) . '</option>';
+            }
+            ?>
+        </select>
+
         <div id="teamMembers">
             <div class="member">
                 <label>Username: <input type="text" name="username[]" required></label>
                 <label>Name: <input type="text" name="name[]" required></label>
             </div>
         </div>
+
         <button type="button" id="addMember" class="view-link">Add Member</button>
         <button type="submit" class="view-link">Submit</button>
     </form>

@@ -152,7 +152,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Viva Session -->
             <div class="item">
-                <a href="../../../viva/viva.php"><i class="far fa-sticky-note"></i>Viva Application</a>
+                <a href="../../../viva/exam_submission.php"><i class="far fa-sticky-note"></i>Viva Application</a>
             </div>
 
             <!-- Results Category -->
