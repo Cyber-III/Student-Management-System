@@ -31,6 +31,7 @@ if ($team_id !== null && !empty($exam_name)) {
     }
 }
 
+
 $message = isset($_GET['message']) ? $_GET['message'] : '';
 
 ?>
@@ -94,7 +95,8 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="teamMembersTable">
+        <!-- ORIGINAL CODE -->
+        <!-- <tbody id="teamMembersTable">
             <?php
             if (count($viva_data) > 0) {
                 foreach ($viva_data as $row) {
@@ -108,6 +110,21 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                 echo "<tr><td colspan='3'>No records found</td></tr>";
             }
             ?>
+        </tbody> -->
+        <tbody id="teamMembersTable">
+        <?php
+        if (count($viva_data) > 0) {
+            foreach ($viva_data as $row) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                echo "<td> <button class='tabbtn btn btn-primary' data-toggle='modal' data-target='#manageModal' data-username='" . htmlspecialchars($row['username']) . "' data-name='" . htmlspecialchars($row['name']) . "'>Manage</button></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='3'>No records found</td></tr>";
+        }
+        ?>
         </tbody>
     </table>
 </div>
