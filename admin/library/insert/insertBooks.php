@@ -86,8 +86,8 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
     <?php elseif ($message == 'delete'): ?>
         <div class="alert alert-danger">Book was deleted successfully.</div>
     <?php endif; ?>
-
-    <form action="booksubmission.php" method="POST" enctype="multipart/form-data">
+<div class="main">
+<form action="booksubmission.php" method="POST" enctype="multipart/form-data">
         <div class="form-container">
             <div class="form-row">
                 <div class="form-group">
@@ -147,7 +147,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
     
 
-    <div class="table">
+    <div class="table_container">
         <table>
             <thead>
                 <tr>
@@ -161,10 +161,10 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                 <?php if ($result->num_rows > 0): ?>
                     <?php foreach ($books_data as $row): ?>
                         <tr data-book-id="<?= htmlspecialchars($row['id']) ?>">
-                            <td><?= htmlspecialchars($row['book_name']) ?></td>
-                            <td><?= htmlspecialchars($row['author_name']) ?></td>
-                            <td><?= htmlspecialchars($row['category']) ?></td>
-                            <td>
+                            <td data-cell ="Book Name"><?= htmlspecialchars($row['book_name']) ?></td>
+                            <td data-cell ="Author Name"><?= htmlspecialchars($row['author_name']) ?></td>
+                            <td data-cell ="Category"><?= htmlspecialchars($row['category']) ?></td>
+                            <td data-cell="Photo">
                                 <?php if (!empty($row['image'])): ?>
                                     <?php
                                     $imgData = base64_encode($row['image']);
@@ -231,6 +231,8 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             </form>
         </div>
     </div>
+</div>
+    
 
 </body>
 

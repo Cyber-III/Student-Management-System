@@ -220,8 +220,9 @@ if(isset($_SESSION['username'])) {
 
             <!-- Notice Board -->
             <div class="item">
-                <a href=""><i class="far fa-sticky-note"></i>Notice Board </a>
+                <a href="../../../admin/Add notice/add notice.php"><i class="far fa-sticky-note"></i> Add Notice </a>
             </div>
+
 
             <!-- Message -->
             <div class="item">

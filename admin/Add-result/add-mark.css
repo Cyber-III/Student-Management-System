@@ -85,3 +85,44 @@ button[type="submit"]:hover,
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
+.assignments-table {
+  margin-top: 50px;
+}
+
+.assignments-table h2 {
+  margin-bottom: 20px;
+}
+
+.assignments-table table {
+  width: 130%;
+  border-collapse: collapse;
+  border: #cacace;
+  margin-bottom: 20px;
+}
+
+.assignments-table th, .assignments-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.assignments-table th {
+  border-collapse: collapse;
+  border: #cacace;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid #007BFF;
+  border-radius: 20px;
+  background-color: #f0f8ff;
+  text-decoration: none;
+  color: #007BFF;
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+.download-button:hover {
+  background-color: #007BFF;
+  color: white;
+}

@@ -52,7 +52,6 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style-template.css">
     <link rel="stylesheet" href="exam_submission-style.css">
-
 </head>
 <body class="one">
 <div class="container1">
@@ -62,46 +61,38 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
     <div class="border-rectangle">
         <?php if ($schedules):?>
             <?php foreach ($schedules as $schedule):?>
-            <div class="schedule-item card">
-                <div class="card-header">
-                <h5 class="card-title"><?= htmlspecialchars($schedule['viva_name'])?></h5>
-                </div>
-                <div class="card-body">
-                <table class="table">
-                <tr>
-                    <th>Module Code</th>
-                    <td><?= htmlspecialchars($schedule['module_code'])?></td>
-                    </tr>
-
-                    <tr>
-                    <th>Module Name</th>
-                    <td><?= htmlspecialchars($schedule['module_name'])?></td>
-                    </tr>
-
-                    <tr>
-                    <th>Date</th>
-                    <td><?= htmlspecialchars($schedule['date'])?></td>
-                    </tr>
-
-                    <tr>
-                    <th>Location</th>
-                    <td><?= htmlspecialchars($schedule['location'])?></td>
-                    </tr>
-                    <tr>
-                    
-                </table>
                 <?php if ($schedule['allow_submission']): ?>
-                <form action="viva.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name']) ?>">
-                    <input type="hidden" name="exam_name" value="<?= htmlspecialchars($schedule['viva_name']) ?>">
-                    <button type="submit" name="submit" class="btn btn-primary">Register</button>
-                </form>
-            <?php else: ?>
-                <p>Registration closed for now.</p>
-            <?php endif; ?>
-
-                </div>
-            </div>
+                    <div class="schedule-item card">
+                        <div class="card-header">
+                            <h5 class="card-title"><?= htmlspecialchars($schedule['viva_name'])?></h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <th>Module Code</th>
+                                    <td><?= htmlspecialchars($schedule['module_code'])?></td>
+                                </tr>
+                                <tr>
+                                    <th>Module Name</th>
+                                    <td><?= htmlspecialchars($schedule['module_name'])?></td>
+                                </tr>
+                                <tr>
+                                    <th>Date</th>
+                                    <td><?= htmlspecialchars($schedule['date'])?></td>
+                                </tr>
+                                <tr>
+                                    <th>Location</th>
+                                    <td><?= htmlspecialchars($schedule['location'])?></td>
+                                </tr>
+                            </table>
+                            <form action="viva.php" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name']) ?>">
+                                <input type="hidden" name="exam_name" value="<?= htmlspecialchars($schedule['viva_name']) ?>">
+                                <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                <?php endif; ?>
             <?php endforeach;?>
         <?php else:?>
             <p>No Viva schedule found for <?= htmlspecialchars($course)?> <?= htmlspecialchars($batch_number)?>.</p>
@@ -115,3 +106,4 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
 <script src="script.js"></script>
 </body>
 </html>
+
