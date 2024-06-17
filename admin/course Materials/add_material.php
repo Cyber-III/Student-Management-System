@@ -4,7 +4,7 @@ session_start();
 // Include the database connection
 include_once('../connection.php');
 
-include_once('../../admin\assests\content\static\template.php');
+include_once('../../admin/assests/content/static/template.php');
 
 // Check if the username session variable is set
 if (!isset($_SESSION['username'])) {
@@ -29,7 +29,7 @@ if (isset($_POST['add'])) {
     $sql = "INSERT INTO course_materials (module_name, module_code, topic, batch_number, course, download) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('sssiss', $module_name, $module_code, $topic, $batch_number, $course, $download);
+        $stmt->bind_param('ssssss', $module_name, $module_code, $topic, $batch_number, $course, $download);
         $stmt->execute();
         $stmt->close();
         // Set the success message

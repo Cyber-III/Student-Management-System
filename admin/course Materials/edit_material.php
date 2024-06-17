@@ -1,19 +1,15 @@
 <?php
 session_start();
+ob_start();  // Start output buffering
 
-// Include the database connection
 include_once('../connection.php');
+include_once('../assests/content/static/template.php');
 
-include_once('../../admin\assests\content\static\template.php');
-
-
-// Check if the username session variable is set
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-// Check if ID is provided in the query string
 if (!isset($_GET['id'])) {
     header("Location: coursematerials.php");
     exit();
@@ -21,7 +17,6 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-// Fetch the existing course material details
 $sql = "SELECT * FROM course_materials WHERE id = ?";
 $stmt = $conn->prepare($sql);
 if ($stmt) {
@@ -39,7 +34,6 @@ if ($stmt) {
     die("Error in SQL query: " . $conn->error);
 }
 
-// Handle form submission for updating the course material
 if (isset($_POST['update'])) {
     $module_name = $_POST['module_name'];
     $module_code = $_POST['module_code'];
@@ -51,15 +45,18 @@ if (isset($_POST['update'])) {
     $sql = "UPDATE course_materials SET module_name = ?, module_code = ?, topic = ?, batch_number = ?, course = ?, download = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('sssissi', $module_name, $module_code, $topic, $batch_number, $course, $download, $id);
+        $stmt->bind_param('ssssssi', $module_name, $module_code, $topic, $batch_number, $course, $download, $id);
         $stmt->execute();
         $stmt->close();
+        $_SESSION['edit_success'] = "Course Material Edited Successfully.";
         header("Location: coursematerials.php");
         exit();
     } else {
         die("Error in SQL query: " . $conn->error);
     }
 }
+
+ob_end_flush();  // Flush the output buffer
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +67,7 @@ if (isset($_POST['update'])) {
     <title>Edit Course Material</title>
     <link rel="stylesheet" href="../style-template.css">
     <link rel="stylesheet" href="style-course_materials.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">
 <div class="container">

@@ -1,0 +1,84 @@
+body {
+    margin-left: 350px;
+    margin-top: 100px;
+}
+
+/* table style */
+table {
+    background: #ffffff;
+    width: 70%;
+    border-collapse: collapse;
+    border: #cacace;
+   
+}
+
+th, td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 15px;
+    /* white-space: nowrap; */
+    
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select, input[type="text"], input[type="date"], input[type="time"], input[type="number"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.container {
+    display: flex;
+}
+
+.view-link {
+    width: 130px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #007BFF;
+    border-radius: 88px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+.tabbtn {
+    width: 90px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #007BFF;
+    border-radius: 88px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.view-link:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.tabbtn:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.details {
+    width: 500px;
+    height: 300px;
+    margin-right: 150px;
+    background-color: #007BFF;
+    padding: 50px;
+    border-radius: 20px;
+    color: white;
+}
+

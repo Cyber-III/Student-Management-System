@@ -38,7 +38,7 @@ include_once('../assests/content/static/template.php');
     if (isset($_GET['already_applied']) && $_GET['already_applied'] == 1) {
         echo '<div class="position-fixed top-50 start-50 translate-middle alert-error-container">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    You already submitted the data for this job post. Please wait. Our admins will contact you as soon as possible.
+                    You have already applied for this job post. Please wait. Our admins will contact you as soon as possible.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>';

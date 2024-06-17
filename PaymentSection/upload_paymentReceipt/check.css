@@ -1,0 +1,21 @@
+body {
+    margin-top: 100px;
+    margin-left: 350px;
+}
+
+/* table style */
+table {
+    background: #ffffff;
+    width: 95%;
+    border-collapse: collapse;
+    border: #cacace;
+   
+}
+
+th, td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 15px;
+    /* white-space: nowrap; */
+    
+}

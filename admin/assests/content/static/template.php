@@ -30,6 +30,8 @@ if(isset($_SESSION['username'])) {
 
 }
 
+
+
 ?>
 
 <!doctype html>
@@ -50,6 +52,7 @@ if(isset($_SESSION['username'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style-template.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
@@ -91,11 +94,6 @@ if(isset($_SESSION['username'])) {
         <!-- Menu Items -->
         <div class="menu">
 
-            <!-- Profile Category -->
-            <div class="item">
-                    <a href="../../../admin/adminViewProfile/viewprofile.php"><i class="far fa-id-card"></i>Profile</a>
-            </div>
-
             <!-- Student Search -->
             <div class="item">
                 <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add Student</a>
@@ -105,17 +103,28 @@ if(isset($_SESSION['username'])) {
             <div class="item">
                 <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
             </div>
+
+
+            <div class="item">
+                <a href="../../../admin/add-result/result.php"><i class='bx bx-add-to-queue'></i>Add Results</a>
+            </div>
             
+
             <!-- Payment Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-hand-holding-usd"></i>Student Payments
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Make Payments</a>
-                    <a href="" class="sub-item">View Payments Status</a>
-                    <a href="" class="sub-item">Upload Payment Receipts</a>
+                    <a href="../../../admin/payment/payment_plan/plan.php" class="sub-item">Manage Payment Plan</a>
+                    <a href="../../../admin/payment/view/view_payments.php" class="sub-item">View Payments</a>
+                    <a href="../../../PaymentSection/upload_paymentReceipt/check.php" class="sub-item">Upload Payment Receipts</a>
                 </div>
+            </div>
+
+            <!-- Viva -->
+            <div class="item">
+                <a href="../../../admin/viva/viva.php"><i class='bx bx-add-to-queue'></i>Viva Schedule</a>
             </div>
 
             <!-- Library Category -->
@@ -124,8 +133,8 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Reserve Library Books</a>
-                    <a href="" class="sub-item">Manage Reserved Books</a>
+                    <a href="../../../admin/library/insert/insertBooks.php" class="sub-item">Insert Books</a>
+                    <a href="../../../admin/library/orders/bookOrders.php" class="sub-item">Books Orders</a>
 
                 </div>
             </div>
@@ -175,10 +184,8 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                   <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
-                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Assignment Submissions</a>
-                  <a href="" class="sub-item">Assignment Feedback</a>
-                  <a href="" class="sub-item">Add Mitigation Request</a>
-                  <a href="" class="sub-item">View Mitigation Request</a>
+                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a>
+                  <a href="../../../admin/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
               </div>
             </div>
 
@@ -202,7 +209,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Course Modules -->
             <div class="item">
-                <a href=""><i class="fas fa-info-circle"></i>Course Modules </a>
+                <a href="../../../admin/Course modules/modules.php"><i class="fas fa-info-circle"></i>Course Modules </a>
             </div>
             
             <!-- Course Materials -->
