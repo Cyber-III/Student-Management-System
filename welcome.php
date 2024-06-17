@@ -14,7 +14,7 @@ if (!$conn) {
 }
 
 // Fetch the latest notices from the database
-$sql = "SELECT subject FROM notice ORDER BY added_date DESC LIMIT 5";
+$sql = "SELECT subject, added_date FROM notice ORDER BY added_date DESC LIMIT 5";
 $result = $conn->query($sql);
 
 // Create an array to hold the notices
@@ -63,13 +63,32 @@ $conn->close();
                             <?php echo " | "; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
-                    <?php echo " | "; ?> &nbsp;<span style="color: yellow; font-weight:500";>Please Check the Notice Board</span>
+                    <?php echo " | "; ?> &nbsp;<span style="color: yellow; font-weight:500;">Please Check the Notice Board</span>
                 <?php else: ?>
                     No notices available. &nbsp;&nbsp;&nbsp;<span style="color: red;">Please Check the Notice Board</span>
                 <?php endif; ?>
             </marquee>
         </p>
     </div>
+</div>
+
+<!-- Notice Board Section -->
+<div class="notice-board">
+    <h2>Notice Board</h2>
+    <?php if (!empty($notices)): ?>
+        <?php foreach ($notices as $notice): ?>
+            <?php
+                // Check if the notice was added in the last 24 hours
+                $isRecent = (time() - strtotime($notice['added_date'])) <= 86400;
+            ?>
+            <div class="notice <?php echo $isRecent ? 'recent' : ''; ?>">
+                <p><?php echo htmlspecialchars($notice['subject']); ?></p>
+                <small><?php echo date("d M Y", strtotime($notice['added_date'])); ?></small>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>No notices available.</p>
+    <?php endif; ?>
 </div>
 
 </body>
