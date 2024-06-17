@@ -28,27 +28,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             final_result = VALUES(final_result)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssssssss', $studentId, $batch, $module, $module, $assignmentMarks, $presentationMarks, $examMarks, $finalMarks);
-    $stmt->execute();
+    if ($stmt) {
+        $stmt->bind_param('ssssssss', $studentId, $batch, $module, $module, $assignmentMarks, $presentationMarks, $examMarks, $finalMarks);
+        $stmt->execute();
 
-    // Check if insertion or update was successful
-    if ($stmt->affected_rows > 0) {
-        $_SESSION['message'] = "Result for $studentName ($studentId) has been successfully saved.";
+        // Check if insertion or update was successful
+        if ($stmt->affected_rows > 0) {
+            $response = ['success' => true, 'message' => "Result for $studentName ($studentId) has been successfully saved."];
+        } else {
+            $response = ['success' => false, 'message' => "Failed to save result for $studentName ($studentId). Please try again."];
+        }
+
+        // Close statement
+        $stmt->close();
     } else {
-        $_SESSION['error'] = "Failed to save result for $studentName ($studentId). Please try again.";
+        $response = ['success' => false, 'message' => "Database error: " . $conn->error];
     }
 
-    // Close statement and connection
-    $stmt->close();
+    // Close connection
     $conn->close();
 
-    // Redirect back to add-mark.php or appropriate page
-    header("Location: add-mark.php?course=$course&batch=$batch&semester=$semester");
+    // Return JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
     exit();
 } else {
     // Handle non-POST requests appropriately
-    $_SESSION['error'] = "Invalid request method. Please submit the form.";
-    header("Location: add-mark.php"); // Redirect to appropriate error handling page
+    $response = ['success' => false, 'message' => "Invalid request method. Please submit the form."];
+
+    // Return JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
     exit();
 }
 ?>
