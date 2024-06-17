@@ -1,22 +1,14 @@
 <?php
 session_start();
-
-// Include the database connection
 include_once('../connection.php');
+include_once('../assests/content/static/template.php');
 
-include_once('../../admin/assests/content/static/template.php');
-
-// Check if the username session variable is set
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-$username = $_SESSION['username']; // Get the username from the session
-
-// Initialize variables
-$course = $module_name = $module_code = $date = $duration = $num_assignments = "";
-$success_message = $error = "";
+$username = $_SESSION['username'];
 
 // Fetch courses for the dropdown menu
 $courses = [];
@@ -30,23 +22,23 @@ if ($result_courses) {
     $error = "Error fetching courses: " . $conn->error;
 }
 
-// Handle form submission for adding a new module
-if (isset($_POST['add'])) {
-    // Sanitize and validate inputs (assuming input validation has been done)
-    $course = $_POST['course']; // Assign to $course instead of $module_name
-    $module_name = $_POST['module_name'];
-    $module_code = $_POST['module_code'];
-    $date = $_POST['date'];
-    $duration = $_POST['duration'];
-    $num_assignments = $_POST['num_assignments'];
 
-    // Prepare and execute SQL insertion
-    $sql = "INSERT INTO modules (course, module_name, module_code, date, duration, num_assignments) VALUES (?, ?, ?, ?, ?, ?)";
+if (isset($_POST['add'])) {
+    $course = $_POST['course'];
+    $batch = $_POST['batch'];
+    $module = $_POST['module'];
+    $lecturer = $_POST['lecturer'];
+    $date = $_POST['date'];
+    $time = $_POST['time'];
+    $notes = $_POST['notes'];
+    $hall = $_POST['hall'];
+
+    $sql = "INSERT INTO class_schedule (course, batch, module, lecturer, date, time, notes, hall) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('sssssi', $course, $module_name, $module_code, $date, $duration, $num_assignments);
+        $stmt->bind_param('ssssssss', $course, $batch, $module, $lecturer, $date, $time, $notes, $hall);
         if ($stmt->execute()) {
-            $success_message = "Module added successfully.";
+            $success_message = "Class schedule added successfully.";
         } else {
             $error = "Error executing query: " . $stmt->error;
         }
@@ -63,7 +55,7 @@ if (isset($_POST['add'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Module</title>
+    <title>Add Schedule</title>
     <link rel="stylesheet" href="../style-template.css">
     <link rel="stylesheet" href="style-module.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -71,7 +63,7 @@ if (isset($_POST['add'])) {
 <body class="body">
 <div class="container">
     <br><br>    
-    <h1>Add Module</h1>
+    <h1>Add Class Schedule</h1>
     <?php if (!empty($success_message)): ?>
         <div class="alert alert-success" role="alert">
             <?= $success_message ?>
@@ -95,28 +87,34 @@ if (isset($_POST['add'])) {
             </select>
         </div>
         <div class="mb-3">
-            <label for="module_name" class="form-label">Module Name</label>
-            <input type="text" class="form-control" id="module_name" name="module_name" value="<?= htmlspecialchars($module_name); ?>" required>
+            <label for="batch" class="form-label">Batch</label>
+            <input type="text" class="form-control" id="batch" name="batch" required>
         </div>
-
         <div class="mb-3">
-            <label for="module_code" class="form-label">Module Code</label>
-            <input type="text" class="form-control" id="module_code" name="module_code" value="<?= htmlspecialchars($module_code); ?>" required>
+            <label for="module" class="form-label">Module</label>
+            <input type="text" class="form-control" id="module" name="module" required>
+        </div>
+        <div class="mb-3">
+            <label for="lecturer" class="form-label">Lecturer</label>
+            <input type="text" class="form-control" id="lecturer" name="lecturer" required>
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>
-            <input type="date" class="form-control" id="date" name="date" value="<?= htmlspecialchars($date); ?>" required>
+            <input type="date" class="form-control" id="date" name="date" required>
         </div>
         <div class="mb-3">
-            <label for="duration" class="form-label">Duration</label>
-            <input type="text" class="form-control" id="duration" name="duration" value="<?= htmlspecialchars($duration); ?>" required>
+            <label for="time" class="form-label">Time</label>
+            <input type="time" class="form-control" id="time" name="time" required>
         </div>
         <div class="mb-3">
-            <label for="num_assignments" class="form-label">Number of Assignments</label>
-            <input type="text" class="form-control" id="num_assignments" name="num_assignments" value="<?= htmlspecialchars($num_assignments); ?>" required>
+            <label for="notes" class="form-label">Notes</label>
+            <input type="text" class="form-control" id="notes" name="notes">
         </div>
-        <button type="submit" name="add" class="btn btn-primary">Add Module</button>
-        <a href="modules.php" class="btn btn-secondary">Back</a>
+        <div class="mb-3">
+            <label for="hall" class="form-label">Hall</label>
+            <input type="text" class="form-control" id="hall" name="hall" required>
+        </div>
+        <button type="submit" class="btn btn-primary" name="add">Add Schedule</button>
     </form>
 </div>
 </body>

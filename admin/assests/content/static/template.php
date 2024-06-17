@@ -122,6 +122,11 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
+            <!-- Viva -->
+            <div class="item">
+                <a href="../../../admin/viva/viva.php"><i class='bx bx-add-to-queue'></i>Viva Schedule</a>
+            </div>
+
             <!-- Library Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fa fa-book"></i>Library Books
@@ -186,7 +191,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Class Schedule Category -->
             <div class="item">
-                    <a href="" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
+                    <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
 
             <!-- Results Category -->
@@ -215,8 +220,9 @@ if(isset($_SESSION['username'])) {
 
             <!-- Notice Board -->
             <div class="item">
-                <a href=""><i class="far fa-sticky-note"></i>Notice Board </a>
+                <a href="../../../admin/Add notice/add notice.php"><i class="far fa-sticky-note"></i> Add Notice </a>
             </div>
+
 
             <!-- Message -->
             <div class="item">

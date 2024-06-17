@@ -3,7 +3,6 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
   margin: 0;
   padding: 0;
   display: flex;
@@ -13,23 +12,22 @@ body {
 }
 
 .container {
-  background-color: #ffffff;
   margin-top: 60px;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 600px; /* Adjust width as needed */
+  width: 700px; /* Adjust width as needed */
 }
 
 .topic {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .topic h1 {
   margin: 0;
   padding: 10px 0;
-  color: #007bff;
+  color: #000000;
+  font-weight: 700;
 }
 
 form {
@@ -51,14 +49,18 @@ button {
 }
 
 button {
-  background-color: #007bff;
-  color: #ffffff;
   border: none;
   cursor: pointer;
+  border: 1px solid #007BFF;
+  border-radius: 88px;
+  background-color: #f0f8ff;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
 }
 
 select:disabled {

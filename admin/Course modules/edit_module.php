@@ -4,7 +4,7 @@ ob_start();  // Start output buffering
 
 include_once('../connection.php');  // Adjust path as necessary
 
-include_once('../../admin/assets/content/static/template.php');
+include_once('../../admin/assests/content/static/template.php');
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -33,6 +33,18 @@ if ($stmt) {
     }
 } else {
     die("Error in SQL query: " . $conn->error);
+}
+
+// Fetch courses for the dropdown menu
+$courses = [];
+$sql_courses = "SELECT course_name FROM course_tbl";
+$result_courses = $conn->query($sql_courses);
+if ($result_courses) {
+    while ($row = $result_courses->fetch_assoc()) {
+        $courses[] = $row['course_name'];
+    }
+} else {
+    $error = "Error fetching courses: " . $conn->error;
 }
 
 if (isset($_POST['update'])) {
@@ -67,16 +79,24 @@ ob_end_flush();  // Flush the output buffer
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Module</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-modules.css">
+    <link rel="stylesheet" href="style-module.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">
 <div class="container">
+    <br><br>
     <h1>Edit Module</h1>
     <form method="post">
         <div class="mb-3">
             <label for="course" class="form-label">Course</label>
-            <input type="text" class="form-control" id="course" name="course" value="<?= htmlspecialchars($module['course']); ?>" required>
+            <select class="form-control" id="course" name="course" required>
+                <option value="">Select Course</option>
+                <?php foreach ($courses as $course_name): ?>
+                    <option value="<?= htmlspecialchars($course_name); ?>" <?= $module['course'] == $course_name ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($course_name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="module_name" class="form-label">Module Name</label>
@@ -99,7 +119,7 @@ ob_end_flush();  // Flush the output buffer
             <input type="text" class="form-control" id="num_assignments" name="num_assignments" value="<?= htmlspecialchars($module['num_assignments']); ?>" required>
         </div>
         <button type="submit" name="update" class="btn btn-primary">Update</button>
-        <a href="modules.php" class="btn btn-secondary">Cancel</a>
+        <a href="modules.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
 </body>
