@@ -1,22 +1,41 @@
 <?php
 session_start();
-include_once('../connection.php');
-include_once('../assests/content/static/template.php');
+ob_start();  // Start output buffering
+
+include_once('../connection.php');  // Adjust path as necessary
+
+include_once('../../admin/assests/content/static/template.php');
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
+if (!isset($_GET['id'])) {
+    header("Location: class_schedule.php");
+    exit();
+}
+
 $id = $_GET['id'];
+
 $sql = "SELECT * FROM class_schedule WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $id);
-$stmt->execute();
-$result = $stmt->get_result();
-$schedule = $result->fetch_assoc();
-$stmt->close();
+if ($stmt) {
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $schedule = $result->fetch_assoc();
+    $stmt->close();
 
+    if (!$schedule) {
+        header("Location: class_schedule.php");
+        exit();
+    }
+} else {
+    die("Error in SQL query: " . $conn->error);
+}
+
+// Fetch courses for the dropdown menu
 $courses = [];
 $sql_courses = "SELECT course_name FROM course_tbl";
 $result_courses = $conn->query($sql_courses);
@@ -35,25 +54,24 @@ if (isset($_POST['update'])) {
     $lecturer = $_POST['lecturer'];
     $date = $_POST['date'];
     $time = $_POST['time'];
-    $notes = $_POST['notes'];
     $hall = $_POST['hall'];
+    $notes = $_POST['notes'];
 
-    $sql = "UPDATE class_schedule SET course=?, batch=?, module=?, lecturer=?, date=?, time=?, notes=?, hall=? WHERE id=?";
+    $sql = "UPDATE class_schedule SET course = ?, batch = ?, module = ?, lecturer = ?, date = ?, time = ?, hall = ?, notes = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('ssssssssi', $course, $batch, $module, $lecturer, $date, $time, $notes, $hall, $id);
-        if ($stmt->execute()) {
-            $_SESSION['edit_success'] = "Class schedule updated successfully.";
-            header("Location: modules.php");
-            exit();
-        } else {
-            $error = "Error executing query: " . $stmt->error;
-        }
+        $stmt->bind_param('ssssssssi', $course, $batch, $module, $lecturer, $date, $time, $hall, $notes, $id);
+        $stmt->execute();
         $stmt->close();
+        $_SESSION['edit_success'] = "Class schedule edited successfully.";
+        header("Location: class_schedule.php");
+        exit();
     } else {
-        $error = "Error in SQL query preparation: " . $conn->error;
+        die("Error in SQL query: " . $conn->error);
     }
 }
+
+ob_end_flush();  // Flush the output buffer
 ?>
 
 <!DOCTYPE html>
@@ -61,28 +79,18 @@ if (isset($_POST['update'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Schedule</title>
+    <title>Edit Class Schedule</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-module.css">
+    <link rel="stylesheet" href="style-class_schedule.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">
 <div class="container">
-    <br><br>    
+    <br><br>
     <h1>Edit Class Schedule</h1>
-    <?php if (!empty($success_message)): ?>
-        <div class="alert alert-success" role="alert">
-            <?= $success_message ?>
-        </div>
-    <?php endif; ?>
-    <?php if (!empty($error)): ?>
-        <div class="alert alert-danger" role="alert">
-            <?= $error ?>
-        </div>
-    <?php endif; ?>
     <form method="post">
         <div class="mb-3">
-            <label for="course" class="form-label">Course Name</label>
+            <label for="course" class="form-label">Course</label>
             <select class="form-control" id="course" name="course" required>
                 <option value="">Select Course</option>
                 <?php foreach ($courses as $course_name): ?>
@@ -113,14 +121,15 @@ if (isset($_POST['update'])) {
             <input type="time" class="form-control" id="time" name="time" value="<?= htmlspecialchars($schedule['time']); ?>" required>
         </div>
         <div class="mb-3">
-            <label for="notes" class="form-label">Notes</label>
-            <input type="text" class="form-control" id="notes" name="notes" value="<?= htmlspecialchars($schedule['notes']); ?>">
-        </div>
-        <div class="mb-3">
             <label for="hall" class="form-label">Hall</label>
             <input type="text" class="form-control" id="hall" name="hall" value="<?= htmlspecialchars($schedule['hall']); ?>" required>
         </div>
-        <button type="submit" class="btn btn-primary" name="update">Update Schedule</button>
+        <div class="mb-3">
+            <label for="notes" class="form-label">Notes</label>
+            <textarea class="form-control" id="notes" name="notes" required><?= htmlspecialchars($schedule['notes']); ?></textarea>
+        </div>
+        <button type="submit" name="update" class="btn btn-primary">Update</button>
+        <a href="class_schedule.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
 </body>
