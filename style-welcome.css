@@ -66,6 +66,70 @@ body::-webkit-scrollbar {
     white-space: nowrap;
 }
 
+.notice-board {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    transform: translateY(-50%);
+    width: 20%;
+    background-color: #333333e0;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.541);
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.notice-board h2 {
+    text-align: center;
+    padding: 15px;
+}
+
+.notice {
+    background-color: #535353;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    position: relative;
+}
+
+.notice.recent {
+    background-color: #555555;
+    font-weight: bold;
+}
+
+.notice p {
+    margin: 0;
+}
+
+.notice small {
+    display: block;
+    text-align: right;
+    color: #bbb;
+}
+
+.notice.recent::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
 /* Media Queries for Responsiveness */
 
 @media screen and (max-width: 600px) {

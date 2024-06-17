@@ -40,20 +40,6 @@ if ($result->num_rows > 0) {
     }
 }
 
-// Fetch assignments data
-$sql = "SELECT username, batch_number, module_name, assignment_name, submission_date, file_path FROM assignments WHERE batch_number = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $batch);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$assignments = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $assignments[] = $row;
-    }
-}
-
 // Close the database connection
 $conn->close();
 ?>
@@ -145,22 +131,9 @@ $conn->close();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($assignments)): ?>
-                        <?php foreach ($assignments as $assignment): ?>
-                            <tr>
-                                <td><?php echo $assignment['username']; ?></td>
-                                <td><?php echo $assignment['batch_number']; ?></td>
-                                <td><?php echo $assignment['module_name']; ?></td>
-                                <td><?php echo $assignment['assignment_name']; ?></td>
-                                <td><?php echo $assignment['submission_date']; ?></td>
-                                <td><a href="<?php echo $assignment['file_path']; ?>" class="download-button" target="_blank">Download</a></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="6">No assignments found.</td>
-                        </tr>
-                    <?php endif; ?>
+                    <tr>
+                        <td colspan="6">No assignments found.</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -196,6 +169,37 @@ $conn->close();
             } else {
                 studentNameInput.value = '';
             }
+
+            // Fetch assignments for the selected student
+            fetchAssignments(selectedUsername);
+        }
+
+        function fetchAssignments(username) {
+            fetch('get_assignments.php?username=' + username)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('.assignments-table tbody');
+                    tableBody.innerHTML = '';
+
+                    if (data.length > 0) {
+                        data.forEach(assignment => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${assignment.username}</td>
+                                <td>${assignment.batch_number}</td>
+                                <td>${assignment.module_name}</td>
+                                <td>${assignment.assignment_name}</td>
+                                <td>${assignment.submission_date}</td>
+                                <td><a href="${assignment.file_path}" class="download-button" target="_blank">Download</a></td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    } else {
+                        const row = document.createElement('tr');
+                        row.innerHTML = '<td colspan="6">No assignments found.</td>';
+                        tableBody.appendChild(row);
+                    }
+                });
         }
 
         function goBack() {
