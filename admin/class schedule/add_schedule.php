@@ -18,13 +18,13 @@ $username = $_SESSION['username']; // Get the username from the session
 $course = $batch = $module = $lecturer = $date = $time = $hall = $notes = "";
 $success_message = $error = "";
 
-// Fetch courses for the dropdown menu
+// Fetch courses from course_tbl for the dropdown menu
 $courses = [];
-$sql_courses = "SELECT DISTINCT course FROM class_schedule";
+$sql_courses = "SELECT course_name FROM course_tbl";
 $result_courses = $conn->query($sql_courses);
 if ($result_courses) {
     while ($row = $result_courses->fetch_assoc()) {
-        $courses[] = $row['course'];
+        $courses[] = $row['course_name'];
     }
 } else {
     $error = "Error fetching courses: " . $conn->error;
@@ -67,7 +67,7 @@ if (isset($_POST['add'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Class Schedule</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-module.css">
+    <link rel="stylesheet" href="style-class_schedule.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">

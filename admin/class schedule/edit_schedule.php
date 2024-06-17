@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 if (!isset($_GET['id'])) {
-    header("Location: schedules.php");
+    header("Location: class_schedule.php");
     exit();
 }
 
@@ -28,7 +28,7 @@ if ($stmt) {
     $stmt->close();
 
     if (!$schedule) {
-        header("Location: schedules.php");
+        header("Location: class_schedule.php");
         exit();
     }
 } else {
@@ -81,7 +81,7 @@ ob_end_flush();  // Flush the output buffer
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Class Schedule</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-module.css">
+    <link rel="stylesheet" href="style-class_schedule.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">
@@ -129,7 +129,7 @@ ob_end_flush();  // Flush the output buffer
             <textarea class="form-control" id="notes" name="notes" required><?= htmlspecialchars($schedule['notes']); ?></textarea>
         </div>
         <button type="submit" name="update" class="btn btn-primary">Update</button>
-        <a href="schedules.php" class="btn btn-secondary">Back</a>
+        <a href="class_schedule.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
 </body>

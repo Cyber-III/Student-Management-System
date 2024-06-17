@@ -131,7 +131,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
             <div class="col-md-3">
                 <div class="input-group">
-                    <button id="search-icon" class="btn btn-primary" onclick="searchSchedules()"><i class="bi bi-search"></i> Search</button>
+                    <button id="search-icon" class="btn btn-primary" onclick="searchSchedules()"><i class="bi bi-search"></i> View</button>
                 </div>
             </div>
         </div>
