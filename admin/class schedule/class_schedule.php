@@ -3,6 +3,7 @@ session_start();
 include_once('../connection.php');
 include_once('../assests/content/static/template.php');
 
+// Handle delete operation
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['delete'])) {
         $course = $_POST['course'];
@@ -65,7 +66,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     </script>
 </head>
 <body>
-    <div class="container mt-5" style = "margin-left :350px; ">
+    <div class="container mt-5">
         <div class="topic">
             <h1>Class Schedules</h1>
         </div>
@@ -99,22 +100,17 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         </div>
         <div class="table-responsive">
-            <?php if (isset($error)): ?>
+            <?php if (isset($_SESSION['error_message'])): ?>
                 <div class="alert alert-danger">
-                    <?php echo htmlspecialchars($error); ?>
+                    <?php echo htmlspecialchars($_SESSION['error_message']); ?>
                 </div>
+                <?php unset($_SESSION['error_message']); ?>
             <?php endif; ?>
             <?php if (isset($_SESSION['delete_success'])): ?>
                 <div class="alert alert-success">
                     <?php echo htmlspecialchars($_SESSION['delete_success']); ?>
                 </div>
                 <?php unset($_SESSION['delete_success']); ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['edit_success'])): ?>
-                <div class="alert alert-success">
-                    <?php echo htmlspecialchars($_SESSION['edit_success']); ?>
-                </div>
-                <?php unset($_SESSION['edit_success']); ?>
             <?php endif; ?>
             <table class="table table-striped">
                 <thead>
@@ -132,7 +128,30 @@ while ($row = mysqli_fetch_assoc($result)) {
                     </tr>
                 </thead>
                 <tbody id="schedules-tbody">
-                    <!-- Class schedule data will be loaded here via AJAX -->
+                    <?php
+                    // Fetch class schedule data
+                    $sql = "SELECT * FROM class_schedule";
+                    $result = mysqli_query($conn, $sql);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['course']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['batch']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['module']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['lecturer']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['date']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['time']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['notes']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['hall']) . "</td>";
+                        echo '<td><a href="edit_schedule.php?id=' . $row['course'] . '" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i> Edit</a></td>';
+                        echo '<td>
+                                <form method="post">
+                                    <input type="hidden" name="course" value="' . htmlspecialchars($row['course']) . '">
+                                    <button type="submit" name="delete" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Delete</button>
+                                </form>
+                              </td>';
+                        echo "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
