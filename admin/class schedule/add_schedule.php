@@ -3,6 +3,7 @@ session_start();
 
 // Include the database connection
 include_once('../connection.php');
+
 include_once('../../admin/assests/content/static/template.php');
 
 // Check if the username session variable is set
@@ -56,6 +57,7 @@ if (isset($_POST['add'])) {
         $error = "Error in SQL query preparation: " . $conn->error;
     }
 }
+
 ?>
 
 <!DOCTYPE html>

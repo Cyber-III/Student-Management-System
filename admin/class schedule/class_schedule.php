@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt) {
             $stmt->bind_param('i', $id);
             if ($stmt->execute()) {
-                $_SESSION['delete_success'] = "Class schedule deleted successfully.";
+                $_SESSION['delete_success'] = "Schedule deleted successfully.";
             } else {
-                $_SESSION['error_message'] = "Error deleting class schedule: " . $stmt->error;
+                $_SESSION['error_message'] = "Error deleting schedule: " . $stmt->error;
             }
             $stmt->close();
         } else {
@@ -22,9 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Fetch distinct courses and modules for filtering
+$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
+
+// Fetch distinct courses, modules, and batches for filtering
 $courses = [];
 $modules = [];
+$batches = [];
 $result = mysqli_query($conn, "SELECT DISTINCT course FROM class_schedule");
 while ($row = mysqli_fetch_assoc($result)) {
     $courses[] = $row['course'];
@@ -32,6 +35,10 @@ while ($row = mysqli_fetch_assoc($result)) {
 $result = mysqli_query($conn, "SELECT DISTINCT module FROM class_schedule");
 while ($row = mysqli_fetch_assoc($result)) {
     $modules[] = $row['module'];
+}
+$result = mysqli_query($conn, "SELECT DISTINCT batch FROM class_schedule");
+while ($row = mysqli_fetch_assoc($result)) {
+    $batches[] = $row['batch'];
 }
 ?>
 
@@ -42,7 +49,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Schedule Table Page</title>
     <link rel="stylesheet" href="../style-template.css">
-    <link rel="stylesheet" href="style-module.css">
+    <link rel="stylesheet" href="style-class_schedule.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -50,11 +57,20 @@ while ($row = mysqli_fetch_assoc($result)) {
         function searchSchedules() {
             var course = document.getElementById('course').value;
             var module = document.getElementById('module').value;
+            var batch = document.getElementById('batch').value;
+            var date = document.getElementById('date').value;
+
+            // Prepare an object to store non-empty search parameters
+            var searchData = {};
+            if (course) searchData.course = course;
+            if (module) searchData.module = module;
+            if (batch) searchData.batch = batch;
+            if (date) searchData.date = date;
 
             $.ajax({
                 url: 'search_schedules.php',
                 type: 'GET',
-                data: { course: course, module: module },
+                data: searchData,
                 success: function(response) {
                     document.getElementById('schedules-tbody').innerHTML = response;
                 },
@@ -68,13 +84,13 @@ while ($row = mysqli_fetch_assoc($result)) {
 <body>
     <div class="container mt-5">
         <div class="topic">
-            <h1>Class Schedules</h1>
+            <h1>Class Schedule</h1>
         </div>
         <div class="add-new my-3">
             <a href="add_schedule.php" class="btn btn-success">Add New Schedule</a>
         </div>
         <div class="row g-3 mb-4">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label for="course" class="form-label">Search by Course:</label>
                 <div class="input-group">
                     <select id="course" name="course" class="form-select">
@@ -83,10 +99,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button id="search-icon" class="btn btn-outline-primary" onclick="searchSchedules()"><i class="bi bi-search"></i></button>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label for="module" class="form-label">Search by Module:</label>
                 <div class="input-group">
                     <select id="module" name="module" class="form-select">
@@ -95,7 +110,28 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <option value="<?= htmlspecialchars($module) ?>"><?= htmlspecialchars($module) ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button id="search-icon" class="btn btn-outline-primary" onclick="searchSchedules()"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="batch" class="form-label">Search by Batch:</label>
+                <div class="input-group">
+                    <select id="batch" name="batch" class="form-select">
+                        <option value="">Select Batch</option>
+                        <?php foreach ($batches as $batch): ?>
+                            <option value="<?= htmlspecialchars($batch) ?>"><?= htmlspecialchars($batch) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="date" class="form-label">Search by Date:</label>
+                <div class="input-group">
+                    <input type="date" id="date" name="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <button id="search-icon" class="btn btn-primary" onclick="searchSchedules()"><i class="bi bi-search"></i> View</button>
                 </div>
             </div>
         </div>
@@ -126,14 +162,14 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <th>Lecturer</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Notes</th>
                         <th>Hall</th>
+                        <th>Notes</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody id="schedules-tbody">
-                    <!-- Class schedule data will be loaded here via AJAX -->
+                    <!-- Schedule data will be loaded here via AJAX -->
                 </tbody>
             </table>
         </div>
