@@ -243,7 +243,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Lecture Evaluation -->
             <div class="item">
-                <a href=""><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
+                <a href="../../../admin/EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
             </div>
 
             <!-- Vacancies -->
