@@ -35,10 +35,9 @@ if ($stmt) {
         echo "<td>" . htmlspecialchars($row['time']) . "</td>";
         echo "<td>" . htmlspecialchars($row['notes']) . "</td>";
         echo "<td>" . htmlspecialchars($row['hall']) . "</td>";
-        echo "<td><a href='edit_schedule.php?id=" . htmlspecialchars($row['id']) . "' class='btn btn-primary'>Edit</a></td>";
         echo "<td>
                 <form method='post'>
-                    <input type='hidden' name='delete_id' value='" . htmlspecialchars($row['id']) . "'>
+                    <input type='hidden' name='delete_course' value='" . htmlspecialchars($row['course']) . "'>
                     <button type='submit' class='btn btn-danger' name='delete'>Delete</button>
                 </form>
               </td>";

@@ -8,12 +8,12 @@ if (!isset($_SESSION['username'])) {
 }
 
 if (isset($_POST['delete'])) {
-    $id = $_POST['delete_id'];
+    $id = $_POST['c'];
     
-    $sql = "DELETE FROM class_schedule WHERE id = ?";
+    $sql = "DELETE FROM class_schedule WHERE course = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
-        $stmt->bind_param('i', $id);
+        $stmt->bind_param('s', $course);
         if ($stmt->execute()) {
             $_SESSION['delete_success'] = "Class schedule deleted successfully.";
         } else {

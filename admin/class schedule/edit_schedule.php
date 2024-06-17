@@ -8,10 +8,10 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$id = $_GET['id'];
-$sql = "SELECT * FROM class_schedule WHERE id = ?";
+$id = $_GET['course'];
+$sql = "SELECT * FROM class_schedule WHERE course = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $id);
+$stmt->bind_param('s', $course);
 $stmt->execute();
 $result = $stmt->get_result();
 $schedule = $result->fetch_assoc();
