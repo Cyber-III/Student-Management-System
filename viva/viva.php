@@ -9,17 +9,22 @@ include_once('../assests/content/static/template.php');
 // Fetch the current user's team ID
 $current_username = $_SESSION['username']; // Assuming the username is stored in session
 $team_id = null;
-$sql = "SELECT id FROM team_members WHERE username = '" . mysqli_real_escape_string($conn, $current_username) . "'";
+$sql = "SELECT viva_name, id FROM team_members WHERE username = '" . mysqli_real_escape_string($conn, $current_username) . "'";
 $result = mysqli_query($conn, $sql);
 
 if ($result && $row = mysqli_fetch_assoc($result)) {
     $team_id = $row['id'];
+    $exam_name = $row['viva_name'];
 }
 
-// Fetch all team members' data based on the team ID
+// Fetch the submitted details from the form
+$module_name = isset($_POST['module_name']) ? $_POST['module_name'] : '';
+$exam_name = isset($_POST['exam_name']) ? $_POST['exam_name'] : '';
+
+// Fetch all team members' data based on the team ID and the selected viva name
 $viva_data = [];
-if ($team_id !== null) {
-    $sql = "SELECT * FROM team_members WHERE id = " . intval($team_id);
+if ($team_id !== null && !empty($exam_name)) {
+    $sql = "SELECT * FROM team_members WHERE id = " . intval($team_id) . " AND viva_name = '" . mysqli_real_escape_string($conn, $exam_name) . "'";
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result)) {
         $viva_data[] = $row;
@@ -46,32 +51,6 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        document.getElementById('addMember').addEventListener('click', function () {
-            var memberContainer = document.createElement('div');
-            memberContainer.className = 'member';
-
-            var usernameLabel = document.createElement('label');
-            usernameLabel.innerHTML = 'Username: <input type="text" name="username[]" required>';
-            memberContainer.appendChild(usernameLabel);
-
-            var nameLabel = document.createElement('label');
-            nameLabel.innerHTML = 'Name: <input type="text" name="name[]" required>';
-            memberContainer.appendChild(nameLabel);
-
-            var removeButton = document.createElement('button');
-            removeButton.type = 'button';
-            removeButton.className = 'view-link';
-            removeButton.innerText = 'Remove';
-            removeButton.addEventListener('click', function () {
-                memberContainer.remove();
-            });
-            memberContainer.appendChild(removeButton);
-
-            document.getElementById('teamMembers').appendChild(memberContainer);
-        });
-
-    </script>
 </head>
 <body>
 
@@ -83,16 +62,10 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     <?php endif; ?>
     <form id="vivaForm" action="submit.php" method="POST">
         <label for="viva_name">Viva Name:</label>
-        <select id="viva_name" name="viva_name" required>
-            <?php
-            // Fetch viva names from the viva_schedules table
-            $sql = "SELECT DISTINCT viva_name FROM viva_schedules";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<option value="' . htmlspecialchars($row['viva_name']) . '">' . htmlspecialchars($row['viva_name']) . '</option>';
-            }
-            ?>
-        </select>
+        <input type="text" id="viva_name" name="viva_name" value="<?= htmlspecialchars($exam_name) ?>" readonly>
+
+        <label for="module_name">Module Name:</label>
+        <input type="text" id="module_name" name="module_name" value="<?= htmlspecialchars($module_name) ?>" readonly>
 
         <div id="teamMembers">
             <div class="member">
@@ -104,8 +77,8 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
         <button type="button" id="addMember" class="view-link">Add Member</button>
         <button type="submit" class="view-link">Submit</button>
     </form>
-    <br> 
-    <br> 
+    <br>
+    <br>
     <div id="timer"></div>
 
     <h2>Team Members</h2>
@@ -187,13 +160,11 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
     </div>
 </div>
 
-
-
-    <script>
-        const vivaData = <?php echo json_encode($viva_data); ?>;
-    </script>
-    <script src="script.js"></script>
-    <script>
+<script>
+    const vivaData = <?php echo json_encode($viva_data); ?>;
+</script>
+<script src="script.js"></script>
+<script>
     $('#manageModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var username = button.data('username');
@@ -224,36 +195,34 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
         });
     });
 
-
     $('#deleteButton').on('click', function () {
-    var username = $('#username').val();
+        var username = $('#username').val();
 
-    // Display confirmation dialog
-    var confirmation = confirm("Are you sure?");
+        // Display confirmation dialog
+        var confirmation = confirm("Are you sure?");
 
-    if (confirmation) {
-        // If the user confirms, proceed with the AJAX request to delete the record
-        $.ajax({
-            url: 'delete.php',
-            type: 'POST',
-            data: { username: username },
-            success: function(response) {
-                console.log("Delete response:", response); // Debugging
-                window.location.href = 'viva.php?message=deleted'; // Redirect to show the delete message
-            },
-            error: function(error) {
-                console.log("Delete error:", error); // Debugging
-                alert('Error deleting record');
-            }
-        });
-    } else {
-        // If the user cancels, do nothing
-        console.log("Delete canceled");
-    }
-});
+        if (confirmation) {
+            // If the user confirms, proceed with the AJAX request to delete the record
+            $.ajax({
+                url: 'delete.php',
+                type: 'POST',
+                data: { username: username },
+                success: function(response) {
+                    console.log("Delete response:", response); // Debugging
+                    window.location.href = 'viva.php?message=deleted'; // Redirect to show the delete message
+                },
+                error: function(error) {
+                    console.log("Delete error:", error); // Debugging
+                    alert('Error deleting record');
+                }
+            });
+        } else {
+            // If the user cancels, do nothing
+            console.log("Delete canceled");
+        }
+    });
 
 </script>
-
 
 </body>
 </html>

@@ -191,7 +191,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Class Schedule Category -->
             <div class="item">
-                    <a href="" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
+                    <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
 
             <!-- Results Category -->
@@ -220,8 +220,9 @@ if(isset($_SESSION['username'])) {
 
             <!-- Notice Board -->
             <div class="item">
-                <a href=""><i class="far fa-sticky-note"></i>Notice Board </a>
+                <a href="../../../admin/Add notice/add notice.php"><i class="far fa-sticky-note"></i> Add Notice </a>
             </div>
+
 
             <!-- Message -->
             <div class="item">
