@@ -1,6 +1,7 @@
-body {
-    margin-left: 350px;
-    margin-top: 100px;
+.main{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
 }
 
 /* form */
@@ -167,3 +168,66 @@ th, td {
     text-decoration: none;
     cursor: pointer;
 }
+
+@media screen and (min-width: 1200px) {
+    .main{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+ }
+ @media screen and (max-width: 1199px) {
+
+    .main{
+        width: 100%;
+       
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+        
+
+    }
+    
+    .modal {
+        margin-left: 0px;
+    }
+
+    
+    th{
+        display: none;
+    }
+    td{
+        
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.75rem 1rem;
+    }
+    td:first-child{
+        padding-top: 2rem;
+
+    }
+    td:last-child{
+        padding-bottom: 2rem;
+        
+    }
+    td::before{
+        content:attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    } 
+
+}
+@media screen and (max-width: 650px){
+    .form-row {
+       display: flex;
+       flex-wrap: wrap; /* Add this to allow flex items to wrap to the next line */
+       gap: 20px;
+     }
+     .modal {
+       margin-left: 0px;
+     }
+    }
+ 
