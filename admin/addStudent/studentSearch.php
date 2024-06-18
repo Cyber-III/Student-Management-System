@@ -54,8 +54,6 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
         <?php elseif ($message == 'delete'): ?>
             <div class="alert alert-danger">The batch was deleted successfully.</div>
         <?php endif; ?>
-        <button class="batch view-link" id="newBatchBtn">New Batch +</button>
-        <button class="batch delete-link" id="removeBatchBtn">Drop Batch -</button>
 
         <form action="studentSubmission.php" method="POST">
             <div class="form-container">
@@ -160,77 +158,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
         </form>
         <br>
     </div>
-    
-    
 
-    <!-- The Insert Modal -->
-    <div id="newBatchModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Add New Batch</h2>
-            <form action="batch_createdelete.php" method="POST">
-                <div class="form-group">
-                    <label for="batch_no">Batch Number:</label>
-                    <input type="text" id="batch_no" name="batch_no" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="batch_course">Course:</label>
-                    <select id="batch_course" name="batch_course" required>
-                        <option value="">Select Course</option>
-                        <?php foreach (array_unique($courses) as $course): ?>
-                            <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="batch_uni">Awarding University:</label>
-                    <select id="batch_uni" name="batch_uni" required>
-                        <option value="">Select University</option>
-                        <?php foreach ($award_unis as $award_uni): ?>
-                            <option value="<?= htmlspecialchars($award_uni) ?>"><?= htmlspecialchars($award_uni) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="batch_no">Intake:</label>
-                    <input type="text" id="intake" name="intake" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="cdate">Commencement Date:</label>
-                    <input type="date" id="cdate" name="cdate" required>
-                </div>
-                <br>
-                <button type="submit" class="batch view-link">Add Batch</button>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- The Remove Modal -->
-    <div id="removeBatchModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Remove Batch</h2>
-            <form action="batch_createdelete.php" method="POST">
-                <div class="form-group">
-                    <label for="batch_number">Batch Number:</label>
-                    <select id="batch_number" name="batch_number" required> <!-- making required the fields -->
-                        <option value="">Select Batch Number</option>
-                        <?php foreach ($batch_numbers as $batch_number): ?>
-                            <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <br>
-                <button type="submit" class="batch delete-link">Remove Batch</button>
-            </form>
-        </div>
-    </div>
 
 </body>
 

@@ -1,0 +1,175 @@
+body {
+    margin-left: 350px;
+    margin-top: 100px;
+}
+
+.main_container{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+
+}
+/* form */
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.form-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 20px;
+    
+}
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+select, input[type="text"], input[type="date"], input[type="time"], input[type="number"], input[type="password"], input[type="email"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.half-width {
+    flex: 0 0 50%;
+}
+.half-width-input {
+    width: 100%;
+}
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.view-link {
+    width: 90px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #007BFF;
+    border-radius: 88px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.view-link:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.delete-link {
+    width: 90px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #e4282e;
+    border-radius: 88px;
+    background-color: #fff1f4;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.delete-link:hover {
+    background-color: #ee0c0c;
+    color: white;
+    cursor: pointer;
+}
+
+.batch {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    margin-left: 150px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal::-webkit-scrollbar {
+    Display: none
+}
+
+
+ 
+@media screen and (min-width: 1200px) {
+    .main_container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+ }
+ @media screen and (max-width: 1199px) {
+
+    .main_container{
+        width: 100%;
+       
+        justify-content: center;
+        margin-top: 5rem
+        ;
+        
+    }
+    .modal {
+        margin-left: 0px;
+      }
+ }
+ @media screen and (max-width: 650px){
+ .form-row {
+    display: flex;
+    flex-wrap: wrap; /* Add this to allow flex items to wrap to the next line */
+    gap: 20px;
+  }
+  .modal {
+    margin-left: 0px;
+  }
+}
