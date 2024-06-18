@@ -20,10 +20,10 @@ if ($result->num_rows > 0) {
 }
 
 // Get batch number from the URL parameter
-if (isset($_GET['batch'])) {
-    $batch = $_GET['batch'];
-} else {
+$batch = $_GET['batch'] ?? null;
+if (!$batch) {
     // Handle error, redirect, or show error message
+    exit('Batch number is missing.');
 }
 
 // Fetch student IDs and names from login_tbl for the selected batch
@@ -54,30 +54,28 @@ $conn->close();
     <link rel="stylesheet" href="../style-template.css">
 </head>
 <body>
-    <div class="header">
-        <!-- <h1>Add Student Result</h1> -->
-    </div>
+    <div class="header"></div>
     <div class="container">
         <div id="message" style="display:none;"></div> <!-- Message container -->
-        <form id="addResultForm" action="process_result.php" method="post"> <!-- Updated action -->
+        <form id="addResultForm"> <!-- Removed action to handle via JS -->
             <div class="form-group">
                 <label for="course">Course:</label>
-                <input type="text" id="course" name="course" value="<?php echo $_GET['course']; ?>" readonly>
+                <input type="text" id="course" name="course" value="<?php echo htmlspecialchars($_GET['course'] ?? ''); ?>" readonly>
             </div>
             <div class="form-group">
                 <label for="batch">Batch:</label>
-                <input type="text" id="batch" name="batch" value="<?php echo $batch; ?>" readonly>
+                <input type="text" id="batch" name="batch" value="<?php echo htmlspecialchars($batch); ?>" readonly>
             </div>
             <div class="form-group">
                 <label for="semester">Semester:</label>
-                <input type="text" id="semester" name="semester" value="<?php echo $_GET['semester']; ?>" readonly>
+                <input type="text" id="semester" name="semester" value="<?php echo htmlspecialchars($_GET['semester'] ?? ''); ?>" readonly>
             </div>
             <div class="form-group">
                 <label for="module">Module:</label>
                 <select id="module" name="module" required>
                     <option value="">-- Select Module --</option>
                     <?php foreach ($module_names as $module_name): ?>
-                        <option value="<?php echo $module_name; ?>"><?php echo $module_name; ?></option>
+                        <option value="<?php echo htmlspecialchars($module_name); ?>"><?php echo htmlspecialchars($module_name); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -86,7 +84,7 @@ $conn->close();
                 <select id="studentId" name="studentId" required onchange="updateStudentName()">
                     <option value="">-- Select Student ID --</option>
                     <?php foreach ($students as $username => $student_name): ?>
-                        <option value="<?php echo $username; ?>"><?php echo $username; ?></option>
+                        <option value="<?php echo htmlspecialchars($username); ?>"><?php echo htmlspecialchars($username); ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -115,7 +113,38 @@ $conn->close();
                 <button type="button" onclick="goBack()" class="back-button">Back</button>
             </div>
         </form>
+
+        <!-- Add the assignments table here -->
+        <div class="assignments-table">
+            <h2>Coursework</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Batch Number</th>
+                        <th>Module Name</th>
+                        <th>Assignment Name</th>
+                        <th>Submission Date</th>
+                        <th>Document</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6">No assignments found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <!-- Modal for displaying messages -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
@@ -126,43 +155,87 @@ $conn->close();
             document.getElementById('course').value = course;
             document.getElementById('batch').value = batch;
             document.getElementById('semester').value = semester;
-
-            populateModules(semester);
         });
 
         function updateStudentName() {
             const studentIdSelect = document.getElementById('studentId');
             const studentNameInput = document.getElementById('studentName');
             
-            // Get the selected username
             const selectedUsername = studentIdSelect.value;
             
-            // Lookup the student name in the students array
-            const studentName = "<?php echo isset($students) ? addslashes(json_encode($students)) : '{}'; ?>";
-            const students = JSON.parse(studentName);
-
-            // Update the student name input field
+            const students = <?php echo json_encode($students); ?>;
+            
             if (students[selectedUsername]) {
                 studentNameInput.value = students[selectedUsername];
             } else {
                 studentNameInput.value = '';
             }
+
+            fetchAssignments(selectedUsername);
+        }
+
+        function fetchAssignments(username) {
+            fetch('get_assignments.php?username=' + username)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('.assignments-table tbody');
+                    tableBody.innerHTML = '';
+
+                    if (data.length > 0) {
+                        data.forEach(assignment => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${assignment.username}</td>
+                                <td>${assignment.batch_number}</td>
+                                <td>${assignment.module_name}</td>
+                                <td>${assignment.assignment_name}</td>
+                                <td>${assignment.submission_date}</td>
+                                <td><a href="${assignment.file_path}" class="file-link" download>Download</a></td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    } else {
+                        const row = document.createElement('tr');
+                        row.innerHTML = '<td colspan="6">No assignments found.</td>';
+                        tableBody.appendChild(row);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching assignments:', error);
+                });
         }
 
         function goBack() {
-            // Reset the form values
-            document.getElementById('studentName').value = '';
-            document.getElementById('studentId').value = '';
-            document.getElementById('assignmentMarks').value = '';
-            document.getElementById('presentationMarks').value = '';
-            document.getElementById('examMarks').value = '';
-            document.getElementById('finalMarks').value = '';
-
-            window.history.back(); // JavaScript function to navigate back
+            window.history.back();
         }
+
+        function closeModal() {
+            document.getElementById('messageModal').style.display = 'none';
+        }
+
+        function showMessage(message) {
+            document.getElementById('modalMessage').innerText = message;
+            document.getElementById('messageModal').style.display = 'block';
+        }
+
+        document.getElementById('addResultForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('process_result.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                showMessage(data.message);
+            })
+            .catch(error => {
+                showMessage('An error occurred. Please try again.');
+                console.error('Error:', error);
+            });
+        });
     </script>
 </body>
 </html>
-
-
-

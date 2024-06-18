@@ -124,7 +124,13 @@ if(isset($_SESSION['username'])) {
 
             <!-- Viva -->
             <div class="item">
-                <a href="../../../admin/viva/viva.php"><i class='bx bx-add-to-queue'></i>Viva Schedule</a>
+                <a class="sub-btn"><i class='bx bx-add-to-queue'></i>Viva
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                    <a href="../../../admin/viva/viva.php" class="sub-item">Viva Schedule</a>
+                    <a href="../../../admin/viva/team.php" class="sub-item">Viva Team Management</a>
+                </div>
             </div>
 
             <!-- Library Category -->
@@ -237,7 +243,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Lecture Evaluation -->
             <div class="item">
-                <a href=""><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
+                <a href="../../../admin/EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
             </div>
 
             <!-- Vacancies -->

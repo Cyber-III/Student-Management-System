@@ -46,15 +46,14 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 </head>
 
 <body>
-
-    <?php if ($message == 'insertstudent'): ?>
-        <div class="alert alert-success">Student was inserted successfully.</div>
-    <?php elseif ($message == 'insert'): ?>
-        <div class="alert alert-success">The batch was created successfully.</div>
-    <?php elseif ($message == 'delete'): ?>
-        <div class="alert alert-danger">The batch was deleted successfully.</div>
-    <?php endif; ?>
     <div class="main_container">
+        <?php if ($message == 'insertstudent'): ?>
+            <div class="alert alert-success">Student was inserted successfully.</div>
+        <?php elseif ($message == 'insert'): ?>
+            <div class="alert alert-success">The batch was created successfully.</div>
+        <?php elseif ($message == 'delete'): ?>
+            <div class="alert alert-danger">The batch was deleted successfully.</div>
+        <?php endif; ?>
         <button class="batch view-link" id="newBatchBtn">New Batch +</button>
         <button class="batch delete-link" id="removeBatchBtn">Drop Batch -</button>
 
