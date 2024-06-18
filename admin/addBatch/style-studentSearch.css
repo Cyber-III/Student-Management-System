@@ -139,8 +139,42 @@ input[type="submit"]:hover {
     Display: none
 }
 
+table {
+    background: #ffffff;
+    width: 100%;
+    border-collapse: collapse;
+    border: #cacace;
+   
+}
 
- 
+th, td {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 15px;
+    /* white-space: nowrap; */
+    
+}
+
+#search-icon {
+    margin-left: 5px;
+    padding: 6px;
+    width: 45px;
+    height: 45px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#search-icon:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
 @media screen and (min-width: 1200px) {
     .main_container{
      width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
