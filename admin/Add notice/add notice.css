@@ -1,8 +1,9 @@
 /* Ensure consistent styling for labels and inputs */
-.container{
+.container {
   padding-top: 60px;
- margin-left:230px ;
+  margin-left: 230px;
 }
+
 .form-container {
   max-width: 600px;
   margin: 30px auto;
@@ -11,14 +12,13 @@
   border-radius: 6px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .form-content {
   margin-bottom: 60px;
 }
 
-.form-content p{
+.form-content p {
   margin-bottom: 10px;
 }
 
@@ -39,7 +39,8 @@ label {
 
 input[type="text"],
 input[type="date"],
-input[type="url"] {
+input[type="url"],
+select {
   width: calc(100% - 20px);
   padding: 10px;
   margin-bottom: 15px;
@@ -51,7 +52,8 @@ input[type="url"] {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input[type="submit"] {
+input[type="submit"],
+button[type="button"] {
   background-color: #4CAF50;
   color: white;
   padding: 12px 24px;
@@ -61,8 +63,41 @@ input[type="submit"] {
   font-size: 16px;
   font-family: Arial, sans-serif;
   transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+button[type="button"]:hover {
   background-color: #45a049;
+}
+
+.batchField {
+  margin-bottom: 10px;
+}
+
+.batchField select {
+  width: calc(100% - 80px);
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #19191c;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.batchField button {
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 16px;
+  color: white;
+  background-color: #f44336;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.batchField button:hover {
+  background-color: #d32f2f;
 }
