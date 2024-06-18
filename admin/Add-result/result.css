@@ -11,11 +11,16 @@ body {
   height: 100vh;
 }
 
-.container {
-  margin-top: 60px;
-  padding: 20px;
-  border-radius: 8px;
-  width: 700px; /* Adjust width as needed */
+.container1 {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+
+}
+.sub_box {
+  /* width: 700px; */
+  display: flex;
+  justify-content: center;
 }
 
 .topic {
@@ -33,6 +38,10 @@ body {
 form {
   display: flex;
   flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
 }
 
 label {
@@ -49,18 +58,23 @@ button {
 }
 
 button {
-  border: none;
-  cursor: pointer;
-  border: 1px solid #007BFF;
-  border-radius: 88px;
-  background-color: #f0f8ff;
+  /* width: 400px; */
+  color: #182431; 
+  text-decoration: none; /* Remove underline */
+  font-weight: bold;
+  padding: 5px 15px;
+  border: 1px solid #007BFF; 
+  border-radius: 88px; 
+  background-color: #f0f8ff; 
   transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+
 }
 
 button:hover {
   background-color: #007BFF;
   color: white;
   cursor: pointer;
+
 }
 
 select:disabled {
@@ -72,8 +86,25 @@ option {
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
-  .container {
-      width: 90%;
+@media screen and (min-width: 1200px) {
+  .container1{
+   width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+   margin: 100px auto auto 300px; 
+   overflow: hidden;
+   max-width: none;
   }
+}
+@media screen and (max-width: 1199px) {
+
+  .container1{
+      width: 100%;
+     
+      justify-content: center;
+    
+      ;
+      
+      
+  }
+
+
 }

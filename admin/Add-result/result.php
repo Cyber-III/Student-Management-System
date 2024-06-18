@@ -36,10 +36,12 @@ $conn->close();
     <link rel="stylesheet" href="result.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container1">
         <div class="topic">
             <h1>Add Student Result</h1>
         </div>
+        <div class="sub_box">
+        
         <form id="selectCourseForm" action="add-mark.php" method="get"> 
             <label for="course">Select Course:</label>
             <select name="course" id="course" required>
@@ -63,6 +65,9 @@ $conn->close();
             <br>
             <button type="submit">Submit</button> 
         </form>
+
+        </div>
+        
     </div>
     <script>
         const courseSelect = document.getElementById('course');
