@@ -2,12 +2,12 @@
 include_once('../connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Fetch viva name from the form submission
-    $viva_name = $_POST['viva_name'];
-    $usernames = $_POST['username'];
-    $names = $_POST['name'];
+    // Sanitize and validate input
+    $viva_name = htmlspecialchars($_POST['viva_name']);
+    $usernames = array_map('htmlspecialchars', $_POST['username']);
+    $names = array_map('htmlspecialchars', $_POST['name']);
 
-    // Fetch the schedule details from viva_schedules table based on the viva name
+    // Fetch the latest viva schedule
     $schedule_sql = "SELECT batch_number, date, location, viva_name FROM viva_schedules WHERE viva_name = ? ORDER BY date DESC LIMIT 1";
     $stmt = $conn->prepare($schedule_sql);
     if ($stmt === false) {
@@ -28,10 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $classroom = $schedule_row['location'];
         $module_name = $schedule_row['viva_name'];
     } else {
-        die('No schedule found in the viva_schedules table for the provided viva name.');
+        die('No schedule found for the provided viva name.');
     }
 
-    // Fetch the last assigned time slot
+    // Fetch the last time slot for the given date
     $sql = "SELECT MAX(time_slot_end) as last_slot FROM team_members WHERE date = ?";
     $stmt_last_slot = $conn->prepare($sql);
     if ($stmt_last_slot === false) {
@@ -45,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die('SQL error: ' . $conn->error);
     }
 
-    $last_slot = "09:00:00"; // Default start time
-
+    $last_slot = "09:00:00"; // Default start time if no slots exist
     if ($result_last_slot->num_rows > 0) {
         $row = $result_last_slot->fetch_assoc();
         if (!empty($row['last_slot'])) {
@@ -54,38 +53,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // Initialize start time
+    // Initialize start time and date objects
     $start_time = new DateTime($last_slot);
+    $current_date = new DateTime($date);
 
-    // Check if the initial end time is beyond 16:00:00 and reset if needed
-    if ($start_time >= new DateTime('16:00:00')) {
-        $start_time = new DateTime('09:00:00');
-    }
+    // Function to calculate the next time slot
+    function calculateNextTimeSlot($start_time, $current_date) {
+        // Define the workday intervals
+        $morning_start = new DateTime('09:00:00');
+        $morning_end = new DateTime('12:00:00');
+        $lunch_start = new DateTime('12:00:00');
+        $lunch_end = new DateTime('13:00:00');
+        $afternoon_start = new DateTime('13:00:00');
+        $day_end = new DateTime('16:00:00');
 
-    // Calculate the end time for the current batch
-    $end_time = clone $start_time;
-    $end_time->add(new DateInterval('PT15M'));
+        // Check if the current start time is within the lunch break
+        if ($start_time >= $lunch_start && $start_time < $lunch_end) {
+            $start_time = $lunch_end;
+        }
 
-    // Skip interval between 12:00 and 13:00
-    if ($start_time >= new DateTime('12:00:00') && $start_time < new DateTime('13:00:00')) {
-        $start_time = new DateTime('13:00:00');
+        // Calculate end time by adding 15 minutes to the start time
         $end_time = clone $start_time;
         $end_time->add(new DateInterval('PT15M'));
+
+        // If the end time crosses the morning end time but is before lunch start
+        if ($end_time > $morning_end && $end_time <= $lunch_start) {
+            $start_time = $afternoon_start;
+            $end_time = clone $start_time;
+            $end_time->add(new DateInterval('PT15M'));
+        }
+
+        // If the end time crosses the day end time
+        if ($end_time > $day_end) {
+            // Move to the next day and start from 9 am
+            $current_date->modify('+1 day');
+            $start_time = $morning_start;
+            $end_time = clone $start_time;
+            $end_time->add(new DateInterval('PT15M'));
+        }
+
+        return [$start_time, $end_time, $current_date];
     }
-
-    // Check if the end time is beyond 16:00:00 and reset if needed
-    if ($end_time > new DateTime('16:00:00')) {
-        $start_time = new DateTime('09:00:00');
-        $time_diff = $end_time->diff(new DateTime('16:00:00'));
-        $end_time = clone $start_time;
-        $end_time->add($time_diff);
-    }
-
-    $time_slot_start = $start_time->format('H:i:s');
-    $time_slot_end = $end_time->format('H:i:s');
-
-    // Generate a unique ID for this batch based on the current timestamp
-    $batch_id = time(); // Using timestamp to ensure uniqueness for the batch
 
     // Prepare the SQL statement with placeholders for insertion
     $stmt_insert = $conn->prepare("INSERT INTO team_members (id, username, name, time_slot_start, time_slot_end, batch_number, date, classroom, viva_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -93,10 +101,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die('MySQL prepare error: ' . $conn->error);
     }
 
-    // Loop through each username and insert into database
+    // Loop through each username and insert into the database
     foreach ($usernames as $index => $username) {
+        // Calculate time slots
+        list($start_time, $end_time, $current_date) = calculateNextTimeSlot($start_time, $current_date);
+
+        $time_slot_start = $start_time->format('H:i:s');
+        $time_slot_end = $end_time->format('H:i:s');
+        $formatted_date = $current_date->format('Y-m-d');
+
+        // Generate a unique ID for this batch based on the current timestamp
+        $batch_id = time() + $index; // Using timestamp to ensure uniqueness for the batch
+
         // Bind parameters
-        $stmt_insert->bind_param('issssssss', $batch_id, $username, $names[$index], $time_slot_start, $time_slot_end, $batch_number, $date, $classroom, $module_name);
+        $stmt_insert->bind_param('issssssss', $batch_id, $username, $names[$index], $time_slot_start, $time_slot_end, $batch_number, $formatted_date, $classroom, $module_name);
 
         // Execute the statement
         $stmt_insert->execute();
@@ -106,13 +124,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Failed to register username $username for the Viva session.<br>";
         }
+
+        // Update start_time for the next slot
+        $start_time = $end_time;
     }
 
     // Close the statement
     $stmt_insert->close();
 
     echo "Team members successfully registered for the Viva session!";
-
 } else {
     echo "Invalid request method.";
 }
