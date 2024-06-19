@@ -8,22 +8,43 @@ include_once('../connection.php');
 // Loading the HTML template
 include_once('../assests/content/static/template.php');
 
-// Fetch the data from the database
-$sql = "SELECT * FROM notice";
-$result = $conn->query($sql);
+// Assume $username is retrieved from the session or some login mechanism
+$username = $_SESSION['username'];
 
-// Create an array to hold the data
-$notices = [];
+$sql = "SELECT course, batch_number FROM login_tbl WHERE username = ?";
+$stmt = $conn->prepare($sql);
+if ($stmt) {
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    $stmt->close();
 
-if ($result->num_rows > 0) {
-    // Fetch the data
-    while ($row = $result->fetch_assoc()) {
-        $notices[] = $row;
+    if ($user) {
+        $course = $user['course'];
+        $batch_number = $user['batch_number'];
+
+        // Store batch number in session
+        $_SESSION['batch_number'] = $batch_number;
+
+        // Use backticks for the table name to avoid SQL syntax errors
+        $sql = "SELECT * FROM `batch-notice` WHERE batch_number = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt) {
+            $stmt->bind_param('s', $batch_number);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $notices = $result->fetch_all(MYSQLI_ASSOC); // Fetch all records
+            $stmt->close();
+        } else {
+            die("Error in SQL query: " . $conn->error);
+        }
+    } else {
+        die("User not found.");
     }
+} else {
+    die("Error in SQL query: " . $conn->error);
 }
-
-// Close the database connection
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +54,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notice Board</title>
     <link rel="stylesheet" href="../../style-template.css"> <!-- Template File CSS -->
-    <link rel="stylesheet" href="style-noticeBoard.css"> 
-
+    <link rel="stylesheet" href="style-noticeBoard.css">
 </head>
 <body>
 <div class="container">
