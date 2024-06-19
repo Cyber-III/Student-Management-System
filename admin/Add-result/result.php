@@ -38,7 +38,7 @@ $conn->close();
 <body>
     <div class="container1">
         <div class="topic">
-            <h1>Add Student Result</h1>
+            <h2>Add Student Result</h2>
         </div>
         <div class="sub_box">
         
