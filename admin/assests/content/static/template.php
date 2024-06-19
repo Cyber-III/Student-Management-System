@@ -96,6 +96,11 @@ if(isset($_SESSION['username'])) {
 
             <!-- Student Search -->
             <div class="item">
+                <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add New Batches</a>
+            </div>
+
+            <!-- Student Search -->
+            <div class="item">
                 <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add Student</a>
             </div>
 
