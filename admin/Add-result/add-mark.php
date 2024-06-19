@@ -9,7 +9,7 @@ include_once('../connection.php');
 include_once('../assests/content/static/template.php');
 
 // Fetch module names (assuming this part remains unchanged)
-$sql = "SELECT module_name FROM modules";
+$sql = "SELECT DISTINCT module_name FROM assignments";
 $result = mysqli_query($conn, $sql);
 
 $module_names = [];
@@ -94,19 +94,19 @@ $conn->close();
             </div>
             <div class="form-group">
                 <label for="assignmentMarks">Assignment Marks:</label>
-                <input type="text" id="assignmentMarks" name="assignmentMarks" required>
+                <input type="text" id="assignmentMarks" name="assignmentMarks" min="0" max="100">
             </div>
             <div class="form-group">
                 <label for="presentationMarks">Presentation Marks:</label>
-                <input type="text" id="presentationMarks" name="presentationMarks" required>
+                <input type="text" id="presentationMarks" name="presentationMarks" min="0" max="100">
             </div>
             <div class="form-group">
                 <label for="examMarks">Exam Marks:</label>
-                <input type="text" id="examMarks" name="examMarks" required>
+                <input type="text" id="examMarks" name="examMarks" min="0" max="100">
             </div>
             <div class="form-group">
                 <label for="finalMarks">Final Marks:</label>
-                <input type="text" id="finalMarks" name="finalMarks" required>
+                <input type="text" id="finalMarks" name="finalMarks" required min="0" max="100">
             </div>
             <div class="button-container">
                 <button type="submit" class="submit-button">Submit Result</button>

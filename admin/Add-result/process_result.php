@@ -18,31 +18,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $examMarks = $_POST['examMarks'];
     $finalMarks = $_POST['finalMarks'];
 
-    // Prepare SQL statement to insert or update marks in final_result table
-    $sql = "INSERT INTO final_result (username, batch_number, module_code, module_name, coursework_result, presentation_result, exam_result, final_result) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE 
-            coursework_result = VALUES(coursework_result),
-            presentation_result = VALUES(presentation_result),
-            exam_result = VALUES(exam_result),
-            final_result = VALUES(final_result)";
+    // Start a transaction
+    $conn->begin_transaction();
 
-    $stmt = $conn->prepare($sql);
-    if ($stmt) {
-        $stmt->bind_param('ssssssss', $studentId, $batch, $module, $module, $assignmentMarks, $presentationMarks, $examMarks, $finalMarks);
-        $stmt->execute();
+    try {
+        // Prepare SQL statement to insert or update marks in final_result table
+        $sqlFinalResult = "INSERT INTO final_result (username, batch_number, module_code, module_name, coursework_result, presentation_result, exam_result, final_result) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON DUPLICATE KEY UPDATE 
+                coursework_result = VALUES(coursework_result),
+                presentation_result = VALUES(presentation_result),
+                exam_result = VALUES(exam_result),
+                final_result = VALUES(final_result)";
 
-        // Check if insertion or update was successful
-        if ($stmt->affected_rows > 0) {
-            $response = ['success' => true, 'message' => "Result for $studentName ($studentId) has been successfully saved."];
+        $stmtFinalResult = $conn->prepare($sqlFinalResult);
+        if ($stmtFinalResult) {
+            $stmtFinalResult->bind_param('ssssssss', $studentId, $batch, $module, $module, $assignmentMarks, $presentationMarks, $examMarks, $finalMarks);
+            $stmtFinalResult->execute();
+
+            // Check if insertion or update was successful
+            if ($stmtFinalResult->affected_rows > 0) {
+                // Prepare SQL statement to update assignment marks in assignments table
+                $sqlAssignment = "UPDATE assignments SET results = ? WHERE username = ? AND batch_number = ? AND module_name = ?";
+                $stmtAssignment = $conn->prepare($sqlAssignment);
+                if ($stmtAssignment) {
+                    $stmtAssignment->bind_param('ssss', $assignmentMarks, $studentId, $batch, $module);
+                    $stmtAssignment->execute();
+
+                    // Check if update was successful
+                    if ($stmtAssignment->affected_rows > 0) {
+                        $response = ['success' => true, 'message' => "Result for $studentName ($studentId) has been successfully saved."];
+                    } else {
+                        throw new Exception("Failed to update assignment result for $studentName ($studentId). Please try again.");
+                    }
+
+                    // Close statement
+                    $stmtAssignment->close();
+                } else {
+                    throw new Exception("Database error: " . $conn->error);
+                }
+            } else {
+                throw new Exception("Failed to save final result for $studentName ($studentId). Please try again.");
+            }
+
+            // Close statement
+            $stmtFinalResult->close();
         } else {
-            $response = ['success' => false, 'message' => "Failed to save result for $studentName ($studentId). Please try again."];
+            throw new Exception("Database error: " . $conn->error);
         }
 
-        // Close statement
-        $stmt->close();
-    } else {
-        $response = ['success' => false, 'message' => "Database error: " . $conn->error];
+        // Commit the transaction
+        $conn->commit();
+    } catch (Exception $e) {
+        // Rollback the transaction if any query fails
+        $conn->rollback();
+        $response = ['success' => false, 'message' => $e->getMessage()];
     }
 
     // Close connection
