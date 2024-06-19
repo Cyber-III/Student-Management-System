@@ -1,3 +1,5 @@
+/* result.css */
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -8,22 +10,28 @@ body {
   height: 100vh;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 .container1 {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
+    max-width: 800px;
+    padding: 20px;
 }
 
 .sub_box {
-  /* width: 700px; */
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .topic {
-  margin-bottom: 25px;
-  text-align: left;
-  margin-left: 45px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .topic h1 {
@@ -54,15 +62,27 @@ button {
 }
 
 button {
-  /* width: 400px; */
-  color: #182431;
-  text-decoration: none; 
+  color: #182431; 
+  text-decoration: none;
   font-weight: bold;
   padding: 5px 15px;
   border: 1px solid #007BFF;
   border-radius: 88px;
   background-color: #f0f8ff;
-  transition: background-color 0.3s, color 0.3s; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#clearButton{
+  border: 1px solid red;
+  border-radius: 88px;
+  background-color: #f0f8ff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#clearButton:hover{
+  background-color: #ff0000;
+  color: white;
+  cursor: pointer;
 }
 
 button:hover {
@@ -79,19 +99,28 @@ option {
   padding: 8px;
 }
 
+.button-group {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.button-group button {
+  margin-right: 15px;
+}
+
 /* Responsive adjustments */
 @media screen and (min-width: 1200px) {
-  .container1 {
-    width: calc(65% - 300px); 
-    margin: 100px auto auto 300px;
-    overflow: hidden;
-    max-width: none;
+  .container1{
+   width: calc(100% - 300px); 
+   margin: 100px auto auto 300px; 
+   overflow: hidden;
+   max-width: none;
   }
 }
 
 @media screen and (max-width: 1199px) {
-  .container1 {
-    width: 100%;
-    justify-content: center;
+  .container1{
+      width: 100%;
+      justify-content: center;
   }
 }
