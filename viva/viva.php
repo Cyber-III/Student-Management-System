@@ -54,11 +54,11 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
 
 </head>
 <body>
+<div class="main_container">
+    <marquee><p class="text">*If you are registering for a team project, please ensure that only the group leader fills out the form.</p></marquee>
 
-<marquee><p class="text">*If you register for a team work, please fill the form only the group leader</p></marquee>
 
-
-    <h1>Viva Session Registration</h1>
+    <h1 class="topic">Viva Session Registration</h1>
     <?php if ($message == 'updated'): ?>
         <div class="alert alert-success">Records are updated successfully.</div>
     <?php elseif ($message == 'deleted'): ?>
@@ -77,15 +77,19 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                 <label>Name: <input type="text" name="name[]" required></label>
             </div>
         </div>
-
-        <button type="button" id="addMember" class="view-link">Add Member</button>
-        <button type="submit" class="view-link">Submit</button>
+        <div class="btn_container">
+            <button type="button" id="addMember" class="view-link">Add Member</button>
+            <button type="submit" class="view-link">Submit</button>
+        </div>
+        
     </form>
     <br>
     <br>
     <div id="timer"></div>
 
-    
+
+</div>
+
 
 <script>
     const vivaData = <?php echo json_encode($viva_data); ?>;
