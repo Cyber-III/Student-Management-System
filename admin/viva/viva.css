@@ -70,6 +70,24 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
+.view-link1 {
+    width: 120px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid #007BFF;
+    border-radius: 88px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.view-link1:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
 .delete-link {
     width: 90px;
     color: #182431;

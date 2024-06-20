@@ -8,10 +8,35 @@ include_once('../connection.php');
 // Loading the HTML template
 include_once('../assests/content/static/template.php');
 
-$message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
-$search_viva_name = isset($_GET['search_viva_name']) ? htmlspecialchars($_GET['search_viva_name']) : '';
-$search_batch_number = isset($_GET['search_batch_number']) ? htmlspecialchars($_GET['search_batch_number']) : '';
-$search_id = isset($_GET['search_id']) ? htmlspecialchars($_GET['search_id']) : '';
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the form data
+    $course = mysqli_real_escape_string($conn, $_POST['course']);
+    $module_name = mysqli_real_escape_string($conn, $_POST['module_name']);
+    $module_code = mysqli_real_escape_string($conn, $_POST['module_code']);
+    $batch_number = mysqli_real_escape_string($conn, $_POST['batch_number']);
+    $viva_name = mysqli_real_escape_string($conn, $_POST['viva_name']);
+    $date = mysqli_real_escape_string($conn, $_POST['date']);
+    $location = mysqli_real_escape_string($conn, $_POST['location']);
+
+    // Insert the data into the database
+    $sql = "INSERT INTO viva_schedules (course, module_name, module_code, batch_number, viva_name, date, location) VALUES 
+    ('$course', '$module_name', '$module_code', '$batch_number', '$viva_name', '$date', '$location')";
+
+    if (mysqli_query($conn, $sql)) {
+        header("Location: viva.php?message=insert");
+        exit();
+    } else {
+        $message = "Error: " . mysqli_error($conn);
+    }
+
+    // Close the database connection
+    mysqli_close($conn);
+
+    // Redirect back to the form with a success message
+    header("Location: viva_form.php?message=" . urlencode($message));
+    exit();
+}
 
 // Fetch distinct viva names for the search dropdown
 $viva_names = [];
@@ -36,6 +61,10 @@ if ($result) {
 $exam_schedule_data = [];
 
 // Fetch all data from the team_members table, filtered by viva name and/or batch number and/or ID if search input is provided
+$search_viva_name = isset($_GET['search_viva_name']) ? htmlspecialchars($_GET['search_viva_name']) : '';
+$search_batch_number = isset($_GET['search_batch_number']) ? htmlspecialchars($_GET['search_batch_number']) : '';
+$search_id = isset($_GET['search_id']) ? htmlspecialchars($_GET['search_id']) : '';
+
 if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_id)) {
     $query = "SELECT * FROM team_members WHERE 1=1";
     if (!empty($search_viva_name)) {
@@ -64,13 +93,48 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Team Details</title>
     <link rel="stylesheet" href="../style-template.css">
     <link rel="stylesheet" href="viva.css">
+    
+    <style>
+        #print-viva-name {
+            display: none; /* Hide by default */
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-table, .print-table * {
+                visibility: visible;
+            }
+            .print-table {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .print-table th:nth-child(9), .print-table td:nth-child(9) {
+                display: none;
+            }
+            #print-viva-name {
+                display: block; /* Show in print view */
+                margin-bottom: 20px;
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Search bar for Viva Name -->
+
+    <!-- Display only in print view -->
+    <div id="print-viva-name"><?= htmlspecialchars($search_viva_name) ?></div>
+
+    <!-- Print button -->
+    <button onclick="printTable()" class="view-link1" style="float: right; margin-top: 120px; margin-right: 150px;">Print Table</button>
+
+    <!-- Search bars -->
     <div class="search-bar">
         <form method="GET" action="">
             <label for="search_viva_name">Search by Viva Name:</label>
@@ -84,7 +148,6 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
         </form>
     </div>
 
-    <!-- Search bar for Batch Number -->
     <div class="search-bar">
         <form method="GET" action="">
             <label for="search_batch_number">Search by Batch Number:</label>
@@ -98,7 +161,6 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
         </form>
     </div>
 
-    <!-- Search bar for ID -->
     <div class="search-bar">
         <form method="GET" action="">
             <label for="search_id">Search by ID:</label>
@@ -108,19 +170,19 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
     </div>
     <br>
 
-
+    <!-- Table section -->
     <div class="table">
-        <table>
+        <table class="print-table">
             <thead>
                 <tr>
-                    <th>Viva</th>
+                    <th>Viva Name</th>
                     <th>Team ID</th>
                     <th>Username</th>
                     <th>Name</th>
                     <th>Date</th>
                     <th>Start</th>
                     <th>End</th>
-                    <th>Class</th>
+                    <th>Classroom</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -140,7 +202,6 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <!-- Show a message or keep the table body empty -->
                     <tr>
                         <td colspan="9">No team details.</td>
                     </tr>
@@ -149,9 +210,10 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
         </table>
     </div>
 
+    <!-- JavaScript for printing the table -->
     <script>
-        function manageExam(row) {
-            
+        function printTable() {
+            window.print();
         }
     </script>
 </body>
