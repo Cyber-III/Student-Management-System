@@ -2,11 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
 
-.body {
-    margin-top: 20px;
-    margin-left: 330px;
-}
 
+.container_main{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+
+}
 #search-icon {
     margin-left: 8px;
     margin-bottom: 8px;
@@ -29,32 +31,22 @@
 }
 
 /* Custom styles for better mobile experience */
-@media (max-width: 768px) {
-    .body {
-        margin: 0;
+@media screen and (min-width: 1200px) {
+    .container_main{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
     }
+ }
+ @media screen and (max-width: 1199px) {
 
-    .topic {
-        text-align: center;
-    }
-
-    .add-new {
-        text-align: center;
-    }
-
-    .form-row {
-        flex-direction: column;
-    }
-
-    .form-group {
+    .container_main{
         width: 100%;
+        justify-content: center;
+        margin-top: 5rem
+        ;
+  
     }
-}
 
-/* Apply specific margins for desktop mode */
-@media (min-width: 992px) {
-    .body {
-        margin-top: 20px;
-        margin-left: 330px;
-    }
-}
+ }

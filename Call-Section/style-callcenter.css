@@ -1,22 +1,39 @@
+/* Global reset */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Typography */
 h4 {
     margin-top: 100px;
     margin-left: 270px;
+    font-size: 24px;
 }
 
+/* Section styling */
 .vh-100 {
     margin-left: 250px;
     margin-right: 50px;
 }
 
+/* Image styling */
 .img-fluid {
+    max-width: 500px;
+    height: auto;
     margin-top: 60px;
-    margin-left: 50px;
+    margin-left: 150px;
+    display: block;
+    border-radius: 10px;
+  
 }
 
+/* Form styling */
 form {
     margin-top: 30px;
 }
 
+/* Contact details section */
 .contact-details {
     margin-top: 30px;
     border: 3px solid #0056b3;
@@ -29,6 +46,7 @@ form {
     font-weight: 600;
     text-align: center;
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .contact-details p {
@@ -40,27 +58,23 @@ form {
 
 .contact-details a {
     text-decoration: none;
-    font-family: "Poppins", sans-serif;
     color: black;
+    font-family: "Poppins", sans-serif;
 }
 
+/* Social icons section */
 .social-icons-container {
     display: flex;
-    align-items: center; /* Center the items vertically */
-    justify-content: center; /* Center the items horizontally */
-    margin-top: 20px; /* Add some margin for spacing */
-    flex-wrap: wrap; /* Allow icons to wrap to the next line on smaller screens */
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .social-icons-container a {
-    margin: 20px; /* Use margin instead of margin-right for better spacing */
+    margin: 0 15px;
 }
 
-/* Media Query */
-.form-label {
-    font-weight: bold;
-}
-
+/* Media Queries */
 @media (max-width: 1200px) {
     .vh-100 {
         margin: 0;
@@ -86,7 +100,7 @@ form {
     }
 
     .social-icons-container a {
-        margin: 15px; /* Reduce margin for smaller screens */
+        margin: 10px;
     }
 }
 

@@ -241,9 +241,9 @@ if(isset($_SESSION['username'])) {
             </div>
 
 
-            <!-- Call Center -->
+         <!-- Call Center -->
             <div class="item">
-                <a href=""><i class="fas fa-phone-alt"></i>Call Center </a>
+                <a href="../../../admin/Edit call center/C-center.php"><i class="fas fa-phone-alt"></i> Edit Call Center </a>
             </div>
 
             <!-- Lecture Evaluation -->
