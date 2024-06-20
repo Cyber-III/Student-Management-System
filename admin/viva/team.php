@@ -101,6 +101,7 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
     <style>
         #print-viva-name {
             display: none; /* Hide by default */
+            font-size: 10rem;
         }
 
         @media print {
@@ -122,12 +123,18 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
             #print-viva-name {
                 display: block; /* Show in print view */
                 margin-bottom: 20px;
-                font-size: 2rem;
+                font-size: 3rem;
             }
         }
     </style>
 
-<script>
+    <script>
+        function printTable() {
+            window.print();
+        }
+    </script>
+
+    <script>
         function manageExam(button) {
             var row = button.closest('tr');
             var vivaName = row.querySelector('td[data-cell="Viva Name"]').textContent;
@@ -229,11 +236,17 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
         <div class="alert alert-danger">Records are deleted successfully.</div>
     <?php endif; ?>
 
-    <!-- Display only in print view -->
-    <div id="print-viva-name"><?= htmlspecialchars($search_viva_name) ?></div>
-
     <!-- Print button -->
-    <button onclick="printTable()" class="view-link1" style="float: right; margin-top: 120px; margin-right: 150px;">Print Table</button>
+    <button onclick="printTable('<?= htmlspecialchars($search_viva_name) ?>')" class="view-link1" style="float: right; margin-top: 120px; margin-right: 150px;">Print Table</button>
+
+    <!-- JavaScript for printing the table -->
+    <script>
+        function printTable(vivaName) {
+            document.title = vivaName; // Set the document title to the viva name
+            window.print();
+            document.title = "Original Page Title"; // Reset the document title after printing
+        }
+    </script>
 
     <!-- Date button -->
     <button class="view-link" style="float: right; margin-top: 120px; margin-right: 150px;" onclick="openDateModal()">Date</button>
@@ -449,11 +462,5 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
         }
     </script>
 
-    <!-- JavaScript for printing the table -->
-    <script>
-        function printTable() {
-            window.print();
-        }
-    </script>
 </body>
 </html>

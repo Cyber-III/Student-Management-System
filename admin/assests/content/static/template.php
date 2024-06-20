@@ -253,7 +253,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Vacancies -->
             <div class="item">
-                <a href=""><i class="fas fa-user-plus"></i>Vacancies </a>
+                <a href="../../../admin/VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
             </div>
 
 
