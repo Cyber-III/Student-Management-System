@@ -109,9 +109,9 @@ if(isset($_SESSION['username'])) {
                 <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
             </div>
 
-
+            <!-- Results -->
             <div class="item">
-                <a href="../../../admin/add-result/result.php"><i class='bx bx-add-to-queue'></i>Add Results</a>
+                <a href="../../../admin/add-result/result.php"><i class="fa fa-trophy"></i>Add Results</a>
             </div>
             
 
@@ -182,9 +182,7 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                     <a href="../../../admin/ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
-                    <a href="" class="sub-item">Exam Submissions</a>
-                    <a href="" class="sub-item">Exam Admission</a>
-                    
+
                 </div>
             </div>
 
@@ -205,19 +203,6 @@ if(isset($_SESSION['username'])) {
                     <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
 
-            <!-- Results Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fa fa-trophy"></i>Results
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="" class="sub-item">Assignment Results</a>
-                    <a href="" class="sub-item">Exam Results</a>
-                    <a href="" class="sub-item">Final Results</a>
-                    
-                </div>
-            </div>
-
             <!-- Course Modules -->
             <div class="item">
                 <a href="../../../admin/Course modules/modules.php"><i class="fas fa-info-circle"></i>Course Modules </a>
@@ -226,7 +211,7 @@ if(isset($_SESSION['username'])) {
             <!-- Course Materials -->
             <div class="item">
               <a href="../../../admin/course Materials/coursematerials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
-          </div>
+            </div>
 
 
             <!-- Notice Board -->
@@ -234,14 +219,7 @@ if(isset($_SESSION['username'])) {
                 <a href="../../../admin/Add notice/add notice.php"><i class="far fa-sticky-note"></i> Add Notice </a>
             </div>
 
-
-            <!-- Message -->
-            <div class="item">
-                <a href=""><i class="fas fa-envelope"></i>Message </a>
-            </div>
-
-
-         <!-- Call Center -->
+            <!-- Call Center -->
             <div class="item">
                 <a href="../../../admin/Edit call center/C-center.php"><i class="fas fa-phone-alt"></i> Edit Call Center </a>
             </div>
