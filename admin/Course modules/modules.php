@@ -67,7 +67,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     </script>
 </head>
 <body>
-    <div class="container mt-5">
+    <div class="container_main">
         <div class="topic">
             <h1>Modules</h1>
         </div>
