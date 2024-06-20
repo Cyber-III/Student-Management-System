@@ -31,13 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die('No schedule found for the provided viva name.');
     }
 
-    // Fetch the last time slot for the given date
-    $sql = "SELECT MAX(time_slot_end) as last_slot FROM team_members WHERE date = ?";
+    // Fetch the last time slot for the given date and classroom
+    $sql = "SELECT MAX(time_slot_end) as last_slot FROM team_members WHERE date = ? AND classroom = ?";
     $stmt_last_slot = $conn->prepare($sql);
     if ($stmt_last_slot === false) {
         die('SQL prepare error: ' . $conn->error);
     }
-    $stmt_last_slot->bind_param('s', $date);
+    $stmt_last_slot->bind_param('ss', $date, $classroom);
     $stmt_last_slot->execute();
     $result_last_slot = $stmt_last_slot->get_result();
 
@@ -95,6 +95,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return [$start_time, $end_time, $current_date];
     }
 
+    // Generate a unique batch ID for this set of insertions
+    $batch_id = time();
+
+    // Calculate time slots once for all insertions
+    list($start_time, $end_time, $current_date) = calculateNextTimeSlot($start_time, $current_date);
+    $time_slot_start = $start_time->format('H:i:s');
+    $time_slot_end = $end_time->format('H:i:s');
+    $formatted_date = $current_date->format('Y-m-d');
+
     // Prepare the SQL statement with placeholders for insertion
     $stmt_insert = $conn->prepare("INSERT INTO team_members (id, username, name, time_slot_start, time_slot_end, batch_number, date, classroom, viva_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if ($stmt_insert === false) {
@@ -103,16 +112,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Loop through each username and insert into the database
     foreach ($usernames as $index => $username) {
-        // Calculate time slots
-        list($start_time, $end_time, $current_date) = calculateNextTimeSlot($start_time, $current_date);
-
-        $time_slot_start = $start_time->format('H:i:s');
-        $time_slot_end = $end_time->format('H:i:s');
-        $formatted_date = $current_date->format('Y-m-d');
-
-        // Generate a unique ID for this batch based on the current timestamp
-        $batch_id = time() + $index; // Using timestamp to ensure uniqueness for the batch
-
         // Bind parameters
         $stmt_insert->bind_param('issssssss', $batch_id, $username, $names[$index], $time_slot_start, $time_slot_end, $batch_number, $formatted_date, $classroom, $module_name);
 
@@ -124,9 +123,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Failed to register username $username for the Viva session.<br>";
         }
-
-        // Update start_time for the next slot
-        $start_time = $end_time;
     }
 
     // Close the statement
