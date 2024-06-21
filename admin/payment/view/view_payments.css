@@ -8,7 +8,6 @@ body {
     body{
      width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
      margin: 100px auto auto 300px; 
-     overflow: hidden;
      max-width: none;
     }
  }
