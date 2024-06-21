@@ -94,14 +94,24 @@ if(isset($_SESSION['username'])) {
         <!-- Menu Items -->
         <div class="menu">
 
-            <!-- Student Search -->
+            <!-- Add Course -->
+            <div class="item">
+                <a href="../../../admin/addCourse/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add New Course</a>
+            </div>
+
+            <!-- Add Batch -->
             <div class="item">
                 <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add New Batches</a>
             </div>
 
-            <!-- Student Search -->
+            <!-- Add Student -->
             <div class="item">
-                <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add Student</a>
+                <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Manage Students</a>
+            </div>
+
+            <!-- Add Lecturers -->
+            <div class="item">
+                <a href="../../../admin/addLecs/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Manage Lecturers</a>
             </div>
 
             <!-- Student Search -->

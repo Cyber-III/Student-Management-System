@@ -14,9 +14,9 @@ $batch_numbers = [];
 $award_unis = [];
 
 // Fetch courses
-$result = mysqli_query($conn, "SELECT DISTINCT course FROM login_tbl");
+$result = mysqli_query($conn, "SELECT DISTINCT course_name FROM course_tbl");
 while ($row = mysqli_fetch_assoc($result)) {
-    $courses[] = $row['course'];
+    $courses[] = $row['course_name'];
 }
 
 // Fetch awarding universities
