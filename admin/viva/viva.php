@@ -136,6 +136,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 </head>
 <body>
+<div class="main_container">
     <?php if ($message == 'insert'): ?>
         <div class="alert alert-success">Records are inserted successfully.</div>
     <?php elseif ($message == 'updated'): ?>
@@ -296,5 +297,6 @@ while ($row = mysqli_fetch_assoc($result)) {
                 </tbody>
             </table>
         </div>
+</div>
 </body>
 </html>
