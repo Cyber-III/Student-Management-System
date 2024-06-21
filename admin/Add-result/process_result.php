@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmtFinalResult->execute();
 
             // Check if insertion or update was successful
-            if ($stmtFinalResult->affected_rows > 0) {
+            if ($stmtFinalResult->affected_rows > 0 || $stmtFinalResult->errno == 0) {
                 // Prepare SQL statement to update assignment marks in assignments table
                 $sqlAssignment = "UPDATE assignments SET results = ? WHERE username = ? AND batch_number = ? AND module_name = ?";
                 $stmtAssignment = $conn->prepare($sqlAssignment);
@@ -46,8 +46,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmtAssignment->execute();
 
                     // Check if update was successful
-                    if ($stmtAssignment->affected_rows > 0) {
-                        $response = ['success' => true, 'message' => "Result for $studentName ($studentId) has been successfully saved."];
+                    if ($stmtAssignment->affected_rows > 0 || $stmtAssignment->errno == 0) {
+                        // Prepare SQL statement to update exam submission marks in exam_submission table
+                        $sqlExamSubmission = "UPDATE exam_submission SET results = ? WHERE username = ? AND batch_number = ? AND module_name = ?";
+                        $stmtExamSubmission = $conn->prepare($sqlExamSubmission);
+                        if ($stmtExamSubmission) {
+                            $stmtExamSubmission->bind_param('ssss', $examMarks, $studentId, $batch, $module);
+                            $stmtExamSubmission->execute();
+
+                            // Check if update was successful
+                            if ($stmtExamSubmission->affected_rows > 0 || $stmtExamSubmission->errno == 0) {
+                                $response = ['success' => true, 'message' => "Result for $studentName ($studentId) has been successfully saved."];
+                            } else {
+                                throw new Exception("Failed to update exam submission result for $studentName ($studentId). Please try again.");
+                            }
+
+                            // Close statement
+                            $stmtExamSubmission->close();
+                        } else {
+                            throw new Exception("Database error: " . $conn->error);
+                        }
                     } else {
                         throw new Exception("Failed to update assignment result for $studentName ($studentId). Please try again.");
                     }
