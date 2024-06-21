@@ -229,66 +229,69 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
     </script>
 </head>
 <body>
+<div class="main_container">
+        <?php if ($message == 'updated'): ?>
+            <div class="alert alert-success">Records are updated successfully.</div>
+        <?php elseif ($message == 'delete'): ?>
+            <div class="alert alert-danger">Records are deleted successfully.</div>
+        <?php endif; ?>
 
-    <?php if ($message == 'updated'): ?>
-        <div class="alert alert-success">Records are updated successfully.</div>
-    <?php elseif ($message == 'delete'): ?>
-        <div class="alert alert-danger">Records are deleted successfully.</div>
-    <?php endif; ?>
 
-    <!-- Print button -->
-    <button onclick="printTable('<?= htmlspecialchars($search_viva_name) ?>')" class="view-link1" style="float: right; margin-top: 120px; margin-right: 150px;">Print Table</button>
+    <div class="search_container">
+            <!-- Search bar for Viva Name -->
+        <div class="search-bar">
+            <form method="GET" action="">
+                <label for="search_viva_name">Search by Viva Name:</label>
+                <select id="search_viva_name" name="search_viva_name">
+                    <option value="">Select Viva Name</option>
+                    <?php foreach ($viva_names as $viva_name): ?>
+                        <option value="<?= htmlspecialchars($viva_name) ?>" <?= $viva_name === $search_viva_name ? 'selected' : '' ?>><?= htmlspecialchars($viva_name) ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit" id="search-icon"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
 
-    <!-- JavaScript for printing the table -->
-    <script>
-        function printTable(vivaName) {
-            document.title = vivaName; // Set the document title to the viva name
-            window.print();
-            document.title = "Original Page Title"; // Reset the document title after printing
-        }
-    </script>
+        <!-- Search bar for Batch Number -->
+        <div class="search-bar">
+            <form method="GET" action="">
+                <label for="search_batch_number">Search by Batch Number:</label>
+                <select id="search_batch_number" name="search_batch_number">
+                    <option value="">Select Batch Number</option>
+                    <?php foreach ($batch_numbers as $batch_number): ?>
+                        <option value="<?= htmlspecialchars($batch_number) ?>" <?= $batch_number === $search_batch_number ? 'selected' : '' ?>><?= htmlspecialchars($batch_number) ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit" id="search-icon"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
 
-    <!-- Date button -->
-    <button class="view-link" style="float: right; margin-top: 120px; margin-right: 150px;" onclick="openDateModal()">Date</button>
+        <!-- Search bar for ID -->
+        <div class="search-bar">
+            <form method="GET" action="">
+                <label for="search_id">Search by ID:</label>
+                <input type="text" id="search_id" name="search_id" value="<?= htmlspecialchars($search_id) ?>" placeholder="Enter ID">
+                <button type="submit" id="search-icon"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>   
 
-    <!-- Search bar for Viva Name -->
-    <div class="search-bar">
-        <form method="GET" action="">
-            <label for="search_viva_name">Search by Viva Name:</label>
-            <select id="search_viva_name" name="search_viva_name">
-                <option value="">Select Viva Name</option>
-                <?php foreach ($viva_names as $viva_name): ?>
-                    <option value="<?= htmlspecialchars($viva_name) ?>" <?= $viva_name === $search_viva_name ? 'selected' : '' ?>><?= htmlspecialchars($viva_name) ?></option>
-                <?php endforeach; ?>
-            </select>
-            <button type="submit" id="search-icon"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
+        <div class="btn_box">
+            <!-- Print button -->
+            <button onclick="printTable('<?= htmlspecialchars($search_viva_name) ?>')" class="view-link1" >Print Table</button>
 
-    <!-- Search bar for Batch Number -->
-    <div class="search-bar">
-        <form method="GET" action="">
-            <label for="search_batch_number">Search by Batch Number:</label>
-            <select id="search_batch_number" name="search_batch_number">
-                <option value="">Select Batch Number</option>
-                <?php foreach ($batch_numbers as $batch_number): ?>
-                    <option value="<?= htmlspecialchars($batch_number) ?>" <?= $batch_number === $search_batch_number ? 'selected' : '' ?>><?= htmlspecialchars($batch_number) ?></option>
-                <?php endforeach; ?>
-            </select>
-            <button type="submit" id="search-icon"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
+            <!-- JavaScript for printing the table -->
+            <script>
+                function printTable(vivaName) {
+                    document.title = vivaName; // Set the document title to the viva name
+                    window.print();
+                    document.title = "Original Page Title"; // Reset the document title after printing
+                }
+            </script>
 
-    <!-- Search bar for ID -->
-    <div class="search-bar">
-        <form method="GET" action="">
-            <label for="search_id">Search by ID:</label>
-            <input type="text" id="search_id" name="search_id" value="<?= htmlspecialchars($search_id) ?>" placeholder="Enter ID">
-            <button type="submit" id="search-icon"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
-    <br>
-
+            <!-- Date button -->
+            <button class="view-link"  onclick="openDateModal()">Date</button>
+        </div>
     <!-- Table section -->
     <div class="table">
         <table class="print-table">
@@ -404,6 +407,9 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
             </form>
         </div>
     </div>
+
+</div>
+    
 
     <script>
         function openDateModal() {
