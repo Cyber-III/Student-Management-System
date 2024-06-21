@@ -1,4 +1,24 @@
 body {
-    margin-top: 100px;
-    margin-left: 320px;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+
 }
+@media screen and (min-width: 1200px) {
+    body{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     max-width: none;
+    }
+ }
+ @media screen and (max-width: 1199px) {
+
+   body{
+        width: 100%;
+        justify-content: center;
+        margin-top: 5rem
+        ;
+  
+    }
+
+ }
