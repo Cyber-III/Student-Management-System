@@ -105,6 +105,7 @@ while ($row = mysqli_fetch_assoc($result2)) {
     </script>
 </head>
 <body>
+    <div class="main_container">
     <?php if ($message == 'insertpayment'): ?>
         <div class="alert alert-success">Payment was inserted successfully.</div>
     <?php elseif ($message == 'updatedpay'): ?>
@@ -210,8 +211,9 @@ while ($row = mysqli_fetch_assoc($result2)) {
         <div id="manageModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="close" onclick="closeModal()">&times;</span>
                     <h2>Manage Payment</h2>
+                    <span class="close" onclick="closeModal()">&times;</span>
+                   
                 </div>
                 <div class="modal-body">
                     <form id="manageForm" action="update_delete_student.php" method="POST">
@@ -241,6 +243,8 @@ while ($row = mysqli_fetch_assoc($result2)) {
                 </div>
             </div>
         </div>
+    </div>
+    
 
 
     <script>
