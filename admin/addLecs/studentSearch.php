@@ -83,8 +83,8 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
         <div class="form-container">
             <div class="form-row">
                 <div class="form-group">
-                    <label for="lecturer_id">Lecturer ID:</label>
-                    <input type="text" id="lecturer_id" name="lecturer_id" required>
+                    <label for="username">Lecturer ID:</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
 
                 <div class="form-group">
@@ -181,7 +181,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             <tbody id="course-tbody">
                 <?php foreach ($course_data as $row): ?>
                     <tr>
-                        <td data-lecturer-id="<?= htmlspecialchars($row['lecturer_id']) ?>"><?= htmlspecialchars($row['lecturer_id']) ?></td>
+                        <td data-lecturer-id="<?= htmlspecialchars($row['username']) ?>"><?= htmlspecialchars($row['username']) ?></td>
                         <td data-name="<?= htmlspecialchars($row['name']) ?>"><?= htmlspecialchars($row['name']) ?></td>
                         <td data-department="<?= htmlspecialchars($row['department']) ?>"><?= htmlspecialchars($row['department']) ?></td>
                         <td data-contact="<?= htmlspecialchars($row['contact']) ?>"><?= htmlspecialchars($row['contact']) ?></td>
@@ -192,7 +192,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
                         <td data-cell="Action">
                             <button class="manage-button view-link" 
-                                    data-lecturer-id="<?= htmlspecialchars($row['lecturer_id']) ?>"
+                                    data-lecturer-id="<?= htmlspecialchars($row['username']) ?>"
                                     data-name="<?= htmlspecialchars($row['name']) ?>"
                                     data-password="<?= htmlspecialchars($row['password']) ?>"
                                     data-department="<?= htmlspecialchars($row['department']) ?>"
@@ -216,7 +216,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             <span id="closeManageBatchModal" class="close">&times;</span>
             <h2>Manage Lecturer</h2>
             <form id="manageBatchForm" action="batch_manage.php" method="POST">
-                <input type="hidden" id="manage_lecturer_id" name="lecturer_id">
+                <input type="hidden" id="manage_lecturer_id" name="username">
                 <div class="form-group">
                     <label for="manage_name">Name:</label>
                     <input type="text" id="manage_name" name="name" required>

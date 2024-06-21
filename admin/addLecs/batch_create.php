@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if action is insert (Add Course)
     if ($_POST['action'] === 'insert') {
         // Retrieve values from POST
-        $lecturer_id = mysqli_real_escape_string($conn, $_POST['lecturer_id']);
+        $lecturer_id = mysqli_real_escape_string($conn, $_POST['username']);
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $department = mysqli_real_escape_string($conn, $_POST['department']);
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $contact = mysqli_real_escape_string($conn, $_POST['contact']);
 
         // Perform insert query
-        $sql = "INSERT INTO lecturers (lecturer_id, name, password, department, email, dob, gender, nic, contact) 
+        $sql = "INSERT INTO lecturers (username, name, password, department, email, dob, gender, nic, contact) 
                 VALUES ('$lecturer_id', '$name', '$password', '$department', '$email', '$dob', '$gender', '$nic', '$contact')";
 
         if (mysqli_query($conn, $sql)) {

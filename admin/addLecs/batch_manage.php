@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if action is edit
     if ($_POST['action'] === 'edit') {
         // Retrieve values from POST
-        $lecturer_id = mysqli_real_escape_string($conn, $_POST['lecturer_id']);
+        $lecturer_id = mysqli_real_escape_string($conn, $_POST['username']);
         $name = mysqli_real_escape_string($conn, $_POST['name']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $department = mysqli_real_escape_string($conn, $_POST['department']);
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 gender = '$gender', 
                 nic = '$nic', 
                 contact = '$contact' 
-                WHERE lecturer_id = '$lecturer_id'";
+                WHERE username = '$lecturer_id'";
 
         if (mysqli_query($conn, $sql)) {
             // Redirect with success message
@@ -43,10 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif ($_POST['action'] === 'delete') {
         // Handle delete action
-        $lecturer_id = mysqli_real_escape_string($conn, $_POST['lecturer_id']);
+        $lecturer_id = mysqli_real_escape_string($conn, $_POST['username']);
 
         // Perform delete query
-        $sql = "DELETE FROM lecturers WHERE lecturer_id = '$lecturer_id'";
+        $sql = "DELETE FROM lecturers WHERE username = '$lecturer_id'";
 
         if (mysqli_query($conn, $sql)) {
             // Redirect with success message
