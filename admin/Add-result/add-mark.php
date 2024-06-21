@@ -111,6 +111,7 @@ $conn->close();
             <div class="button-container">
                 <button type="submit" class="submit-button">Submit Result</button>
                 <button type="button" onclick="goBack()" class="back-button">Back</button>
+                <button type="button" onclick="viewResults()" class="view-results-button">View Results</button>
             </div>
         </form>
 
@@ -132,6 +133,28 @@ $conn->close();
                     <tr>
                         <td colspan="6">No assignments found.</td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Results table container -->
+        <div class="results-table" id="resultsTable" style="display:none;">
+            <h2>Final Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Batch Number</th>
+                        <th>Module Name</th>
+                        <th>Coursework Result</th>
+                        <th>Presentation Result</th>
+                        <th>Exam Result</th>
+                        <th>Final Result</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTableBody">
+                    <!-- Results will be appended here -->
                 </tbody>
             </table>
         </div>
@@ -202,6 +225,47 @@ $conn->close();
                 })
                 .catch(error => {
                     console.error('Error fetching assignments:', error);
+                });
+        }
+
+        function viewResults() {
+            const studentId = document.getElementById('studentId').value;
+            if (!studentId) {
+                showMessage('Please select a student ID first.');
+                return;
+            }
+
+            fetch('get_results.php?username=' + studentId)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('resultsTableBody');
+                    tableBody.innerHTML = '';
+
+                    if (data.length > 0) {
+                        data.forEach(result => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${result.username}</td>
+                                <td>${result.batch_number}</td>
+                                <td>${result.module_name}</td>
+                                <td>${result.coursework_result}</td>
+                                <td>${result.presentation_result}</td>
+                                <td>${result.exam_result}</td>
+                                <td>${result.final_result}</td>
+                                <td><a href="manage_result.php?username=${result.username}&module=${result.module_name}" class="manage-link">Manage</a></td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    } else {
+                        const row = document.createElement('tr');
+                        row.innerHTML = '<td colspan="8">No results found.</td>';
+                        tableBody.appendChild(row);
+                    }
+
+                    document.getElementById('resultsTable').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error fetching results:', error);
                 });
         }
 
