@@ -43,6 +43,28 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
     <title>ABC INSTITUTE</title>
     <link rel="stylesheet" href="../style-template.css">
     <link rel="stylesheet" href="style-studentSearch.css">
+
+    <script>
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('password-error');
+            const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W_]).{8,}$/;
+
+            if (!passwordPattern.test(password)) {
+                errorMessage.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
+                return false;
+            }
+
+            errorMessage.textContent = "";
+            return true;
+        }
+
+        function validateForm(event) {
+            if (!validatePassword()) {
+                event.preventDefault();
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -55,30 +77,31 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             <div class="alert alert-danger">The batch was deleted successfully.</div>
         <?php endif; ?>
 
-        <form action="studentSubmission.php" method="POST">
+        <form action="studentSubmission.php" method="POST" onsubmit="validateForm(event)">
             <div class="form-container">
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="sid">Student ID: </label>
-                        <input type="text" id="sid" name="sid" required> <!-- making required the fields -->
+                        <input type="text" id="sid" name="sid" required>
                     </div>
 
                     <div class="form-group">
                         <label for="sname">Student Name: </label>
-                        <input type="text" id="sname" name="sname" required> <!-- making required the fields -->
+                        <input type="text" id="sname" name="sname" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password">Password: </label>
-                        <input type="password" id="password" name="password" required> <!-- making required the fields -->
+                        <input type="password" id="password" name="password" required oninput="validatePassword()">
+                        <span id="password-error" class="error-message"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="batch_number">Batch Number:</label>
-                        <select id="batch_number" name="batch_number" required> <!-- making required the fields -->
+                        <select id="batch_number" name="batch_number" required>
                             <option value="">Select Batch Number</option>
                             <?php foreach ($batch_numbers as $batch_number): ?>
                                 <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
@@ -90,7 +113,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                 <div class="form-row">
                     <div class="form-group">
                         <label for="course">Course:</label>
-                        <select id="course" name="course" required> <!-- making required the fields -->
+                        <select id="course" name="course" required>
                             <option value="">Select Course</option>
                             <?php foreach (array_unique($courses) as $course): ?>
                                 <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
@@ -100,31 +123,31 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
                     <div class="form-group">
                         <label for="bdate">Date of Birth:</label>
-                        <input type="date" id="bdate" name="bdate" required> <!-- making required the fields -->
+                        <input type="date" id="bdate" name="bdate" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nic">National Identity Card Number:</label>
-                        <input type="text" id="nic" name="nic" required> <!-- making required the fields -->
+                        <input type="text" id="nic" name="nic" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required> <!-- making required the fields -->
+                        <input type="email" id="email" name="email" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="contact">Contact Number:</label>
-                        <input type="text" id="contact" name="contact" required> <!-- making required the fields -->
+                        <input type="text" id="contact" name="contact" required>
                     </div>
 
                     <div class="form-group">
                         <label for="award_uni">Awarding University:</label>
-                        <select id="award_uni" name="award_uni" required> <!-- making required the fields -->
+                        <select id="award_uni" name="award_uni" required>
                             <option value="">Select University</option>
                             <?php foreach ($award_unis as $award_uni): ?>
                                 <option value="<?= htmlspecialchars($award_uni) ?>"><?= htmlspecialchars($award_uni) ?></option>
@@ -136,12 +159,12 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                 <div class="form-row">
                     <div class="form-group">
                         <label for="uni_num">University Number:</label>
-                        <input type="text" id="uni_num" name="uni_num" required> <!-- making required the fields -->
+                        <input type="text" id="uni_num" name="uni_num" required>
                     </div>
 
                     <div class="form-group">
                         <label for="location">Local Branch:</label>
-                        <input type="text" id="location" name="location" required> <!-- making required the fields -->
+                        <input type="text" id="location" name="location" required>
                     </div>
                 </div>
 
@@ -149,7 +172,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                     <div class="form-group">
                         <label for="gender">Gender:</label>
                         <input type="radio" id="male" name="gender" value="Male" required> Male
-                        <input type="radio" id="female" name="gender" value="Female" required> Female <!-- making required the fields -->
+                        <input type="radio" id="female" name="gender" value="Female" required> Female
                     </div>
                 </div>
             </div>

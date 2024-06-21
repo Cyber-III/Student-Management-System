@@ -93,6 +93,11 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
 .batch {
     width: 150px;
     margin-bottom: 20px;
