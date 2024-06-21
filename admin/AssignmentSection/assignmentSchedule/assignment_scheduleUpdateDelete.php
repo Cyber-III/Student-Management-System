@@ -15,13 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $module_code = $_POST['module_code'];
         $date_of_issue = $_POST['date_of_issue'];
         $date_of_submit = $_POST['date_of_submit'];
-        $view = isset($_POST['view']) ? 1 : 0;
-        $status = $_POST['status'];
-        $feedback = $_POST['feedback'];
-        $mitigation_request = isset($_POST['mitigation_request']) ? 1 : 0;
+        $view = $_POST['view'];
         $allow_submission = isset($_POST['allow_submission']) ? 1 : 0;
 
-        $sql = "UPDATE assignment_schedule SET module_name='$module_name', module_code='$module_code', date_of_issue='$date_of_issue', date_of_submit='$date_of_submit', view='$view', status='$status', feedback='$feedback', mitigation_request='$mitigation_request', allow_submission='$allow_submission' WHERE batch_number='$batch_number' AND assignment_name='$assignment_name'";
+        $sql = "UPDATE assignment_schedule SET module_name='$module_name', module_code='$module_code', date_of_issue='$date_of_issue', date_of_submit='$date_of_submit', view='$view', allow_submission='$allow_submission' WHERE batch_number='$batch_number' AND assignment_name='$assignment_name'";
         
         if (mysqli_query($conn, $sql)) {
             header("Location: assignment_schedule.php?message=updated");

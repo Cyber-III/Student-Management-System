@@ -35,14 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $assignment_name = mysqli_real_escape_string($conn, $_POST['assignment_name']);
     $date_of_issue = mysqli_real_escape_string($conn, $_POST['date_of_issue']);
     $date_of_submit = mysqli_real_escape_string($conn, $_POST['date_of_submit']);
-    $view = isset($_POST['view']) ? 1 : 0;
-    $status = mysqli_real_escape_string($conn, $_POST['status']);
-    $feedback = mysqli_real_escape_string($conn, $_POST['feedback']);
-    $mitigation_request = isset($_POST['mitigation_request']) ? 1 : 0;
+    $view = mysqli_real_escape_string($conn, $_POST['view']);
     $allow_submission = isset($_POST['allow_submission']) ? 1 : 0;
 
     // Insert the data into the assignment_schedule table
-    $sql = "INSERT INTO assignment_schedule (course, module_name, module_code, batch_number, assignment_name, date_of_issue, date_of_submit, view, status, feedback, mitigation_request, allow_submission) VALUES ('$course', '$module_name', '$module_code', '$batch_number', '$assignment_name', '$date_of_issue', '$date_of_submit', '$view', '$status', '$feedback', '$mitigation_request', '$allow_submission')";
+    $sql = "INSERT INTO assignment_schedule (course, module_name, module_code, batch_number, assignment_name, date_of_issue, date_of_submit, view, allow_submission) VALUES ('$course', '$module_name', '$module_code', '$batch_number', '$assignment_name', '$date_of_issue', '$date_of_submit', '$view', '$allow_submission')";
 
     if (mysqli_query($conn, $sql)) {
         header("Location: assignment_schedule.php?message=insert");

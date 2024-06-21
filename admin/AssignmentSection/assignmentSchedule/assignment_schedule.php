@@ -133,12 +133,10 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                 document.getElementById('manage-assignment_name').value = cells[3].textContent;
                 document.getElementById('manage-date_of_issue').value = cells[4].textContent;
                 document.getElementById('manage-date_of_submit').value = cells[5].textContent;
-                document.getElementById('manage-view').checked = cells[6].textContent === 'Yes';
-                document.getElementById('manage-status').value = cells[7].textContent;
-                document.getElementById('manage-feedback').value = cells[8].textContent;
-                document.getElementById('manage-mitigation_request').checked = cells[9].textContent === 'Yes';
-                document.getElementById('manage-allow_submission').checked = cells[10].textContent === 'Yes';
+                document.getElementById('manage-view').value = cells[6].querySelector('a').href;
+                document.getElementById('manage-allow_submission').checked = cells[7].textContent === 'Yes';
             }
+
 
             // Attach the event listener to the buttons after the rows are created
             document.querySelectorAll('.manage-button').forEach(button => {
@@ -230,27 +228,11 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
 
                 <div class="form-group">
                     <label for="view">View:</label>
-                    <input type="checkbox" id="view" name="view" value="1">
+                    <input type="text" id="view" name="view" required>
                 </div>
             </div>
 
             <div class="form-row">
-                <div class="form-group">
-                    <label for="status">Status:</label>
-                    <input type="text" id="status" name="status" required> <!-- making required the fields -->
-                </div>
-
-                <div class="form-group">
-                    <label for="feedback">Feedback:</label>
-                    <input type="text" id="feedback" name="feedback">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="mitigation_request">Mitigation Request:</label>
-                    <input type="checkbox" id="mitigation_request" name="mitigation_request" value="1">
-                </div>
 
                 <div class="form-group">
                     <label for="allow_submission">Allow Submission:</label>
@@ -283,8 +265,8 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                 
                 </div>
                 <div class="form-group">
-                    <label for="manage-assignment_name">Assignment Name:</label>
-                    <input type="text" id="manage-assignment_name" name="assignment_name">
+                    <label for="manage-assignment_name"></label>
+                    <input type="hidden" id="manage-assignment_name" name="assignment_name">
                 
                 </div>
                 <div class="form-group">
@@ -299,24 +281,9 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                 </div>
                 <div class="form-group">
                     <label for="manage-view">View</label>
-                    <input type="checkbox" id="manage-view" name="view" value="1" class="checkbox-label">
+                    <input type="text" id="manage-view" name="view">
 
                     <br> <br>
-                </div>
-
-                <div class="form-group">
-                    <label for="manage-status">Status:</label>
-                    <input type="text" id="manage-status" name="status">
-                </div>
-
-                <div class="form-group">
-                    <label for="manage-feedback">Feedback:</label>
-                    <input type="text" id="manage-feedback" name="feedback">
-                </div>
-
-                <div class="form-group">
-                    <label for="manage-mitigation_request">Mitigation Request</label>
-                    <input type="checkbox" id="manage-mitigation_request" name="mitigation_request" value="1" class="checkbox-label">
                 </div>
 
                 <div class="form-group">
@@ -360,9 +327,6 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                     <th>Date of Issue</th>
                     <th>Date of Submit</th>
                     <th>View</th>
-                    <th>Status</th>
-                    <th>Feedback</th>
-                    <th>Mitigation Request</th>
                     <th>Allow Submission</th>
                     <th>Action</th>
                 </tr>
@@ -376,10 +340,7 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                         <td><?= htmlspecialchars($row['assignment_name']) ?></td>
                         <td><?= htmlspecialchars($row['date_of_issue']) ?></td>
                         <td><?= htmlspecialchars($row['date_of_submit']) ?></td>
-                        <td><?= $row['view'] ? 'Yes' : 'No' ?></td>
-                        <td><?= htmlspecialchars($row['status']) ?></td>
-                        <td><?= htmlspecialchars($row['feedback']) ?></td>
-                        <td><?= $row['mitigation_request'] ? 'Yes' : 'No' ?></td>
+                        <td><a href="<?= htmlspecialchars($row['view']) ?>" download>LINK</a></td>
                         <td><?= $row['allow_submission'] ? 'Yes' : 'No' ?></td>
                         <td><button onclick="manageAssignment(this.parentNode.parentNode)" class="manage-button view-link">Manage</button></td>
                     </tr>
