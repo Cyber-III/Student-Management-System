@@ -96,34 +96,23 @@ if(isset($_SESSION['username'])) {
 
             <!-- Add Course -->
             <div class="item">
-                <a href="../../../admin/addCourse/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add New Course</a>
+                <a href="../../../admin/addCourse/studentSearch.php"><i class="fa-solid fa-book-open"></i>Add New Course</a>
+            </div>
+
+            <!-- Course Modules -->
+            <div class="item">
+                <a href="../../../admin/Course modules/modules.php"><i class="fa-solid fa-list"></i>Course Modules </a>
             </div>
 
             <!-- Add Batch -->
             <div class="item">
-                <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Add New Batches</a>
+                <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-people-group"></i>Add New Batches</a>
             </div>
 
             <!-- Add Student -->
             <div class="item">
                 <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Manage Students</a>
             </div>
-
-            <!-- Add Lecturers -->
-            <div class="item">
-                <a href="../../../admin/addLecs/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Manage Lecturers</a>
-            </div>
-
-            <!-- Student Search -->
-            <div class="item">
-                <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
-            </div>
-
-            <!-- Results -->
-            <div class="item">
-                <a href="../../../admin/add-result/result.php"><i class="fa fa-trophy"></i>Add Results</a>
-            </div>
-            
 
             <!-- Payment Category -->
             <div class="item">
@@ -137,6 +126,39 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
+            <!-- Add Lecturers -->
+            <div class="item">
+                <a href="../../../admin/addLecs/studentSearch.php"><i class="fa-solid fa-person-chalkboard"></i>Manage Lecturers</a>
+            </div>
+
+            <!-- Student Search -->
+            <div class="item">
+                <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
+            </div>
+
+            <!-- Exam Category -->
+            <div class="item">
+                <a class="sub-btn"><i class="far fa-file-alt"></i>Exams
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                    <a href="../../../admin/ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
+
+                </div>
+            </div>
+
+            <!-- Assignments Category -->
+            <div class="item">
+                <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                  <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
+                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a>
+                  <a href="../../../admin/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
+              </div>
+            </div>
+
             <!-- Viva -->
             <div class="item">
                 <a class="sub-btn"><i class='bx bx-add-to-queue'></i>Viva
@@ -146,6 +168,11 @@ if(isset($_SESSION['username'])) {
                     <a href="../../../admin/viva/viva.php" class="sub-item">Viva Schedule</a>
                     <a href="../../../admin/viva/team.php" class="sub-item">Viva Team Management</a>
                 </div>
+            </div>
+
+            <!-- Results -->
+            <div class="item">
+                <a href="../../../admin/add-result/result.php"><i class="fa fa-trophy"></i>Add Results</a>
             </div>
 
             <!-- Library Category -->
@@ -185,37 +212,9 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
-            <!-- Exam Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="far fa-file-alt"></i>Exams
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../admin/ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
-
-                </div>
-            </div>
-
-            <!-- Assignments Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                  <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
-                  <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a>
-                  <a href="../../../admin/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
-              </div>
-            </div>
-
             <!-- Class Schedule Category -->
             <div class="item">
                     <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
-            </div>
-
-            <!-- Course Modules -->
-            <div class="item">
-                <a href="../../../admin/Course modules/modules.php"><i class="fas fa-info-circle"></i>Course Modules </a>
             </div>
             
             <!-- Course Materials -->
@@ -241,7 +240,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Vacancies -->
             <div class="item">
-                <a href="../../../admin/VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
+                <a href="../../../admin/VacancySection/vacancy.php"><i class="fa-solid fa-file-contract"></i>Vacancies </a>
             </div>
 
 
