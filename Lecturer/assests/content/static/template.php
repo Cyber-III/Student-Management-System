@@ -107,6 +107,11 @@ if(isset($_SESSION['username'])) {
                     <a href="../../../Lecturer/view_profile/view_profile.php" class="sub-item"><i class="far fa-id-card"></i>Profile</a>
             </div>
 
+            <!-- Student Search -->
+            <div class="item">
+                <a href="../../../Lecturer/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
+            </div>
+
             <!-- Class Schedule Category -->
             <div class="item">
                     <a href="../../../Lecturer/Class Schedule/classSchedule.php" class="sub-item"><i class="far fa-calendar-alt"></i>Class Schedule</a>
