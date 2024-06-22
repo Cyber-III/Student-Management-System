@@ -161,12 +161,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </tr>
             <?php foreach ($mitigations as $mitigation): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($mitigation['username']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['module_name']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['module_code']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['date']); ?></td>
-                    <td><?php echo htmlspecialchars($mitigation['description']); ?></td>
-                    <td>
+                    <td data-cell = 'Username'><?php echo htmlspecialchars($mitigation['username']); ?></td>
+                    <td data-cell = 'Module Name'><?php echo htmlspecialchars($mitigation['module_name']); ?></td>
+                    <td data-cell = 'Module Code'><?php echo htmlspecialchars($mitigation['module_code']); ?></td>
+                    <td data-cell = 'Date'><?php echo htmlspecialchars($mitigation['date']); ?></td>
+                    <td data-cell = 'Description'><?php echo htmlspecialchars($mitigation['description']); ?></td>
+                    <td data-cell = 'Status'>
                         <form class="status-form" method="post">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($mitigation['id']); ?>">
                             <select name="status" class="status-select" data-id="<?php echo htmlspecialchars($mitigation['id']); ?>">
