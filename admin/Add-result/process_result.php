@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $presentationMarks = $_POST['presentationMarks'];
     $examMarks = $_POST['examMarks'];
     $finalMarks = $_POST['finalMarks'];
+    $feedback = $_POST['feedback']; // Capture feedback from form
 
     // Start a transaction
     $conn->begin_transaction();
@@ -38,11 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Check if insertion or update was successful
             if ($stmtFinalResult->affected_rows > 0 || $stmtFinalResult->errno == 0) {
-                // Prepare SQL statement to update assignment marks in assignments table
-                $sqlAssignment = "UPDATE assignments SET results = ? WHERE username = ? AND batch_number = ? AND module_name = ?";
+                // Prepare SQL statement to update assignment marks and feedback in assignments table
+                $sqlAssignment = "UPDATE assignments SET results = ?, feedback = ? WHERE username = ? AND batch_number = ? AND module_name = ?";
                 $stmtAssignment = $conn->prepare($sqlAssignment);
                 if ($stmtAssignment) {
-                    $stmtAssignment->bind_param('ssss', $assignmentMarks, $studentId, $batch, $module);
+                    $stmtAssignment->bind_param('sssds', $assignmentMarks, $feedback, $studentId, $batch, $module);
                     $stmtAssignment->execute();
 
                     // Check if update was successful
@@ -67,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             throw new Exception("Database error: " . $conn->error);
                         }
                     } else {
-                        throw new Exception("Failed to update assignment result for $studentName ($studentId). Please try again.");
+                        throw new Exception("Failed to update assignment result and feedback for $studentName ($studentId). Please try again.");
                     }
 
                     // Close statement

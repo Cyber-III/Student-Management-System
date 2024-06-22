@@ -57,7 +57,7 @@ $conn->close();
     <div class="header"></div>
     <div class="container">
         <div id="message" style="display:none;"></div> <!-- Message container -->
-        <form id="addResultForm"> <!-- Removed action to handle via JS -->
+        <form id="addResultForm">
             <div class="form-group">
                 <label for="course">Course:</label>
                 <input type="text" id="course" name="course" value="<?php echo htmlspecialchars($_GET['course'] ?? ''); ?>" readonly>
@@ -108,6 +108,10 @@ $conn->close();
                 <label for="finalMarks">Final Marks:</label>
                 <input type="text" id="finalMarks" name="finalMarks" required min="0" max="100">
             </div>
+            <div class="form-group">
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" name="feedback" required></textarea>
+            </div>
             <div class="button-container">
                 <button type="submit" class="submit-button">Submit Result</button>
                 <button type="button" onclick="goBack()" class="back-button">Back</button>
@@ -126,12 +130,13 @@ $conn->close();
                         <th>Module Name</th>
                         <th>Assignment Name</th>
                         <th>Submission Date</th>
+                        <th>Feedback</th>
                         <th>Document</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="6">No assignments found.</td>
+                        <td colspan="7">No assignments found.</td>
                     </tr>
                 </tbody>
             </table>
@@ -213,13 +218,14 @@ $conn->close();
                                 <td>${assignment.module_name}</td>
                                 <td>${assignment.assignment_name}</td>
                                 <td>${assignment.submission_date}</td>
+                                <td>${assignment.feedback}</td>
                                 <td><a href="${assignment.file_path}" class="file-link" download>Download</a></td>
                             `;
                             tableBody.appendChild(row);
                         });
                     } else {
                         const row = document.createElement('tr');
-                        row.innerHTML = '<td colspan="6">No assignments found.</td>';
+                        row.innerHTML = '<td colspan="7">No assignments found.</td>';
                         tableBody.appendChild(row);
                     }
                 })
@@ -294,6 +300,8 @@ $conn->close();
             .then(response => response.json())
             .then(data => {
                 showMessage(data.message);
+                // Optionally clear the form after successful submission
+                document.getElementById('addResultForm').reset();
             })
             .catch(error => {
                 showMessage('An error occurred. Please try again.');
