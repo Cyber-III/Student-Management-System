@@ -88,7 +88,10 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
                             <form action="viva.php" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name']) ?>">
                                 <input type="hidden" name="exam_name" value="<?= htmlspecialchars($schedule['viva_name']) ?>">
-                                <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                <div class="button2">
+                                    <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                                </div>
+
                             </form>
                         </div>
                     </div>

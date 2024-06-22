@@ -54,37 +54,49 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
 
 </head>
 <body>
+<div class="main_container">
+<marquee><p class="text">*If you are registering for a team project, please have only the group leader fill out the form.</p></marquee>
+<h1 class="title">Viva Session Registration</h1>
 
-<marquee><p class="text">*If you register for a team work, please fill the form only the group leader</p></marquee>
 
-
-    <h1>Viva Session Registration</h1>
     <?php if ($message == 'updated'): ?>
         <div class="alert alert-success">Records are updated successfully.</div>
     <?php elseif ($message == 'deleted'): ?>
         <div class="alert alert-danger">Records are deleted successfully.</div>
     <?php endif; ?>
-    <form id="vivaForm" action="submit.php" method="POST">
-        <label for="viva_name">Viva Name:</label>
-        <input type="text" id="viva_name" name="viva_name" value="<?= htmlspecialchars($exam_name) ?>" readonly>
-
-        <label for="module_name">Module Name:</label>
-        <input type="text" id="module_name" name="module_name" value="<?= htmlspecialchars($module_name) ?>" readonly>
-
-        <div id="teamMembers">
-            <div class="member">
-                <label>Username: <input type="text" name="username[]" required></label>
-                <label>Name: <input type="text" name="name[]" required></label>
+    <div class="form_container">
+        <form id="vivaForm" action="submit.php" method="POST">
+            <div class="form_group">
+                <label for="viva_name">Viva Name:</label>
+                <input type="text" id="viva_name" name="viva_name" value="<?= htmlspecialchars($exam_name) ?>" readonly>
             </div>
-        </div>
 
-        <button type="button" id="addMember" class="view-link">Add Member</button>
-        <button type="submit" class="view-link">Submit</button>
-    </form>
+            <div class="form_group">
+            <label for="module_name">Module Name:</label>
+            <input type="text" id="module_name" name="module_name" value="<?= htmlspecialchars($module_name) ?>" readonly>
+            </div>
+            <div class="form_group">
+                <div id="teamMembers">
+                    <div class="member">
+                        <label>Username: <input type="text" name="username[]" required></label>
+                        <label>Name: <input type="text" name="name[]" required></label>
+                    </div>
+                </div>
+            </div>
+        <div class="button_container">
+            <button type="button" id="addMember" class="view-link">Add Member</button>
+            <button type="submit" class="view-link">Submit</button>
+        </div>
+            
+        </form>
+    </div>
+    
     <br>
     <br>
     <div id="timer"></div>
 
+</div>
+    
     
 
 <script>

@@ -7,50 +7,46 @@
 /* form */
 
 .form-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-.form-row {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-}
-.form-group {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin-right: 20px;
+   
+    padding: 20px;
     
 }
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-right: 20px;
+}
+
+.form-group:last-child {
+    margin-right: 0;
+}
+
 label {
+    display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
-select, input[type="text"], input[type="date"], input[type="time"], input[type="number"], input[type="password"], input[type="email"] {
-    padding: 8px;
-    margin-bottom: 10px;
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    box-sizing: border-box;
 }
-.half-width {
-    flex: 0 0 50%;
-}
-.half-width-input {
-    width: 100%;
-}
-input[type="submit"] {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
-input[type="submit"]:hover {
-    background-color: #45a049;
+
+input[type="text"]:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .view-link {
@@ -170,7 +166,11 @@ th {
     background-color: #f0f8ff;
     transition: background-color 0.3s, color 0.3s;
 }
-
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 #search-icon:hover {
     background-color: #007BFF;
     color: white;
@@ -224,12 +224,25 @@ th {
     }
  }
  @media screen and (max-width: 650px){
- .form-row {
-    display: flex;
-    flex-wrap: wrap; /* Add this to allow flex items to wrap to the next line */
-    gap: 20px;
-  }
+ 
   .modal {
     margin-left: 0px;
   }
+  .form-row {
+    flex-direction: column;
+}
+
+.form-group {
+    margin-right: 0;
+    margin-bottom: 15px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 }

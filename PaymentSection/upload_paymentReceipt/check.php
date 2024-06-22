@@ -67,6 +67,7 @@ if (isset($_POST['receipt_id']) && isset($_POST['status'])) {
     </script>
 </head>
 <body>
+    <div class="main">
     <div class="table">
         <table>
             <thead>
@@ -85,10 +86,10 @@ if (isset($_POST['receipt_id']) && isset($_POST['status'])) {
                     <?php foreach ($receipts_data as $row): ?>
                         <?php if ($row['status'] != 'checked'): ?>
                             <tr id="row_<?= $row['id'] ?>">
-                                <td><?= htmlspecialchars($row['student_id']) ?></td>
-                                <td><?= htmlspecialchars($row['student_name']) ?></td>
-                                <td><?= htmlspecialchars($row['payment_date']) ?></td>
-                                <td><?= htmlspecialchars($row['payment_amount']) ?></td>
+                                <td data-cell="Student ID"><?= htmlspecialchars($row['student_id']) ?></td>
+                                <td data-cell="Student Name"><?= htmlspecialchars($row['student_name']) ?></td>
+                                <td data-cell="Payment Date"><?= htmlspecialchars($row['payment_date']) ?></td>
+                                <td data-cell="Payment Amount"><?= htmlspecialchars($row['payment_amount']) ?></td>
                                 <td>
                                     <?php if (!empty($row['file_path'])): ?>
                                         <img style="cursor:pointer" src="<?= htmlspecialchars($row['file_path']) ?>" alt="Receipt Image" width="100" height="100" onclick="downloadImage('<?= htmlspecialchars($row['file_path']) ?>')">
@@ -96,8 +97,8 @@ if (isset($_POST['receipt_id']) && isset($_POST['status'])) {
                                         No Image
                                     <?php endif; ?>
                                 </td>
-                                <td><?= htmlspecialchars($row['remark']) ?></td>
-                                <td>
+                                <td data-cell="Remark"><?= htmlspecialchars($row['remark']) ?></td>
+                                <td data-cell="Status">
                                     <span id="status_<?= $row['id'] ?>"><?= htmlspecialchars($row['status']) ?></span>
                                     <input type="checkbox" id="checkbox_<?= $row['id'] ?>" onclick="updateStatus(<?= $row['id'] ?>)">
                                 </td>
@@ -110,5 +111,7 @@ if (isset($_POST['receipt_id']) && isset($_POST['status'])) {
             </tbody>
         </table>
     </div>
+    </div>
+    
 </body>
 </html>
