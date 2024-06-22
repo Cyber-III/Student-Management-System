@@ -53,7 +53,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 </head>
 
 <body>
-
+<div class="main_container">
     <?php if ($message == 'insert'): ?>
         <div class="alert alert-success">The batch was created successfully.</div>
     <?php elseif ($message == 'delete'): ?>
@@ -189,6 +189,8 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             </form>
         </div>
     </div>
+
+</div>
 
 </body>
 

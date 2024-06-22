@@ -46,7 +46,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 </head>
 
 <body>
-
+<div class="main_container">
     <?php if ($message == 'insert'): ?>
         <div class="alert alert-success">The course was created successfully.</div>
     <?php elseif ($message == 'delete'): ?>
@@ -161,6 +161,8 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             </form>
         </div>
     </div>
+
+</div>
 
     <script>
     var manageBatchModal = document.getElementById("manageBatchModal");

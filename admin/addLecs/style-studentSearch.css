@@ -1,7 +1,7 @@
-body {
+/* body {
     margin-left: 330px;
     margin-top: 100px;
-}
+} */
 
 .main_container{
     max-width: 800px;
@@ -144,20 +144,27 @@ input[type="submit"]:hover {
     Display: none
 }
 
-table {
-    background: #ffffff;
-    width: 95%;
+.table {
+    width: 100%;
+    margin: 20px 0;
     border-collapse: collapse;
-    border: #cacace;
-   
+    font-family: 'Arial', sans-serif;
 }
-
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
 th, td {
-    border: 0px solid #dddddd;
+    padding: 12px;
     text-align: left;
-    padding: 15px;
-    /* white-space: nowrap; */
-    
+    border-bottom: 1px solid #ddd;
+}
+th {
+    /* background-color: #0d6efd; */
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
 }
 
 #search-icon, #search-uni-icon {
@@ -213,7 +220,31 @@ th, td {
     }
     .modal {
         margin-left: 0px;
-      }
+    }
+
+    th{
+        display: none;
+    }
+    td{
+        
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.75rem 1rem;
+    }
+    td:first-child{
+        padding-top: 2rem;
+
+    }
+    td:last-child{
+        padding-bottom: 2rem;
+        
+    }
+    td::before{
+        content:attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
  }
  @media screen and (max-width: 650px){
  .form-row {

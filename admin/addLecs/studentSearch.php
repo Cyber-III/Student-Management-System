@@ -68,7 +68,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 </head>
 
 <body>
-
+<div class="main_container">
     <?php if ($message == 'insert'): ?>
         <div class="alert alert-success">The Records were created successfully.</div>
     <?php elseif ($message == 'delete'): ?>
@@ -160,7 +160,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
         <br>
 
     </div>
-    
+
 
     <!-- Table -->
     <div class="table">
@@ -181,14 +181,14 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             <tbody id="course-tbody">
                 <?php foreach ($course_data as $row): ?>
                     <tr>
-                        <td data-lecturer-id="<?= htmlspecialchars($row['username']) ?>"><?= htmlspecialchars($row['username']) ?></td>
-                        <td data-name="<?= htmlspecialchars($row['name']) ?>"><?= htmlspecialchars($row['name']) ?></td>
-                        <td data-department="<?= htmlspecialchars($row['department']) ?>"><?= htmlspecialchars($row['department']) ?></td>
-                        <td data-contact="<?= htmlspecialchars($row['contact']) ?>"><?= htmlspecialchars($row['contact']) ?></td>
-                        <td data-email="<?= htmlspecialchars($row['email']) ?>"><?= htmlspecialchars($row['email']) ?></td>
-                        <td data-dob="<?= htmlspecialchars($row['dob']) ?>"><?= htmlspecialchars($row['dob']) ?></td>
-                        <td data-nic="<?= htmlspecialchars($row['nic']) ?>"><?= htmlspecialchars($row['nic']) ?></td>
-                        <td data-gender="<?= htmlspecialchars($row['gender']) ?>"><?= htmlspecialchars($row['gender']) ?></td>
+                    <td data-cell="Lecturer ID" data-lecturer-id="<?= htmlspecialchars($row['username']) ?>"><?= htmlspecialchars($row['username']) ?></td>
+                    <td data-cell="Name" data-name="<?= htmlspecialchars($row['name']) ?>"><?= htmlspecialchars($row['name']) ?></td>
+                    <td data-cell="Department" data-department="<?= htmlspecialchars($row['department']) ?>"><?= htmlspecialchars($row['department']) ?></td>
+                    <td data-cell="Contact" data-contact="<?= htmlspecialchars($row['contact']) ?>"><?= htmlspecialchars($row['contact']) ?></td>
+                    <td data-cell="Email" data-email="<?= htmlspecialchars($row['email']) ?>"><?= htmlspecialchars($row['email']) ?></td>
+                    <td data-cell="DOB" data-dob="<?= htmlspecialchars($row['dob']) ?>"><?= htmlspecialchars($row['dob']) ?></td>
+                    <td data-cell="NIC" data-nic="<?= htmlspecialchars($row['nic']) ?>"><?= htmlspecialchars($row['nic']) ?></td>
+                    <td data-cell="Gender" data-gender="<?= htmlspecialchars($row['gender']) ?>"><?= htmlspecialchars($row['gender']) ?></td>
 
                         <td data-cell="Action">
                             <button class="manage-button view-link" 
@@ -260,7 +260,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
             </form>
         </div>
     </div>
-
+</div>
 
     <script>
         var manageBatchModal = document.getElementById("manageBatchModal");
