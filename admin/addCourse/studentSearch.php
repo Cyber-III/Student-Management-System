@@ -19,9 +19,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 // Fetch awarding universities
-$result1 = mysqli_query($conn, "SELECT DISTINCT award_uni FROM course_tbl");
+$result1 = mysqli_query($conn, "SELECT DISTINCT uni_name FROM awarding_uni");
 while ($row = mysqli_fetch_assoc($result1)) {
-    $award_unis[] = $row['award_uni'];
+    $award_unis[] = $row['uni_name'];
 }
 
 // Fetch all data from the course_tbl table

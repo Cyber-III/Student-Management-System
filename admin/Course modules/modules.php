@@ -27,9 +27,9 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 // Fetch distinct courses and module names for filtering
 $courses = [];
 $module_names = [];
-$result = mysqli_query($conn, "SELECT DISTINCT course FROM modules");
+$result = mysqli_query($conn, "SELECT DISTINCT course_name FROM course_tbl");
 while ($row = mysqli_fetch_assoc($result)) {
-    $courses[] = $row['course'];
+    $courses[] = $row['course_name'];
 }
 $result = mysqli_query($conn, "SELECT DISTINCT module_name FROM modules");
 while ($row = mysqli_fetch_assoc($result)) {

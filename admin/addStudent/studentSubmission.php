@@ -22,27 +22,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $location = htmlspecialchars($_POST['location']);
     $gender = htmlspecialchars($_POST['gender']);
 
-    // Prepare SQL insert statement
-    $sql = "INSERT INTO login_tbl (student_name, username, password, course, batch_number, gender, dob, nic, email, contact, awarding_uni, uni_number, lec) 
+    // Prepare SQL insert statement for login_tbl
+    $sql1 = "INSERT INTO login_tbl (student_name, username, password, course, batch_number, gender, dob, nic, email, contact, awarding_uni, uni_number, lec) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
-    // Initialize prepared statement
-    if ($stmt = $conn->prepare($sql)) {
-        // Bind parameters
-        $stmt->bind_param("sssssssssssss", $sname, $sid, $password, $course, $batch_number, $gender, $bdate, $nic, $email, $contact, $award_uni, $uni_num, $location);
+    // Prepare SQL insert statement for payment_summary_tbl
+    $sql2 = "INSERT INTO payment_summary_tbl (username, tot_course_fee, amount_paid, outstanding) 
+            VALUES (?, 0, 0, 0)";
+    
+    // Initialize prepared statement for login_tbl
+    if ($stmt1 = $conn->prepare($sql1)) {
+        // Bind parameters for login_tbl
+        $stmt1->bind_param("sssssssssssss", $sname, $sid, $password, $course, $batch_number, $gender, $bdate, $nic, $email, $contact, $award_uni, $uni_num, $location);
         
-        // Execute the statement
-        if ($stmt->execute()) {
-            header("Location: studentSearch.php?message=insertstudent");
-            exit();
+        // Execute the statement for login_tbl
+        if ($stmt1->execute()) {
+            // Initialize prepared statement for payment_summary_tbl
+            if ($stmt2 = $conn->prepare($sql2)) {
+                // Bind parameters for payment_summary_tbl
+                $stmt2->bind_param("s", $sid);
+                
+                // Execute the statement for payment_summary_tbl
+                if ($stmt2->execute()) {
+                    header("Location: studentSearch.php?message=insertstudent");
+                    exit();
+                } else {
+                    echo "Error inserting into payment_summary_tbl: " . $stmt2->error;
+                }
+
+                // Close the statement for payment_summary_tbl
+                $stmt2->close();
+            } else {
+                echo "Error preparing statement for payment_summary_tbl: " . $conn->error;
+            }
         } else {
-            echo "Error: " . $stmt->error;
+            echo "Error inserting into login_tbl: " . $stmt1->error;
         }
 
-        // Close the statement
-        $stmt->close();
+        // Close the statement for login_tbl
+        $stmt1->close();
     } else {
-        echo "Error preparing statement: " . $conn->error;
+        echo "Error preparing statement for login_tbl: " . $conn->error;
     }
 
     // Close the database connection

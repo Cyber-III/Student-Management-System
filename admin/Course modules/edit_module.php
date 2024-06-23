@@ -83,7 +83,7 @@ ob_end_flush();  // Flush the output buffer
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="body">
-<div class="container">
+<div class="container_main">
     <br><br>
     <h1>Edit Module</h1>
     <form method="post">

@@ -92,9 +92,7 @@ if ($result1->num_rows > 0) {
     $tot_course_fee = $row1['tot_course_fee'];
     $amount_paid = $row1['amount_paid'];
     $outstanding = $row1['outstanding'];
-    $uni_fee = $row1['uni_fee'];
-    $paid_uni_fee = $row1['paid_uni_fee'];
-    $uni_fee_outstanding = $row1['uni_fee_outstanding'];
+
 }
 ?>
 
@@ -126,18 +124,6 @@ if ($result1->num_rows > 0) {
                     <tr>
                         <td><b>Outstanding</b></td>
                         <td><?php echo htmlspecialchars($outstanding); ?></td>
-                    </tr>
-                    <tr>
-                        <td><b>University Fee</b></td>
-                        <td><?php echo htmlspecialchars($uni_fee); ?></td>
-                    </tr>
-                    <tr>
-                        <td><b>Paid University Fee</b></td>
-                        <td><?php echo htmlspecialchars($paid_uni_fee); ?></td>
-                    </tr>
-                    <tr>
-                        <td><b>University Fee Outstanding</b></td>
-                        <td><?php echo htmlspecialchars($uni_fee_outstanding); ?></td>
                     </tr>
                 </table>
             </div>
@@ -202,9 +188,7 @@ if ($result1->num_rows > 0) {
                 'Course Fee',
                 'Amount Paid',
                 'Outstanding',
-                'University Fee',
-                'Paid University Fee',
-                'University Fee Outstanding'
+
             ],
             datasets: [{
                 label: 'Fees Breakdown',
@@ -212,25 +196,17 @@ if ($result1->num_rows > 0) {
                     <?php echo $tot_course_fee; ?>,
                     <?php echo $amount_paid; ?>,
                     <?php echo $outstanding; ?>,
-                    <?php echo $uni_fee; ?>,
-                    <?php echo $paid_uni_fee; ?>,
-                    <?php echo $uni_fee_outstanding; ?>
+
                 ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 206, 86, 0.2)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',    // Red
                     'rgba(54, 162, 235, 1)',    // Blue
-                    'rgba(255, 206, 86, 1)',    // Yellow
-                    'rgba(75, 192, 192, 1)',    // Teal
-                    'rgba(153, 102, 255, 1)',   // Purple
-                    'rgba(255, 159, 64, 1)'  
+                    'rgba(255, 206, 86, 1)'    // Yellow
                 ],
                 borderWidth: 1
             }]
