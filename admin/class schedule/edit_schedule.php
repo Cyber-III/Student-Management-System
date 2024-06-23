@@ -35,6 +35,30 @@ if ($stmt) {
     die("Error in SQL query: " . $conn->error);
 }
 
+// Fetch lecturers from lecturers table for the dropdown menu
+$lecturers = [];
+$sql_lecturers = "SELECT name FROM lecturers";
+$result_lecturers = $conn->query($sql_lecturers);
+if ($result_lecturers) {
+    while ($row = $result_lecturers->fetch_assoc()) {
+        $lecturers[] = $row['name'];
+    }
+} else {
+    $error = "Error fetching lecturers: " . $conn->error;
+}
+
+// Fetch batches from batches table for the dropdown menu
+$batches = [];
+$sql_batches = "SELECT batch_no FROM batches";
+$result_batches = $conn->query($sql_batches);
+if ($result_batches) {
+    while ($row = $result_batches->fetch_assoc()) {
+        $batches[] = $row['batch_no'];
+    }
+} else {
+    $error = "Error fetching batches: " . $conn->error;
+}
+
 // Fetch courses for the dropdown menu
 $courses = [];
 $sql_courses = "SELECT course_name FROM course_tbl";
@@ -84,8 +108,8 @@ ob_end_flush();  // Flush the output buffer
     <link rel="stylesheet" href="style-class_schedule.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
-<body class="body">
-<div class="container">
+<body>
+<div class="container_main">
     <br><br>
     <h1>Edit Class Schedule</h1>
     <form method="post">
@@ -102,15 +126,32 @@ ob_end_flush();  // Flush the output buffer
         </div>
         <div class="mb-3">
             <label for="batch" class="form-label">Batch</label>
-            <input type="text" class="form-control" id="batch" name="batch" value="<?= htmlspecialchars($schedule['batch']); ?>" required>
+            <select class="form-control" id="batch" name="batch" required>
+                <option value="">Select Batch</option>
+                <?php foreach ($batches as $batch_no): ?>
+                    <option value="<?= htmlspecialchars($batch_no); ?>" <?= $schedule['batch'] == $batch_no ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($batch_no); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="module" class="form-label">Module</label>
-            <input type="text" class="form-control" id="module" name="module" value="<?= htmlspecialchars($schedule['module']); ?>" required>
+            <select class="form-control" id="module" name="module" required>
+                <option value="">Select Module</option>
+                <!-- Options will be populated by JavaScript -->
+            </select>
         </div>
         <div class="mb-3">
             <label for="lecturer" class="form-label">Lecturer</label>
-            <input type="text" class="form-control" id="lecturer" name="lecturer" value="<?= htmlspecialchars($schedule['lecturer']); ?>" required>
+            <select class="form-control" id="lecturer" name="lecturer" required>
+                <option value="">Select Lecturer</option>
+                <?php foreach ($lecturers as $lecturer_name): ?>
+                    <option value="<?= htmlspecialchars($lecturer_name); ?>" <?= $schedule['lecturer'] == $lecturer_name ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($lecturer_name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>
@@ -126,11 +167,57 @@ ob_end_flush();  // Flush the output buffer
         </div>
         <div class="mb-3">
             <label for="notes" class="form-label">Notes</label>
-            <textarea class="form-control" id="notes" name="notes" required><?= htmlspecialchars($schedule['notes']); ?></textarea>
+            <textarea class="form-control" id="notes" name="notes"><?= htmlspecialchars($schedule['notes']); ?></textarea>
         </div>
         <button type="submit" name="update" class="btn btn-primary">Update</button>
         <a href="class_schedule.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
 </body>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var courseSelect = document.getElementById('course');
+    var moduleSelect = document.getElementById('module');
+    var currentModule = <?= json_encode($schedule['module']); ?>;
+
+    courseSelect.addEventListener('change', function() {
+        var course = this.value;
+
+        // Clear existing options
+        moduleSelect.innerHTML = '<option value="">Select Module</option>';
+
+        if (course) {
+            // Fetch modules for the selected course using AJAX
+            fetch('get_modules.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'course=' + encodeURIComponent(course)
+            })
+            .then(response => response.json())
+            .then(modules => {
+                modules.forEach(function(module) {
+                    var option = document.createElement('option');
+                    option.value = module;
+                    option.textContent = module;
+                    if (module === currentModule) {
+                        option.selected = true;
+                    }
+                    moduleSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching modules:', error));
+        }
+    });
+
+    // Trigger change event initially if course is pre-selected (edit mode)
+    if (courseSelect.value) {
+        courseSelect.dispatchEvent(new Event('change'));
+    }
+});
+</script>
+
+
 </html>

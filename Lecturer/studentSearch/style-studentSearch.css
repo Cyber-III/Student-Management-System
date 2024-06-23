@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+.main_container{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+
+}
+select,input[type="text"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#search-icon {
+    margin-left: 8px;
+    margin-bottom: 8px;
+    padding: 6px;
+    width: 45px;
+    height: 45px;
+    color: #182431;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#search-icon:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.search_container {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+#batch_number, #username {
+    width: 400px; /* Adjust this value to increase the width of the select and input elements */
+    padding: 10px; /* Optional: to give some padding for better appearance */
+    font-size: 16px; /* Optional: to adjust the font size */
+}
+
+
+
+.table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    /* background-color: #0d6efd; */
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+
+@media screen and (min-width: 1200px) {
+    .main_container{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+ }
+ @media screen and (max-width: 1199px) {
+
+    .main_container{
+        width: 100%;
+        justify-content: center;
+        margin-top: 5rem;
+        
+        
+    }
+    th{
+        display: none;
+    }
+    td{
+        
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 15ch auto;
+        padding: 0.75rem 1rem;
+    }
+    td:first-child{
+        padding-top: 2rem;
+
+    }
+    td:last-child{
+        padding-bottom: 2rem;
+        
+    }
+    td::before{
+        content:attr(data-cell) ": ";
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+   
+ }
+ @media screen and (max-width: 824px){
+   
+    .search_container{
+        display: block;
+        flex-direction: column;
+    }
+
+ }

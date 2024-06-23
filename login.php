@@ -8,18 +8,18 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
     if (empty($username) && empty($password)) {
-        echo "<script>alert('Please Fill Username and Password'); window.location='index.php';</script>";
+        $_SESSION['error'] = 'Please fill in both username and password';
+        header('Location: index.php');
         exit;
-    }
-    elseif (empty($password)) {
-        echo "<script>alert('Please Fill Password'); window.location='index.php';</script>";
+    } elseif (empty($password)) {
+        $_SESSION['error'] = 'Please fill in the password';
+        header('Location: index.php');
         exit;
-    }
-    elseif (empty($username)) {
-        echo "<script>alert('Please Fill Username'); window.location='index.php';</script>";
+    } elseif (empty($username)) {
+        $_SESSION['error'] = 'Please fill in the username';
+        header('Location: index.php');
         exit;
-    }
-    else {
+    } else {
         $sql = "SELECT * FROM `login_tbl` WHERE `username`='$username' AND `password`='$password'";
         $result = mysqli_query($conn, $sql);
 
@@ -33,13 +33,14 @@ if (isset($_POST['login'])) {
                 $_SESSION['name'] = $name;
                 $_SESSION['username'] = $username;
                 // Don't store password in session
-                header('location: welcome.php');
+                header('Location: welcome.php');
                 exit;
             }
         } else {
-            echo "<script>alert('Invalid Username or Password'); window.location='index.php';</script>";
+            $_SESSION['error'] = 'Invalid username or password';
+            header('Location: index.php');
             exit;
         }
     }
-
 }
+?>

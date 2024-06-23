@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +17,26 @@
 
     .social-icons-container a {
         margin-right: 50px;
+    }
+
+    #search-icon {
+      margin-left: 5px;
+      padding: 6px;
+      width: 45px;
+      height: 45px;
+      color: #182431;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #e4282e;
+      border-radius: 10px;
+      background-color: #fff1f4;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #search-icon:hover {
+      background-color: #ee0c0c;
+      color: white;
+      cursor: pointer;
     }
 
 </style>
@@ -31,6 +55,18 @@
 </head>
 
 <body>
+
+<?php
+    if (isset($_SESSION['error'])) {
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+            . $_SESSION['error'] .
+            '<button type="button" id="search-icon" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+             </button>
+        </div>';
+        unset($_SESSION['error']);
+    }
+?>
 
 
   <section class="vh-100">
@@ -86,6 +122,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+
+  <!-- Include Bootstrap JS and dependencies (optional) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

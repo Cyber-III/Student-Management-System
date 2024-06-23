@@ -193,7 +193,7 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Graduation Schedule</a>
+                    <a href="../../../admin/graduation/payment_plan/plan.php" class="sub-item">Graduation Schedule</a>
                     <a href="" class="sub-item">Register for Graduation</a>
                     <a href="" class="sub-item">Graduation Photos</a>
                     <a href="" class="sub-item">Registration Summary</a>

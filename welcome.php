@@ -83,6 +83,7 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style-welcome.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Welcome Page</title>
 
     <!-- Upper Icon -->
@@ -117,24 +118,34 @@ $conn->close();
     </div>
 </div>
 
+<!-- Add a floating button to the top-right corner -->
+<button class="notice-btn" id="notice-btn"><i class='bx bxs-bell-ring'></i></button>
+
 <!-- Notice Board Section -->
-<div class="notice-board">
+<div class="notice-board" id="notice-board">
     <h2>Notice Board</h2>
-    <?php if (!empty($notices_notice_board)): ?>
-        <?php foreach ($notices_notice_board as $notice): ?>
+    <?php if (!empty($notices_notice_board)):?>
+        <?php foreach ($notices_notice_board as $notice):?>
             <?php
                 // Check if the notice was added in the last 24 hours
                 $isRecent = (time() - strtotime($notice['added_date'])) <= 86400;
-            ?>
-            <div class="notice <?php echo $isRecent ? 'recent' : ''; ?>">
-                <p><?php echo htmlspecialchars($notice['subject']); ?></p>
-                <small><?php echo date("d M Y", strtotime($notice['added_date'])); ?></small>
+           ?>
+            <div class="notice <?php echo $isRecent? 'ecent' : '';?>">
+                <p><?php echo htmlspecialchars($notice['subject']);?></p>
+                <small><?php echo date("d M Y", strtotime($notice['added_date']));?></small>
             </div>
-        <?php endforeach; ?>
-    <?php else: ?>
+        <?php endforeach;?>
+    <?php else:?>
         <p>No notices available for your batch.</p>
-    <?php endif; ?>
+    <?php endif;?>
 </div>
+<script>
+    const noticeBtn = document.getElementById('notice-btn');
+    const noticeBoard = document.getElementById('notice-board');
 
+    noticeBtn.addEventListener('click', () => {
+        noticeBoard.classList.toggle('show');
+    });
+</script>
 </body>
 </html>

@@ -8,15 +8,16 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 
     if (empty($username) && empty($password)) {
-        echo "<script>alert('Please Fill Username and Password'); window.location='index.php';</script>";
+        $_SESSION['error'] = 'Please fill in both username and password';
+        header('Location: index.php');
         exit;
-    }
-    elseif (empty($password)) {
-        echo "<script>alert('Please Fill Password'); window.location='index.php';</script>";
+    } elseif (empty($password)) {
+        $_SESSION['error'] = 'Please fill in the password';
+        header('Location: index.php');
         exit;
-    }
-    elseif (empty($username)) {
-        echo "<script>alert('Please Fill Username'); window.location='index.php';</script>";
+    } elseif (empty($username)) {
+        $_SESSION['error'] = 'Please fill in the username';
+        header('Location: index.php');
         exit;
     }
     else {
@@ -37,7 +38,8 @@ if (isset($_POST['login'])) {
                 exit;
             }
         } else {
-            echo "<script>alert('Invalid Username or Password'); window.location='index.php';</script>";
+            $_SESSION['error'] = 'Invalid username or password';
+            header('Location: index.php');
             exit;
         }
     }
