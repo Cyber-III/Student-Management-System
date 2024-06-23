@@ -68,7 +68,7 @@ if(isset($_SESSION['username'])) {
         
         <i class="bi bi-list toggle-sidebar-btn"></i>
         </div>
-        <a href="../../../welcome.php"><img src="../../../pics/L4.png" alt="" class="logos"></a>
+        <a href="../../../Lecturer/welcome.php"><img src="../../../pics/L4.png" alt="" class="logos"></a>
         
 
         <nav class="header-nav ms-auto">
@@ -76,8 +76,8 @@ if(isset($_SESSION['username'])) {
             
             <ul class="d-flex align-items-center">
             
-            <a href="../../../welcome.php"><li>Home</li></a>
-            <a href="../../../index.php"><li>Logout</li></a>
+            <a href="../../../Lecturer/welcome.php"><li>Home</li></a>
+            <a href="../../../Lecturer/index.php"><li>Logout</li></a>
             <div class="animation start-home"></div>
             </ul>
         </nav>

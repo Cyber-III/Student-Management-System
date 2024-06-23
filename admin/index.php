@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +17,26 @@
 
     .social-icons-container a {
         margin-right: 50px;
+    }
+
+    #search-icon {
+      margin-left: 5px;
+      padding: 6px;
+      width: 45px;
+      height: 45px;
+      color: #182431;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #e4282e;
+      border-radius: 10px;
+      background-color: #fff1f4;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #search-icon:hover {
+      background-color: #ee0c0c;
+      color: white;
+      cursor: pointer;
     }
 
 </style>
@@ -31,7 +55,17 @@
 </head>
 
 <body>
-
+<?php
+    if (isset($_SESSION['error'])) {
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+            . $_SESSION['error'] .
+            '<button type="button" id="search-icon" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+             </button>
+        </div>';
+        unset($_SESSION['error']);
+    }
+?>
 
   <section class="vh-100">
     <div class="container py-5 h-100">
@@ -63,7 +97,13 @@
               <input type="submit" value="Sign in" name="login" class="btn btn-warning btn-lg text-light my-2 py-3" style="width:100% ; border-radius: 30px; font-weight:600; background-color: #3333ff; border-color: #3333ff; color: #FFFFFF;" />
           
             </div>
-
+            <!-- Social Icons -->
+            <div class="social-icons-container">
+              <a href="https://www.instagram.com/icbtsrilanka/" target="_blank"> <img src="icons/instagram.png" alt="" height="32px" width="32px"> </a>
+              <a href="https://www.facebook.com/ICBTsrilanka/" target="_blank"> <img src="icons/facebook.png" alt="" height="32px" width="32px"> </a>
+              <a href="https://www.youtube.com/channel/UC3bDumjXNsq2ixYkUT7wT_g" target="_blank"> <img src="icons/youtube.png" alt="" height="32px" width="32px"> </a>
+              <a href="https://www.linkedin.com/school/icbtcampus/" target="_blank"> <img src="icons/linkedin.png" alt="" height="32px" width="32px"> </a>
+            </div>
           </form>
         </div>
       </div>
@@ -77,6 +117,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+
+  <!-- Include Bootstrap JS and dependencies (optional) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
