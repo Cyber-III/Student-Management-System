@@ -18,7 +18,31 @@ $username = $_SESSION['username']; // Get the username from the session
 $course = $batch = $module = $lecturer = $date = $time = $hall = $notes = "";
 $success_message = $error = "";
 
-// Fetch courses from course_tbl for the dropdown menu
+// Fetch lecturers from lecturers table for the dropdown menu
+$lecturers = [];
+$sql_lecturers = "SELECT name FROM lecturers";
+$result_lecturers = $conn->query($sql_lecturers);
+if ($result_lecturers) {
+    while ($row = $result_lecturers->fetch_assoc()) {
+        $lecturers[] = $row['name'];
+    }
+} else {
+    $error = "Error fetching lecturers: " . $conn->error;
+}
+
+// Fetch batches from batches table for the dropdown menu
+$batches = [];
+$sql_batches = "SELECT batch_no FROM batches";
+$result_batches = $conn->query($sql_batches);
+if ($result_batches) {
+    while ($row = $result_batches->fetch_assoc()) {
+        $batches[] = $row['batch_no'];
+    }
+} else {
+    $error = "Error fetching batches: " . $conn->error;
+}
+
+// Fetch courses from courses table for the dropdown menu
 $courses = [];
 $sql_courses = "SELECT course_name FROM course_tbl";
 $result_courses = $conn->query($sql_courses);
@@ -57,7 +81,6 @@ if (isset($_POST['add'])) {
         $error = "Error in SQL query preparation: " . $conn->error;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -98,15 +121,32 @@ if (isset($_POST['add'])) {
         </div>
         <div class="mb-3">
             <label for="batch" class="form-label">Batch</label>
-            <input type="text" class="form-control" id="batch" name="batch" value="<?= htmlspecialchars($batch); ?>" required>
+            <select class="form-control" id="batch" name="batch" required>
+                <option value="">Select Batch</option>
+                <?php foreach ($batches as $batch_no): ?>
+                    <option value="<?= htmlspecialchars($batch_no); ?>" <?= $batch == $batch_no ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($batch_no); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="module" class="form-label">Module</label>
-            <input type="text" class="form-control" id="module" name="module" value="<?= htmlspecialchars($module); ?>" required>
+            <select class="form-control" id="module" name="module" required>
+                <option value="">Select Module</option>
+                <!-- Options will be populated by JavaScript -->
+            </select>
         </div>
         <div class="mb-3">
             <label for="lecturer" class="form-label">Lecturer</label>
-            <input type="text" class="form-control" id="lecturer" name="lecturer" value="<?= htmlspecialchars($lecturer); ?>" required>
+            <select class="form-control" id="lecturer" name="lecturer" required>
+                <option value="">Select Lecturer</option>
+                <?php foreach ($lecturers as $lecturer_name): ?>
+                    <option value="<?= htmlspecialchars($lecturer_name); ?>" <?= $lecturer == $lecturer_name ? 'selected' : ''; ?>>
+                        <?= htmlspecialchars($lecturer_name); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>
@@ -122,11 +162,41 @@ if (isset($_POST['add'])) {
         </div>
         <div class="mb-3">
             <label for="notes" class="form-label">Notes</label>
-            <textarea class="form-control" id="notes" name="notes" required><?= htmlspecialchars($notes); ?></textarea>
+            <textarea class="form-control" id="notes" name="notes"><?= htmlspecialchars($notes); ?></textarea>
         </div>
         <button type="submit" name="add" class="btn btn-primary">Add Class Schedule</button>
         <a href="class_schedule.php" class="btn btn-secondary">Back</a>
     </form>
 </div>
+<script>
+document.getElementById('course').addEventListener('change', function() {
+    var course = this.value;
+    var moduleSelect = document.getElementById('module');
+
+    // Clear existing options
+    moduleSelect.innerHTML = '<option value="">Select Module</option>';
+
+    if (course) {
+        // Fetch modules for the selected course
+        fetch('get_modules.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'course=' + encodeURIComponent(course)
+        })
+        .then(response => response.json())
+        .then(modules => {
+            modules.forEach(function(module) {
+                var option = document.createElement('option');
+                option.value = module;
+                option.textContent = module;
+                moduleSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+</script>
 </body>
 </html>
