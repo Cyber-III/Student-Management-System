@@ -5,7 +5,7 @@ include_once('../connection.php');
 if (isset($_GET['username'])) {
     $username = $_GET['username'];
 
-    $sql = "SELECT username, batch_number, module_name, assignment_name, submission_date, file_path FROM assignments WHERE username = ?";
+    $sql = "SELECT username, batch_number, module_name, assignment_name, submission_date, feedback, file_path FROM assignments WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
     $stmt->execute();
