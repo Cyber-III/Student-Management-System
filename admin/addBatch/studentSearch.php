@@ -60,6 +60,8 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
         <div class="alert alert-danger">The batch was deleted successfully.</div>
     <?php elseif ($message == 'edit'): ?>
         <div class="alert alert-success">The batch was updated successfully.</div>
+    <?php elseif ($message == 'exists'): ?>
+        <div class="alert alert-danger">The batch already exists.</div>
     <?php endif; ?>
 
     <br>

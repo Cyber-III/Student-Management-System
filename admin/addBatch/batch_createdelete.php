@@ -23,7 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: studentSearch.php?message=insert");
                 exit();
             } else {
-                echo "Error: " . $stmt->error;
+                if ($stmt->errno == 1062) { // Duplicate entry error code
+                    header("Location: studentSearch.php?message=exists");
+                    exit();
+                } else {
+                    echo "Error: " . $stmt->error;
+                }
             }
             $stmt->close();
         } else {
