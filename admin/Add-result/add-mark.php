@@ -155,7 +155,6 @@ $conn->close();
                         <th>Presentation Result</th>
                         <th>Exam Result</th>
                         <th>Final Result</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="resultsTableBody">
@@ -258,7 +257,6 @@ $conn->close();
                                 <td>${result.presentation_result}</td>
                                 <td>${result.exam_result}</td>
                                 <td>${result.final_result}</td>
-                                <td><a href="manage_result.php?username=${result.username}&module=${result.module_name}" class="manage-link">Manage</a></td>
                             `;
                             tableBody.appendChild(row);
                         });
