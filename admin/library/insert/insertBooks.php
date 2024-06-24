@@ -117,13 +117,13 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                     <input type="file" id="photo" name="photo" required>
                 </div>
             </div>
+            
+            <button type="submit" class="view-link">Submit</button>
+            
         </div>
         <br>
-
     </form>
     <br>
-
-
 
     <!-- Search bar -->
     <div class="form-row">
@@ -139,13 +139,8 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                 <button id="search-icon" onclick="searchByBatch()"><i class="fas fa-search"></i></button>
             </div>
         </div>
-
     </div>
     <br>
-
-
-
-    
 
     <div class="table_container">
         <table>
@@ -182,7 +177,6 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                     <tr><td colspan="5">No records found</td></tr>
                 <?php endif; ?>
             </tbody>
-
         </table>
     </div>
 
