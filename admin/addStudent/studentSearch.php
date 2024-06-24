@@ -100,11 +100,11 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                     </div>
 
                     <div class="form-group">
-                        <label for="batch_number">Batch Number:</label>
-                        <select id="batch_number" name="batch_number" required>
-                            <option value="">Select Batch Number</option>
-                            <?php foreach ($batch_numbers as $batch_number): ?>
-                                <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
+                        <label for="course">Course:</label>
+                        <select id="course" name="course" required>
+                            <option value="">Select Course</option>
+                            <?php foreach (array_unique($courses) as $course): ?>
+                                <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -112,11 +112,11 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="course">Course:</label>
-                        <select id="course" name="course" required>
-                            <option value="">Select Course</option>
-                            <?php foreach (array_unique($courses) as $course): ?>
-                                <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
+                        <label for="batch_number">Batch Number:</label>
+                        <select id="batch_number" name="batch_number" required>
+                            <option value="">Select Batch Number</option>
+                            <?php foreach ($batch_numbers as $batch_number): ?>
+                                <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
