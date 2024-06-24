@@ -78,55 +78,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // Entry does not exist, insert a new one
                     $sql = "INSERT INTO assignments (module_name, assignment_name, batch_number, username, file_path, module_code) VALUES (?, ?, ?, ?, ?, ?)";
                     
-                    // Check if the entry already exists in the final_result table
-                    $checkFinalResult = "SELECT * FROM final_result WHERE module_name = ? AND batch_number = ? AND module_code = ? AND username = ?";
-                    $stmtCheck = $conn->prepare($checkFinalResult);
-                    if ($stmtCheck) {
-                        $stmtCheck->bind_param('ssss', $module_name, $batch_number, $module_code, $username);
-                        $stmtCheck->execute();
-                        $resultCheck = $stmtCheck->get_result();
-                        $stmtCheck->close();
-
-                        if ($resultCheck->num_rows > 0) {
-                            // Entry exists, skip insertion or update if needed
-                            $insertFinalResult = false;
-                        } else {
-                            // Entry does not exist, proceed with insertion
-                            $insertFinalResult = true;
-                        }
-                    } else {
-                        echo "Error preparing check statement: " . $conn->error;
-                    }
-
-                    $stmt1 = $conn->prepare($sql);
-                    $finalres = "INSERT INTO final_result (module_name, batch_number, module_code, username) VALUES (?, ?, ?, ?)";
-                    $stmt2 = $conn->prepare($finalres);
-
-                    if ($stmt1 && $stmt2) {
-                        $stmt1->bind_param('ssssss', $module_name, $assignment_name, $batch_number, $username, $uploadFile, $module_code);
-                        if ($insertFinalResult) {
-                            $stmt2->bind_param('ssss', $module_name, $batch_number, $module_code, $username);
-                        }
-                        
-                        $conn->begin_transaction();
-
-                        try {
-                            $stmt1->execute();
-                            if ($insertFinalResult) {
-                                $stmt2->execute();
-                            }
-                            $conn->commit();
+                    $stmt = $conn->prepare($sql);
+                    if ($stmt) {
+                        $stmt->bind_param('ssssss', $module_name, $assignment_name, $batch_number, $username, $uploadFile, $module_code);
+                        if ($stmt->execute()) {
                             header("Location: upload_submission.php?message=submitted");
                             exit();
-                        } catch (Exception $e) {
-                            $conn->rollback();
-                            echo "Error inserting records: " . $e->getMessage();
+                        } else {
+                            echo "Error inserting assignment: " . $stmt->error;
                         }
-                        
-                        $stmt1->close();
-                        $stmt2->close();
+                        $stmt->close();
                     } else {
-                        echo "Error preparing insert statements: " . $conn->error;
+                        echo "Error preparing insert statement: " . $conn->error;
                     }
                 }
             } else {
