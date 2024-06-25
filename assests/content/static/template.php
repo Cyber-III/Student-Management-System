@@ -35,6 +35,7 @@ if(isset($_SESSION['username'])) {
 
 }
 
+$activePage = basename($_SERVER['PHP_SELF'], ".php");
 ?>
 
 <!doctype html>
@@ -102,7 +103,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Profile Category -->
             <div class="item">
-                    <a href="../../../view_profile/view_profile.php" class="sub-item"><i class="far fa-id-card"></i>Student Profile</a>
+                <a href="../../../view_profile/view_profile.php" class="sub-item <?php echo $activePage == 'view_profile' ? 'active' : ''; ?>"><i class="far fa-id-card"></i>Student Profile</a>
             </div>
             
             <!-- Payment Category -->
@@ -111,15 +112,15 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../PaymentSection/make_payment/make_payment.php" class="sub-item">Make Payments</a>
-                    <a href="../../../PaymentSection/view_paymentStatus/view_paymentStatus.php" class="sub-item">View Payments Status</a>
-                    <a href="../../../PaymentSection/upload_paymentReceipt/upload_paymentReceipt.php" class="sub-item">Upload Payment Receipts</a>
+                    <a href="../../../PaymentSection/make_payment/make_payment.php" class="sub-item <?php echo $activePage == 'make_payment' ? 'active' : ''; ?>">Make Payments</a>
+                    <a href="../../../PaymentSection/view_paymentStatus/view_paymentStatus.php" class="sub-item <?php echo $activePage == 'view_paymentStatus' ? 'active' : ''; ?>">View Payments Status</a>
+                    <a href="../../../PaymentSection/upload_paymentReceipt/upload_paymentReceipt.php" class="sub-item <?php echo $activePage == 'upload_paymentReceipt' ? 'active' : ''; ?>">Upload Payment Receipts</a>
                 </div>
             </div>
             
             <!-- Class Schedule Category -->
             <div class="item">
-                    <a href="../../../Class Schedule/classSchedule.php" class="sub-item"><i class="far fa-calendar-alt"></i>Class Schedule</a>
+                    <a href="../../../Class Schedule/classSchedule.php" class="sub-item <?php echo $activePage == 'classSchedule' ? 'active' : ''; ?>"><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
             
             <!-- Exam Category -->
@@ -128,9 +129,9 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
-                    <a href="../../../ExamSection/ExamSubmission/exam_submission.php" class="sub-item">Exam Submissions</a>
-                    <a href="../../../ExamSection/ExamAdmission/examAdmission.php" class="sub-item">Exam Admission</a>
+                    <a href="../../../ExamSection/ExamSchedule/exam_schedule.php" class="sub-item <?php echo $activePage == 'exam_schedule' ? 'active' : ''; ?>">Exam Schedule</a>
+                    <a href="../../../ExamSection/ExamSubmission/exam_submission.php" class="sub-item <?php echo $activePage == 'exam_submission' ? 'active' : ''; ?>">Exam Submissions</a>
+                    <a href="../../../ExamSection/ExamAdmission/examAdmission.php" class="sub-item <?php echo $activePage == 'examAdmission' ? 'active' : ''; ?>">Exam Admission</a>
                     
                 </div>
             </div>
@@ -141,18 +142,18 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="../../../AssignmentSection\submission\upload_submission.php" class="sub-item">Assignment Submissions</a>
-                    <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
-                    <a href="../../../AssignmentSection\Mitigation Request\mitigation.php" class="sub-item">Add Mitigation Request</a>
-                    <a href="../../../AssignmentSection\Mitigation Request\view_mitigation.php" class="sub-item">View Mitigation Request</a>
+                    <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item <?php echo $activePage == 'schedule' ? 'active' : ''; ?>">Assignment Schedule</a>
+                    <a href="../../../AssignmentSection\submission\upload_submission.php" class="sub-item <?php echo $activePage == 'upload_submission' ? 'active' : ''; ?>">Assignment Submissions</a>
+                    <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item <?php echo $activePage == 'feedback' ? 'active' : ''; ?>">Assignment Feedback</a>
+                    <a href="../../../AssignmentSection\Mitigation Request\mitigation.php" class="sub-item <?php echo $activePage == 'mitigation' ? 'active' : ''; ?>">Add Mitigation Request</a>
+                    <a href="../../../AssignmentSection\Mitigation Request\view_mitigation.php" class="sub-item <?php echo $activePage == 'view_mitigation' ? 'active' : ''; ?>">View Mitigation Request</a>
                     
                 </div>
             </div>
 
             <!-- Viva Session -->
             <div class="item">
-                <a href="../../../viva/exam_submission.php"><i class="far fa-sticky-note"></i>Viva Application</a>
+                <a href="../../../viva/viva_submission.php" class="sub-item <?php echo $activePage == 'viva_submission' ? 'active' : ''; ?>"> <i class="far fa-sticky-note"></i>Viva Application</a>
             </div>
 
             <!-- Results Category -->
@@ -161,16 +162,16 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../ResultSection/Assignment/result.php" class="sub-item">Assignment Results</a>
-                    <a href="../../../ResultSection/Exam/result.php" class="sub-item">Exam Results</a>
-                    <a href="../../../ResultSection/Final/final.php" class="sub-item">Final Results</a>
+                    <a href="../../../ResultSection/Assignment/result.php" class="sub-item <?php echo $activePage == 'result' ? 'active' : ''; ?>">Assignment Results</a>
+                    <a href="../../../ResultSection/Exam/Examresult.php" class="sub-item <?php echo $activePage == 'Examresult' ? 'active' : ''; ?>">Exam Results</a>
+                    <a href="../../../ResultSection/Final/final.php" class="sub-item <?php echo $activePage == 'final' ? 'active' : ''; ?>">Final Results</a>
                     
                 </div>
             </div>
 
             <!-- Notice Board -->
             <div class="item">
-                <a href="../../../Notice-Board-Section/noticeboard.php"><i class="far fa-sticky-note"></i>Notice Board </a>
+                <a href="../../../Notice-Board-Section/noticeboard.php" class="sub-item <?php echo $activePage == 'noticeboard' ? 'active' : ''; ?>"> <i class="far fa-sticky-note"></i>Notice Board</a>
             </div>
 
             <!-- Library Category -->
@@ -179,8 +180,8 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../LibrarySection/ReserveBooks/reserveBooks.php" class="sub-item">Reserve Library Books</a>
-                    <a href="../../../LibrarySection/ManageReservedBooks/manageReservedBooks.php" class="sub-item">Manage Reserved Books</a>
+                    <a href="../../../LibrarySection/ReserveBooks/reserveBooks.php" class="sub-item <?php echo $activePage == 'reserveBooks' ? 'active' : ''; ?>">Reserve Library Books</a>
+                    <a href="../../../LibrarySection/ManageReservedBooks/manageReservedBooks.php" class="sub-item <?php echo $activePage == 'manageReservedBooks' ? 'active' : ''; ?>">Manage Reserved Books</a>
 
                 </div>
             </div>
@@ -191,10 +192,10 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../GraduationSection/GraduationSchedule/graduationSchedule.php" class="sub-item">Graduation Schedule</a>
-                    <a href="../../../GraduationSection/RegisterGrad/registerGrad.php" class="sub-item">Register for Graduation</a>
-                    <a href="../../../GraduationSection/GradPhotos/gradPhotos.php" class="sub-item">Graduation Photos</a>
-                    <a href="../../../GraduationSection/RegisterSummary/registerSummary.php" class="sub-item">Registration Summary</a>
+                    <a href="../../../GraduationSection/GraduationSchedule/graduationSchedule.php" class="sub-item <?php echo $activePage == 'graduationSchedule' ? 'active' : ''; ?>">Graduation Schedule</a>
+                    <a href="../../../GraduationSection/RegisterGrad/registerGrad.php" class="sub-item <?php echo $activePage == 'registerGrad' ? 'active' : ''; ?>">Register for Graduation</a>
+                    <a href="../../../GraduationSection/GradPhotos/gradPhotos.php" class="sub-item <?php echo $activePage == 'gradPhotos' ? 'active' : ''; ?>">Graduation Photos</a>
+                    <a href="../../../GraduationSection/RegisterSummary/registerSummary.php" class="sub-item <?php echo $activePage == 'registerSummary' ? 'active' : ''; ?>">Registration Summary</a>
                 </div>
             </div>
             
@@ -204,45 +205,45 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../MembershipSection/library_mem/library_mem.php" class="sub-item">Library Membership</a>
-                    <a href="../../../MembershipSection/recreation_mem/recreation_mem.php" class="sub-item">Recreation Membership</a>
+                    <a href="../../../MembershipSection/library_mem/library_mem.php" class="sub-item <?php echo $activePage == 'library_mem' ? 'active' : ''; ?>">Library Membership</a>
+                    <a href="../../../MembershipSection/recreation_mem/recreation_mem.php" class="sub-item <?php echo $activePage == 'recreation_mem' ? 'active' : ''; ?>">Recreation Membership</a>
                     
                 </div>
             </div>
 
             <!-- Course Modules -->
             <div class="item">
-                <a href="../../../Course Modules/course_module.php"><i class="fas fa-info-circle"></i>Course Modules </a>
+                <a href="../../../Course Modules/course_module.php" class="sub-item <?php echo $activePage == 'course_module' ? 'active' : ''; ?>"><i class="fas fa-info-circle"></i>Course Modules </a>
             </div>
             
             <!-- Course Materials -->
             <div class="item">
-                <a href="../../../Course Materials/courseMaterials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
+                <a href="../../../Course Materials/courseMaterials.php" class="sub-item <?php echo $activePage == 'courseMaterials' ? 'active' : ''; ?>"><i class="fas fa-book-reader"></i>Course Materials </a>
             </div>
 
             <!-- Course Guidlines Category -->
             <div class="item">
-                    <a href="../../../CourseGuidline/StudentGuidline/studentGuidline.php"><i class="far fa-question-circle"></i>Course Guidlines</a>
+                    <a href="../../../CourseGuidline/StudentGuidline/studentGuidline.php" class="sub-item <?php echo $activePage == 'studentGuidline' ? 'active' : ''; ?>"><i class="far fa-question-circle"></i>Course Guidlines</a>
             </div>           
 
             <!-- Message -->
             <div class="item">
-                <a href="../../../MessageSection/message.php"><i class="fas fa-envelope"></i>Message </a>
+                <a href="../../../MessageSection/message.php" class="sub-item <?php echo $activePage == 'message' ? 'active' : ''; ?>"><i class="fas fa-envelope"></i>Message </a>
             </div>
 
             <!-- Call Center -->
             <div class="item">
-                <a href="../../../Call-Section/callcenter.php"><i class="fas fa-phone-alt"></i>Call Center </a>
+                <a href="../../../Call-Section/callcenter.php" class="sub-item <?php echo $activePage == 'callcenter' ? 'active' : ''; ?>"><i class="fas fa-phone-alt"></i>Call Center </a>
             </div>
 
             <!-- Lecture Evaluation -->
             <div class="item">
-                <a href="../../../EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
+                <a href="../../../EvaluationSection/evaluation.php" class="sub-item <?php echo $activePage == 'evaluation' ? 'active' : ''; ?>"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
             </div>
 
             <!-- Vacancies -->
             <div class="item">
-                <a href="../../../VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
+                <a href="../../../VacancySection/vacancy.php" class="sub-item <?php echo $activePage == 'vacancy' ? 'active' : ''; ?>"><i class="fas fa-user-plus"></i>Vacancies </a>
             </div>
 
 
@@ -333,7 +334,21 @@ if(isset($_SESSION['username'])) {
         }
 
     })();
+
+        // JavaScript for sidebar toggle
+        let subMenu = document.getElementsByClassName('sub-btn');
+    for (let i = 0; i < subMenu.length; i++) {
+      subMenu[i].addEventListener('click', function() {
+        this.classList.toggle('active');
+        this.nextElementSibling.classList.toggle('show');
+      });
+    }
 </script>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-oBqDVmMz4fnFO9gybVp+6eP23Q8uMGFcm5iD9GNGIa0WlH/eUcZOw7KHEd0P2vHg"
+crossorigin="anonymous"></script>
 
 
 </html>

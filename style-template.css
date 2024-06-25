@@ -13,6 +13,18 @@
     font-family: "Poppins", sans-serif;
 }
 
+/* Style for active menu item */
+.sidebar .menu .sub-item.active {
+  color: rgb(0, 204, 255); 
+  font-weight: bold; 
+}
+
+/* Style for the active submenu item */
+.sidebar .menu .sub-menu .sub-item.active {
+  color: rgb(0, 204, 255); 
+  font-weight: bold; 
+}
+
 
 /* Sidebar section ================================================================================*/
 

@@ -15,7 +15,7 @@ function sanitize_input($conn, $data) {
 
 // Fetch awarding batch numbers
 $com_notice = [];
-$result2 = mysqli_query($conn, "SELECT * batch_no FROM notice");
+$result2 = mysqli_query($conn, "SELECT id FROM notice");
 
 
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         foreach ($batches as $batch) {
             $batch = sanitize_input($conn, $batch);
-            $query = "INSERT INTO `batch-notice` (batch_number, subject, added_date, view_link) VALUES ('$batch', '$subject', '$added_date', '$view_link')";
+            $query = "INSERT INTO batch-notice (batch_number, subject, added_date, view_link) VALUES ('$batch', '$subject', '$added_date', '$view_link')";
             
             if (mysqli_query($conn, $query)) {
                 echo "Batch notice added successfully.";
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="button" class="view-link" onclick="openBatchNotice()">Manage</button>
 
         <div class="form-content">
-            <h1 style="bold">Batch Notice</h1>
+            <h1>Batch Notice</h1>
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <input type="hidden" name="batch_notice_form">
                 <label for="subject">Subject:</label>
