@@ -134,108 +134,36 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../AssignmentSection\schedule\schedule.php" class="sub-item">Assignment Schedule</a>
-                    <a href="../../../AssignmentSection\submission\upload_submission.php" class="sub-item">Assignment Submissions</a>
-                    <a href="../../../AssignmentSection\Feedback\feedback.php" class="sub-item">Assignment Feedback</a>
-                    <a href="../../../AssignmentSection\Mitigation Request\mitigation.php" class="sub-item">Add Mitigation Request</a>
-                    <a href="../../../AssignmentSection\Mitigation Request\view_mitigation.php" class="sub-item">View Mitigation Request</a>
-                    
-                </div>
+                  <a href="../../../Lecturer/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
+                  <!-- <a href="../../../Lecturer/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a> -->
+                  <a href="../../../Lecturer/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
+              </div>
             </div>
 
-            <!-- Viva Session -->
+            <!-- Viva -->
             <div class="item">
-                <a href="../../../viva/exam_submission.php"><i class="far fa-sticky-note"></i>Viva Application</a>
-            </div>
-
-            <!-- Results Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fa fa-trophy"></i>Results
+                <a class="sub-btn"><i class='far fa-sticky-note'></i>Viva
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../ResultSection/Assignment/result.php" class="sub-item">Assignment Results</a>
-                    <a href="../../../ResultSection/Exam/result.php" class="sub-item">Exam Results</a>
-                    <a href="../../../ResultSection/Final/final.php" class="sub-item">Final Results</a>
-                    
+                    <a href="../../../Lecturer/viva/viva.php" class="sub-item">Viva Schedule</a>
+                    <a href="../../../Lecturer/viva/team.php" class="sub-item">Viva Team Management</a>
                 </div>
-            </div>
-
-            <!-- Notice Board -->
-            <div class="item">
-                <a href="../../../Notice-Board-Section/noticeboard.php"><i class="far fa-sticky-note"></i>Notice Board </a>
-            </div>
-
-            <!-- Library Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fa fa-book"></i>Library Books
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../LibrarySection/ReserveBooks/reserveBooks.php" class="sub-item">Reserve Library Books</a>
-                    <a href="../../../LibrarySection/ManageReservedBooks/manageReservedBooks.php" class="sub-item">Manage Reserved Books</a>
-
-                </div>
-            </div>
-
-            <!-- Graduation Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-user-graduate"></i>Graduation
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../GraduationSection/GraduationSchedule/graduationSchedule.php" class="sub-item">Graduation Schedule</a>
-                    <a href="../../../GraduationSection/RegisterGrad/registerGrad.php" class="sub-item">Register for Graduation</a>
-                    <a href="../../../GraduationSection/GradPhotos/gradPhotos.php" class="sub-item">Graduation Photos</a>
-                    <a href="../../../GraduationSection/RegisterSummary/registerSummary.php" class="sub-item">Registration Summary</a>
-                </div>
-            </div>
-            
-            <!-- Membership Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-award"></i>Memberships
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                    <a href="../../../MembershipSection/library_mem/library_mem.php" class="sub-item">Library Membership</a>
-                    <a href="../../../MembershipSection/recreation_mem/recreation_mem.php" class="sub-item">Recreation Membership</a>
-                    
-                </div>
-            </div>
-
-            <!-- Course Modules -->
-            <div class="item">
-                <a href="../../../Course Modules/course_module.php"><i class="fas fa-info-circle"></i>Course Modules </a>
             </div>
             
             <!-- Course Materials -->
             <div class="item">
-                <a href="../../../Course Materials/courseMaterials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
+              <a href="../../../Lecturer/course Materials/coursematerials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
             </div>
-
-            <!-- Course Guidlines Category -->
-            <div class="item">
-                    <a href="../../../CourseGuidline/StudentGuidline/studentGuidline.php"><i class="far fa-question-circle"></i>Course Guidlines</a>
-            </div>           
 
             <!-- Message -->
-            <div class="item">
+            <!-- <div class="item">
                 <a href="../../../MessageSection/message.php"><i class="fas fa-envelope"></i>Message </a>
-            </div>
-
-            <!-- Call Center -->
-            <div class="item">
-                <a href="../../../Call-Section/callcenter.php"><i class="fas fa-phone-alt"></i>Call Center </a>
-            </div>
-
-            <!-- Lecture Evaluation -->
-            <div class="item">
-                <a href="../../../EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
-            </div>
+            </div> -->
 
             <!-- Vacancies -->
             <div class="item">
-                <a href="../../../VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
+                <a href="../../../Lecturer/VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
             </div>
 
 
