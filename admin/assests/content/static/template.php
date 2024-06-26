@@ -96,7 +96,7 @@ if(isset($_SESSION['username'])) {
 
              <!-- Student Management-->
              <div class="item">
-                <a class="sub-btn"><i class="fa-solid fa-user-plus"></i>Student Manage
+                <a class="sub-btn"><i class="fa-solid fa-user-plus"></i>Manage Student
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
@@ -130,7 +130,7 @@ if(isset($_SESSION['username'])) {
 
              <!-- Exam Category -->
              <div class="item">
-                <a class="sub-btn"><i class="fa-solid fa-book-open"></i>Courses
+                <a class="sub-btn"><i class="fa-solid fa-book-open"></i>Manage Courses
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
@@ -147,7 +147,7 @@ if(isset($_SESSION['username'])) {
 
             <!-- Add Batch -->
             <div class="item">
-                <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-people-group"></i>Batches</a>
+                <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-people-group"></i>Manage Batches</a>
             </div>
             
             <!-- Assignments Category -->
