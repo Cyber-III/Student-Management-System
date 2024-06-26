@@ -17,8 +17,6 @@ function sanitize_input($conn, $data) {
 $com_notice = [];
 $result2 = mysqli_query($conn, "SELECT id FROM notice");
 
-
-
 // Fetch awarding batch numbers
 $batch_numbers = [];
 $result2 = mysqli_query($conn, "SELECT DISTINCT batch_no FROM batches");
@@ -53,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         foreach ($batches as $batch) {
             $batch = sanitize_input($conn, $batch);
-            $query = "INSERT INTO batch-notice (batch_number, subject, added_date, view_link) VALUES ('$batch', '$subject', '$added_date', '$view_link')";
+            $query = "INSERT INTO `batch-notice` (batch_number, subject, added_date, view_link) VALUES ('$batch', '$subject', '$added_date', '$view_link')";
             
             if (mysqli_query($conn, $query)) {
                 echo "Batch notice added successfully.";
@@ -102,6 +100,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             const batchContainer = document.getElementById('batchContainer');
             batchContainer.removeChild(button.parentNode);
         }
+
+        function openBatchNotice() {
+            // Redirect to the batch-notice.php file
+            window.location.href = 'batch-notice.php';
+        }
+
+        function openNotice() {
+            // Redirect to the notice.php file
+            window.location.href = 'notice.php';
+        }
     </script>
 </head>
 <body>
@@ -131,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                               <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
                           <?php endforeach; ?>
                       </select>
-                      <input type="hidden" onclick="removeBatchField(this)" class="delete-link"></input>
+                      <button type="button" onclick="removeBatchField(this)" class="delete-link">Remove</button>
                     </div>
                 </div>
                 <button type="button" id="addBatchButton" onclick="addBatchField()" class="view-link">Add Batch</button>
@@ -139,9 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="submit" value="Add Notice" class="view-link">
             </form>
         </div>
-
-
-        
     </div>
 
     <div class="form-container-2">
@@ -166,64 +171,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 </body>
-
-    <script>
-        function openBatchNotice() {
-            // Redirect to the batch-notice.php file
-            window.location.href = 'batch-notice.php';
-        }
-
-        function addBatchField() {
-            // Function to dynamically add batch fields
-            var batchContainer = document.getElementById('batchContainer');
-            var newField = document.createElement('div');
-            newField.className = 'batchField';
-            newField.innerHTML = `
-                <select name="batch[]" required>
-                    <option value="">Select Batch Number</option>
-                    <?php foreach ($batch_numbers as $batch_number): ?>
-                        <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <input type="hidden" onclick="removeBatchField(this)" class="delete-link">
-            `;
-            batchContainer.appendChild(newField);
-        }
-
-        function removeBatchField(element) {
-            // Function to remove batch fields
-            var batchContainer = document.getElementById('batchContainer');
-            batchContainer.removeChild(element.parentNode);
-        }
-    </script>
-
-    <script>
-        function openNotice() {
-            // Redirect to the batch-notice.php file
-            window.location.href = 'notice.php';
-        }
-
-        function addBatchField() {
-            // Function to dynamically add batch fields
-            var batchContainer = document.getElementById('batchContainer');
-            var newField = document.createElement('div');
-            newField.className = 'batchField';
-            newField.innerHTML = `
-                <select name="batch[]" required>
-                    <option value="">Select Batch Number</option>
-                    <?php foreach ($batch_numbers as $batch_number): ?>
-                        <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <input type="hidden" onclick="removeBatchField(this)" class="delete-link">
-            `;
-            batchContainer.appendChild(newField);
-        }
-
-        function removeBatchField(element) {
-            // Function to remove batch fields
-            var batchContainer = document.getElementById('batchContainer');
-            batchContainer.removeChild(element.parentNode);
-        }
-    </script>
 </html>
