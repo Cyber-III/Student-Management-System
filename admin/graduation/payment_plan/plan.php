@@ -300,7 +300,7 @@ while ($row = mysqli_fetch_assoc($result3)) {
                     </div>
 
                     <br>
-                    <button type="button" id="editButton" class="view-link">Edit</button>
+                    <button type="button" id="editButton" class="view-link">Save</button>
                     <button type="button" id="deleteButton" class="delete-link">Delete</button>
                 </div>
                 <br>

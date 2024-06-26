@@ -54,7 +54,7 @@ input[type="submit"]:hover {
 }
 
 .view-link {
-    width: 90px;
+    width: auto;
     color: #182431;
     text-decoration: none;
     font-weight: bold;
