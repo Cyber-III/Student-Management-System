@@ -113,7 +113,7 @@ ob_end_flush();
                     <td><?= htmlspecialchars($row['subject']) ?></td>
                     <td><?= htmlspecialchars($row['added_date']) ?></td>
                     <td><?= htmlspecialchars($row['view_link']) ?></td>
-                    <td data-cell="Action"><button onclick="manageNotice(this.parentNode.parentNode)" class="manage-button view-link">Manage</button></td>
+                    <td data-cell="Action"><button onclick="manageNotice(this.parentNode.parentNode)" class="manage-button view-link">Edit</button></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

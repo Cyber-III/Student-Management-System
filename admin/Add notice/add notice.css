@@ -87,7 +87,7 @@ select {
 
 .view-link {
   margin-bottom: 20px;
-  width: 110px;
+  width: auto;
   color: #182431;
   text-decoration: none;
   font-weight: bold;
@@ -105,7 +105,7 @@ select {
 }
 
 .delete-link {
-  width: 90px;
+  width: auto;
   color: #182431;
   text-decoration: none;
   font-weight: bold;
