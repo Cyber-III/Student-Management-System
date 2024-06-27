@@ -39,7 +39,7 @@ if(isset($_SESSION['username'])) {
 
 ?>
 
-!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
