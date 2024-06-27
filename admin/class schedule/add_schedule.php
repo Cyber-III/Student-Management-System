@@ -172,9 +172,11 @@ if (isset($_POST['add'])) {
 document.getElementById('course').addEventListener('change', function() {
     var course = this.value;
     var moduleSelect = document.getElementById('module');
+    var batchSelect = document.getElementById('batch');
 
     // Clear existing options
     moduleSelect.innerHTML = '<option value="">Select Module</option>';
+    batchSelect.innerHTML = '<option value="">Select Batch</option>';
 
     if (course) {
         // Fetch modules for the selected course
@@ -194,9 +196,30 @@ document.getElementById('course').addEventListener('change', function() {
                 moduleSelect.appendChild(option);
             });
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error fetching modules:', error));
+
+        // Fetch batches for the selected course
+        fetch('get_batches.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'course=' + encodeURIComponent(course)
+        })
+        .then(response => response.json())
+        .then(batches => {
+            batches.forEach(function(batch) {
+                var option = document.createElement('option');
+                option.value = batch;
+                option.textContent = batch;
+                batchSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching batches:', error));
     }
 });
+
+
 </script>
 </body>
 </html>
