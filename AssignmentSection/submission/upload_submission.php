@@ -34,6 +34,33 @@ if ($stmt) {
         } else {
             die("Error in SQL query: " . $conn->error);
         }
+
+        // Fetch submitted assignments
+        $sql = "SELECT assignment_name FROM assignments WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt) {
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $submitted_assignments = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            // Extract assignment names
+            $submitted_names = array_column($submitted_assignments, 'assignment_name');
+        } else {
+            die("Error in SQL query: " . $conn->error);
+        }
+
+        // Separate assignments into submitted and not submitted
+        $submitted = [];
+        $not_submitted = [];
+        foreach ($schedules as $schedule) {
+            if (in_array($schedule['assignment_name'], $submitted_names)) {
+                $submitted[] = $schedule;
+            } else {
+                $not_submitted[] = $schedule;
+            }
+        }
     } else {
         die("User not found.");
     }
@@ -54,13 +81,10 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
     <link rel="stylesheet" href="style-submission.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-
 </head>
-<body>
 <body>
 <div class="submission_container">
     <marquee><p class="text">Please note that when renaming your document, use your username (CL number) and assignment name. Ex: 'CL_HDCSE_CMU_XXX_XX_Networking_Practicle.pdf'</p></marquee>
-
     <h1 class="topic">Assignment Submission</h1>
 
     <?php if ($message == 'submitted'):?>
@@ -75,45 +99,43 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
         <div class="alert alert-danger">No submission found yet for the specified assignment.</div>
     <?php endif;?>
 
+    <br>
+    <br>
+    <h2>Submitted Assignments</h2>
     <div class="card-list">
-        <?php if ($schedules):?>
-            <?php foreach ($schedules as $schedule):?>
+        <?php if ($submitted):?>
+            <?php foreach ($submitted as $schedule):?>
                 <div class="card">
                     <div class="card-header">
                         <p><?= htmlspecialchars($schedule['assignment_name'])?></p>
                     </div>
                     <div class="card-body">
-                    <table class="info-table">
-                        <tr>
-                            <th class="label-column"><span class="label">Module Name:</span></th>
-                            <td class="value-column"><?= htmlspecialchars($schedule['module_name'])?></td>
-                        </tr>
-                        <tr>
-                            <th class="label-column"><span class="label">Module Code:</span></th>
-                            <td class="value-column"><?= htmlspecialchars($schedule['module_code'])?></td>
-                        </tr>
-                        <tr>
-                            <th class="label-column"><span class="label">Date:</span></th>
-                            <td class="value-column"><?= htmlspecialchars($schedule['date_of_issue'])?></td>
-                        </tr>
-                    </table>
+                        <table class="info-table">
+                            <tr>
+                                <th class="label-column"><span class="label">Module Name:</span></th>
+                                <td class="value-column"><?= htmlspecialchars($schedule['module_name'])?></td>
+                            </tr>
+                            <tr>
+                                <th class="label-column"><span class="label">Module Code:</span></th>
+                                <td class="value-column"><?= htmlspecialchars($schedule['module_code'])?></td>
+                            </tr>
+                            <tr>
+                                <th class="label-column"><span class="label">Date:</span></th>
+                                <td class="value-column"><?= htmlspecialchars($schedule['date_of_submit'])?></td>
+                            </tr>
+                        </table>
                         <?php if ($schedule['allow_submission']):?>
                             <form action="upload.php" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name'])?>">
                                 <input type="hidden" name="assignment_name" value="<?= htmlspecialchars($schedule['assignment_name'])?>">
                                 <input type="hidden" name="module_code" value="<?= htmlspecialchars($schedule['module_code'])?>">
                                 <div class="file_box">
-                                    <input  type="file" name="file">
+                                    <input type="file" name="file">
                                 </div>
-                                <!-- <div class="input-group mb-3">
-                                    <input type="file" class="form-control" id="inputGroupFile01">
-                                </div> -->
                                 <div class="button_container">
                                     <button type="submit" name="submit" class="btn1">Submit</button>
                                     <button type="submit" name="view" class="btn1">View</button>
-
                                 </div>
-                                
                             </form>
                         <?php else:?>
                             <p>Submission is not allowed for this assignment at the moment.</p>
@@ -122,14 +144,60 @@ $file_path = isset($_GET['file_path']) ? $_GET['file_path'] : '';
                 </div>
             <?php endforeach;?>
         <?php else:?>
-            <p>No assignment schedule found for <?= htmlspecialchars($course)?> <?= htmlspecialchars($batch_number)?>.</p>
+            <p>No submitted assignments found yet.</p>
+        <?php endif;?>
+    </div>
+    <br>
+    <br>
+    <h2>Not Submitted Assignments</h2>
+    <div class="card-list">
+        <?php if ($not_submitted):?>
+            <?php foreach ($not_submitted as $schedule):?>
+                <div class="card">
+                    <div class="card-header">
+                        <p><?= htmlspecialchars($schedule['assignment_name'])?></p>
+                    </div>
+                    <div class="card-body">
+                        <table class="info-table">
+                            <tr>
+                                <th class="label-column"><span class="label">Module Name:</span></th>
+                                <td class="value-column"><?= htmlspecialchars($schedule['module_name'])?></td>
+                            </tr>
+                            <tr>
+                                <th class="label-column"><span class="label">Module Code:</span></th>
+                                <td class="value-column"><?= htmlspecialchars($schedule['module_code'])?></td>
+                            </tr>
+                            <tr>
+                                <th class="label-column"><span class="label">Date:</span></th>
+                                <td class="value-column"><?= htmlspecialchars($schedule['date_of_submit'])?></td>
+                            </tr>
+                        </table>
+                        <?php if ($schedule['allow_submission']):?>
+                            <form action="upload.php" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="module_name" value="<?= htmlspecialchars($schedule['module_name'])?>">
+                                <input type="hidden" name="assignment_name" value="<?= htmlspecialchars($schedule['assignment_name'])?>">
+                                <input type="hidden" name="module_code" value="<?= htmlspecialchars($schedule['module_code'])?>">
+                                <div class="file_box">
+                                    <input type="file" name="file">
+                                </div>
+                                <div class="button_container">
+                                    <button type="submit" name="submit" class="btn1">Submit</button>
+                                    <button type="submit" name="view" class="btn1">View</button>
+                                </div>
+                            </form>
+                        <?php else:?>
+                            <p>Submission is not allowed for this assignment at the moment.</p>
+                        <?php endif;?>
+                    </div>
+                </div>
+            <?php endforeach;?>
+        <?php else:?>
+            <p>No Assignments found for <?= htmlspecialchars($course)?> <?= htmlspecialchars($batch_number)?>.</p>
         <?php endif;?>
     </div>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>

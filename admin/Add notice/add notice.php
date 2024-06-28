@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 <div class="container">
     <div class="form-container-1">
-        <button type="button" class="view-link" onclick="openBatchNotice()">Manage</button>
+        <button type="button" class="view-link" onclick="openBatchNotice()">View All</button>
 
         <div class="form-content">
             <h1>Batch Notice</h1>
@@ -144,14 +144,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <button type="button" id="addBatchButton" onclick="addBatchField()" class="view-link">Add Batch</button>
 
-                <input type="submit" value="Add Notice" class="view-link">
+                <input type="submit" value="Save Notice" class="view-link">
             </form>
         </div>
     </div>
 
     <div class="form-container-2">
         <div class="form-content">
-        <button type="button" class="view-link" onclick="openNotice()">Manage</button>
+        <button type="button" class="view-link" onclick="openNotice()">View All</button>
 
             <h1>Common Notice</h1>
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -165,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="view_link">Link:</label>
                 <input type="text" id="view_link" name="view_link" >
 
-                <input type="submit" value="Add Notice" class="view-link">
+                <input type="submit" value="Save Notice" class="view-link">
             </form>
         </div>
     </div>

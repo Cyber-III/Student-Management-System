@@ -94,24 +94,15 @@ if(isset($_SESSION['username'])) {
         <!-- Menu Items -->
         <div class="menu">
 
-            <!-- Add Course -->
-            <div class="item">
-                <a href="../../../admin/addCourse/studentSearch.php"><i class="fa-solid fa-book-open"></i>Add New Course</a>
-            </div>
-
-            <!-- Course Modules -->
-            <div class="item">
-                <a href="../../../admin/Course modules/modules.php"><i class="fa-solid fa-list"></i>Course Modules </a>
-            </div>
-
-            <!-- Add Batch -->
-            <div class="item">
-                <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-people-group"></i>Add New Batches</a>
-            </div>
-
-            <!-- Add Student -->
-            <div class="item">
-                <a href="../../../admin/addStudent/studentSearch.php"><i class="fa-solid fa-user-plus"></i></i>Manage Students</a>
+             <!-- Student Management-->
+             <div class="item">
+                <a class="sub-btn"><i class="fa-solid fa-user-plus"></i>Manage Student
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                    <a href="../../../admin/addStudent/studentSearch.php" class="sub-item"></i>Add Students</a>
+                    <a href="../../../admin/studentSearch/studentSearch.php">Student Search</a>
+                </div>
             </div>
 
             <!-- Payment Category -->
@@ -130,10 +121,45 @@ if(isset($_SESSION['username'])) {
             <div class="item">
                 <a href="../../../admin/addLecs/studentSearch.php"><i class="fa-solid fa-person-chalkboard"></i>Manage Lecturers</a>
             </div>
-
-            <!-- Student Search -->
+            
+            <!-- Class Schedule Category -->
             <div class="item">
-                <a href="../../../admin/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
+                    <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
+            </div>
+
+
+             <!-- Exam Category -->
+             <div class="item">
+                <a class="sub-btn"><i class="fa-solid fa-book-open"></i>Manage Courses
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                    <a href="../../../admin/addCourse/studentSearch.php" class="sub-item">Courses</a>
+                    <a href="../../../admin/Course modules/modules.php" class="sub-item">Course Modules </a>
+                    <a href="../../../admin/course Materials/coursematerials.php" class="sub-item">Course Materials </a>
+                </div>
+            </div>
+            
+            <!-- Class Schedule Category -->
+            <div class="item">
+                    <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
+            </div>
+
+            <!-- Add Batch -->
+            <div class="item">
+                <a href="../../../admin/addBatch/studentSearch.php"><i class="fa-solid fa-people-group"></i>Manage Batches</a>
+            </div>
+            
+            <!-- Assignments Category -->
+            <div class="item">
+                <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
+                    <!-- Dropdown -->
+                </a>
+                <div class="sub-menu">
+                  <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
+                  <!-- <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a> -->
+                  <a href="../../../admin/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
+              </div>
             </div>
 
             <!-- Exam Category -->
@@ -147,17 +173,6 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
-            <!-- Assignments Category -->
-            <div class="item">
-                <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
-                    <!-- Dropdown -->
-                </a>
-                <div class="sub-menu">
-                  <a href="../../../admin/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
-                  <!-- <a href="../../../admin/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a> -->
-                  <a href="../../../admin/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
-              </div>
-            </div>
 
             <!-- Viva -->
             <div class="item">
@@ -194,9 +209,9 @@ if(isset($_SESSION['username'])) {
                 </a>
                 <div class="sub-menu">
                     <a href="../../../admin/graduation/payment_plan/plan.php" class="sub-item">Graduation Schedule</a>
-                    <a href="" class="sub-item">Register for Graduation</a>
+                    <!-- <a href="" class="sub-item">Register for Graduation</a>
                     <a href="" class="sub-item">Graduation Photos</a>
-                    <a href="" class="sub-item">Registration Summary</a>
+                    <a href="" class="sub-item">Registration Summary</a> -->
                 </div>
             </div>
             
@@ -212,25 +227,14 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
-            <!-- Class Schedule Category -->
-            <div class="item">
-                    <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
-            </div>
-            
-            <!-- Course Materials -->
-            <div class="item">
-              <a href="../../../admin/course Materials/coursematerials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
-            </div>
-
-
             <!-- Notice Board -->
             <div class="item">
-                <a href="../../../admin/Add notice/add notice.php"><i class="far fa-sticky-note"></i> Add Notice </a>
+                <a href="../../../admin/Add notice/add notice.php"><i class="far fa-sticky-note"></i>Notice </a>
             </div>
 
             <!-- Call Center -->
             <div class="item">
-                <a href="../../../admin/Edit call center/C-center.php"><i class="fas fa-phone-alt"></i> Edit Call Center </a>
+                <a href="../../../admin/Edit call center/C-center.php"><i class="fas fa-phone-alt"></i>Call Center </a>
             </div>
 
             <!-- Lecture Evaluation -->

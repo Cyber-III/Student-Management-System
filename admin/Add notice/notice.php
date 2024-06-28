@@ -113,7 +113,7 @@ ob_end_flush();
                     <td><?= htmlspecialchars($row['subject']) ?></td>
                     <td><?= htmlspecialchars($row['added_date']) ?></td>
                     <td><?= htmlspecialchars($row['view_link']) ?></td>
-                    <td data-cell="Action"><button onclick="manageNotice(this.parentNode.parentNode)" class="manage-button view-link">Manage</button></td>
+                    <td data-cell="Action"><button onclick="manageNotice(this.parentNode.parentNode)" class="manage-button view-link">Edit</button></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -138,12 +138,12 @@ ob_end_flush();
             <label for="edit_view_link">Link:</label>
             <input type="text" id="edit_view_link" name="view_link">
             
-            <input type="submit" value="Save Changes">
+            <input type="submit" value="Save Changes" class="view-link">
         </form>
         <form id="deleteForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <input type="hidden" name="delete_notice_form">
             <input type="hidden" id="delete_id" name="id">
-            <input type="submit" value="Delete Notice">
+            <input type="submit" value="Delete Notice" class="delete-link">
         </form>
     </div>
 </div>

@@ -1,0 +1,105 @@
+/* General styles for the table and other elements */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+
+.container_main{
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+
+}
+h1{
+    text-align: center;
+}
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+}
+.btn1 {
+    width: 100px;
+    color: #182431; 
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    padding: 5px 15px;
+    border: 1px solid #007BFF; 
+    border-radius: 88px; 
+    background-color: #f0f8ff; 
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  }
+  
+  .btn1:hover {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
+  div#results {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    justify-content: center;
+}
+#results div {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(37, 39, 59, 0.3);
+    width: 450px;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+}
+#results div:hover{
+    scale: 1.1;
+}
+
+#results h2 {
+    margin: 0 0 10px;
+}
+
+#results a {
+    color: blue;
+    text-decoration: none;
+}
+@media screen and (min-width: 1200px) {
+    .container_main{
+     width: calc(100% - 300px);  /* to remove the extra space allocated for the side bar */
+     margin: 100px auto auto 300px; 
+     overflow: hidden;
+     max-width: none;
+    }
+ }
+ @media screen and (max-width: 1199px) {
+
+    .container_main{
+        width: 100%;
+        justify-content: center;
+        margin-top: 5rem
+        ;
+    }
+    
+    #searchInput{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 368px) {
+    form {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+}

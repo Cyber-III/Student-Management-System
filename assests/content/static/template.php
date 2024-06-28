@@ -193,9 +193,9 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                 </a>
                 <div class="sub-menu">
                     <a href="../../../GraduationSection/GraduationSchedule/graduationSchedule.php" class="sub-item <?php echo $activePage == 'graduationSchedule' ? 'active' : ''; ?>">Graduation Schedule</a>
-                    <a href="../../../GraduationSection/RegisterGrad/registerGrad.php" class="sub-item <?php echo $activePage == 'registerGrad' ? 'active' : ''; ?>">Register for Graduation</a>
+                    <!-- <a href="../../../GraduationSection/RegisterGrad/registerGrad.php" class="sub-item <?php echo $activePage == 'registerGrad' ? 'active' : ''; ?>">Register for Graduation</a> -->
                     <a href="../../../GraduationSection/GradPhotos/gradPhotos.php" class="sub-item <?php echo $activePage == 'gradPhotos' ? 'active' : ''; ?>">Graduation Photos</a>
-                    <a href="../../../GraduationSection/RegisterSummary/registerSummary.php" class="sub-item <?php echo $activePage == 'registerSummary' ? 'active' : ''; ?>">Registration Summary</a>
+                    <!-- <a href="../../../GraduationSection/RegisterSummary/registerSummary.php" class="sub-item <?php echo $activePage == 'registerSummary' ? 'active' : ''; ?>">Registration Summary</a> -->
                 </div>
             </div>
             
@@ -245,7 +245,11 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
             <div class="item">
                 <a href="../../../VacancySection/vacancy.php" class="sub-item <?php echo $activePage == 'vacancy' ? 'active' : ''; ?>"><i class="fas fa-user-plus"></i>Vacancies </a>
             </div>
-
+            <!-- searching API -->
+            <div class="item">
+                <a href="../../../search_API/livesearch.php" class="sub-item <?php echo $activePage == 'livesearch' ? 'active' : ''; ?>"><i class="fas fa-user-plus"></i>livesearch </a>
+            </div>
+           
 
         </div>
     </div>
