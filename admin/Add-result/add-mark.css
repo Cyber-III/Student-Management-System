@@ -106,7 +106,7 @@ button[type="submit"]:hover,
   margin-top: 1rem;
   border: 1px solid #ff0000;
   border-radius: 20px;
-  background-color: #f0f8ff;
+  background-color: #fff0f0;
   transition: background-color 0.3s, color 0.3s; 
 }
 
