@@ -80,9 +80,10 @@ $conn->close();
                 </select>
             </div>
             <div class="form-group">
-                <label for="studentId">Student ID:</label>
+                <label for="studentId">Student ID / Batch</label>
                 <select id="studentId" name="studentId" required onchange="updateStudentName()">
                     <option value="">-- Select Student ID --</option>
+                    <option value="batch">Select Batch</option>
                     <?php foreach ($students as $username => $student_name): ?>
                         <option value="<?php echo htmlspecialchars($username); ?>"><?php echo htmlspecialchars($username); ?></option>
                     <?php endforeach; ?>
@@ -240,7 +241,13 @@ $conn->close();
                 return;
             }
 
-            fetch('get_results.php?username=' + studentId)
+            let url = 'get_results.php?username=' + studentId;
+            if (studentId === 'batch') {
+                const batch = document.getElementById('batch').value;
+                url = 'get_results.php?batch=' + batch;
+            }
+
+            fetch(url)
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = document.getElementById('resultsTableBody');
