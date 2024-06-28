@@ -151,6 +151,7 @@ $conn->close();
                     <span>Sort by:</span>
                     <button class="sort-button" onclick="sortResults('asc')">Ascending</button>
                     <button class="sort-button" onclick="sortResults('desc')">Descending</button>
+                    <button class="print-button" onclick="printResults()">Print Results</button>
                 </div>
             </div>
             <table>
@@ -341,6 +342,22 @@ $conn->close();
                 console.error('Error:', error);
             });
         });
+        function printResults() {
+            // Hide elements not to be printed
+            const sortOptions = document.querySelector('.sort-options');
+            sortOptions.style.display = 'none';
+
+           // Print the results table
+           const resultsTable = document.getElementById('resultsTable');
+           const printContents = resultsTable.innerHTML;
+           const originalContents = document.body.innerHTML;
+           document.body.innerHTML = printContents;
+           window.print();
+           document.body.innerHTML = originalContents;
+           sortOptions.style.display = 'block';
+}
+
+
     </script>
 </body>
 </html>
