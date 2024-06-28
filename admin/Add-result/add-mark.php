@@ -80,7 +80,7 @@ $conn->close();
                 </select>
             </div>
             <div class="form-group">
-                <label for="studentId">Student ID / Batch</label>
+                <label for="studentId">Student ID:</label>
                 <select id="studentId" name="studentId" required onchange="updateStudentName()">
                     <option value="">-- Select Student ID --</option>
                     <option value="batch">Select Batch</option>
@@ -145,7 +145,14 @@ $conn->close();
 
         <!-- Results table container -->
         <div class="results-table" id="resultsTable" style="display:none;">
-            <h2>Final Results</h2>
+            <div class="results-header">
+                <h2>Final Results</h2>
+                <div class="sort-options">
+                    <span>Sort by:</span>
+                    <button class="sort-button" onclick="sortResults('asc')">Ascending</button>
+                    <button class="sort-button" onclick="sortResults('desc')">Descending</button>
+                </div>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -278,6 +285,27 @@ $conn->close();
                 .catch(error => {
                     console.error('Error fetching results:', error);
                 });
+        }
+
+        function sortResults(order) {
+            const tableBody = document.getElementById('resultsTableBody');
+            const rows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            rows.sort((a, b) => {
+                const finalResultA = parseFloat(a.cells[6].textContent) || 0;
+                const finalResultB = parseFloat(b.cells[6].textContent) || 0;
+
+                if (order === 'asc') {
+                    return finalResultA - finalResultB;
+                } else if (order === 'desc') {
+                    return finalResultB - finalResultA;
+                } else {
+                    return 0;
+                }
+            });
+
+            tableBody.innerHTML = '';
+            rows.forEach(row => tableBody.appendChild(row));
         }
 
         function goBack() {
