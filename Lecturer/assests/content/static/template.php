@@ -150,6 +150,11 @@ if(isset($_SESSION['username'])) {
                     <a href="../../../Lecturer/viva/team.php" class="sub-item">Viva Team Management</a>
                 </div>
             </div>
+
+            <!-- Module Category -->
+            <div class="item">
+            <a href="../../../Lecturer/Course modules/modules.php" class="sub-item"><i class="fa-solid fa-book-open"></i>Course Modules </a>
+            </div>
             
             <!-- Course Materials -->
             <div class="item">
