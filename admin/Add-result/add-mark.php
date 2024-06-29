@@ -80,7 +80,7 @@ $conn->close();
                 </select>
             </div>
             <div class="form-group">
-                <label for="studentId">Student ID:</label>
+                <label for="studentId">Student ID / Batch</label>
                 <select id="studentId" name="studentId" required onchange="updateStudentName()">
                     <option value="">-- Select Student ID --</option>
                     <option value="batch">Select Batch</option>
@@ -151,7 +151,10 @@ $conn->close();
                     <span>Sort by:</span>
                     <button class="sort-button" onclick="sortResults('asc')">Ascending</button>
                     <button class="sort-button" onclick="sortResults('desc')">Descending</button>
+
                     <button class="print-button" onclick="printResults()">Print Results</button>
+
+
                 </div>
             </div>
             <table>
