@@ -161,6 +161,12 @@ if(isset($_SESSION['username'])) {
                 <a href="../../../MessageSection/message.php"><i class="fas fa-envelope"></i>Message </a>
             </div> -->
 
+            
+            <!-- Lecture Evaluation -->
+            <div class="item">
+                <a href="../../../Lecturer/EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
+            </div>
+
             <!-- Vacancies -->
             <div class="item">
                 <a href="../../../Lecturer/VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>

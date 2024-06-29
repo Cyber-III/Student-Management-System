@@ -1,0 +1,49 @@
+h4 {
+    margin-top: 100px;
+    margin-left: 270px;
+}
+
+.vh-100 {
+    margin-left: 300px;
+    margin-right: 50px;
+}
+
+.custom-img {
+    max-width: 80%; /* Adjust this value to make the image smaller */
+    margin-left: 100px;
+}
+
+@media (max-width: 768px) {
+    .custom-img {
+        max-width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+    .custom-img {
+        max-width: 80%;
+        margin-left: 100px;
+    }
+}
+/* Media Query */
+.form-label {
+    font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+    .vh-100 {
+        margin: 0;
+        justify-content: center;
+    }
+
+    .col-md-7 {
+        justify-content: center;
+    }
+
+}
+@media (max-width: 767.98px) {
+    form {
+        margin-top: 20px;
+    }
+}
