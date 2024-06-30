@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (mysqli_query($conn, $sql)) {
         // Redirect with a success message
-        header("Location: plan.php?message=insertpayment");
+        header("Location: graduationSechedule.php?message=insertpayment");
         exit();
     } else {
         // Handle the error

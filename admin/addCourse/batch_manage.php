@@ -20,9 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            header("Location: studentSearch.php?message=edit");
+            header("Location: addCourse.php?message=edit");
         } else {
-            header("Location: studentSearch.php?message=edit_error");
+            header("Location: addCourse.php?message=edit_error");
         }
         $stmt->close();
     } elseif ($action == 'delete') {
@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            header("Location: studentSearch.php?message=delete");
+            header("Location: addCourse.php?message=delete");
         } else {
-            header("Location: studentSearch.php?message=delete_error");
+            header("Location: addCourse.php?message=delete_error");
         }
         $stmt->close();
     }

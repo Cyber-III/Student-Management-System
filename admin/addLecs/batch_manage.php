@@ -34,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (mysqli_query($conn, $sql)) {
             // Redirect with success message
-            header("Location: studentSearch.php?message=edit");
+            header("Location: addLecturer.php?message=edit");
             exit;
         } else {
             // Redirect with error message
-            header("Location: studentSearch.php?message=error");
+            header("Location: addLecturer.php?message=error");
             exit;
         }
     } elseif ($_POST['action'] === 'delete') {
@@ -50,21 +50,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (mysqli_query($conn, $sql)) {
             // Redirect with success message
-            header("Location: studentSearch.php?message=delete");
+            header("Location: addLecturer.php?message=delete");
             exit;
         } else {
             // Redirect with error message
-            header("Location: studentSearch.php?message=error");
+            header("Location: addLecturer.php?message=error");
             exit;
         }
     } else {
         // Invalid action
-        header("Location: studentSearch.php?message=error");
+        header("Location: addLecturer.php?message=error");
         exit;
     }
 } else {
     // Redirect if accessed directly without POST request
-    header("Location: studentSearch.php");
+    header("Location: addLecturer.php");
     exit;
 }
 ?>

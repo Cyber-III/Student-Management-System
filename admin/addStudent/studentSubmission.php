@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 // Execute the statement for payment_summary_tbl
                 if ($stmt2->execute()) {
-                    header("Location: studentSearch.php?message=insertstudent");
+                    header("Location: addStudent.php?message=insertstudent");
                     exit();
                 } else {
                     echo "Error inserting into payment_summary_tbl: " . $stmt2->error;

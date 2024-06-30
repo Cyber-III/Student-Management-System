@@ -20,11 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("ssss", $batch_number, $course, $intake, $award_uni);
             if ($stmt->execute()) {
-                header("Location: studentSearch.php?message=insert");
+                header("Location: addBatch.php?message=insert");
                 exit();
             } else {
                 if ($stmt->errno == 1062) { // Duplicate entry error code
-                    header("Location: studentSearch.php?message=exists");
+                    header("Location: addBatch.php?message=exists");
                     exit();
                 } else {
                     echo "Error: " . $stmt->error;
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("s", $batch_number);
             if ($stmt->execute()) {
-                header("Location: studentSearch.php?message=delete");
+                header("Location: addBatch.php?message=delete");
                 exit();
             } else {
                 echo "Error: " . $stmt->error;

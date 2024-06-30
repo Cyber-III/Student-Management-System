@@ -26,21 +26,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (mysqli_query($conn, $sql)) {
             // Redirect with success message
-            header("Location: studentSearch.php?message=insert");
+            header("Location: addLecturer.php?message=insert");
             exit;
         } else {
             // Redirect with error message and SQL error details
-            header("Location: studentSearch.php?message=error&error=" . urlencode(mysqli_error($conn)));
+            header("Location: addLecturer.php?message=error&error=" . urlencode(mysqli_error($conn)));
             exit;
         }
     } else {
         // Invalid action
-        header("Location: studentSearch.php?message=error&action=invalid");
+        header("Location: addLecturer.php?message=error&action=invalid");
         exit;
     }
 } else {
     // Redirect if accessed directly without POST request
-    header("Location: studentSearch.php?message=error&access=direct");
+    header("Location: addLecturer.php?message=error&access=direct");
     exit;
 }
 ?>

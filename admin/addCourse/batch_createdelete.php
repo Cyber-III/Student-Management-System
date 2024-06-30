@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("ss", $course_name, $award_uni);
             if ($stmt->execute()) {
-                header("Location: studentSearch.php?message=insert");
+                header("Location: addCourse.php?message=insert");
                 exit();
             } else {
                 echo "Error: " . $stmt->error;

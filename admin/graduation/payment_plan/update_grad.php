@@ -28,10 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conn, $sql)) {
         // Redirect with success message
-        header("Location: plan.php?message=updatedpay");
+        header("Location: graduationSechedule.php?message=updatedpay");
     } else {
         // Redirect with error message
-        header("Location: plan.php?message=error");
+        header("Location: graduationSechedule.php?message=error");
     }
 }
 ?>
