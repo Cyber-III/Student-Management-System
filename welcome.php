@@ -109,9 +109,9 @@ $conn->close();
                             <?php echo " | "; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
-                    <?php echo " | "; ?> &nbsp;<span style="color: yellow; font-weight:500;">Please Check the Notice Board</span>
-                <?php else: ?>
-                    No notices available. &nbsp;&nbsp;&nbsp;<span style="color: red;">Please Check the Notice Board</span>
+                    
+                
+                    <!-- No notices available. &nbsp;&nbsp;&nbsp;<span style="color: red;">Please Check the Notice Board</span> -->
                 <?php endif; ?>
             </marquee>
         </p>
@@ -124,21 +124,28 @@ $conn->close();
 <!-- Notice Board Section -->
 <div class="notice-board" id="notice-board">
     <h2>Notice Board</h2>
-    <?php if (!empty($notices_notice_board)):?>
-        <?php foreach ($notices_notice_board as $notice):?>
+    <?php if (!empty($notices_notice_board)): ?>
+        <?php foreach ($notices_notice_board as $notice): ?>
             <?php
                 // Check if the notice was added in the last 24 hours
-                $isRecent = (time() - strtotime($notice['added_date'])) <= 86400;
-           ?>
-            <div class="notice <?php echo $isRecent? 'ecent' : '';?>">
-                <p><?php echo htmlspecialchars($notice['subject']);?></p>
-                <small><?php echo date("d M Y", strtotime($notice['added_date']));?></small>
+                $addedTime = strtotime($notice['added_date']);
+                $currentTime = time();
+                $twentyFourHoursAgo = $currentTime - (24 * 60 * 60);
+                $isRecent = $addedTime >= $twentyFourHoursAgo;
+
+                // Format the date
+                $formattedDate = date("d M Y", $addedTime);
+            ?>
+            <div class="notice <?php echo $isRecent ? 'recent' : ''; ?>">
+                <p><?php echo htmlspecialchars($notice['subject']); ?></p>
+                <small><?php echo $formattedDate; ?></small>
             </div>
-        <?php endforeach;?>
-    <?php else:?>
+        <?php endforeach; ?>
+    <?php else: ?>
         <p>No notices available for your batch.</p>
-    <?php endif;?>
+    <?php endif; ?>
 </div>
+
 <script>
     const noticeBtn = document.getElementById('notice-btn');
     const noticeBoard = document.getElementById('notice-board');

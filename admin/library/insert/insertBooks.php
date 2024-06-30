@@ -38,18 +38,32 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
     <link rel="stylesheet" href="style-insertBooks.css">
 
     <script>
-        function searchByBatch() {
-            var selectedBatch = document.getElementById("batch_number").value;
+        function searchByBookName() {
+            var searchQuery = document.getElementById("search_book_name").value.toLowerCase();
             var rows = document.querySelectorAll("#library-tbody tr");
             rows.forEach(row => {
-                var bookName = row.children[0].textContent;
-                if (selectedBatch === "" || bookName === selectedBatch) {
+                var bookName = row.children[0].textContent.toLowerCase();
+                if (bookName.includes(searchQuery)) {
                     row.style.display = "";
                 } else {
                     row.style.display = "none";
                 }
             });
         }
+
+        function searchByCategory() {
+            var selectedCategory = document.getElementById("search_category").value;
+            var rows = document.querySelectorAll("#library-tbody tr");
+            rows.forEach(row => {
+                var category = row.children[2].textContent;
+                if (selectedCategory === "" || category === selectedCategory) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
 
         function manageBook(row) {
             const cells = row.querySelectorAll('td');
@@ -79,6 +93,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 </head>
 <body>
 
+<div class="main">
     <?php if ($message == 'insertbook'): ?>
         <div class="alert alert-success">Book was inserted successfully.</div>
     <?php elseif ($message == 'updated'): ?>
@@ -86,7 +101,6 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
     <?php elseif ($message == 'delete'): ?>
         <div class="alert alert-danger">Book was deleted successfully.</div>
     <?php endif; ?>
-<div class="main">
 <form action="booksubmission.php" method="POST" enctype="multipart/form-data">
         <div class="form-container">
             <div class="form-row">
@@ -106,7 +120,20 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                         <option value="">Select Category</option>
                         <option value="Software Engineering">Software Engineering</option>
                         <option value="Automobile">Automobile</option>
-                        <!-- Add more categories as needed -->
+                        <option value="Automobile">Management</option>
+                        <option value="Automobile">Strategic Management</option>
+                        <option value="Automobile">Marketing</option>
+                        <option value="Automobile">Economics</option>
+                        <option value="Automobile">Research</option>
+                        <option value="Automobile">Accounting</option>
+                        <option value="Automobile">Finance</option>
+                        <option value="Automobile">Statistics</option>
+                        <option value="Automobile">Psychology</option>
+                        <option value="Automobile">Nursing</option>
+                        <option value="Automobile">Law</option>
+                        <option value="Automobile">Quantity Survey</option>
+
+                        
                         <?php foreach ($award_unis as $award_uni): ?>
                             <option value="<?= htmlspecialchars($award_uni) ?>"><?= htmlspecialchars($award_uni) ?></option>
                         <?php endforeach; ?>
@@ -128,15 +155,31 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
     <!-- Search bar -->
     <div class="form-row">
         <div class="form-group">
-            <label for="batch_number">Search by Book Name:</label>
+            <label for="search_book_name">Search by Book Name:</label>
             <div class="input-group">
-                <select id="batch_number" name="batch_number">
-                    <option value="">Choose Book Name</option>
-                    <?php foreach ($batch_numbers as $batch_number): ?>
-                        <option value="<?= htmlspecialchars($batch_number) ?>"><?= htmlspecialchars($batch_number) ?></option>
-                    <?php endforeach; ?>
+                <input type="text" id="search_book_name" name="search_book_name" onkeyup="searchByBookName()">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="search_category">Search by Category:</label>
+            <div class="input-group">
+                <select id="search_category" name="search_category" onchange="searchByCategory()">
+                    <option value="">Choose Category</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="Automobile">Automobile</option>
+                    <option value="Management">Management</option>
+                    <option value="Strategic Management">Strategic Management</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Economics">Economics</option>
+                    <option value="Research">Research</option>
+                    <option value="Accounting">Accounting</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Statistics">Statistics</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Nursing">Nursing</option>
+                    <option value="Law">Law</option>
+                    <option value="Quantity Survey">Quantity Survey</option>
                 </select>
-                <button id="search-icon" onclick="searchByBatch()"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </div>

@@ -133,6 +133,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="input-group">
                     <button id="search-icon" class="btn btn-primary" onclick="searchSchedules()"><i class="bi bi-search"></i></button>
                 </div>
+                <div class="input-group">
+                    <button class="delete-link" onclick="deleteBatch()">Delete Batch</button>
+                </div>
             </div>
         </div>
         <div class="table-responsive">
@@ -175,4 +178,32 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
 </body>
+
+<script>
+    function deleteBatch() {
+        var batch = document.getElementById('batch').value;
+
+        if (batch.trim() === '') {
+            alert('Please select a batch to delete.');
+            return;
+        }
+
+        if (confirm('Are you sure to delete all schedules for batch: ' + batch + '?')) {
+            $.ajax({
+                url: 'delete_batch.php',
+                type: 'POST',
+                data: { batch: batch },
+                success: function(response) {
+                    alert(response); // Optional: Display success message
+                    searchSchedules(); // Refresh schedule list
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    alert('Error deleting batch.');
+                }
+            });
+        }
+    }
+</script>
+
 </html>

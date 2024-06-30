@@ -4,6 +4,11 @@
     padding: 20px;
 
 }
+
+.print-table hr {
+    border-color: #333;
+    margin: 10px 0;
+}
 /* search bars */
 .search_container {
     display: flex;

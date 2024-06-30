@@ -309,25 +309,39 @@ if (!empty($search_viva_name) || !empty($search_batch_number) || !empty($search_
                 </tr>
             </thead>
             <tbody id="exam-schedule-tbody">
-                <?php if (!empty($exam_schedule_data)): ?>
-                    <?php foreach ($exam_schedule_data as $row): ?>
-                        <tr>
-                            <td data-cell="Viva Name"><?= htmlspecialchars($row['viva_name']) ?></td>
-                            <td data-cell="Team ID"><?= htmlspecialchars($row['id']) ?></td>
-                            <td data-cell="Username"><?= htmlspecialchars($row['username']) ?></td>
-                            <td data-cell="Name"><?= htmlspecialchars($row['name']) ?></td>
-                            <td data-cell="Date"><?= htmlspecialchars($row['date']) ?></td>
-                            <td data-cell="Start"><?= htmlspecialchars($row['time_slot_start']) ?></td>
-                            <td data-cell="End"><?= htmlspecialchars($row['time_slot_end']) ?></td>
-                            <td data-cell="Classroom"><?= htmlspecialchars($row['classroom']) ?></td>
-                            <td data-cell="Action"><button onclick="manageExam(this)" class="view-link">Manage</button></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
+            <?php if (!empty($exam_schedule_data)): ?>
+                <?php $prev_start_time = null; ?>
+                <?php foreach ($exam_schedule_data as $row): ?>
+                    <?php
+                    $current_start_time = htmlspecialchars($row['time_slot_start']);
+                    // Check if current start time is different from previous start time
+                    if ($current_start_time !== $prev_start_time):
+                        // Print a horizontal line if it's not the first row
+                        if ($prev_start_time !== null): ?>
+                            <tr class="time-change"><td colspan="9"></td></tr>
+                        <?php endif;
+                        // Update previous start time
+                        $prev_start_time = $current_start_time;
+                    endif;
+                    ?>
                     <tr>
-                        <td colspan="9">No team details.</td>
+                        <td data-cell="Viva Name"><?= htmlspecialchars($row['viva_name']) ?></td>
+                        <td data-cell="Team ID"><?= htmlspecialchars($row['id']) ?></td>
+                        <td data-cell="Username"><?= htmlspecialchars($row['username']) ?></td>
+                        <td data-cell="Name"><?= htmlspecialchars($row['name']) ?></td>
+                        <td data-cell="Date"><?= htmlspecialchars($row['date']) ?></td>
+                        <td data-cell="Start"><?= $current_start_time ?></td>
+                        <td data-cell="End"><?= htmlspecialchars($row['time_slot_end']) ?></td>
+                        <td data-cell="Classroom"><?= htmlspecialchars($row['classroom']) ?></td>
+                        <td data-cell="Action"><button onclick="manageExam(this)" class="view-link">Manage</button></td>
                     </tr>
-                <?php endif; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="9">No team details.</td>
+                </tr>
+            <?php endif; ?>
+
             </tbody>
         </table>
     </div>

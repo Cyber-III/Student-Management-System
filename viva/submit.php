@@ -7,6 +7,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usernames = array_map('htmlspecialchars', $_POST['username']);
     $names = array_map('htmlspecialchars', $_POST['name']);
 
+    // Check if any of the usernames have already registered for this viva
+    foreach ($usernames as $username) {
+        $check_sql = "SELECT COUNT(*) AS count FROM team_members WHERE username = ? AND viva_name = ?";
+        $stmt = $conn->prepare($check_sql);
+        if ($stmt === false) {
+            die('SQL prepare error: ' . $conn->error);
+        }
+        $stmt->bind_param('ss', $username, $viva_name);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        if ($row['count'] > 0) {
+            echo "You have already registered for the Viva session!";
+            exit();
+        }
+    }
+
     // Fetch the latest viva schedule
     $schedule_sql = "SELECT batch_number, date, location, viva_name FROM viva_schedules WHERE viva_name = ? ORDER BY date DESC LIMIT 1";
     $stmt = $conn->prepare($schedule_sql);
@@ -117,12 +134,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Execute the statement
         $stmt_insert->execute();
-
-        if ($stmt_insert->affected_rows > 0) {
-            echo "Username $username registered for the Viva session.<br>";
-        } else {
-            echo "Failed to register username $username for the Viva session.<br>";
-        }
     }
 
     // Close the statement

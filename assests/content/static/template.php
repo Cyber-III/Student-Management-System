@@ -153,7 +153,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
             <!-- Viva Session -->
             <div class="item">
-                <a href="../../../viva/viva_submission.php" class="sub-item <?php echo $activePage == 'viva_submission' ? 'active' : ''; ?>"> <i class="far fa-sticky-note"></i>Viva Application</a>
+                <a href="../../../viva/viva_submission.php" class="sub-item <?php echo $activePage == 'viva_submission' ? 'active' : ''; ?>"> <i class="fa-solid fa-person-chalkboard"></i>Viva Application</a>
             </div>
 
             <!-- Results Category -->
@@ -243,11 +243,11 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
             <!-- Vacancies -->
             <div class="item">
-                <a href="../../../VacancySection/vacancy.php" class="sub-item <?php echo $activePage == 'vacancy' ? 'active' : ''; ?>"><i class="fas fa-user-plus"></i>Vacancies </a>
+                <a href="../../../VacancySection/vacancy.php" class="sub-item <?php echo $activePage == 'vacancy' ? 'active' : ''; ?>"><i class="fa-solid fa-file-contract"></i>Vacancies </a>
             </div>
             <!-- searching API -->
             <div class="item">
-                <a href="../../../search_API/livesearch.php" class="sub-item <?php echo $activePage == 'livesearch' ? 'active' : ''; ?>"><i class="fas fa-user-plus"></i>livesearch </a>
+                <a href="../../../search_API/livesearch.php" class="sub-item <?php echo $activePage == 'livesearch' ? 'active' : ''; ?>"><i class="fa-solid fa-book-atlas"></i>Livesearch </a>
             </div>
            
 

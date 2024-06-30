@@ -58,12 +58,14 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
 <marquee><p class="text">*If you are registering for a team project, please have only the group leader fill out the form.</p></marquee>
 <h1 class="title">Viva Session Registration</h1>
 
-
     <?php if ($message == 'updated'): ?>
         <div class="alert alert-success">Records are updated successfully.</div>
     <?php elseif ($message == 'deleted'): ?>
         <div class="alert alert-danger">Records are deleted successfully.</div>
+    <?php elseif ($message == 'already_registered'): ?>
+        <div class="alert alert-warning">You have already registered.</div>
     <?php endif; ?>
+
     <div class="form_container">
         <form id="vivaForm" action="submit.php" method="POST">
             <div class="form_group">
@@ -72,8 +74,8 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
             </div>
 
             <div class="form_group">
-            <label for="module_name">Module Name:</label>
-            <input type="text" id="module_name" name="module_name" value="<?= htmlspecialchars($module_name) ?>" readonly>
+                <label for="module_name">Module Name:</label>
+                <input type="text" id="module_name" name="module_name" value="<?= htmlspecialchars($module_name) ?>" readonly>
             </div>
             <div class="form_group">
                 <div id="teamMembers">
@@ -83,24 +85,43 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                     </div>
                 </div>
             </div>
-        <div class="button_container">
-            <button type="button" id="addMember" class="view-link">Add Member</button>
-            <button type="submit" class="view-link">Submit</button>
-        </div>
-            
+            <div class="button_container">
+                <button type="button" id="addMember" class="view-link">Add Member</button>
+                <button type="submit" class="view-link">Submit</button>
+            </div>
         </form>
     </div>
     
     <br>
     <br>
     <div id="timer"></div>
-
 </div>
     
-    
-
 <script>
     const vivaData = <?php echo json_encode($viva_data); ?>;
+
+    document.getElementById('addMember').addEventListener('click', function() {
+        const teamMembersDiv = document.getElementById('teamMembers');
+        const newMemberDiv = document.createElement('div');
+        newMemberDiv.classList.add('member');
+        newMemberDiv.innerHTML = `
+            <label>Username: <input type="text" name="username[]" required></label>
+            <label>Name: <input type="text" name="name[]" required></label>
+        `;
+        teamMembersDiv.appendChild(newMemberDiv);
+    });
+
+    document.getElementById('vivaForm').addEventListener('submit', function(event) {
+        const usernames = Array.from(document.querySelectorAll('input[name="username[]"]')).map(input => input.value);
+        const vivaName = document.getElementById('viva_name').value;
+        
+        const hasDuplicate = vivaData.some(member => usernames.includes(member.username) && member.viva_name === vivaName);
+
+        if (hasDuplicate) {
+            alert('You have already registered!');
+            event.preventDefault();
+        }
+    });
 </script>
 <script src="script.js"></script>
 

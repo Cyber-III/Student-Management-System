@@ -227,7 +227,7 @@ $message = isset($_GET['message']) ? $_GET['message'] : '';
                 </div>
 
                 <div class="form-group">
-                    <label for="view">View:</label>
+                    <label for="view">Assignment Link:</label>
                     <input type="text" id="view" name="view" required>
                 </div>
             </div>

@@ -38,9 +38,6 @@ while ($row = $result->fetch_assoc()) {
     }
 }
 
-// Close the database connection
-$conn->close();
-
 // Prepare data for the payments chart
 $monthlyPayments = array_fill(0, 12, 0);
 foreach ($payments as $payment) {
@@ -56,6 +53,15 @@ $labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augu
 $monthlyPaymentsJson = json_encode($monthlyPayments);
 $penaltiesJson = json_encode($penalties);
 $labelsJson = json_encode($labels);
+
+$payment_data = [];
+$result = mysqli_query($conn, "SELECT * FROM payment_status");
+while ($row = mysqli_fetch_assoc($result)) {
+    $payment_data[] = $row;
+}
+
+// Close the database connection
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +76,35 @@ $labelsJson = json_encode($labels);
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div class="container">
+        <h2>Payment Status Details</h2>
+        <label for="username">Search by Username</label>
+        <input type="text" id="searchInput" onkeyup="searchByUsername()" placeholder="Search for usernames..">
+        <table id="paymentTable">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>No</th>
+                    <th>Paid Date</th>
+                    <!-- <th>Description</th> -->
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($payment_data as $payment): ?>
+                <tr style="display:none">
+                    <td data-cell="Username"><?php echo htmlspecialchars($payment['username']); ?></td>
+                    <td data-cell="No"><?php echo htmlspecialchars($payment['no']); ?></td>
+                    <td data-cell="Paid Date"><?php echo htmlspecialchars($payment['paid_date']); ?></td>
+                    <td data-cell="Amount"><?php echo htmlspecialchars($payment['amount']); ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <br> <br>
+
     <div class="container">
         <h2>Upcoming Payments</h2>
         <canvas id="paymentsChart" width="400" height="200"></canvas>
@@ -146,6 +181,26 @@ $labelsJson = json_encode($labels);
                 }
             }
         });
+
+        // Function to search by username
+        function searchByUsername() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("paymentTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
+                td = tr[i].getElementsByTagName("td")[0]; // Assuming username is in the first column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>

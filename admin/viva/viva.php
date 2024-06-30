@@ -278,7 +278,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <th>Viva Name</th>
                         <th>Date</th>
                         <th>Location</th>
-                        <th>Allow Submission</th>
+                        <th>Allow Registration</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -290,7 +290,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                             <td data-cell="Exam Name"><?= htmlspecialchars($row['viva_name']) ?></td>
                             <td data-cell="Date"><?= htmlspecialchars($row['date']) ?></td>
                             <td data-cell="Location"><?= htmlspecialchars($row['location']) ?></td>
-                            <td data-cell="Allow Submission"><?= $row['allow_submission'] ? 'Yes' : 'No' ?></td>
+                            <td data-cell="Allow Registration"><?= $row['allow_submission'] ? 'Yes' : 'No' ?></td>
                             <td data-cell="Action"><button onclick="manageExam(this.parentNode.parentNode)" class="manage-button view-link">Manage</button></td>
                         </tr>
                     <?php endforeach; ?>

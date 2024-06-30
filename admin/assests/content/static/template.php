@@ -139,11 +139,6 @@ if(isset($_SESSION['username'])) {
                     <a href="../../../admin/course Materials/coursematerials.php" class="sub-item">Course Materials </a>
                 </div>
             </div>
-            
-            <!-- Class Schedule Category -->
-            <div class="item">
-                    <a href="../../../admin/class schedule/class_schedule.php" ><i class="far fa-calendar-alt"></i>Class Schedule</a>
-            </div>
 
             <!-- Add Batch -->
             <div class="item">
