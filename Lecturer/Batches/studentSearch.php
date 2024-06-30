@@ -134,7 +134,6 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                     <th>Intake</th>
                     <th>Commencement Date</th>
                     <th>Awarding University</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody id="exam-schedule-tbody">
@@ -145,100 +144,13 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
                         <td data-cell="Intake"><?= htmlspecialchars($row['intake']) ?></td>
                         <td data-cell="Commencement Date"><?= htmlspecialchars($row['commencement_date']) ?></td>
                         <td data-cell="Awarding University"><?= htmlspecialchars($row['award_uni']) ?></td>
-                        <td data-cell="Action"><button onclick="manageExam(this)" class="manage-button view-link">Manage</button></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 
-    <!-- manage modal -->
-    <div id="manageBatchModal" class="modal">
-        <div class="modal-content">
-            <span id="closeManageBatchModal" class="close">&times;</span>
-            <h2>Manage Batch</h2>
-            <form id="manageBatchForm" action="batch_manage.php" method="POST">
-                <input type="hidden" id="manage_batch_no" name="batch_no">
-                <div class="form-group">
-                    <label for="manage_batch_course">Course:</label>
-                    <select id="manage_batch_course" name="course" required>
-                        <option value="">Select Course</option>
-                        <?php foreach ($courses as $course): ?>
-                            <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="manage_batch_intake">Intake:</label>
-                    <input type="text" id="manage_batch_intake" name="intake" required>
-                </div>
-                <div class="form-group">
-                    <label for="manage_batch_cdate">Commencement Date:</label>
-                    <input type="date" id="manage_batch_cdate" name="commencement_date" required>
-                </div>
-                <div class="form-group">
-                    <label for="manage_batch_uni">Awarding University:</label>
-                    <select id="manage_batch_uni" name="award_uni" required>
-                        <option value="">Select University</option>
-                        <?php foreach ($award_unis as $award_uni): ?>
-                            <option value="<?= htmlspecialchars($award_uni) ?>"><?= htmlspecialchars($award_uni) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <br>
-                <button type="submit" name="action" value="edit" class="batch view-link">Save</button>
-                <button type="submit" name="action" value="delete" class="batch delete-link">Delete</button>
-            </form>
-        </div>
-    </div>
-
-</div>
-
-</body>
-
-<script>
-    var manageBatchModal = document.getElementById("manageBatchModal");
-    var closeManageBatchModal = document.getElementById("closeManageBatchModal");
-
-    // close button
-    closeManageBatchModal.onclick = function() {
-        manageBatchModal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modals, close them
-    window.onclick = function(event) {
-        if (event.target == manageBatchModal) {
-            manageBatchModal.style.display = "none";
-        }
-    }
-
-    // Manage Exam functionality
-    function manageExam(button) {
-        var row = button.parentElement.parentElement;
-        var batchNo = row.querySelector("[data-cell='Batch Number']").innerText;
-        var course = row.querySelector("[data-cell='Course']").innerText;
-        var intake = row.querySelector("[data-cell='Intake']").innerText;
-        var cdate = row.querySelector("[data-cell='Commencement Date']").innerText;
-        var uni = row.querySelector("[data-cell='Awarding University']").innerText;
-
-        document.getElementById("manage_batch_no").value = batchNo;
-        document.getElementById("manage_batch_course").value = course;
-        document.getElementById("manage_batch_intake").value = intake;
-        document.getElementById("manage_batch_cdate").value = cdate;
-        document.getElementById("manage_batch_uni").value = uni;
-
-        manageBatchModal.style.display = "block";
-    }
-
-    document.getElementById("manageBatchForm").addEventListener("submit", function(event) {
-        var action = document.activeElement.value;
-        if (action === 'delete') {
-            var confirmDelete = confirm("Are you sure to delete this batch?");
-            if (!confirmDelete) {
-                event.preventDefault();
-            }
-        }
-    });
+                <script>
 
     // Search functionality
     document.getElementById("search-icon").addEventListener("click", function() {
