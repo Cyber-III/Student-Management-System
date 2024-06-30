@@ -155,8 +155,6 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
 
 
-
-
             <!-- Assignments Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
@@ -213,7 +211,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
             <!-- Vacancies -->
                 <div class="item">
-                <a href="../../../Lecturer/VacancySection/vacancy.php" class="sub-item <?php echo $activePage == 'vacancy' ? 'active' : ''; ?>"><i class="fas fa-chart-line"></i>Vacancies</a>
+                <a href="../../../Lecturer/VacancySection/vacancy.php" class="sub-item <?php echo $activePage == 'vacancy' ? 'active' : ''; ?>"><i class="fa-solid fa-file-contract"></i>Vacancies</a>
             </div>
 
 
