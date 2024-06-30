@@ -32,7 +32,7 @@ $conn->close();
     <!-- Template CSS -->
     <link rel="stylesheet" href="../style-template.css">
     <!-- Result CSS -->
-    <link rel="stylesheet" href="result.css">
+    <link rel="stylesheet" href="results.css">
 </head>
 <body>
     <div class="wrapper">
@@ -41,7 +41,7 @@ $conn->close();
                 <h2>Add Student Result</h2>
             </div>
             <div class="sub_box">
-                <form id="selectCourseForm" action="add-mark.php" method="get"> 
+                <form id="selectCourseForm" action="add-marks.php" method="get"> 
                     <label for="course">Select Course:</label>
                     <select name="course" id="course" required>
                         <option value="">-- Select Course --</option>
@@ -104,7 +104,7 @@ $conn->close();
         });
 
         function fetchBatches(course) {
-            fetch(`fetch_batches.php?course=${course}`)
+            fetch(`fetch_batch.php?course=${course}`)
                 .then(response => response.json())
                 .then(data => {
                     batchSelect.disabled = false;

@@ -133,6 +133,11 @@ if(isset($_SESSION['username'])) {
                 </div>
             </div>
 
+            <!-- Results -->
+                <div class="item">
+                <a href="../../../Lecturer/Add-result/results.php"><i class="fa fa-trophy"></i>Add Results</a>
+            </div>
+
             <!-- Assignments Category -->
             <div class="item">
                 <a class="sub-btn"><i class="fas fa-swatchbook"></i>Assignments
