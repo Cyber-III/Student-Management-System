@@ -35,7 +35,7 @@ if(isset($_SESSION['username'])) {
 
 }
 
-
+$activePage = basename($_SERVER['PHP_SELF'], ".php");
 
 ?>
 
@@ -94,6 +94,8 @@ if(isset($_SESSION['username'])) {
                 <i class="fas fa-times"></i>
             </div> -->
 
+            
+
             <!-- welcome -->
             <h1 class="welcome">Welcome,  <span><?php echo isset($name) ? $name : ''; ?></span></h1>
 
@@ -102,25 +104,35 @@ if(isset($_SESSION['username'])) {
         <!-- Menu Items -->
         <div class="menu">
 
+
+
             <!-- Profile Category -->
             <div class="item">
-                    <a href="../../../Lecturer/view_profile/view_profile.php" class="sub-item"><i class="far fa-id-card"></i>Profile</a>
+                    <a href="../../../Lecturer/view_profile/view_profile.php" class="sub-item <?php echo $activePage == 'view_profile' ? 'active' : ''; ?>"><i class="far fa-id-card"></i>Profile</a>
             </div>
+
+
 
             <!-- Student Search -->
             <div class="item">
-                <a href="../../../Lecturer/studentSearch/studentSearch.php"><i class="fas fa-search"></i>Student Search</a>
+                <a href="../../../Lecturer/studentSearch/studentSearch.php"class="sub-item <?php echo $activePage == 'studentSearch' ? 'active' : ''; ?>"><i class="fas fa-search"></i>Student Search</a>
             </div>
+
+
 
             <!-- Class Schedule Category -->
             <div class="item">
-                    <a href="../../../Lecturer/Class Schedule/classSchedule.php" class="sub-item"><i class="far fa-calendar-alt"></i>Class Schedule</a>
+                    <a href="../../../Lecturer/Class Schedule/classSchedule.php" class="sub-item <?php echo $activePage == 'classSchedule' ? 'active' : ''; ?>"><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
+
+
 
             <!-- Add Batch -->
             <div class="item">
-                <a href="../../../Lecturer/Batches/studentSearch.php"><i class="fa-solid fa-people-group"></i>View Batches</a>
+                <a href="../../../Lecturer/Batches/studentSearchs.php"class="sub-item <?php echo $activePage == 'studentSearchs' ? 'active' : ''; ?>"><i class="fa-solid fa-people-group"></i>View Batches</a>
             </div>
+
+
             
             <!-- Exam Category -->
             <div class="item">
@@ -128,15 +140,19 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../Lecturer/ExamSection/ExamSchedule/exam_schedule.php" class="sub-item">Exam Schedule</a>
+                    <a href="../../../Lecturer/ExamSection/ExamSchedule/exam_schedule.php" class="sub-item <?php echo $activePage == 'exam_schedule' ? 'active' : ''; ?>">Exam Schedule</a>
 
                 </div>
             </div>
 
+
+
             <!-- Results -->
                 <div class="item">
-                <a href="../../../Lecturer/Add-result/results.php"><i class="fa fa-trophy"></i>Add Results</a>
+                <a href="../../../Lecturer/Add-result/results.php" class="sub-item <?php echo $activePage == 'results' ? 'active' : ''; ?>"><i class="fa fa-trophy"></i>Add Results</a>
             </div>
+
+
 
             <!-- Assignments Category -->
             <div class="item">
@@ -144,11 +160,13 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                  <a href="../../../Lecturer/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item">Assignment Schedule</a>
+                  <a href="../../../Lecturer/AssignmentSection/assignmentSchedule/assignment_schedule.php" class="sub-item <?php echo $activePage == 'assignment_schedule' ? 'active' : ''; ?>">Assignment Schedule</a>
                   <!-- <a href="../../../Lecturer/AssignmentSection/assignmentSubmission/assignment_submission.php" class="sub-item">Submissions Management</a> -->
-                  <a href="../../../Lecturer/AssignmentSection/mitigation requests/mitigation.php" class="sub-item">Mitigation Requests</a>
+                  <a href="../../../Lecturer/AssignmentSection/mitigation requests/mitigation.php" class="sub-item <?php echo $activePage == 'mitigation' ? 'active' : ''; ?>">Mitigation Requests</a>
               </div>
             </div>
+
+
 
             <!-- Viva -->
             <div class="item">
@@ -156,36 +174,45 @@ if(isset($_SESSION['username'])) {
                     <!-- Dropdown -->
                 </a>
                 <div class="sub-menu">
-                    <a href="../../../Lecturer/viva/viva.php" class="sub-item">Viva Schedule</a>
-                    <a href="../../../Lecturer/viva/team.php" class="sub-item">Viva Team Management</a>
+                    <a href="../../../Lecturer/viva/viva.php" class="sub-item <?php echo $activePage == 'viva' ? 'active' : ''; ?>">Viva Schedule</a>
+                    <a href="../../../Lecturer/viva/team.php" class="sub-item <?php echo $activePage == 'team' ? 'active' : ''; ?>">Viva Team Management</a>
                 </div>
             </div>
 
+
+
             <!-- Module Category -->
             <div class="item">
-            <a href="../../../Lecturer/Course modules/modules.php" class="sub-item"><i class="fa-solid fa-book-open"></i>Course Modules </a>
+            <a href="../../../Lecturer/Course modules/modules.php" class="sub-item <?php echo $activePage == 'modules' ? 'active' : ''; ?>"><i class="fa-solid fa-book-open"></i>Course Modules </a>
             </div>
+
+
             
             <!-- Course Materials -->
             <div class="item">
-              <a href="../../../Lecturer/course Materials/coursematerials.php"><i class="fas fa-book-reader"></i>Course Materials </a>
+              <a href="../../../Lecturer/course Materials/coursematerials.php" class="sub-item <?php echo $activePage == 'coursematerials' ? 'active' : ''; ?>"><i class="fas fa-book-reader"></i>Course Materials </a>
             </div>
+
+
 
             <!-- Message -->
             <!-- <div class="item">
                 <a href="../../../MessageSection/message.php"><i class="fas fa-envelope"></i>Message </a>
             </div> -->
 
+
             
             <!-- Lecture Evaluation -->
             <div class="item">
-                <a href="../../../Lecturer/EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
+                <a href="../../../Lecturer/EvaluationSection/evaluation.php" class="sub-item <?php echo $activePage == 'evaluation' ? 'active' : ''; ?>"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
             </div>
 
+
             <!-- Vacancies -->
-            <div class="item">
-                <a href="../../../Lecturer/VacancySection/vacancy.php"><i class="fas fa-user-plus"></i>Vacancies </a>
+                <div class="item">
+                <a href="../../../Lecturer/VacancySection/vacancy.php" class="sub-item <?php echo $activePage == 'vacancy' ? 'active' : ''; ?>"><i class="fas fa-chart-line"></i>Vacancies</a>
             </div>
+
 
 
         </div>
@@ -276,6 +303,8 @@ if(isset($_SESSION['username'])) {
 
     })();
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-oBqDVmMz4fnFO9gybVp+6eP23Q8uMGFcm5iD9GNGIa0WlH/eUcZOw7KHEd0P2vHg"
+crossorigin="anonymous"></script>
 
 </html>
