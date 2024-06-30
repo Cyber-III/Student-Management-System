@@ -156,11 +156,6 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
 
 
-            <!-- Results -->
-                <div class="item">
-                <a href="../../../Lecturer/Add-result/results.php"><i class="fa fa-trophy"></i>Add Results</a>
-            </div>
-
 
             <!-- Assignments Category -->
             <div class="item">
