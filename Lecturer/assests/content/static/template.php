@@ -116,6 +116,11 @@ if(isset($_SESSION['username'])) {
             <div class="item">
                     <a href="../../../Lecturer/Class Schedule/classSchedule.php" class="sub-item"><i class="far fa-calendar-alt"></i>Class Schedule</a>
             </div>
+
+            <!-- Add Batch -->
+            <div class="item">
+                <a href="../../../Lecturer/Batches/studentSearch.php"><i class="fa-solid fa-people-group"></i>View Batches</a>
+            </div>
             
             <!-- Exam Category -->
             <div class="item">
@@ -150,6 +155,11 @@ if(isset($_SESSION['username'])) {
                     <a href="../../../Lecturer/viva/team.php" class="sub-item">Viva Team Management</a>
                 </div>
             </div>
+
+            <!-- Module Category -->
+            <div class="item">
+            <a href="../../../Lecturer/Course modules/modules.php" class="sub-item"><i class="fa-solid fa-book-open"></i>Course Modules </a>
+            </div>
             
             <!-- Course Materials -->
             <div class="item">
@@ -160,6 +170,12 @@ if(isset($_SESSION['username'])) {
             <!-- <div class="item">
                 <a href="../../../MessageSection/message.php"><i class="fas fa-envelope"></i>Message </a>
             </div> -->
+
+            
+            <!-- Lecture Evaluation -->
+            <div class="item">
+                <a href="../../../Lecturer/EvaluationSection/evaluation.php"><i class="fas fa-chart-line"></i>Lecture Evaluation </a>
+            </div>
 
             <!-- Vacancies -->
             <div class="item">
