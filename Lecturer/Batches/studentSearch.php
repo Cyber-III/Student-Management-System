@@ -54,62 +54,7 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
 <body>
 <div class="main_container">
-    <?php if ($message == 'insert'): ?>
-        <div class="alert alert-success">The batch was created successfully.</div>
-    <?php elseif ($message == 'delete'): ?>
-        <div class="alert alert-danger">The batch was deleted successfully.</div>
-    <?php elseif ($message == 'edit'): ?>
-        <div class="alert alert-success">The batch was updated successfully.</div>
-    <?php elseif ($message == 'exists'): ?>
-        <div class="alert alert-danger">The batch already exists.</div>
-    <?php endif; ?>
-
-    <br>
-    
-    <h2>Add New Batch</h2>
-    <form action="batch_createdelete.php" method="POST">
-        <div class="form-container">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="batch_no">Batch Number:</label>
-                    <input type="text" id="batch_no" name="batch_no" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="batch_course">Course:</label>
-                    <select id="batch_course" name="batch_course" required>
-                        <option value="">Select Course</option>
-                        <?php foreach (array_unique($courses) as $course): ?>
-                            <option value="<?= htmlspecialchars($course) ?>"><?= htmlspecialchars($course) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="batch_uni">Awarding University:</label>
-                    <select id="batch_uni" name="batch_uni" required>
-                        <option value="">Select University</option>
-                        <?php foreach ($award_unis as $award_uni): ?>
-                            <option value="<?= htmlspecialchars($award_uni) ?>"><?= htmlspecialchars($award_uni) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="intake">Intake:</label>
-                    <input type="text" id="intake" name="intake" required>
-                </div>
-                
-            </div>
-
-
-        </div>
-        <br>
-        <button type="submit" class="batch view-link">Add Batch</button>
-    </form>
+   
 
     <!-- Search bar -->
     <div class="search-bar">
