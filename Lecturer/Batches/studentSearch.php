@@ -54,7 +54,6 @@ $message = isset($_GET['message']) ? htmlspecialchars($_GET['message']) : '';
 
 <body>
 <div class="main_container">
-   
 
     <!-- Search bar -->
     <div class="search-bar">
