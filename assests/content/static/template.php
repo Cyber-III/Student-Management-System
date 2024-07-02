@@ -249,6 +249,11 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
             <div class="item">
                 <a href="../../../search_API/livesearch.php" class="sub-item <?php echo $activePage == 'livesearch' ? 'active' : ''; ?>"><i class="fa-solid fa-book-atlas"></i>Livesearch </a>
             </div>
+
+            <!-- Help & Support -->
+                <div class="item">
+                <a href="../../../help/help.php" class="sub-item <?php echo $activePage == 'help' ? 'active' : ''; ?>"><i class="fa-solid fa-font-awesome"></i>Help & Support </a>
+            </div>
            
 
         </div>
