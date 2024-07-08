@@ -1,10 +1,14 @@
 # Student-Management-System
 
-First, you have to fork this repository into your account.
 
-https://github.com/RamithaHeshan33/Student-Management-System/assets/142712365/d4c98882-f6b5-46f2-92ae-3dc32632030f
+![banner](https://github.com/Cyber-III/Student-Management-System/assets/142712365/dbb52453-607a-4c5f-ba8d-ab4af9b51b92)
 
-After that, you have to clone the repository that you forked.
 
-https://github.com/RamithaHeshan33/Student-Management-System/assets/142712365/3f7a6a1c-c325-4d42-9f58-7df9d948fd64
+Introducing the Student Management System of the ABC campus. Actually, we built this system as a retrofit to our existing university SIS. In fact, we used the PHP stack to develop this entire project. Which means HTML, CSS, and JavaScript for the front end, PHP for the back end, and MySql for the database. Let's focus on the WOW facts of our SMIS.
 
+### Automated VIVA scheduling system
+In the existing system, admins have to allocate the time slots for VIVA teams manually. It is a very time-consuming task. We automated the entire VIVA exam scheduling process. You can see it in the video clip below.
+
+https://github.com/Cyber-III/Student-Management-System/assets/142712365/e0141ff5-5a9b-43a8-81f0-9b5df1f8830c
+
+### Live Search Option
